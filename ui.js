@@ -4,6 +4,9 @@ import colors from 'tailwindcss/colors'
 const bearUI = plugin(
   function () {},
   {
+    content: [
+      './resources/**/*{.php,.blade.php}'
+    ],
     theme: {
       extend: {
         colors: {
