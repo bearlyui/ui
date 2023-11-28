@@ -1,0 +1,43 @@
+{
+    "name": "bearly/ui",
+    "description": "A set of grizzly UI components to drop into your app.",
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bearly\\Ui\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Austen Cameron",
+            "email": "austen.cameron@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bearly\\Ui\\BearUiProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "livewire/livewire": "^3.1",
+        "orchestra/testbench": "^8.15"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bearly\\Ui\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ]
+    }
+}
