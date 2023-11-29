@@ -2,7 +2,7 @@
 
 namespace Bearly\Ui\Tests;
 
-use Bearly\Ui\BearUIProvider;
+use Bearly\Ui\BearUiProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
@@ -24,7 +24,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            BearUIProvider::class,
+            BearUiProvider::class,
             LivewireServiceProvider::class,
             HtmlTestingAssertionsProvider::class,
         ];

@@ -4,7 +4,7 @@ namespace Bearly\Ui;
 
 use Illuminate\Support\ServiceProvider;
 
-class BearUIProvider extends ServiceProvider {
+class BearUiProvider extends ServiceProvider {
 
     function boot(): void
     {
