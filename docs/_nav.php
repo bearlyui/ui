@@ -8,6 +8,7 @@ return [
     'Components' => [
         'Buttons' => '/docs/buttons',
         'Cards' => '/docs/cards',
+        'Dropdowns' => '/docs/dropdowns',
         'Form Inputs' => '/docs/form-inputs',
         'Toggle Switches' => '/docs/toggle-switches',
         'Tooltips' => '/docs/toggle-switches',
