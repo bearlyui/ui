@@ -4,6 +4,7 @@
 <div {{ $attributes->class([
     'rounded border shadow-md bg-white dark:bg-gray-400/5 ',
     'bg-white dark:bg-gray-400/5 border-gray-300 dark:border-white/7.5',
+    'text-gray-700 dark:text-gray-200',
     {{-- 'shadow-primary-500/40 border-primary-300' => $color === 'primary',
     'shadow-green-500/40 border-green-300' => $color === 'green', --}}
 ]) }}>
