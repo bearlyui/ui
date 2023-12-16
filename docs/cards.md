@@ -1,6 +1,6 @@
-### Cards
+## Cards
 Boxes in boxes in boxes. Cards to put stuff in. Not everything needs to be in a card, but they're great when you need 'em.
-#### Basic Card
+### Basic Card
 
 <x-code-demo lang="blade">
     <x-ui::card>Hello, I'm a happy little card!</x-ui::card>
@@ -12,7 +12,7 @@ Boxes in boxes in boxes. Cards to put stuff in. Not everything needs to be in a 
 <x-ui::card class="mt-10">I'm a blade card component demo</x-ui::card>
 ```
 
-#### Header & Footer
+### Header & Footer
 ```html +demo
 <x-ui::card>
     <x-slot:header>Card with Header &amp; Footer</x-slot:header>
