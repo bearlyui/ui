@@ -51,5 +51,5 @@ Either directly from the package, or copy them into your project.
 ### Using Components
 You can use the components directly from the package by prefixing them with `x-ui::`
 ```blade
-@verbatim<x-ui::input />@endverbatim
+<x-ui::input />
 ```
