@@ -11,6 +11,6 @@ return [
         'Dropdowns' => '/docs/dropdowns',
         'Form Inputs' => '/docs/form-inputs',
         'Toggle Switches' => '/docs/toggle-switches',
-        'Tooltips' => '/docs/toggle-switches',
+        'Tooltips' => '/docs/tooltips',
     ],
 ];
