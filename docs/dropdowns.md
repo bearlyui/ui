@@ -1,8 +1,29 @@
-### Dropdowns
+# Dropdowns
 
-Dropdowns, menus, etc...
+Click on a trigger element and a magic menu appears!
 
-#### Menus
+Dropdowns expect you to use a `trigger` slot. This is the element that will be clicked to open the dropdown. It can be anything you want, but it's usually a button.
+
+## The Trigger Slot
+
+Use `<x-slot:trigger>` to define the trigger element.
+
+```html
+<x-slot:trigger>
+    <button>...</button>
+</x-slot:trigger>
+```
+
+## Menu Item Components
+Use the `<x-ui::dropdown.item>` component to define menu items.
+
+```html
+<x-ui::dropdown.item>...</x-ui::dropdown.item>
+```
+
+## Full Example
+
+An example dropdown might look like this:
 
 ```html +demo
 <x-ui::dropdown>
