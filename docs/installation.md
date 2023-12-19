@@ -105,7 +105,5 @@ Once you've installed the components, you can use them directly in your project.
 (your location may vary -- it's your world now!)
 
 ```blade
-@verbatim
 <x-input />
-@endverbatim
 ```
