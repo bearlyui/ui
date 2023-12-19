@@ -1,18 +1,25 @@
 @props([
     'theme' => 'primary',
     'title' => null,
+    'button' => null,
+    'icon' => null,
 ])
 
 {{-- Considerations
 
-- Other slots? Icons, Title, etc...
-- Several variants? Glow, bordered, etc...
-- Should they be dismissable?
+- [x] Button slot?
+- [x] Icon slot?
+- [ ] Several variants? Glow, bordered, etc...
+- [ ] Should they be dismissable?
+- [ ] Accessibility
+- [ ] Enums for theme or variants?
  --}}
 
 <div {{ $attributes->class([
     'relative overflow-hidden rounded px-4 py-2 transition ease-in-out',
     'shadow-t border bg-white dark:bg-gray-950/40',
+    'flex items-center justify-between' => $button,
+
     {{-- Primary Theme --}}
     'text-primary-600 shadow-primary-400/60 border-primary-500/40' => $theme === 'primary',
     'dark:text-primary-400 dark:shadow-primary-300/60 dark:border-primary-300/40' => $theme === 'primary',
@@ -26,15 +33,25 @@
     'text-red-600 shadow-red-400/60 border-red-500/40' => $theme === 'error',
     'dark:text-red-400 dark:shadow-red-300/60 dark:border-red-300/40' => $theme === 'error',
 ]) }}>
-    @if ($title)
-        <h4 @class([
-            'text-lg font-medium tracking-tight',
-            'text-primary-700 dark:text-primary-200' => $theme === 'primary',
-            'text-green-700 dark:text-green-200' => $theme === 'success',
-            'text-amber-700 dark:text-amber-200' => $theme === 'warning',
-            'text-red-700 dark:text-red-200' => $theme === 'error',
-        ])>{{ $title }}</h4>
+    <div>
+        @if ($title)
+            <h4 @class([
+                'text-lg font-medium tracking-tight',
+                'text-primary-700 dark:text-primary-200' => $theme === 'primary',
+                'text-green-700 dark:text-green-200' => $theme === 'success',
+                'text-amber-700 dark:text-amber-200' => $theme === 'warning',
+                'text-red-700 dark:text-red-200' => $theme === 'error',
+            ])>{{ $title }}</h4>
+        @endif
+        {{-- <div class="bg-gradient-to-b from-primary-800 shadow-r shadow-pink-400 to-amber-800 w-[4px] absolute left-0 inset-y-0">&nbsp;</div> --}}
+        <div @class(['mt-1.5' => $title])>{{ $slot }}</div>
+    </div>
+    @if ($icon)
+        <div {{ $icon->attributes->class([
+            'absolute top-0 right-0 mt-2 mr-2 opacity-30 saturate-[.7]',
+        ]) }}>
+            {{ $icon }}
+        </div>
     @endif
-    {{-- <div class="bg-gradient-to-b from-primary-800 shadow-r shadow-pink-400 to-amber-800 w-[4px] absolute left-0 inset-y-0">&nbsp;</div> --}}
-    <div @class(['mt-1.5' => $title])>{{ $slot }}</div>
+    {{ $button }}
 </div>
