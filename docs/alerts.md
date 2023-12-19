@@ -15,7 +15,7 @@ Use the `<x-ui::alert>` component for simple alerts. Specify a theme with the `t
 
 ## Including Titles
 ```html +demo title={Alert with Title} previewClasses={space-y-10}
-<x-ui::alert title="Hello, Chat!">
+<x-ui::alert title="Hello, Chat!" :dismissable="true">
     You folks are the best!
 </x-ui::alert>
 
