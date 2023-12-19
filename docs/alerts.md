@@ -22,7 +22,13 @@ Use the `title` property (or slot) to include a title in your alert.
 ```
 
 ### Theme
-The `theme` property change the look of your alert. It defaults to `primary`.
+The `theme` property change the look of your alert. It defaults to `primary`,
+but `success`, `warning`, and `error` are also valid. These are interchangeable with
+the following enumerations if you prefer:
+- `Bearly\Ui\AlertTheme::Primary`
+- `Bearly\Ui\AlertTheme::Success`
+- `Bearly\Ui\AlertTheme::Warning`
+- `Bearly\Ui\AlertTheme::Error`
 
 ```html +demo title={Available Themes} previewClasses={space-y-6}
 <x-ui::alert>I'm a primary themed alert</x-ui::alert>
@@ -32,14 +38,15 @@ The `theme` property change the look of your alert. It defaults to `primary`.
 ```
 
 ### Variant
-There are two options for **variant** -- `glow` and `border`. The default is `glow`.
+There are two options for **variant** -- `glow` and `bordered`. The default is `glow`.
+These are interchangeable with `Bearly\Ui\AlertVariant::Glow` and `Bearly\Ui\AlertVariant::Bordered` enumerations.
 
 ```html +demo title={Available Variants} previewClasses={space-y-6}
 <x-ui::alert>This alert is the glow variant</x-ui::alert>
-<x-ui::alert variant="border">This alert is the border variant</x-ui::alert>
-<x-ui::alert theme="success" variant="border">This alert is the border variant</x-ui::alert>
-<x-ui::alert theme="warning" variant="border">This alert is the border variant</x-ui::alert>
-<x-ui::alert theme="error" variant="border">This alert is the border variant</x-ui::alert>
+<x-ui::alert variant="bordered">This alert is the border variant</x-ui::alert>
+<x-ui::alert theme="success" variant="bordered">This alert is the border variant</x-ui::alert>
+<x-ui::alert theme="warning" variant="bordered">This alert is the border variant</x-ui::alert>
+<x-ui::alert theme="error" variant="bordered">This alert is the border variant</x-ui::alert>
 ```
 
 ### Dismissable
