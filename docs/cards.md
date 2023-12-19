@@ -6,7 +6,7 @@ Sometimes putting forms in cards is a good idea. Sometimes it's not. You do you.
 ## Basics
 
 ```html +demo
-<x-ui::card class="mt-10">I'm a Happy Little Card</x-ui::card>
+<x-ui::card>I'm a Happy Little Card</x-ui::card>
 ```
 
 ## Header & Footer

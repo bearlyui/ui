@@ -8,7 +8,7 @@ Dropdowns expect you to use a `trigger` slot. This is the element that will be c
 
 Use `<x-slot:trigger>` to define the trigger element.
 
-```html
+```html title={The Trigger Slot}
 <x-slot:trigger>
     <button>...</button>
 </x-slot:trigger>
@@ -17,7 +17,7 @@ Use `<x-slot:trigger>` to define the trigger element.
 ## Menu Item Components
 Use the `<x-ui::dropdown.item>` component to define menu items.
 
-```html
+```html title={Dropdown Item}
 <x-ui::dropdown.item>...</x-ui::dropdown.item>
 ```
 
@@ -25,7 +25,7 @@ Use the `<x-ui::dropdown.item>` component to define menu items.
 
 An example dropdown might look like this:
 
-```html +demo
+```html +demo title={Dropdown Menu Example}
 <x-ui::dropdown>
     <x-slot:trigger>
         <x-ui::button>Example Dropdown</x-ui::button>
