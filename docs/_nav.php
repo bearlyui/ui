@@ -6,6 +6,7 @@ return [
         'Configuration' => '/docs/configuration',
     ],
     'Components' => [
+        'Alerts' => '/docs/alerts',
         'Buttons' => '/docs/buttons',
         'Cards' => '/docs/cards',
         'Dropdowns' => '/docs/dropdowns',
