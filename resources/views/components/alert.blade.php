@@ -83,7 +83,7 @@
     {{-- Close Button --}}
     @if ($dismissable && !$button)
         <div @class([
-            'absolute top-0 right-0 mr-2',
+            'absolute top-0 right-0',
             'mt-2' => $title,
             'inset-y-0 flex items-center' => !$title,
         ])>
