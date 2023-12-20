@@ -14,7 +14,7 @@ The components are built for Laravel, Livewire, and Tailwind CSS.
 **The required dependencies are:**
 - Laravel 10.x
 - Livewire 3.x
-- Tailwind CSS 3.x _(if using the Tailwind plugin)_
+- Tailwind CSS 3.4.x
 - Tailwind CSS Forms Plugin
 
 ## Usage Methods

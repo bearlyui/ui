@@ -1,12 +1,12 @@
-@use('Bearly\Ui\AlertTheme')
-@use('Bearly\Ui\AlertVariant')
+@use('Bearly\Ui\Color')
+@use('Bearly\Ui\Variant')
 @props([
     'title' => null,
     'button' => null,
     'icon' => null,
     'dismissable' => false,
-    'theme' => AlertTheme::Primary,
-    'variant' => AlertVariant::Glow
+    'color' => Color::Primary,
+    'variant' => Variant::Glow
 ])
 
 <div
@@ -28,29 +28,29 @@
             'px-4 py-2',
             'flex items-center justify-between' => $button,
 
-            'shadow-t border' => AlertVariant::Glow->is($variant),
-            'border border-l-[6px]' => AlertVariant::Bordered->is($variant),
+            'shadow-t border' => Variant::Glow->is($variant),
+            'border border-l-[6px]' => Variant::Bordered->is($variant),
 
             {{-- Primary Theme --}}
-            'text-primary-600 shadow-primary-400/60 border-primary-500/40' => AlertTheme::Primary->is($theme),
-            'dark:text-primary-400 dark:shadow-primary-300/60' => AlertTheme::Primary->is($theme),
-            'dark:border-primary-300' => AlertTheme::Primary->is($theme) && AlertVariant::Glow->is($variant),
-            'dark:border-l-primary-300 dark:border-primary-300/60' => AlertTheme::Primary->is($theme) && AlertVariant::Bordered->is($variant),
+            'text-primary-600 shadow-primary-400/60 border-primary-500/40' => Color::Primary->is($color),
+            'dark:text-primary-400 dark:shadow-primary-300/60' => Color::Primary->is($color),
+            'dark:border-primary-300' => Color::Primary->is($color) && Variant::Glow->is($variant),
+            'dark:border-l-primary-300 dark:border-primary-300/60' => Color::Primary->is($color) && Variant::Bordered->is($variant),
 
             {{-- Success Theme --}}
-            'text-green-600 shadow-green-400/60 border-green-500/40' => AlertTheme::Success->is($theme),
-            'dark:text-green-400 dark:shadow-green-300/60 dark:border-green-300/40' => AlertTheme::Success->is($theme),
-            'dark:border-l-green-300 dark:border-green-300/60' => AlertTheme::Success->is($theme) && AlertVariant::Bordered->is($variant),
+            'text-success-600 shadow-success-400/60 border-success-500/40' => Color::Success->is($color),
+            'dark:text-success-400 dark:shadow-success-300/60 dark:border-success-300/40' => Color::Success->is($color),
+            'dark:border-l-success-300 dark:border-success-300/60' => Color::Success->is($color) && Variant::Bordered->is($variant),
 
             {{-- Warning Theme --}}
-            'text-amber-600 shadow-amber-400/60 border-amber-500/40' => AlertTheme::Warning->is($theme),
-            'dark:text-amber-400 dark:shadow-amber-300/60 dark:border-amber-300/40' => AlertTheme::Warning->is($theme),
-            'dark:border-l-amber-300 dark:border-amber-300/60' => AlertTheme::Warning->is($theme) && AlertVariant::Bordered->is($variant),
+            'text-warning-600 shadow-warning-400/60 border-warning-500/40' => Color::Warning->is($color),
+            'dark:text-warning-400 dark:shadow-warning-300/60 dark:border-warning-300/40' => Color::Warning->is($color),
+            'dark:border-l-warning-300 dark:border-warning-300/60' => Color::Warning->is($color) && Variant::Bordered->is($variant),
 
             {{-- Error Theme --}}
-            'text-red-600 shadow-red-400/60 border-red-500/40' => AlertTheme::Error->is($theme),
-            'dark:text-red-400 dark:shadow-red-300/60 dark:border-red-300/40' => AlertTheme::Error->is($theme),
-            'dark:border-l-red-400 dark:border-red-300/60' => AlertTheme::Error->is($theme) && AlertVariant::Bordered->is($variant),
+            'text-error-600 shadow-error-400/60 border-error-500/40' => Color::Error->is($color),
+            'dark:text-error-400 dark:shadow-error-300/60 dark:border-error-300/40' => Color::Error->is($color),
+            'dark:border-l-error-400 dark:border-error-300/60' => Color::Error->is($color) && Variant::Bordered->is($variant),
         ])
     }}
 >
@@ -59,10 +59,10 @@
         @if ($title)
             <h4 x-bind:id="$id('alert-title')" @class([
                 'text-lg font-medium tracking-tight',
-                'text-primary-700 dark:text-primary-200' => AlertTheme::Primary->is($theme),
-                'text-green-700 dark:text-green-200' => AlertTheme::Success->is($theme),
-                'text-amber-700 dark:text-amber-200' => AlertTheme::Warning->is($theme),
-                'text-red-700 dark:text-red-200' => AlertTheme::Error->is($theme),
+                'text-primary-700 dark:text-primary-200' => Color::Primary->is($color),
+                'text-success-700 dark:text-success-200' => Color::Success->is($color),
+                'text-warning-700 dark:text-warning-200' => Color::Warning->is($color),
+                'text-error-700 dark:text-error-200' => Color::Error->is($color),
             ]) >{{ $title }}</h4>
         @endif
         <div @class(['mt-1.5' => $title])>{{ $slot }}</div>
