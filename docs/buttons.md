@@ -3,11 +3,33 @@
 The button components still need some love. They're intentionally simple so far, but they need to be beefed up with more options and styles (and focus states!).
 A simple button component, not much to see here. This component needs to be beefed up and is still a work in progress.
 
+## Usage
+Use the `<x-ui::button>` component to create a button of the default variant and color.
+
+```html +demo title={Using Buttons} previewClasses={py-8 flex items-center justify-center}
+<x-ui::button>Happy Little Button</x-ui::button>
+```
+
+## Properties
+
+The button component exposes a handful of props to easily tweak their look and function.
+Buttons also forward all attributes to the underlying `<button></button>` HTML tag.
+
+| Property | Type | Default | Description |
+|:---|:---|:---|:---|
+| `color` | `string \| Color` | `primary` | The color of the button. |
+| `size` | `string \| Size` | `base` | The size of the button. |
+| `variant` | `string \| Variant` | `solid` | The variant of the button. |
+| `radius` | `string \| Size` | `base` | The border radius of the button. |
+| `href` | `string` | `null` | The URL the button should link to. |
+
+---
 
 ## Colors
 Buttons come in 5 colors: `primary` (default), `secondary`, `success`, `warning`, and `error`.
+The `color` prop accepts a string or a `Color` enum to define this value.
 
-```html +demo title={Simple Buttons} previewClasses={grid gap-5 grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+```html +demo title={Simple Buttons} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
 <x-ui::button>Primary</x-ui::button>
 <x-ui::button color="secondary">Secondary</x-ui::button>
 <x-ui::button color="success">Success</x-ui::button>
@@ -46,10 +68,46 @@ disable any default sizing and specify your own by including `size="none"`.
 </div>
 ```
 
-## Variants
-Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
+## Radius
 
-```html +demo title={Solid Variant} previewClasses={flex items-center justify-center justify-between}
+Control the amount of corner rounding with the radii: `none`, `sm`, `md` (default), `lg`, `xl`, and `full`.
+
+```html +demo title={Button Sizing} previewClasses={flex space-x-5 items-end justify-center py-12}
+<div class="text-center">
+    <x-ui::button radius="none">Button</x-ui::button>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">xs</div>
+</div>
+<div class="text-center">
+    <x-ui::button radius="sm">Button</x-ui::button>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">sm</div>
+</div>
+<div class="text-center">
+    <x-ui::button>Button</x-ui::button>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">base</div>
+</div>
+<div class="text-center">
+    <x-ui::button radius="md">Button</x-ui::button>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">md</div>
+</div>
+<div class="text-center">
+    <x-ui::button radius="lg">Button</x-ui::button>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">lg</div>
+</div>
+<div class="text-center">
+    <x-ui::button radius="xl">Button</x-ui::button>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">xl</div>
+</div>
+<div class="text-center">
+    <x-ui::button radius="full">Button</x-ui::button>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">full</div>
+</div>
+```
+
+
+## Variants
+Buttons come in 6 variants (themes if you like that better): `solid` (default), `outline`, `link`, `gradient`, `ghost`, and `glow`.
+
+```html +demo title={Solid Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
 <x-ui::button>Primary</x-ui::button>
 <x-ui::button color="secondary">Secondary</x-ui::button>
 <x-ui::button color="success">Success</x-ui::button>
@@ -57,7 +115,7 @@ Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
 <x-ui::button color="error">Error</x-ui::button>
 ```
 
-```html +demo title={Outline Variant} previewClasses={flex items-center justify-center justify-between}
+```html +demo title={Outline Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
 <x-ui::button variant="outline">Primary</x-ui::button>
 <x-ui::button color="secondary" variant="outline">Secondary</x-ui::button>
 <x-ui::button color="success" variant="outline">Success</x-ui::button>
@@ -65,7 +123,7 @@ Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
 <x-ui::button color="error" variant="outline">Error</x-ui::button>
 ```
 
-```html +demo title={Link Variant} previewClasses={flex items-center justify-center justify-between}
+```html +demo title={Link Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
 <x-ui::button variant="link">Primary</x-ui::button>
 <x-ui::button color="secondary" variant="link">Secondary</x-ui::button>
 <x-ui::button color="success" variant="link">Success</x-ui::button>
@@ -73,23 +131,7 @@ Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
 <x-ui::button color="error" variant="link">Error</x-ui::button>
 ```
 
-```html +demo title={Ghost Variant} previewClasses={flex items-center justify-center justify-between}
-<x-ui::button variant="ghost">Primary</x-ui::button>
-<x-ui::button color="secondary" variant="ghost">Secondary</x-ui::button>
-<x-ui::button color="success" variant="ghost">Success</x-ui::button>
-<x-ui::button color="warning" variant="ghost">Warning</x-ui::button>
-<x-ui::button color="error" variant="ghost">Error</x-ui::button>
-```
-
-```html +demo title={Glow Variant} previewClasses={flex items-center justify-center justify-between}
-<x-ui::button variant="glow">Primary</x-ui::button>
-<x-ui::button color="secondary" variant="glow">Secondary</x-ui::button>
-<x-ui::button color="success" variant="glow">Success</x-ui::button>
-<x-ui::button color="warning" variant="glow">Warning</x-ui::button>
-<x-ui::button color="error" variant="glow">Error</x-ui::button>
-```
-
-```html +demo title={Gradient Variant} previewClasses={flex items-center justify-center justify-between}
+```html +demo title={Gradient Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
 <x-ui::button variant="gradient">Primary</x-ui::button>
 <x-ui::button color="secondary" variant="gradient">Secondary</x-ui::button>
 <x-ui::button color="success" variant="gradient">Success</x-ui::button>
@@ -97,17 +139,25 @@ Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
 <x-ui::button color="error" variant="gradient">Error</x-ui::button>
 ```
 
-## Props
+```html +demo title={Ghost Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button variant="ghost">Primary</x-ui::button>
+<x-ui::button color="secondary" variant="ghost">Secondary</x-ui::button>
+<x-ui::button color="success" variant="ghost">Success</x-ui::button>
+<x-ui::button color="warning" variant="ghost">Warning</x-ui::button>
+<x-ui::button color="error" variant="ghost">Error</x-ui::button>
+```
 
-### Buttons as Links (href)
-You can use the `href` prop to turn a button into a link.
+```html +demo title={Glow Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button variant="glow">Primary</x-ui::button>
+<x-ui::button color="secondary" variant="glow">Secondary</x-ui::button>
+<x-ui::button color="success" variant="glow">Success</x-ui::button>
+<x-ui::button color="warning" variant="glow">Warning</x-ui::button>
+<x-ui::button color="error" variant="glow">Error</x-ui::button>
+```
+
+## Links (href)
+Use the `href` prop to turn a button into a link. It uses an `onclick` handler to redirect to the specified URL since buttons don't have the `href` attribute.
 
 ```html +demo title={Buttons as Links} previewClasses={flex items-center justify-center py-6}
 <x-ui::button href="https://laravel.com" variant="glow" color="error">This Button Links to the Laravel Docs</x-ui::button>
 ```
-
-<!-- | Property | Type | Default | Description |
-|:---|:---|:---|:---|
-| `color` | `string` | `primary` | The color of the button. |
-| `size` | `string` | `md` | The size of the button. |
-| `variant` | `string` | `solid` | The variant of the button. | -->

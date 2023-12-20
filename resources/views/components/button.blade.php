@@ -5,14 +5,24 @@
     'color' => Color::Primary,
     'size' => Size::BASE,
     'variant' => Variant::Solid,
+    'radius' => Size::BASE,
     'href' => null,
 ])
 
 <button
     {{ $attributes->class([
-        'rounded-md transition-all ease-in-out',
+        'transition-all ease-in-out',
 
-        {{-- Base focus state --}}
+        {{-- Border Radius --}}
+        'rounded-none' => Size::NONE->is($radius),
+        'rounded-sm' => Size::SM->is($radius),
+        'rounded' => Size::BASE->is($radius),
+        'rounded-md' => Size::MD->is($radius),
+        'rounded-lg' => Size::LG->is($radius),
+        'rounded-xl' => Size::XL->is($radius),
+        'rounded-full' => Size::FULL->is($radius),
+
+        {{-- Focus states --}}
         ...config('ui.focusClasses'),
         'focus:ring-primary-400/80 focus:dark:ring-primary-300/80' => Color::Primary->is($color),
         'focus:ring-secondary-400/80 focus:dark:ring-secondary-300/80' => Color::Secondary->is($color),
