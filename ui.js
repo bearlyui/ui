@@ -11,7 +11,7 @@ const bearUI = plugin(
       extend: {
         colors: {
           primary: colors.cyan,
-          secondary: colors.gray,
+          secondary: colors.slate,
           success: colors.green,
           warning: colors.amber,
           error: colors.red,

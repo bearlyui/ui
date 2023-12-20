@@ -65,6 +65,10 @@
         'text-error-500 border-error-300 bg-error-200/15 shadow-error-400/60 hover:text-error-600 hover:shadow-lg hover:shadow-error-400/60 dark:text-error-400 dark:bg-error-700/10 dark:border-error-600 dark:hover:text-error-200' => Color::Error->is($color) && Variant::Glow->is($variant),
 
         {{-- Gradient Variant --}}
-        'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 dark:from-primary-400 dark:to-primary-500 dark:hover:from-primary-500 dark:hover:to-primary-600' => Color::Primary->is($color) && Variant::Gradient->is($variant),
+        'text-primary-50 bg-gradient-to-bl from-primary-200 to-primary-600 hover:hue-rotate-30 dark:from-primary-400 dark:to-primary-800 dark:hover:hue-rotate-30' => Color::Primary->is($color) && Variant::Gradient->is($variant),
+        'text-secondary-50 bg-gradient-to-bl from-secondary-200 to-secondary-600 hover:hue-rotate-90 dark:from-secondary-400 dark:to-secondary-800 dark:hover:hue-rotate-90' => Color::Secondary->is($color) && Variant::Gradient->is($variant),
+        'text-success-50 bg-gradient-to-bl from-success-200 to-success-600 hover:hue-rotate-30 dark:from-success-400 dark:to-success-800 dark:hover:hue-rotate-30' => Color::Success->is($color) && Variant::Gradient->is($variant),
+        'text-warning-50 bg-gradient-to-bl from-warning-200 to-warning-600 hover:-hue-rotate-30 dark:from-warning-400 dark:to-warning-800 dark:hover:-hue-rotate-30' => Color::Warning->is($color) && Variant::Gradient->is($variant),
+        'text-error-50 bg-gradient-to-bl from-error-200 to-error-600 hover:-hue-rotate-30 dark:from-error-400 dark:to-error-800 dark:hover:-hue-rotate-30' => Color::Error->is($color) && Variant::Gradient->is($variant),
     ])->merge(['type' => 'button']) }}
 >{{ $slot }}</button>
