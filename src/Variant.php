@@ -9,6 +9,7 @@ enum Variant: string
     case Bordered = 'bordered';
     case Ghost = 'ghost';
     case Glow = 'glow';
+    case Gradient = 'gradient';
     case Link = 'link';
     case Outline = 'outline';
     case Solid = 'solid';

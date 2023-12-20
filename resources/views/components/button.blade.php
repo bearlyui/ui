@@ -9,7 +9,15 @@
 
 <button
     {{ $attributes->class([
-        'rounded-md transition ease-in-out',
+        'rounded-md transition-all ease-in-out',
+
+        {{-- Base focus state --}}
+        ...config('ui.focusClasses'),
+        'focus:ring-primary-400/80 focus:dark:ring-primary-300/80' => Color::Primary->is($color),
+        'focus:ring-secondary-400/80 focus:dark:ring-secondary-300/80' => Color::Secondary->is($color),
+        'focus:ring-success-400/80 focus:dark:ring-success-300/80' => Color::Success->is($color),
+        'focus:ring-warning-400/80 focus:dark:ring-warning-300/80' => Color::Warning->is($color),
+        'focus:ring-error-400/80 focus:dark:ring-error-300/80' => Color::Error->is($color),
 
         {{-- Sizing --}}
         'px-1.5 py-1 text-xs' => Size::XS->is($size),
@@ -20,49 +28,43 @@
         'px-8 py-4 text-xl font-medium' => Size::XL->is($size),
 
         {{-- Solid Variant --}}
-        'text-white/90 bg-primary-500 hover:bg-primary-600' => Color::Primary->is($color) && Variant::Solid->is($variant),
-        'text-gray-900 bg-gray-100 hover:bg-gray-200' => Color::Secondary->is($color) && Variant::Solid->is($variant),
-        'text-white/90 bg-green-500 hover:bg-green-600' => Color::Success->is($color) && Variant::Solid->is($variant),
-        'text-white/90 bg-red-500 hover:bg-red-600' => Color::Error->is($color) && Variant::Solid->is($variant),
-        'text-white/90 bg-amber-500 hover:bg-amber-600' => Color::Warning->is($color) && Variant::Solid->is($variant),
+        'text-white/90 bg-primary-500 hover:bg-primary-600 dark:text-primary-900 dark:bg-primary-300 dark:hover:bg-primary-100' => Color::Primary->is($color) && Variant::Solid->is($variant),
+        'text-secondary-100 bg-secondary-500/80 hover:bg-secondary-600 dark:text-secondary-900 dark:bg-secondary-300 dark:hover:bg-secondary-100' => Color::Secondary->is($color) && Variant::Solid->is($variant),
+        'text-white/90 bg-success-500 hover:bg-success-600 dark:text-success-900 dark:bg-success-300 dark:hover:bg-success-100' => Color::Success->is($color) && Variant::Solid->is($variant),
+        'text-white/90 bg-warning-500 hover:bg-warning-600 dark:text-warning-900 dark:bg-warning-300 dark:hover:bg-warning-100' => Color::Warning->is($color) && Variant::Solid->is($variant),
+        'text-white/90 bg-error-500 hover:bg-error-600 dark:text-error-900 dark:bg-error-300 dark:hover:bg-error-100' => Color::Error->is($color) && Variant::Solid->is($variant),
 
         {{-- Outline Variant --}}
-        'text-primary-500 border-primary-500 hover:bg-primary-50' => Color::Primary->is($color) && Variant::Outline->is($variant),
-        'text-gray-900 border-gray-100 hover:bg-gray-50' => Color::Secondary->is($color) && Variant::Outline->is($variant),
-        'text-green-500 border-green-500 hover:bg-green-50' => Color::Success->is($color) && Variant::Outline->is($variant),
-        'text-red-500 border-red-500 hover:bg-red-50' => Color::Error->is($color) && Variant::Outline->is($variant),
-        'text-amber-500 border-amber-500 hover:bg-amber-50' => Color::Warning->is($color) && Variant::Outline->is($variant),
-
-        {{-- Ghost Variant --}}
-        'text-primary-500 hover:bg-primary-50' => Color::Primary->is($color) && Variant::Ghost->is($variant),
-        'text-gray-900 hover:bg-gray-50' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
-        'text-green-500 hover:bg-green-50' => Color::Success->is($color) && Variant::Ghost->is($variant),
-        'text-red-500 hover:bg-red-50' => Color::Error->is($color) && Variant::Ghost->is($variant),
-        'text-amber-500 hover:bg-amber-50' => Color::Warning->is($color) && Variant::Ghost->is($variant),
+        'border' => Variant::Outline->is($variant),
+        'text-primary-500 border-primary-500 hover:bg-primary-50 dark:text-primary-400 dark:border-primary-400 dark:hover:bg-primary-600/40 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Outline->is($variant),
+        'text-secondary-500 border-secondary-500 hover:bg-secondary-300/50 hover:text-secondary-700 dark:text-secondary-300 dark:border-secondary-400 dark:hover:bg-secondary-600 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Outline->is($variant),
+        'text-success-500 border-success-500 hover:bg-success-50 dark:text-success-400 dark:border-success-400 dark:hover:bg-success-600/40 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Outline->is($variant),
+        'text-warning-500 border-warning-500 hover:bg-warning-50 dark:text-warning-400 dark:border-warning-400 dark:hover:bg-warning-600/40 dark:hover:text-warning-100' => Color::Warning->is($color) && Variant::Outline->is($variant),
+        'text-error-500 border-error-500 hover:bg-error-50 dark:text-error-400 dark:border-error-400 dark:hover:bg-error-600/40 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Outline->is($variant),
 
         {{-- Link Variant --}}
-        'text-primary-500 hover:bg-primary-50' => Color::Primary->is($color) && Variant::Link->is($variant),
-        'text-gray-900 hover:bg-gray-50' => Color::Secondary->is($color) && Variant::Link->is($variant),
-        'text-green-500 hover:bg-green-50' => Color::Success->is($color) && Variant::Link->is($variant),
-        'text-red-500 hover:bg-red-50' => Color::Error->is($color) && Variant::Link->is($variant),
-        'text-amber-500 hover:bg-amber-50' => Color::Warning->is($color) && Variant::Link->is($variant),
+        'text-primary-500 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Link->is($variant),
+        'text-secondary-500 hover:text-secondary-800 dark:text-secondary-300 dark:hover:text-secondary-50' => Color::Secondary->is($color) && Variant::Link->is($variant),
+        'text-success-500 hover:text-success-800 dark:text-success-400 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Link->is($variant),
+        'text-warning-500 hover:text-warning-800 dark:text-warning-400 dark:hover:text-warning-100' => Color::Warning->is($color) && Variant::Link->is($variant),
+        'text-error-500 hover:text-error-800 dark:text-error-400 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Link->is($variant),
+
+        {{-- Ghost Variant --}}
+        'text-primary-500 hover:bg-primary-50 dark:text-primary-400 dark:hover:bg-primary-600/40 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Ghost->is($variant),
+        'text-secondary-500 hover:bg-secondary-300/50 hover:text-secondary-700 dark:text-secondary-300 dark:hover:bg-secondary-600/40 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
+        'text-success-500 hover:bg-success-50 dark:text-success-400 dark:hover:bg-success-600/40 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Ghost->is($variant),
+        'text-warning-500 hover:bg-warning-50 dark:text-warning-400 dark:hover:bg-warning-600/40 dark:hover:text-warning-100' => Color::Warning->is($color) && Variant::Ghost->is($variant),
+        'text-error-500 hover:bg-error-50 dark:text-error-400 dark:hover:bg-error-600/40 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Ghost->is($variant),
 
         {{-- Glow Variant --}}
-        'text-primary-500 shadow-primary-400/60 border-primary-500/40 hover:bg-primary-50' => Color::Primary->is($color) && Variant::Glow->is($variant),
-        'text-gray-900 shadow-gray-400/60 border-gray-100/40 hover:bg-gray-50' => Color::Secondary->is($color) && Variant::Glow->is($variant),
-        'text-green-500 shadow-green-400/60 border-green-500/40 hover:bg-green-50' => Color::Success->is($color) && Variant::Glow->is($variant),
-        'text-red-500 shadow-red-400/60 border-red-500/40 hover:bg-red-50' => Color::Error->is($color) && Variant::Glow->is($variant),
-        'text-amber-500 shadow-amber-400/60 border-amber-500/40 hover:bg-amber-50' => Color::Warning->is($color) && Variant::Glow->is($variant),
+        'shadow hover:shadow-lg border-t' => Variant::Glow->is($variant),
+        'text-primary-500 border-primary-300 bg-primary-200/15 shadow-primary-400/60 hover:text-primary-600 hover:shadow-lg hover:shadow-primary-400/60 dark:text-primary-400 dark:bg-primary-700/10 dark:border-primary-600 dark:hover:text-primary-200' => Color::Primary->is($color) && Variant::Glow->is($variant),
+        'text-secondary-500 border-secondary-300 bg-secondary-300/10 shadow-secondary-400/60 hover:text-secondary-600 hover:shadow-lg hover:shadow-secondary-400/60 dark:text-secondary-300 dark:bg-secondary-700/10 dark:border-secondary-600 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Glow->is($variant),
+        'text-success-500 border-success-300 bg-success-200/15 shadow-success-400/60 hover:text-success-600 hover:shadow-lg hover:shadow-success-400/60 dark:text-success-400 dark:bg-success-700/10 dark:border-success-600 dark:hover:text-success-200' => Color::Success->is($color) && Variant::Glow->is($variant),
+        'text-warning-500 border-warning-300 bg-warning-200/15 shadow-warning-400/60 hover:text-warning-600 hover:shadow-lg hover:shadow-warning-400/60 dark:text-warning-400 dark:bg-warning-700/10 dark:border-warning-600 dark:hover:text-warning-200' => Color::Warning->is($color) && Variant::Glow->is($variant),
+        'text-error-500 border-error-300 bg-error-200/15 shadow-error-400/60 hover:text-error-600 hover:shadow-lg hover:shadow-error-400/60 dark:text-error-400 dark:bg-error-700/10 dark:border-error-600 dark:hover:text-error-200' => Color::Error->is($color) && Variant::Glow->is($variant),
 
-        {{-- Bordered Variant --}}
-        'text-primary-500 border-primary-500 hover:bg-primary-50' => Color::Primary->is($color) && Variant::Bordered->is($variant),
-        'text-gray-900 border-gray-100 hover:bg-gray-50' => Color::Secondary->is($color) && Variant::Bordered->is($variant),
-        'text-green-500 border-green-500 hover:bg-green-50' => Color::Success->is($color) && Variant::Bordered->is($variant),
-        'text-red-500 border-red-500 hover:bg-red-50' => Color::Error->is($color) && Variant::Bordered->is($variant),
-        'text-amber-500 border-amber-500 hover:bg-amber-50' => Color::Warning->is($color) && Variant::Bordered->is($variant),
-
-
-        {{-- Focus state --}}
-        ...config('ui.focusClasses'),
+        {{-- Gradient Variant --}}
+        'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 dark:from-primary-400 dark:to-primary-500 dark:hover:from-primary-500 dark:hover:to-primary-600' => Color::Primary->is($color) && Variant::Gradient->is($variant),
     ])->merge(['type' => 'button']) }}
 >{{ $slot }}</button>

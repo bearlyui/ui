@@ -72,3 +72,27 @@ Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
 <x-ui::button color="warning" variant="link">Warning</x-ui::button>
 <x-ui::button color="error" variant="link">Error</x-ui::button>
 ```
+
+```html +demo title={Ghost Variant} previewClasses={flex items-center justify-center justify-between}
+<x-ui::button variant="ghost">Primary</x-ui::button>
+<x-ui::button color="secondary" variant="ghost">Secondary</x-ui::button>
+<x-ui::button color="success" variant="ghost">Success</x-ui::button>
+<x-ui::button color="warning" variant="ghost">Warning</x-ui::button>
+<x-ui::button color="error" variant="ghost">Error</x-ui::button>
+```
+
+```html +demo title={Glow Variant} previewClasses={flex items-center justify-center justify-between}
+<x-ui::button variant="glow">Primary</x-ui::button>
+<x-ui::button color="secondary" variant="glow">Secondary</x-ui::button>
+<x-ui::button color="success" variant="glow">Success</x-ui::button>
+<x-ui::button color="warning" variant="glow">Warning</x-ui::button>
+<x-ui::button color="error" variant="glow">Error</x-ui::button>
+```
+
+```html +demo title={Gradient Variant} previewClasses={flex items-center justify-center justify-between}
+<x-ui::button variant="gradient">Primary</x-ui::button>
+<x-ui::button color="secondary" variant="gradient">Secondary</x-ui::button>
+<x-ui::button color="success" variant="gradient">Success</x-ui::button>
+<x-ui::button color="warning" variant="gradient">Warning</x-ui::button>
+<x-ui::button color="error" variant="gradient">Error</x-ui::button>
+```
