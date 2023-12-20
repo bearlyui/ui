@@ -2,11 +2,8 @@
 
 namespace Bearly\Ui;
 
-enum AlertVariant: string
+trait Comparable
 {
-    case Glow = 'glow';
-    case Bordered = 'bordered';
-
     public function is(string|self $variant): bool
     {
         if (is_string($variant)) {
