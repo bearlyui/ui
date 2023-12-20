@@ -5,6 +5,7 @@
     'color' => Color::Primary,
     'size' => Size::BASE,
     'variant' => Variant::Solid,
+    'href' => null,
 ])
 
 <button
@@ -46,6 +47,7 @@
         'text-error-500 border-error-500 hover:bg-error-50 dark:text-error-400 dark:border-error-400 dark:hover:bg-error-600/40 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Outline->is($variant),
 
         {{-- Link Variant --}}
+        'font-medium' => Variant::Link->is($variant),
         'text-primary-500 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Link->is($variant),
         'text-secondary-500 hover:text-secondary-800 dark:text-secondary-300 dark:hover:text-secondary-50' => Color::Secondary->is($color) && Variant::Link->is($variant),
         'text-success-500 hover:text-success-800 dark:text-success-400 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Link->is($variant),
@@ -73,5 +75,7 @@
         'text-success-50 bg-gradient-to-bl from-success-200 to-success-600 hover:hue-rotate-30 dark:from-success-400 dark:to-success-800 dark:hover:hue-rotate-30' => Color::Success->is($color) && Variant::Gradient->is($variant),
         'text-warning-50 bg-gradient-to-bl from-warning-200 to-warning-600 hover:-hue-rotate-30 dark:from-warning-400 dark:to-warning-800 dark:hover:-hue-rotate-30' => Color::Warning->is($color) && Variant::Gradient->is($variant),
         'text-error-50 bg-gradient-to-bl from-error-200 to-error-600 hover:-hue-rotate-30 dark:from-error-400 dark:to-error-800 dark:hover:-hue-rotate-30' => Color::Error->is($color) && Variant::Gradient->is($variant),
-    ])->merge(['type' => 'button']) }}
->{{ $slot }}</button>
+    ])
+    ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
+    ->merge(['type' => 'button'])
+}}>{{ $slot }}</button>

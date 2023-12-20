@@ -15,7 +15,7 @@ Buttons come in 5 colors: `primary` (default), `secondary`, `success`, `warning`
 <x-ui::button color="error">Error</x-ui::button>
 ```
 
-### Sizing
+## Sizing
 Buttons come in 5 sizes: `xs`, `sm`, `md` (default), `lg`, and `xl`. You can
 disable any default sizing and specify your own by including `size="none"`.
 
@@ -46,7 +46,7 @@ disable any default sizing and specify your own by including `size="none"`.
 </div>
 ```
 
-### Variants
+## Variants
 Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
 
 ```html +demo title={Solid Variant} previewClasses={flex items-center justify-center justify-between}
@@ -96,3 +96,18 @@ Buttons come in 3 variants: `solid` (default), `outline`, and `link`.
 <x-ui::button color="warning" variant="gradient">Warning</x-ui::button>
 <x-ui::button color="error" variant="gradient">Error</x-ui::button>
 ```
+
+## Props
+
+### Buttons as Links (href)
+You can use the `href` prop to turn a button into a link.
+
+```html +demo title={Buttons as Links} previewClasses={flex items-center justify-center py-6}
+<x-ui::button href="https://laravel.com" variant="glow" color="error">This Button Links to the Laravel Docs</x-ui::button>
+```
+
+<!-- | Property | Type | Default | Description |
+|:---|:---|:---|:---|
+| `color` | `string` | `primary` | The color of the button. |
+| `size` | `string` | `md` | The size of the button. |
+| `variant` | `string` | `solid` | The variant of the button. | -->
