@@ -22,6 +22,7 @@ Buttons also forward all attributes to the underlying `<button></button>` HTML t
 | `variant` | `string \| Variant` | `solid` | The variant of the button. |
 | `radius` | `string \| Size` | `base` | The border radius of the button. |
 | `href` | `string` | `null` | The URL the button should link to. |
+| `disabled` | `boolean` | `false` | Whether the button is disabled. |
 
 ---
 
@@ -160,4 +161,55 @@ Use the `href` prop to turn a button into a link. It uses an `onclick` handler t
 
 ```html +demo title={Buttons as Links} previewClasses={flex items-center justify-center py-6}
 <x-ui::button href="https://laravel.com" variant="glow" color="error">This Button Links to the Laravel Docs</x-ui::button>
+```
+
+## Disabled State
+Each variant also has a disabled state. The `disabled` prop accepts a boolean value.
+
+```html +demo title={Solid Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button :disabled="true">Primary</x-ui::button>
+<x-ui::button :disabled="true" color="secondary">Secondary</x-ui::button>
+<x-ui::button :disabled="true" color="success">Success</x-ui::button>
+<x-ui::button :disabled="true" color="warning">Warning</x-ui::button>
+<x-ui::button :disabled="true" color="error">Error</x-ui::button>
+```
+
+```html +demo title={Outline Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button :disabled="true" variant="outline">Primary</x-ui::button>
+<x-ui::button :disabled="true" color="secondary" variant="outline">Secondary</x-ui::button>
+<x-ui::button :disabled="true" color="success" variant="outline">Success</x-ui::button>
+<x-ui::button :disabled="true" color="warning" variant="outline">Warning</x-ui::button>
+<x-ui::button :disabled="true" color="error" variant="outline">Error</x-ui::button>
+```
+
+```html +demo title={Link Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button :disabled="true" variant="link">Primary</x-ui::button>
+<x-ui::button :disabled="true" color="secondary" variant="link">Secondary</x-ui::button>
+<x-ui::button :disabled="true" color="success" variant="link">Success</x-ui::button>
+<x-ui::button :disabled="true" color="warning" variant="link">Warning</x-ui::button>
+<x-ui::button :disabled="true" color="error" variant="link">Error</x-ui::button>
+```
+
+```html +demo title={Gradient Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button :disabled="true" variant="gradient">Primary</x-ui::button>
+<x-ui::button :disabled="true" color="secondary" variant="gradient">Secondary</x-ui::button>
+<x-ui::button :disabled="true" color="success" variant="gradient">Success</x-ui::button>
+<x-ui::button :disabled="true" color="warning" variant="gradient">Warning</x-ui::button>
+<x-ui::button :disabled="true" color="error" variant="gradient">Error</x-ui::button>
+```
+
+```html +demo title={Ghost Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button :disabled="true" variant="ghost">Primary</x-ui::button>
+<x-ui::button :disabled="true" color="secondary" variant="ghost">Secondary</x-ui::button>
+<x-ui::button :disabled="true" color="success" variant="ghost">Success</x-ui::button>
+<x-ui::button :disabled="true" color="warning" variant="ghost">Warning</x-ui::button>
+<x-ui::button :disabled="true" color="error" variant="ghost">Error</x-ui::button>
+```
+
+```html +demo title={Glow Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+<x-ui::button :disabled="true" variant="glow">Primary</x-ui::button>
+<x-ui::button :disabled="true" color="secondary" variant="glow">Secondary</x-ui::button>
+<x-ui::button :disabled="true" color="success" variant="glow">Success</x-ui::button>
+<x-ui::button :disabled="true" color="warning" variant="glow">Warning</x-ui::button>
+<x-ui::button :disabled="true" color="error" variant="glow">Error</x-ui::button>
 ```

@@ -7,11 +7,15 @@
     'variant' => Variant::Solid,
     'radius' => Size::BASE,
     'href' => null,
+    'disabled' => false,
 ])
 
 <button
     {{ $attributes->class([
         'transition-all ease-in-out',
+
+        {{-- Disabled States --}}
+        'opacity-60 saturate-[0.3] cursor-not-allowed' => $disabled,
 
         {{-- Border Radius --}}
         'rounded-none' => Size::NONE->is($radius),
@@ -86,6 +90,7 @@
         'text-warning-50 bg-gradient-to-bl from-warning-200 to-warning-600 hover:-hue-rotate-30 dark:from-warning-400 dark:to-warning-800 dark:hover:-hue-rotate-30' => Color::Warning->is($color) && Variant::Gradient->is($variant),
         'text-error-50 bg-gradient-to-bl from-error-200 to-error-600 hover:-hue-rotate-30 dark:from-error-400 dark:to-error-800 dark:hover:-hue-rotate-30' => Color::Error->is($color) && Variant::Gradient->is($variant),
     ])
+    ->when($disabled, fn ($attributes) => $attributes->merge(['disabled' => 'disabled']))
     ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
     ->merge(['type' => 'button'])
 }}>{{ $slot }}</button>
