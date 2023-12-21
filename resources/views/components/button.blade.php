@@ -15,9 +15,7 @@
         'transition-all ease-in-out',
 
         {{-- Disabled States --}}
-        'opacity-60 saturate-50 cursor-not-allowed' => $disabled,
-
-        {{-- Color --}}
+        'opacity-60 saturate-[0.3] cursor-not-allowed' => $disabled,
 
         {{-- Border Radius --}}
         'rounded-none' => Size::NONE->is($radius),
