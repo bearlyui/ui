@@ -1,10 +1,8 @@
 # Buttons
 
-The button components still need some love. They're intentionally simple so far, but they need to be beefed up with more options and styles (and focus states!).
-A simple button component, not much to see here. This component needs to be beefed up and is still a work in progress.
+## Using Buttons
 
-## Usage
-Use the `<x-ui::button>` component to create a button of the default variant and color.
+Use `<x-ui::button>` to create a button of the default variant and color.
 
 ```html +demo title={Using Buttons} previewClasses={py-8 flex items-center justify-center}
 <x-ui::button>Happy Little Button</x-ui::button>
@@ -12,8 +10,7 @@ Use the `<x-ui::button>` component to create a button of the default variant and
 
 ## Properties
 
-The button component exposes a handful of props to easily tweak their look and function.
-Buttons also forward all attributes to the underlying `<button></button>` HTML tag.
+Buttons forward all attributes to the underlying `<button></button>` HTML tag by default. They also recognize the following properties in order to customize behavior, theme, and size.
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
@@ -26,7 +23,7 @@ Buttons also forward all attributes to the underlying `<button></button>` HTML t
 
 ---
 
-## Colors
+### Colors
 Buttons come in 5 colors: `primary` (default), `secondary`, `success`, `warning`, and `error`.
 The `color` prop accepts a string or a `Color` enum to define this value.
 
@@ -38,7 +35,7 @@ The `color` prop accepts a string or a `Color` enum to define this value.
 <x-ui::button color="error">Error</x-ui::button>
 ```
 
-## Sizing
+### Sizing
 Buttons come in 5 sizes: `xs`, `sm`, `md` (default), `lg`, and `xl`. You can
 disable any default sizing and specify your own by including `size="none"`.
 
@@ -69,7 +66,7 @@ disable any default sizing and specify your own by including `size="none"`.
 </div>
 ```
 
-## Radius
+### Radius
 
 Control the amount of corner rounding with the radii: `none`, `sm`, `md` (default), `lg`, `xl`, and `full`.
 
@@ -105,7 +102,7 @@ Control the amount of corner rounding with the radii: `none`, `sm`, `md` (defaul
 ```
 
 
-## Variants
+### Variant
 Buttons come in 6 variants (themes if you like that better): `solid` (default), `outline`, `link`, `gradient`, `ghost`, and `glow`.
 
 ```html +demo title={Solid Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -156,14 +153,14 @@ Buttons come in 6 variants (themes if you like that better): `solid` (default), 
 <x-ui::button color="error" variant="glow">Error</x-ui::button>
 ```
 
-## Links (href)
+### Links (href)
 Use the `href` prop to turn a button into a link. It uses an `onclick` handler to redirect to the specified URL since buttons don't have the `href` attribute.
 
 ```html +demo title={Buttons as Links} previewClasses={flex items-center justify-center py-6}
 <x-ui::button href="https://laravel.com" variant="glow" color="error">This Button Links to the Laravel Docs</x-ui::button>
 ```
 
-## Disabled State
+### Disabled State
 Each variant also has a disabled state. The `disabled` prop accepts a boolean value.
 
 ```html +demo title={Solid Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}

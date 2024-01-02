@@ -1,27 +1,59 @@
 # Tooltips
+## 🚧 TO DO
+- [x] Finish documentation for all properties, slots, and sections
+- [ ] Refine the API - change / rename the shortcut prop and other things
 
-Helpful little popups that appear when you hover over an element. They're great for
-providing extra context or showing keyboard shortcuts. They'll automatically use
+Helpful little buggers that appear when you hover over an element. Great for giving extra context or showing keyboard shortcuts. They'll automatically use
 their parent element as a trigger.
+
+## Using Tooltips
+
+Use `<x-ui::tooltip>` **inside an element** to add a tooltip to the parent element.
+
+```html +demo
+<x-ui::button>
+    <x-ui::tooltip title="Have a nice day!" />
+    Hover me, please!
+</x-ui::button>
+```
 
 Tooltips are overflow-aware too, and will adjust their positioning if they overflow
 outside of the viewport. Huge thanks to [Alpine's Anchor plugin](https://alpinejs.dev/plugins/anchor#positioning) and [Floating UI](https://floating-ui.com) for that.
 
-## Config Options
-**The tooltip component exposes the following props**
-```php
-[
-    'title' => null,
-    'shortcut' => null,
-    'position' => 'top',
-    'offset' => 4,
-]
+## Properties
+
+Use the following properties to customize your tooltips.
+
+| Property | Type | Default | Description |
+|:---|:---|:---|:---|
+| `title` | `string` | `null` | The main title of the tooltip. |
+| `shortcut` | `string` | `null` | Additional styled keyboard shortcut text. |
+| `offset` | `integer` | `4` | The offset of the tooltip from the trigger element. |
+| `position` | `string` | `top` | The position relative to the trigger element. |
+
+---
+
+### Title
+The `title` prop is interchangeable with the default slot. Use whichever style you prefer.
+
+```blade
+{{-- title prop or default slot (same thing) --}}
+<x-ui::tooltip title="Hello" />
+<x-ui::tooltip>Hello</x-ui::tooltip>
 ```
 
-The `title` prop is interchangeable with the default slot. Use whichever you prefer.
+### Shortcut
+Use the `shortcut` prop (or slot) to add styled `<kbd>` tags to your tooltip.
 
-The `shortcut` prop is also interchangeable with a `shortcut` slot. Use it for specifying keyboard shortcuts.
+```blade
+{{-- shortcut prop or shortcut slot (same thing) --}}
+<x-ui::tooltip shortcut="⌘+S" />
+<x-ui::tooltip>
+    <x-slot:shortcut>⌘+S</x-slot:shortcut>
+</x-ui::tooltip>
+```
 
+### Offset & Position
 The offset and position props correspond to options in Floating UI -- [via Alpine's Anchor plugin](https://alpinejs.dev/plugins/anchor#positioning).
 
 
@@ -35,7 +67,7 @@ Here's a basic example.
 </x-ui::button>
 ```
 
-You can also use them like this.
+You can also customize the position and offset, like this.
 ```html +demo
 <x-ui::button>
     <x-ui::tooltip position="right" offset="20">Enjoy yourself, and be happy.</x-ui::tooltip>

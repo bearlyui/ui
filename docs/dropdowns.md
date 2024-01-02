@@ -1,11 +1,15 @@
 # Dropdowns
+## 🚧 TO DO
+- [ ] Improve hover/selected/focus states
+- [ ] Fill out documentation for properties and slots
 
 Click on a trigger element and a magic menu appears!
 
+
+## Using Dropdowns
 Dropdowns expect you to use a `trigger` slot. This is the element that will be clicked to open the dropdown. It can be anything you want, but it's usually a button.
 
-## The Trigger Slot
-
+### The Trigger Slot
 Use `<x-slot:trigger>` to define the trigger element.
 
 ```html title={The Trigger Slot}
@@ -14,14 +18,14 @@ Use `<x-slot:trigger>` to define the trigger element.
 </x-slot:trigger>
 ```
 
-## Menu Item Components
+### Menu Item Components
 Use the `<x-ui::dropdown.item>` component to define menu items.
 
 ```html title={Dropdown Item}
 <x-ui::dropdown.item>...</x-ui::dropdown.item>
 ```
 
-## Full Example
+### Full Example
 
 An example dropdown might look like this:
 
@@ -57,4 +61,8 @@ An example dropdown might look like this:
 </x-ui::dropdown>
 ```
 
-#### Nested hover menus
+## Properties
+### Property ABC
+
+## Slots
+### Slot ABC

@@ -1,8 +1,8 @@
 # Alerts
 
-Give some extra attention to the *important* stuff.
+Give some extra attention to the *exciting* stuff.
 
-## Basic usage
+## Using Alerts
 
 Use the `<x-ui::alert>` component for simple alerts. Specify a color theme with the `color` attribute
 to change the alert's color. The default color is `primary`, but you can also use `success`,
