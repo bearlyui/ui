@@ -5,9 +5,8 @@
 - [x] Add `color` property and support for all colors
 - [x] Add `variant` property and several variants
 - [x] Add `size` property and support for all sizes
-- [ ] Style header and footers with all variants and colors
-- [ ] Test all variant/color combos with `header` and `footer` slots
-- [ ] Test all radii with headers and footers
+- [x] Test all radii with headers and footers
+- [ ] Style all variant/color combos with `header` and `footer` slots
 - [ ] Finish filling out documentation
 
 Cards to put stuff in. They're great when you need 'em!
@@ -16,7 +15,7 @@ Cards to put stuff in. They're great when you need 'em!
 
 Use `<x-ui::card>` to create a card with the default variant, padding, and radius.
 
-```html +demo previewClasses={space-y-5}
+```html +demo title={Basic Cards} previewClasses={space-y-5}
 <x-ui::card>I'm a Happy Little Card</x-ui::card>
 <x-ui::card color="primary">I'm a Happy Little Card</x-ui::card>
 <x-ui::card color="secondary">I'm a Happy Little Card</x-ui::card>
@@ -31,9 +30,10 @@ Customize your cards with the following properties.
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `padding` | `boolean` | `true` | Include default padding. |
-| `radius` | `string \| Size` | `base` | The border radius of the button. |
-| `variant` | `string \| Variant` | `solid` | The variant of the button. |
+| `color` | `string \| Color` | `base` | The color of the card. |
+| `size` | `string \| Size` | `true` | The padding and text size of the card. |
+| `radius` | `string \| Size` | `base` | The border radius of the card. |
+| `variant` | `string \| Variant` | `solid` | The variant of the card. |
 
 ---
 
