@@ -3,9 +3,11 @@
 - [x] Setup documentation like other pages, document existing cards
 - [x] Add `header` and `footer` slots
 - [x] Add `color` property and support for all colors
-- [ ] Add `variant` property and several variants
+- [x] Add `variant` property and several variants
+- [x] Add `size` property and support for all sizes
+- [ ] Style header and footers with all variants and colors
 - [ ] Test all variant/color combos with `header` and `footer` slots
-- [ ] Figure out a better abstraction for padding/sizing
+- [ ] Test all radii with headers and footers
 - [ ] Finish filling out documentation
 
 Cards to put stuff in. They're great when you need 'em!
@@ -35,13 +37,61 @@ Customize your cards with the following properties.
 
 ---
 
-### ☑️ Padding
+### Size
 
-TODO
+Cards of all sizes. The default is `base`, but `sm`, `md`, and `lg` are all available too.
 
-### ️️☑ ️Radius
+```html +demo title={Card Sizing} previewClasses={space-y-5}
+<div>
+    <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">SM Sizing</h5>
+    <x-ui::card size="sm">
+        <x-slot:header>Header</x-slot:header>
+        I'm a small card
+        <x-slot:footer>Footer</x-slot:footer>
+    </x-ui::card>
+</div>
 
-TODO
+<div>
+    <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">Base Sizing</h5>
+    <x-ui::card>
+        <x-slot:header>Header</x-slot:header>
+        I'm a base card
+        <x-slot:footer>Footer</x-slot:footer>
+    </x-ui::card>
+</div>
+
+<div>
+    <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">MD Sizing</h5>
+    <x-ui::card size="md">
+        <x-slot:header>Header</x-slot:header>
+        I'm a medium card
+        <x-slot:footer>Footer</x-slot:footer>
+    </x-ui::card>
+</div>
+
+<div>
+    <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">LG Sizing</h5>
+    <x-ui::card size="lg">
+        <x-slot:header>Header</x-slot:header>
+        I'm a large card
+        <x-slot:footer>Footer</x-slot:footer>
+    </x-ui::card>
+</div>
+```
+
+
+### ️️Radius
+
+Cards come with rounded corners by default, but support `none`, `sm`, `base`, `md`, and `lg`, `xl` corner radii.
+
+```html +demo title={Card Radius} previewClasses={space-y-5}
+<x-ui::card radius="none">I'm a card with no radius</x-ui::card>
+<x-ui::card radius="sm">I'm a card with a small radius</x-ui::card>
+<x-ui::card radius="base">I'm a card with the default radius</x-ui::card>
+<x-ui::card radius="md">I'm a card with a medium radius</x-ui::card>
+<x-ui::card radius="lg">I'm a card with a large radius</x-ui::card>
+<x-ui::card radius="xl">I'm a card with a extra large radius</x-ui::card>
+```
 
 ### Variant
 
@@ -122,6 +172,17 @@ The ol' top-n-bottom.
 
 <x-ui::card color="error">
     <x-slot:header>Card with Header &amp; Footer</x-slot:header>
+    <div class="my-4 text-base text-black/60 dark:text-white/60">This is a card with a header. It lives in our world.</div>
+    <x-slot:footer>Example Footer</x-slot:footer>
+</x-ui::card>
+```
+
+## Examples
+
+### Kitchen Sink
+```html +demo
+<x-ui::card radius="xl" size="lg" color="success" variant="solid">
+    <x-slot:header>Kitchen Sink</x-slot:header>
     <div class="my-4 text-base text-black/60 dark:text-white/60">This is a card with a header. It lives in our world.</div>
     <x-slot:footer>Example Footer</x-slot:footer>
 </x-ui::card>

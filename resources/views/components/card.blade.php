@@ -1,16 +1,25 @@
 @use('Bearly\Ui\Color')
+@use('Bearly\Ui\Size')
 @use('Bearly\Ui\Variant')
 @props([
-    'padding' => true,
     'color' => Color::None,
+    'size' => Size::BASE,
+    'radius' => Size::BASE,
     'variant' => Variant::Outline,
 ])
-<div {{ $attributes->class([
-    'rounded border',
-    'text-gray-700 dark:text-gray-200',
 
+<div {{ $attributes->class([
+    'border',
+    'text-gray-700 dark:text-gray-200' => Color::None->is($color) && Variant::Outline->is($variant),
     'shadow dark:shadow-md' => !Variant::Glow->is($variant),
     'bg-white dark:bg-gray-400/5' => Variant::Outline->is($variant) || Variant::Glow->is($variant),
+
+    {{-- Radii --}}
+    'rounded-sm' => Size::SM->is($radius),
+    'rounded' => Size::BASE->is($radius),
+    'rounded-md' => Size::MD->is($radius),
+    'rounded-lg' => Size::LG->is($radius),
+    'rounded-xl' => Size::XL->is($radius),
 
     {{-- Outline --}}
     'border-gray-300 dark:border-white/7.5' => Color::None->is($color) && Variant::Outline->is($variant),
@@ -49,8 +58,15 @@
     {{-- Header --}}
     @if ($header ?? false)
         <div {{ $header->attributes->class([
-            'text-lg font-medium text-black/70 dark:text-white/70 rounded-t',
+            'text-black/70 dark:text-white/70',
             'border-b bg-gray-50 dark:bg-black/10',
+
+            {{-- Radii --}}
+            'rounded-t-sm' => Size::SM->is($radius),
+            'rounded-t' => Size::BASE->is($radius),
+            'rounded-t-md' => Size::MD->is($radius),
+            'rounded-t-lg' => Size::LG->is($radius),
+            'rounded-t-xl' => Size::XL->is($radius),
 
             {{-- Colors --}}
             'border-gray-200 dark:border-white/5' => Color::None->is($color) && Variant::Outline->is($variant),
@@ -59,29 +75,51 @@
             'border-success-300/25' => Color::Success->is($color) && Variant::Outline->is($variant),
             'border-warning-300/25' => Color::Warning->is($color) && Variant::Outline->is($variant),
             'border-error-300/25' => Color::Error->is($color) && Variant::Outline->is($variant),
-            'px-4 py-2' => $padding === true,
+
+            {{-- Sizing --}}
+            'px-3 py-1.5 text-base' => Size::SM->is($size),
+            'px-4 py-2 font-medium' => Size::BASE->is($size),
+            'px-5 py-2.5 font-medium text-lg' => Size::MD->is($size),
+            'px-6 py-3 font-semibold text-xl' => Size::LG->is($size),
         ]) }}>
             {{ $header }}
         </div>
     @endif
 
+    {{-- Main Content --}}
     <div @class([
-        'px-4 py-2' => $padding === true,
+        'px-3 py-1.5 text-sm' => Size::SM->is($size),
+        'px-4 py-2' => Size::BASE->is($size),
+        'px-5 py-2.5' => Size::MD->is($size),
+        'px-6 py-3 text-lg' => Size::LG->is($size),
     ])>{{ $slot }}</div>
 
     {{-- Footer --}}
     @if ($footer ?? false)
         <div {{ $footer->attributes->class([
-            'rounded-b border-t',
+            'border-t',
             'bg-gray-50 text-black/70',
             'dark:bg-black/10 dark:text-white/70',
+
+            {{-- Radii --}}
+            'rounded-b-sm' => Size::SM->is($radius),
+            'rounded-b' => Size::BASE->is($radius),
+            'rounded-b-md' => Size::MD->is($radius),
+            'rounded-b-lg' => Size::LG->is($radius),
+            'rounded-b-xl' => Size::XL->is($radius),
+
+            {{-- Colors --}}
             'border-gray-200 dark:border-white/5' => Color::None->is($color) && Variant::Outline->is($variant),
             'border-primary-300/25' => Color::Primary->is($color) && Variant::Outline->is($variant),
             'border-secondary-300/25' => Color::Secondary->is($color) && Variant::Outline->is($variant),
             'border-success-300/25' => Color::Success->is($color) && Variant::Outline->is($variant),
             'border-warning-300/25' => Color::Warning->is($color) && Variant::Outline->is($variant),
             'border-error-300/25' => Color::Error->is($color) && Variant::Outline->is($variant),
-            'px-4 py-2' => $padding === true,
+
+            'px-3 py-1.5 text-sm' => Size::SM->is($size),
+            'px-4 py-2' => Size::BASE->is($size),
+            'px-5 py-2.5' => Size::MD->is($size),
+            'px-6 py-3 text-lg' => Size::LG->is($size),
         ]) }}>
             {{ $footer }}
         </div>
