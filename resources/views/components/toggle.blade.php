@@ -1,13 +1,33 @@
+@use('Bearly\Ui\Color')
+
 @props([
     'checked' => false,
+    'withIcon' => true,
+    'color' => Color::Primary,
 ])
 @php
 $idOrName = $attributes->get('id') ?? $attributes->get('name') ?? false;
-$hasError = $idOrName ? $errors?->has($idOrName) ?? false : false;
-$isChecked = old() && !empty($checked) && !array_key_exists($attributes->get('name'), old())
-    ? false
-    : old($attributes->get('name', '_'), $checked)
+$dotName = preg_replace('/\[(.*?)\]/', '.$1', $idOrName);
+$nameWithoutBrackets = str($idOrName)->before('[')->toString();
+// For toggles, you might be using as a single toggle, or as an array.
+// In the case of the array, we should also look at the "name" string before
+// any [] characters
+$hasError = $idOrName
+    ? $errors?->hasAny([$idOrName, $dotName, $nameWithoutBrackets]) ?? false
+    : false;
+$isChecked = empty(old()) ? $checked : (boolean) old($dotName);
+
+$trackClasses = match($color) {
+    Color::Primary, 'primary' => 'bg-primary-500 dark:bg-primary-400/70 text-primary-600 dark:text-primary-200',
+    Color::Secondary, 'secondary'  => 'bg-secondary-500 dark:bg-secondary-400/70 text-secondary-600 dark:text-secondary-200',
+    Color::Success, 'success'  => 'bg-success-500 dark:bg-success-400/70 text-success-600 dark:text-success-200',
+    Color::Warning, 'warning'  => 'bg-warning-500 dark:bg-warning-400/70 text-warning-600 dark:text-warning-200',
+    Color::Error, 'error'  => 'bg-error-500 dark:bg-error-400/70 text-error-600 dark:text-error-200',
+    default => ''
+};
+
 @endphp
+
 <button
     type="button"
     role="switch"
@@ -15,25 +35,29 @@ $isChecked = old() && !empty($checked) && !array_key_exists($attributes->get('na
         checked: @js($isChecked),
     }"
     x-modelable="checked"
-    x-on:click="checked = !checked"
+    x-on:click="$refs.checkbox.click()"
     x-bind:aria-checked="checked"
     x-bind:class="{
         'bg-gray-200 dark:bg-black/25': !checked,
-        'bg-primary-500 dark:bg-primary-400/70': checked,
+        @js($trackClasses): checked,
     }"
     {{ $attributes
+        ->whereDoesntStartWith(['wire:model', 'x-model'])
         ->except('name', 'value')
         ->class([
             'rounded-full border-2',
             'border-transparent' => !$hasError,
             'border-red-500 dark:border-red-400' => $hasError,
             'relative inline-flex h-6 w-11 flex-shrink-0',
+            'outline outline-1 focus:outline-1 outline-black/10 outline-offset-[-1px]',
             'cursor-pointer group transition-all duration-200 ease-in-out',
-            ...config('ui.focusClasses')
+            'focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white/80',
+            'dark:focus:ring-primary-400 dark:focus:ring-offset-black/80',
+
         ])
     }}
 >
-    <span class="sr-only">Use setting</span>
+    <span class="sr-only">{{ $idOrName }}</span>
     {{-- Dot --}}
     <span
         x-cloak
@@ -55,11 +79,12 @@ $isChecked = old() && !empty($checked) && !array_key_exists($attributes->get('na
                 'absolute inset-0 flex h-full w-full': true,
                 'items-center justify-center transition-opacity': true,
             }"
+            @class(['hidden' => !$withIcon])
         >
             @if ($iconOn ?? false)
                 {{ $iconOn }}
             @else
-                <svg class="h-3 w-3 text-primary-600 dark:text-primary-300" fill="currentColor" viewBox="0 0 12 12">
+                <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 12 12">
                     <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
                 </svg>
             @endif
@@ -73,6 +98,7 @@ $isChecked = old() && !empty($checked) && !array_key_exists($attributes->get('na
                 'opacity-100 duration-200 ease-in': !checked,
                 'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity': true,
             }"
+            @class(['hidden' => !$withIcon])
         >
             @if ($iconOff ?? false)
                 {{ $iconOff }}
@@ -83,14 +109,15 @@ $isChecked = old() && !empty($checked) && !array_key_exists($attributes->get('na
             @endempty
         </span>
 
-        {{-- Bind hidden input for normal forms if there's a name attribute --}}
-        @if (!$attributes->whereStartsWith('wire:model')->first())
-            <input
-                type="checkbox"
-                class="hidden"
-                @checked($isChecked)
-                {{ $attributes->merge(['value' => 'on']) }}
-            >
-        @endif
+        {{-- Bind a hidden checkbox so everything works well with x-model, wire:model, and normal form submits --}}
+        <input
+            type="checkbox"
+            x-ref="checkbox"
+            class="hidden"
+            {{ $attributes->merge([
+                'value' => 'on',
+                'x-model' => 'checked'
+            ]) }}
+        >
     </span>
 </button>
