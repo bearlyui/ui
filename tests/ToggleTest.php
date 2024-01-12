@@ -10,7 +10,7 @@ class ToggleTest extends TestCase
     public function test_renders()
     {
         $this->blade('<x-ui::toggle />')->assertSeeHtmlInOrder([
-            '<button', 'role="switch"', 'checked:', '>'
+            '<button', 'role="switch"', 'checked:', '>',
         ]);
     }
 
@@ -19,7 +19,7 @@ class ToggleTest extends TestCase
         $this->blade('<x-ui::toggle thing="amajig" />')->assertSeeHtmlInOrder([
             '<button',
             'thing="amajig"',
-            '>'
+            '>',
         ]);
     }
 
@@ -31,11 +31,11 @@ class ToggleTest extends TestCase
         ]);
     }
 
-    public function test_not_backed_by_hidden_input_when_wire_model_present()
+    public function test_hidden_input_gets_wire_model()
     {
         $this->blade('<x-ui::toggle wire:model="foo" />')->assertSeeHtmlInOrder([
             '<button', 'role="switch"', 'checked:', '>',
-        ])->assertDontSeeHtml('type="checkbox"');
+        ])->assertSeeHtmlInOrder(['type="checkbox"', 'wire:model="foo"']);
     }
 
     public function test_hidden_input_gets_value()
