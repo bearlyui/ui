@@ -35,7 +35,7 @@ $trackClasses = match($color) {
         checked: @js($isChecked),
     }"
     x-modelable="checked"
-    x-on:click="checked = !checked"
+    x-on:click="$refs.checkbox.click()"
     x-bind:aria-checked="checked"
     x-bind:class="{
         'bg-gray-200 dark:bg-black/25': !checked,
