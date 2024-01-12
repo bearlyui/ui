@@ -12,8 +12,33 @@ If you need something more fancy than the standard checkbox, you can use the tog
 Use `<x-ui::toggle>` to create a toggle switch. You can use the `checked` property to set the initial state of the toggle, or `wire:model`.
 
 ```html +demo
-<x-ui::label class="inline-flex items-center space-x-2">
+<x-ui::label class="flex items-center space-x-2">
     <x-ui::toggle />
+    <span>Yes, or no?</span>
+</x-ui::label>
+
+<x-ui::label class="flex mt-4 items-center space-x-2">
+    <x-ui::toggle :checked="true" />
+    <span>Yes, or no?</span>
+</x-ui::label>
+
+<x-ui::label class="flex mt-4 items-center space-x-2">
+    <x-ui::toggle :checked="true" color="secondary" />
+    <span>Yes, or no?</span>
+</x-ui::label>
+
+<x-ui::label class="flex mt-4 items-center space-x-2">
+    <x-ui::toggle :checked="true" color="success" />
+    <span>Yes, or no?</span>
+</x-ui::label>
+
+<x-ui::label class="flex mt-4 items-center space-x-2">
+    <x-ui::toggle :checked="true" color="warning" />
+    <span>Yes, or no?</span>
+</x-ui::label>
+
+<x-ui::label class="flex mt-4 items-center space-x-2">
+    <x-ui::toggle :checked="true" color="error" />
     <span>Yes, or no?</span>
 </x-ui::label>
 ```
