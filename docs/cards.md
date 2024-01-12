@@ -1,13 +1,4 @@
 # Cards
-## 🚧 TO DO
-- [x] Setup documentation like other pages, document existing cards
-- [x] Add `header` and `footer` slots
-- [x] Add `color` property and support for all colors
-- [x] Add `variant` property and several variants
-- [x] Add `size` property and support for all sizes
-- [x] Test all radii with headers and footers
-- [ ] Style all variant/color combos with `header` and `footer` slots
-- [ ] Finish filling out documentation
 
 Cards to put stuff in. They're great when you need 'em!
 

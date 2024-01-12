@@ -22,20 +22,20 @@
     'rounded-xl' => Size::XL->is($radius),
 
     {{-- Outline --}}
-    'border-gray-300 dark:border-white/7.5' => Color::None->is($color) && Variant::Outline->is($variant),
-    'border-primary-300 dark:border-primary-300/50' => Color::Primary->is($color) && Variant::Outline->is($variant),
-    'border-secondary-300 dark:border-secondary-300/50' => Color::Secondary->is($color) && Variant::Outline->is($variant),
-    'border-success-300 dark:border-success-300/50' => Color::Success->is($color) && Variant::Outline->is($variant),
-    'border-warning-300 dark:border-warning-300/50' => Color::Warning->is($color) && Variant::Outline->is($variant),
-    'border-error-300 dark:border-error-300/50' => Color::Error->is($color) && Variant::Outline->is($variant),
+    'border-gray-300/100 dark:border-white/7.5' => Color::None->is($color) && Variant::Outline->is($variant),
+    'border-primary-300/100 dark:border-primary-300/50' => Color::Primary->is($color) && Variant::Outline->is($variant),
+    'border-secondary-300/100 dark:border-secondary-300/50' => Color::Secondary->is($color) && Variant::Outline->is($variant),
+    'border-success-300/100 dark:border-success-300/50' => Color::Success->is($color) && Variant::Outline->is($variant),
+    'border-warning-300/100 dark:border-warning-300/50' => Color::Warning->is($color) && Variant::Outline->is($variant),
+    'border-error-300/100 dark:border-error-300/50' => Color::Error->is($color) && Variant::Outline->is($variant),
 
     {{-- Solid --}}
     'bg-white dark:bg-gray-400/5 border-gray-300/75 dark:border-white/7.5' => Color::None->is($color) && Variant::Solid->is($variant),
-    'bg-primary-100 border-primary-400 text-primary-800 dark:bg-primary-400/40 dark:text-primary-200' => Color::Primary->is($color) && Variant::Solid->is($variant),
-    'bg-secondary-100 border-secondary-300 text-secondary-800 dark:bg-secondary-400/40 dark:text-secondary-200' => Color::Secondary->is($color) && Variant::Solid->is($variant),
-    'bg-success-100 border-success-400 text-success-800 dark:bg-success-400/40 dark:text-success-200' => Color::Success->is($color) && Variant::Solid->is($variant),
-    'bg-warning-100 border-warning-400 text-warning-800 dark:bg-warning-400/40 dark:text-warning-100' => Color::Warning->is($color) && Variant::Solid->is($variant),
-    'bg-error-100 border-error-400/75 text-error-800 dark:bg-error-400/40 dark:text-error-200' => Color::Error->is($color) && Variant::Solid->is($variant),
+    'bg-primary-100 border-primary-400 text-primary-800 dark:bg-primary-400/40 dark:border-primary-600 dark:text-primary-200' => Color::Primary->is($color) && Variant::Solid->is($variant),
+    'bg-secondary-100 border-secondary-300 text-secondary-800 dark:bg-secondary-400/40 dark:border-secondary-500 dark:text-secondary-200' => Color::Secondary->is($color) && Variant::Solid->is($variant),
+    'bg-success-100 border-success-400 text-success-800 dark:bg-success-400/40 dark:border-success-600 dark:text-success-200' => Color::Success->is($color) && Variant::Solid->is($variant),
+    'bg-warning-100 border-warning-400 text-warning-800 dark:bg-warning-400/40 dark:border-warning-500/30 dark:text-warning-100' => Color::Warning->is($color) && Variant::Solid->is($variant),
+    'bg-error-100 border-error-400/75 text-error-800 dark:bg-error-400/40 dark:border-error-500/30 dark:text-error-200' => Color::Error->is($color) && Variant::Solid->is($variant),
 
     {{-- Gradient --}}
     'bg-gradient-to-br from-white to-gray-50 dark:from-gray-400/5 dark:to-gray-400/10 border-gray-300/75 dark:border-white/7.5' => Color::None->is($color) && Variant::Gradient->is($variant),
@@ -68,13 +68,34 @@
             'rounded-t-lg' => Size::LG->is($radius),
             'rounded-t-xl' => Size::XL->is($radius),
 
-            {{-- Colors --}}
-            'border-gray-200 dark:border-white/5' => Color::None->is($color) && Variant::Outline->is($variant),
-            'border-primary-300/25' => Color::Primary->is($color) && Variant::Outline->is($variant),
-            'border-secondary-300/25' => Color::Secondary->is($color) && Variant::Outline->is($variant),
-            'border-success-300/25' => Color::Success->is($color) && Variant::Outline->is($variant),
-            'border-warning-300/25' => Color::Warning->is($color) && Variant::Outline->is($variant),
-            'border-error-300/25' => Color::Error->is($color) && Variant::Outline->is($variant),
+            {{-- Base Colors --}}
+            'border-gray-200/100 dark:border-white/5' => Color::None->is($color),
+            'border-primary-300/25' => Color::Primary->is($color),
+            'border-secondary-300/25' => Color::Secondary->is($color),
+            'border-success-300/25' => Color::Success->is($color),
+            'border-warning-300/25' => Color::Warning->is($color),
+            'border-error-300/25' => Color::Error->is($color),
+
+            {{-- Solid --}}
+            'bg-primary-200/30' => Color::Primary->is($color) && Variant::Solid->is($variant),
+            'bg-secondary-200/30' => Color::Secondary->is($color) && Variant::Solid->is($variant),
+            'bg-success-200/30' => Color::Success->is($color) && Variant::Solid->is($variant),
+            'bg-warning-200/30' => Color::Warning->is($color) && Variant::Solid->is($variant),
+            'bg-error-200/30' => Color::Error->is($color) && Variant::Solid->is($variant),
+
+            {{-- Gradient --}}
+            'bg-primary-200/30' => Variant::Gradient->is($variant) && Color::Primary->is($color),
+            'bg-secondary-200/30' => Variant::Gradient->is($variant) && Color::Secondary->is($color),
+            'bg-success-200/30' => Variant::Gradient->is($variant) && Color::Success->is($color),
+            'bg-warning-200/30' => Variant::Gradient->is($variant) && Color::Warning->is($color),
+            'bg-error-200/30' => Variant::Gradient->is($variant) && Color::Error->is($color),
+
+            {{-- Glow --}}
+            'bg-primary-100/15' => Variant::Glow->is($variant) && Color::Primary->is($color),
+            'bg-secondary-100/15' => Variant::Glow->is($variant) && Color::Secondary->is($color),
+            'bg-success-100/15' => Variant::Glow->is($variant) && Color::Success->is($color),
+            'bg-warning-100/15' => Variant::Glow->is($variant) && Color::Warning->is($color),
+            'bg-error-100/15' => Variant::Glow->is($variant) && Color::Error->is($color),
 
             {{-- Sizing --}}
             'px-3 py-1.5 text-base' => Size::SM->is($size),
@@ -108,14 +129,36 @@
             'rounded-b-lg' => Size::LG->is($radius),
             'rounded-b-xl' => Size::XL->is($radius),
 
-            {{-- Colors --}}
-            'border-gray-200 dark:border-white/5' => Color::None->is($color) && Variant::Outline->is($variant),
-            'border-primary-300/25' => Color::Primary->is($color) && Variant::Outline->is($variant),
-            'border-secondary-300/25' => Color::Secondary->is($color) && Variant::Outline->is($variant),
-            'border-success-300/25' => Color::Success->is($color) && Variant::Outline->is($variant),
-            'border-warning-300/25' => Color::Warning->is($color) && Variant::Outline->is($variant),
-            'border-error-300/25' => Color::Error->is($color) && Variant::Outline->is($variant),
+            {{-- Base Colors --}}
+            'border-gray-200 dark:border-white/5' => Color::None->is($color),
+            'border-primary-300/25' => Color::Primary->is($color),
+            'border-secondary-300/25' => Color::Secondary->is($color),
+            'border-success-300/25' => Color::Success->is($color),
+            'border-warning-300/25' => Color::Warning->is($color),
+            'border-error-300/25' => Color::Error->is($color),
 
+            {{-- Solid --}}
+            'bg-primary-200/30' => Color::Primary->is($color) && Variant::Solid->is($variant),
+            'bg-secondary-200/30' => Color::Secondary->is($color) && Variant::Solid->is($variant),
+            'bg-success-200/30' => Color::Success->is($color) && Variant::Solid->is($variant),
+            'bg-warning-200/30' => Color::Warning->is($color) && Variant::Solid->is($variant),
+            'bg-error-200/30' => Color::Error->is($color) && Variant::Solid->is($variant),
+
+            {{-- Gradient --}}
+            'bg-primary-200/30' => Variant::Gradient->is($variant) && Color::Primary->is($color),
+            'bg-secondary-200/30' => Variant::Gradient->is($variant) && Color::Secondary->is($color),
+            'bg-success-200/30' => Variant::Gradient->is($variant) && Color::Success->is($color),
+            'bg-warning-200/30' => Variant::Gradient->is($variant) && Color::Warning->is($color),
+            'bg-error-200/30' => Variant::Gradient->is($variant) && Color::Error->is($color),
+
+            {{-- Glow --}}
+            'bg-primary-100/15' => Variant::Glow->is($variant) && Color::Primary->is($color),
+            'bg-secondary-100/15' => Variant::Glow->is($variant) && Color::Secondary->is($color),
+            'bg-success-100/15' => Variant::Glow->is($variant) && Color::Success->is($color),
+            'bg-warning-100/15' => Variant::Glow->is($variant) && Color::Warning->is($color),
+            'bg-error-100/15' => Variant::Glow->is($variant) && Color::Error->is($color),
+
+            {{-- Sizing --}}
             'px-3 py-1.5 text-sm' => Size::SM->is($size),
             'px-4 py-2' => Size::BASE->is($size),
             'px-5 py-2.5' => Size::MD->is($size),
