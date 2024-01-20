@@ -1,5 +1,7 @@
 @props([
-    'closeOnClick' => true,
+    'dismiss' => true,
+    'focusOnHover' => true,
+    'spacing' => 'space-x-2',
 ])
 <button
     type="button"
@@ -18,15 +20,35 @@
         'w-full min-w-[200px] flex items-center justify-between',
         'text-sm font-normal rounded text-left',
         'transition-all ease-in-out',
-        'outline-none focus:outline-none focus-visible:bg-black/2.5 focus-visible:dark:bg-white/2.5',
-        'text-gray-600/90 hover:bg-black/5 hover:text-gray-800',
-        'dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-white/5',
-    ]) }}
+        'outline-none focus:outline-none focus:bg-black/5 focus:dark:bg-white/5',
+        'text-gray-600/90 dark:text-gray-400',
+    ])->when($dismiss,fn ($a) => $a->merge([
+        'x-on:click' => 'closeDropdown',
+        'x-on:keyup.enter' => 'closeDropdown',
+    ]))->when($focusOnHover, fn ($a) => $a->merge([
+        'x-on:mouseenter' => 'activeItem = $el && $focus.focus($el)',
+        'x-on:mousemove' => 'if (activeItem != $el) { activeItem = $el && $focus.focus($el) }',
+        'x-bind:class' => '{ "hover:bg-black/5 hover:text-gray-800 hover:bg-black/5 dark:hover:text-gray-200 dark:hover:bg-white/5": activeItem == $el }',
+    ]), fn ($a) => $a-merge([
+        'x-bind:class' => '{ "hover:bg-black/5 hover:text-gray-800 hover:bg-black/5 dark:hover:text-gray-200 dark:hover:bg-white/5": true }',
+    ]))
+    }}
 >
-    <span class="inline-flex items-center antialiased">
-        @if ($icon ?? false)
-            <span {{ $icon->attributes->class('mr-2 transition-all opacity-50 group-hover:opacity-100') }}>{{ $icon }}</span>
+    <span @class([
+        'flex items-center antialiased',
+        $spacing => !empty($spacing),
+    ])>
+        {{-- Before --}}
+        @if ($before ?? false)
+            <span {{ $before->attributes }}>{{ $before }}</span>
         @endif
-        {{ $slot }}
+
+        {{-- Content --}}
+        <span>{{ $slot }}</span>
+
+        {{-- After --}}
+        @if ($after ?? false)
+            <span {{ $after->attributes }}>{{ $after }}</span>
+        @endif
     </span>
 </button>

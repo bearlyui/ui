@@ -1,16 +1,21 @@
 @props([
-    'position' => 'bottom',
+    'open' => false,
     'offset' => 4,
+    'position' => 'bottom',
 ])
 <span
     x-id="['dropdown-trigger']"
     x-data="{
-        open: false,
+        open: @js($open),
         anchorTo: $refs.trigger,
         focusableTrigger: null,
         activeItem: null,
         openDropdown() {
             this.open = true
+            if (this.activeItem == null) {
+                this.activeItem = $refs.content.firstElementChild
+            }
+            $nextTick(() => $focus.focus(this.activeItem))
         },
         closeDropdown() {
             this.open = false
@@ -19,7 +24,7 @@
             this.open ? this.closeDropdown() : this.openDropdown()
         },
         init() {
-            this.$nextTick(() => {
+            $nextTick(() => {
                 if (this.focusableTrigger.hasAttribute('id')) return
                 this.focusableTrigger.setAttribute('id', this.$id('dropdown-trigger'))
             })
