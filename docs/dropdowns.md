@@ -32,6 +32,16 @@ but it's usually a button. An example dropdown looks like this:
 
 ---
 
+### Open
+
+The `open` property is a boolean that determines whether the dropdown is shown or not. You can use this property to control the dropdown's state from outside the component.
+
+```html
+<x-ui::dropdown :open="true">
+    ...
+</x-ui::dropdown>
+```
+
 ### Offset
 
 The the gap between the dropdown and the triggering element as a pixel value. This value is passed directly to [Alpine's Anchor plugin](https://alpinejs.dev/plugins/anchor), which is built on top of [Floating UI](https://floating-ui.com). Most of the time you'll want the default value, but if you need more or less space you can use this property to achieve it.
@@ -79,6 +89,7 @@ Dropdown items have a few properties:
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
 | `dismiss` | `boolean` | `true` | Close the outer dropdown menu when the item is clicked (or focused and enter is pressed)  |
+| `focusOnHover` | `boolean` | `true` | Focus the item when hovered over. Use kebab-case like `:focus-on-hover="false"` |
 | `spacing` | `string` | `space-x-2` | A [Tailwind CSS Spacing Utility](https://tailwindcss.com/docs/space) class, like `space-x-2`. |
 
 ---

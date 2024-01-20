@@ -12,12 +12,10 @@
         activeItem: null,
         openDropdown() {
             this.open = true
-            if (!this.activeItem) {
-                $nextTick(() => {
-                    this.activeItem = $refs.content.firstElementChild
-                    $focus.focus(this.activeItem)
-                })
+            if (this.activeItem == null) {
+                this.activeItem = $refs.content.firstElementChild
             }
+            $nextTick(() => $focus.focus(this.activeItem))
         },
         closeDropdown() {
             this.open = false
@@ -26,7 +24,7 @@
             this.open ? this.closeDropdown() : this.openDropdown()
         },
         init() {
-            this.$nextTick(() => {
+            $nextTick(() => {
                 if (this.focusableTrigger.hasAttribute('id')) return
                 this.focusableTrigger.setAttribute('id', this.$id('dropdown-trigger'))
             })
@@ -35,7 +33,6 @@
 >
     {{-- Trigger --}}
     <span x-init="focusableTrigger = $focus.getFirst()" class="inline-block" x-ref="trigger" x-on:click.prevent="toggle()">{{ $trigger }}</span>
-
 
     {{-- Content --}}
     <template x-teleport="body">
