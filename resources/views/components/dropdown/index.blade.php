@@ -15,7 +15,7 @@
             if (!this.activeItem) {
                 $nextTick(() => {
                     this.activeItem = $refs.content.firstElementChild
-                    $focus.within($refs.content).wrap().first()
+                    $focus.focus(this.activeItem)
                 })
             }
         },
@@ -35,6 +35,7 @@
 >
     {{-- Trigger --}}
     <span x-init="focusableTrigger = $focus.getFirst()" class="inline-block" x-ref="trigger" x-on:click.prevent="toggle()">{{ $trigger }}</span>
+
 
     {{-- Content --}}
     <template x-teleport="body">
