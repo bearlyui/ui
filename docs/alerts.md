@@ -1,12 +1,20 @@
 # Alerts
 
-Give some extra attention to the *exciting* stuff.
+Give important messages some extra **_growl_**. Alerts are almost as versatile as a bear's claws for getting your users' attention. You can customize their color, variant, and even add dismissable functionality.
+
+```html +demo title={Alert Examples} previewClasses={space-y-4}
+<x-ui::alert color="primary" :dismissable="true" x-init="$watch('open', value => { setTimeout(() => { open = true }, 750) })">I'm a primary alert, hear me roar!</x-ui::alert>
+<x-ui::alert color="secondary" :dismissable="true" x-init="$watch('open', value => { setTimeout(() => { open = true }, 750) })">I'm a secondary alert, hear me roar!</x-ui::alert>
+<x-ui::alert color="success" :dismissable="true" x-init="$watch('open', value => { setTimeout(() => { open = true }, 750) })">I'm a success alert, hear me roar!</x-ui::alert>
+<x-ui::alert color="warning" :dismissable="true" x-init="$watch('open', value => { setTimeout(() => { open = true }, 750) })">I'm a warning alert, hear me roar!</x-ui::alert>
+<x-ui::alert color="error" :dismissable="true" x-init="$watch('open', value => { setTimeout(() => { open = true }, 750) })">I'm a error alert, hear me roar!</x-ui::alert>
+```
 
 ## Using Alerts
 
-Use the `<x-ui::alert>` component for simple alerts. Specify a color theme with the `color` attribute
-to change the alert's color. The default color is `primary`, but you can also use `success`,
-`warning`, and `error`.
+Use the `<x-ui::alert>` component for simple alerts. Specify a color theme with the
+`color` attribute to change the alert's color. The default color is `primary`, but
+you can use `secondary`, `success`, `warning`, and `error` if you need to.
 
 ```html +demo title={Basic Alert}
 <x-ui::alert>I'm a default alert.</x-ui::alert>
@@ -24,7 +32,7 @@ Use the `title` property (or slot) to include a title in your alert.
 ### Color
 The `color` property change the look of your alert. It defaults to `primary`,
 but `success`, `warning`, and `error` are also valid. These are interchangeable with
-the following enumerations if you prefer:
+the following enumerations if you prefer to use those instead:
 - `Bearly\Ui\Color::Primary`
 - `Bearly\Ui\Color::Success`
 - `Bearly\Ui\Color::Warning`
@@ -32,6 +40,7 @@ the following enumerations if you prefer:
 
 ```html +demo title={Available Color Themes} previewClasses={space-y-6}
 <x-ui::alert>I'm a primary themed alert</x-ui::alert>
+<x-ui::alert color="secondary">I'm a secondary themed alert</x-ui::alert>
 <x-ui::alert color="success">Happy little success message</x-ui::alert>
 <x-ui::alert color="warning">Warning, don't mess with this one</x-ui::alert>
 <x-ui::alert color="error">Error 406 - brain not found</x-ui::alert>
@@ -41,9 +50,15 @@ the following enumerations if you prefer:
 There are two options for **variant** -- `glow` and `outline`. The default is `glow`.
 These are interchangeable with `Bearly\Ui\Variant::Glow` and `Bearly\Ui\Variant::Outline` enumerations.
 
-```html +demo title={Available Variants} previewClasses={space-y-6}
+```html +demo title={Available Variants} previewClasses={space-y-3}
 <x-ui::alert>This alert is the glow variant</x-ui::alert>
+<x-ui::alert color="secondary">This alert is the glow variant</x-ui::alert>
+<x-ui::alert color="success">This alert is the glow variant</x-ui::alert>
+<x-ui::alert color="warning">This alert is the glow variant</x-ui::alert>
+<x-ui::alert color="error">This alert is the glow variant</x-ui::alert>
+<hr class="border-black/10 dark:border-white/15 !my-5">
 <x-ui::alert variant="outline">This alert is the outline variant</x-ui::alert>
+<x-ui::alert color="secondary" variant="outline">This alert is the outline variant</x-ui::alert>
 <x-ui::alert color="success" variant="outline">This alert is the outline variant</x-ui::alert>
 <x-ui::alert color="warning" variant="outline">This alert is the outline variant</x-ui::alert>
 <x-ui::alert color="error" variant="outline">This alert is the outline variant</x-ui::alert>
