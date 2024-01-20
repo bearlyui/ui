@@ -23,8 +23,8 @@
         'outline-none focus:outline-none focus:bg-black/5 focus:dark:bg-white/5',
         'text-gray-600/90 dark:text-gray-400',
     ])->when($dismiss,fn ($a) => $a->merge([
-        'x-on:click' => 'closeDropdown',
-        'x-on:keyup.enter' => 'closeDropdown',
+        'x-on:click' => '$nextTick(() => { closeDropdown() })',
+        'x-on:keydown.enter' => '$nextTick(() => { closeDropdown() })',
     ]))->when($focusOnHover, fn ($a) => $a->merge([
         'x-on:mouseenter' => 'activeItem = $el && $focus.focus($el)',
         'x-on:mousemove' => 'if (activeItem != $el) { activeItem = $el && $focus.focus($el) }',

@@ -32,7 +32,12 @@
     }"
 >
     {{-- Trigger --}}
-    <span x-init="focusableTrigger = $focus.getFirst()" class="inline-block" x-ref="trigger" x-on:click.prevent="toggle()">{{ $trigger }}</span>
+    <span
+        x-ref="trigger"
+        x-init="focusableTrigger = $focus.getFirst()"
+        x-on:click.prevent="toggle()"
+        class="inline-block"
+    >{{ $trigger }}</span>
 
     {{-- Content --}}
     <template x-teleport="body">
