@@ -14,7 +14,19 @@
         open: true,
     }"
     x-show="open"
-    x-transition
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 scale-75 translate-y-full"
+    x-transition:enter-end="opacity-100 scale-[1.02] -translate-y-1"
+    x-transition:leave="transition ease-in-out duration-300"
+    x-transition:leave-start="opacity-100 scale-100 -translate-y-full"
+    x-transition:leave-end="opacity-0 scale-75 translate-y-full"
+
+    {{-- x-transition:enter="transition duration-250 ease-in translate-y-0"
+    x-transition:enter-start="opacity-0 scale-0 translate-y-8"
+    x-transition:enter-end="opacity-100 scale-105"
+    x-transition:leave="transition duration-500 ease-out translate-y-0"
+    x-transition:leave-start="opacity-100 scale-105 -translate-y-10"
+    x-transition:leave-end="opacity-0 scale-0 translate-y-10" --}}
     {{ $attributes
         ->merge(['role' => 'status'])
         ->when(
@@ -31,23 +43,29 @@
             'shadow-t border' => Variant::Glow->is($variant),
             'border border-l-[6px]' => Variant::Outline->is($variant),
 
-            {{-- Primary Theme --}}
+
+            {{-- Primary --}}
             'text-primary-600 shadow-primary-400/60 border-primary-500/40' => Color::Primary->is($color),
             'dark:text-primary-400 dark:shadow-primary-300/60' => Color::Primary->is($color),
             'dark:border-primary-300' => Color::Primary->is($color) && Variant::Glow->is($variant),
             'dark:border-l-primary-300 dark:border-primary-300/60' => Color::Primary->is($color) && Variant::Outline->is($variant),
 
-            {{-- Success Theme --}}
+            {{-- Secondary --}}
+            'text-secondary-600 shadow-secondary-400/60 border-secondary-500/40' => Color::Secondary->is($color),
+            'dark:text-secondary-400 dark:shadow-secondary-300/60 dark:border-secondary-300/40' => Color::Secondary->is($color),
+            'dark:border-l-secondary-300 dark:border-secondary-300/60' => Color::Secondary->is($color) && Variant::Outline->is($variant),
+
+            {{-- Success --}}
             'text-success-600 shadow-success-400/60 border-success-500/40' => Color::Success->is($color),
             'dark:text-success-400 dark:shadow-success-300/60 dark:border-success-300/40' => Color::Success->is($color),
             'dark:border-l-success-300 dark:border-success-300/60' => Color::Success->is($color) && Variant::Outline->is($variant),
 
-            {{-- Warning Theme --}}
+            {{-- Warning --}}
             'text-warning-600 shadow-warning-400/60 border-warning-500/40' => Color::Warning->is($color),
             'dark:text-warning-400 dark:shadow-warning-300/60 dark:border-warning-300/40' => Color::Warning->is($color),
             'dark:border-l-warning-300 dark:border-warning-300/60' => Color::Warning->is($color) && Variant::Outline->is($variant),
 
-            {{-- Error Theme --}}
+            {{-- Error --}}
             'text-error-600 shadow-error-400/60 border-error-500/40' => Color::Error->is($color),
             'dark:text-error-400 dark:shadow-error-300/60 dark:border-error-300/40' => Color::Error->is($color),
             'dark:border-l-error-400 dark:border-error-300/60' => Color::Error->is($color) && Variant::Outline->is($variant),
@@ -71,8 +89,7 @@
     {{-- Icon --}}
     @if ($icon)
         <div {{ $icon->attributes->class([
-            'absolute top-0 right-0 mt-2 opacity-30 saturate-[.7]',
-            'dark:opacity-50',
+            'absolute top-0 right-0 mt-1 opacity-30 saturate-[.7]',
             'mr-2' => !$dismissable,
             'mr-7' => $dismissable,
         ]) }}>
@@ -93,8 +110,11 @@
                 aria-label="Close"
                 @class([
                     'p-2.5 transition ease-in-out rounded',
-                    'text-gray-400 hover:text-gray-800',
-                    'dark:text-white/30 dark:hover:text-white/70',
+                    'text-primary-500 hover:text-primary-800 dark:hover:text-primary-100' => Color::Primary->is($color),
+                    'text-secondary-500 hover:text-secondary-800 dark:hover:text-secondary-100' => Color::Secondary->is($color),
+                    'text-success-500 hover:text-success-800 dark:hover:text-success-100' => Color::Success->is($color),
+                    'text-warning-500 hover:text-warning-800 dark:hover:text-warning-100' => Color::Warning->is($color),
+                    'text-error-500 hover:text-error-800 dark:hover:text-error-100' => Color::Error->is($color),
                     ...config('ui.focusClasses')
                 ])
                 @keyup.enter="open = false"
