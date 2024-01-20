@@ -1,7 +1,4 @@
 # Dropdowns
-## 🚧 TO DO
-- [x] Fill out documentation for properties and slots
-- [ ] Improve hover/selected/focus states -- handle when hovering but also using mouse to select a different item via keyboard focus?
 
 Dropdowns give you the power to pawsitively enhance your user interface. They can be used for navigation, settings, or any other list of options.
 

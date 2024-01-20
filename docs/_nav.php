@@ -11,7 +11,7 @@ return [
         'Cards' => '/docs/cards',
         // '🚧 Context Menus' => '/docs/context-menus',
         // '🚧 Dialogs' => '/docs/dialogs',
-        '🚧 Dropdowns' => '/docs/dropdowns',
+        'Dropdowns' => '/docs/dropdowns',
         '🚧 Form Inputs' => '/docs/form-inputs',
         '🚧 Toggle Switches' => '/docs/toggle-switches',
         '🚧 Tooltips' => '/docs/tooltips',
