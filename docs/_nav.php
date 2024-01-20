@@ -9,7 +9,7 @@ return [
         '🚧 ️ Alerts' => '/docs/alerts',
         '☑️ Buttons' => '/docs/buttons',
         '☑️ Cards' => '/docs/cards',
-        '🚧 Context Menus' => '/docs/context-menus',
+        '🚧 Menus' => '/docs/menus',
         '🚧 Dialogs' => '/docs/dialogs',
         '🚧 Dropdowns' => '/docs/dropdowns',
         '🚧 Form Inputs' => '/docs/form-inputs',
