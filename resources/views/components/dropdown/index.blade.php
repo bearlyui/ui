@@ -1,6 +1,6 @@
 @props([
-    'position' => 'bottom',
     'offset' => 4,
+    'position' => 'bottom',
 ])
 <span
     x-id="['dropdown-trigger']"

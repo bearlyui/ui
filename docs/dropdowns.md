@@ -1,21 +1,22 @@
 # Dropdowns
 ## 🚧 TO DO
-- [ ] Improve hover/selected/focus states
-- [ ] Fill out documentation for properties and slots
+- [x] Fill out documentation for properties and slots
+- [ ] Improve hover/selected/focus states -- handle when hovering but also using mouse to select a different item via keyboard focus?
 
-Click on a trigger element and a magic menu appears!
-
+Dropdowns give you the power to pawsitively enhance your user interface. They can be used for navigation, settings, or any other list of options.
 
 ## Using Dropdowns
-Dropdowns expect you to use a `trigger` slot. This is the element that will be clicked to open the dropdown. It can be anything you want, but it's usually a button.
+Define the element that opens the dropdown with the `trigger` slot. It can be anything you want, but it's usually a button.
 
-### The Trigger Slot
-Use `<x-slot:trigger>` to define the trigger element.
-
-```html title={The Trigger Slot}
-<x-slot:trigger>
-    <button>...</button>
-</x-slot:trigger>
+```html +demo title={Basic Dropdown Menu}
+<x-ui::dropdown>
+    <x-slot:trigger>
+        <x-ui::button>Click Me, If You Dare...</x-ui::button>
+    </x-slot:trigger>
+    <x-ui::dropdown.item>Grizzly Bears</x-ui::dropdown.item>
+    <x-ui::dropdown.item>Polar Bears</x-ui::dropdown.item>
+    <x-ui::dropdown.item>Panda Bears</x-ui::dropdown.item>
+</x-ui::dropdown>
 ```
 
 ### Menu Item Components
@@ -62,7 +63,38 @@ An example dropdown might look like this:
 ```
 
 ## Properties
-### Property ABC
+
+| Property | Type | Default | Description |
+|:---|:---|:---|:---|
+| `offset` | `integer` | `true` | The pixel-value gap between the menu and the trigger element. <br> _See the [Alpine docs on offset](https://alpinejs.dev/plugins/anchor#offset) for more._ |
+| `position` | `string` | `bottom` | The dropdown's location relative to the trigger element. <br> _See the [Alpine docs on positioning](https://alpinejs.dev/plugins/anchor#positioning) for possible values._ |
+---
+
+### Offset
+
+The the gap between the dropdown and the triggering element as a pixel value. This value is passed directly to [Alpine's Anchor plugin](https://alpinejs.dev/plugins/anchor), which is built on top of [Floating UI](https://floating-ui.com). Most of the time you'll want the default value, but if you need more or less space you can use this property to achieve it.
+```html
+<x-ui::dropdown offset="10">
+    ...
+</x-ui::dropdown>
+```
+
+### Position
+
+The dropdown's location relative to the trigger element. This value is passed directly to [Alpine's Anchor plugin](https://alpinejs.dev/plugins/anchor) too. The default value is `bottom`, but you can also use `top`, `top-start`, `top-end`, `left`, `left-start`, `left-end`, `bottom-start`, `bottom-end`, `right`, `right-start`, and `right-end`.
+```html
+<x-ui::dropdown position="top">
+    I open above the trigger element.
+</x-ui::dropdown>
+```
 
 ## Slots
-### Slot ABC
+
+### Trigger
+Use `<x-slot:trigger>` to define the trigger element.
+
+```html title={The Trigger Slot}
+<x-slot:trigger>
+    <button>...</button>
+</x-slot:trigger>
+```
