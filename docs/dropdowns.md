@@ -65,7 +65,8 @@ Use `<x-slot:trigger>` to define the trigger element.
 
 ### Basics
 
-Use the `<x-ui::dropdown.item>` component to define menu items.
+Use the `<x-ui::dropdown.item>` component to define menu items. The default slot is the item's main content label.
+The default slot content gets wrapped in a `<span>` tag to allow for automatic spacing within menu items.
 
 ```html title={Dropdown Item}
 <x-ui::dropdown.item>...</x-ui::dropdown.item>
@@ -96,7 +97,7 @@ slots are most commonly used for icons or to denote further actions (such as a h
 </x-ui::dropdown.item>
 ```
 
-```html +demo title={Menu Items - Before Slot}
+```html +demo title={Menu Items - Before / After Slots}
 <x-ui::dropdown>
     <x-slot:trigger>
         <x-ui::button>Example Before / After Slots</x-ui::button>
@@ -117,7 +118,37 @@ slots are most commonly used for icons or to denote further actions (such as a h
 </x-ui::dropdown>
 ```
 
-## Another Example
+#### Slot Attribute Forwarding
+
+The `before` and `after` slots are also wrapped in a `<span>` tag, and the slot attributes are forwarded to it
+by default. This means you can use the `class` attribute to style the content within each slot.
+
+```html
+<x-ui::dropdown.item>
+    <x-slot:before class="text-red-500">...</x-slot:before>
+    ...
+    <x-slot:after class="text-blue-500">...</x-slot:after>
+</x-ui::dropdown.item>
+```
+
+```html +demo title={Menu Items - Before / After Slots with Classes}
+<x-ui::dropdown>
+    <x-slot:trigger>
+        <x-ui::button>Example Before / After Slots with Classes</x-ui::button>
+    </x-slot:trigger>
+    <x-ui::dropdown.item>
+        <x-slot:before class="text-red-500">
+            RED
+        </x-slot:before>
+        Menu Item with Before / After icons
+        <x-slot:after class="text-blue-500">
+            BLUE
+        </x-slot:after>
+    </x-ui::dropdown.item>
+</x-ui::dropdown>
+```
+
+<!-- ## Another Example
 
 This dropdown uses the `before` slot to add an icon before the menu item's main content.
 
@@ -151,4 +182,4 @@ This dropdown uses the `before` slot to add an icon before the menu item's main 
         Menu Item 3
     </x-ui::dropdown.item>
 </x-ui::dropdown>
-```
+``` -->
