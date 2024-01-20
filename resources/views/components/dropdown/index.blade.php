@@ -1,11 +1,12 @@
 @props([
+    'open' => false,
     'offset' => 4,
     'position' => 'bottom',
 ])
 <span
     x-id="['dropdown-trigger']"
     x-data="{
-        open: false,
+        open: @js($open),
         anchorTo: $refs.trigger,
         focusableTrigger: null,
         activeItem: null,
