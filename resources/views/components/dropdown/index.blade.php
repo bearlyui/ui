@@ -12,6 +12,12 @@
         activeItem: null,
         openDropdown() {
             this.open = true
+            if (!this.activeItem) {
+                $nextTick(() => {
+                    this.activeItem = $refs.content.firstElementChild
+                    $focus.within($refs.content).wrap().first()
+                })
+            }
         },
         closeDropdown() {
             this.open = false
