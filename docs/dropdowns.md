@@ -24,7 +24,7 @@ but it's usually a button. An example dropdown looks like this:
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
 | `open` | `boolean` | `false` | Whether the dropdown is open or not. |
-| `offset` | `integer` | `true` | The pixel-value gap between the menu and the trigger element. <br> _See the [Alpine docs on offset](https://alpinejs.dev/plugins/anchor#offset) for more._ |
+| `offset` | `integer` | `4` | The pixel-value gap between the menu and the trigger element. <br> _See the [Alpine docs on offset](https://alpinejs.dev/plugins/anchor#offset) for more._ |
 | `position` | `string` | `bottom` | The dropdown's location relative to the trigger element. <br> _See the [Alpine docs on positioning](https://alpinejs.dev/plugins/anchor#positioning) for possible values._ |
 
 ---

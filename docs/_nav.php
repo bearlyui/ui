@@ -12,9 +12,9 @@ return [
         // '🚧 Context Menus' => '/docs/context-menus',
         // '🚧 Dialogs' => '/docs/dialogs',
         'Dropdowns' => '/docs/dropdowns',
-        '🚧 Form Inputs' => '/docs/form-inputs',
-        '🚧 Toggle Switches' => '/docs/toggle-switches',
-        '🚧 Tooltips' => '/docs/tooltips',
+        'Form Inputs' => '/docs/form-inputs',
+        'Toggle Switches' => '/docs/toggle-switches',
+        'Tooltips' => '/docs/tooltips',
         // '🚧 Toasts 🤔' => '/docs/toasts',
     ],
 ];
