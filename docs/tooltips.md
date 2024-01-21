@@ -8,9 +8,9 @@ their parent element as a trigger.
 Use `<x-ui::tooltip>` **inside an element** to add a tooltip to the parent element.
 
 ```html +demo
-<x-ui::button>
+<x-ui::button color="success">
     <x-ui::tooltip title="Have a nice day!" />
-    Hover me, please!
+    Hover for top secret info
 </x-ui::button>
 ```
 
