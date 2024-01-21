@@ -1,8 +1,11 @@
+@use('Bearly\Ui\Size')
+
 @props([
     'title' => null,
     'shortcut' => null,
-    'position' => 'top',
     'offset' => 4,
+    'position' => 'top',
+    'size' => Size::SM
 ])
 <template x-data="{ trigger: $el.parentNode }" x-teleport="body">
     <span
@@ -31,10 +34,14 @@
             x-transition
             role="tooltip"
             @class([
-                'block px-1.5 py-1 w-max transition-all ease-in-out pointer-events-none',
-                'border text-xs rounded backdrop-blur-lg',
+                'block w-max transition-all ease-in-out pointer-events-none',
+                'border rounded backdrop-blur-lg',
                 'bg-gradient-to-b from-white/90 to-white/60 border-black/15a text-gray-700 shadow',
                 'dark:from-white/10 dark:to-white/5 dark:border-white/10 dark:text-white/80 dark:shadow-lg dark:shadow-black/30',
+                'px-1.5 py-1 text-xs' => Size::SM->is($size),
+                'px-3 py-1.5 text-sm' => Size::BASE->is($size),
+                'px-4 py-2 text-base' => Size::MD->is($size),
+                'px-5 py-2.5 text-lg' => Size::LG->is($size),
             ])
         >
             @if ($title)
