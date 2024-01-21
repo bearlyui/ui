@@ -14,7 +14,7 @@ return [
         'Dropdowns' => '/docs/dropdowns',
         'Form Inputs' => '/docs/form-inputs',
         'Toggle Switches' => '/docs/toggle-switches',
-        '🚧 Tooltips' => '/docs/tooltips',
+        'Tooltips' => '/docs/tooltips',
         // '🚧 Toasts 🤔' => '/docs/toasts',
     ],
 ];
