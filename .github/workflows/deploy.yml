@@ -1,0 +1,14 @@
+name: Deploy
+
+on: [push]
+
+jobs:
+  deploy:
+    name: Deploy to Forge
+    runs-on: ubuntu-latest
+    env:
+        DEPLOY_URL: ${{ secrets.DEPLOY_URL }}
+    steps:
+        - name: Deploy to Production
+          if: github.ref == 'refs/heads/main' && env.DEPLOY_URL != null
+          run: curl ${{ env.DEPLOY_URL }}
