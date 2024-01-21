@@ -57,13 +57,11 @@ class Install extends Command
         if ($confirmed) {
             $this->publish($componentsToPublish, $publishTo);
         }
-
-        warning('Nothing actually happens yet.');
     }
 
     protected function publish(array $components, string $publishTo)
     {
-        info('🫡  Publishing components...');
+        info('🫡  Publishing...');
 
         foreach ($this->allComponents as $slug => $title) {
 
@@ -72,20 +70,22 @@ class Install extends Command
                 continue;
             }
 
+            $publishToPath = base_path($publishTo.DIRECTORY_SEPARATOR);
+
             // Some files have multiple paths
             foreach ($this->pathsFromSlug($slug) as $path) {
                 // Check if the file exists there and skip if it does
-                if (file_exists($publishTo.DIRECTORY_SEPARATOR.$path.'.blade.php')) {
+                if (file_exists($publishToPath.$path.'.blade.php')) {
                     warning(sprintf('%s already exists. Skipping...', $path));
 
                     continue;
                 }
 
                 // Copy the file from package's folder to the publish location
-                note(sprintf('Publishing %s...', $publishTo.DIRECTORY_SEPARATOR.$path.'.blade.php'));
+                note(sprintf('Publishing %s...', $publishToPath.$path.'.blade.php'));
                 copy(
                     __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.$path.'.blade.php',
-                    $publishTo.DIRECTORY_SEPARATOR.$path.'.blade.php'
+                    $publishToPath.$path.'.blade.php'
                 );
 
             }
