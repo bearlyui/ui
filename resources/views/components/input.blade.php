@@ -14,7 +14,7 @@
         ...config('ui.focusClasses'),
         {{-- Error styles --}}
         'border-gray-300 focus:border-gray-300 dark:border-gray-600/60 dark:focus:border-gray-600/60' => !$hasError,
-        'border-red-400 focus:border-red-400 dark:border-red-300 dark:focus:border-red-300' => $hasError,
+        'border-red-500/80 focus:border-red-500/80 dark:border-red-400/80 dark:focus:border-red-400/80' => $hasError,
     ])->merge([
         'type' => 'text',
     ])

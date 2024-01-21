@@ -5,6 +5,7 @@
     'withIcon' => true,
     'color' => Color::Primary,
 ])
+
 @php
 $idOrName = $attributes->get('id') ?? $attributes->get('name') ?? false;
 $dotName = preg_replace('/\[(.*?)\]/', '.$1', $idOrName);

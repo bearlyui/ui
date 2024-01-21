@@ -21,7 +21,7 @@ Customize your cards with the following properties.
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `color` | `string \| Color` | `base` | The color of the card. |
+| `color` | `string \| Color` | `none` | The color of the card. |
 | `size` | `string \| Size` | `true` | The padding and text size of the card. |
 | `radius` | `string \| Size` | `base` | The border radius of the card. |
 | `variant` | `string \| Variant` | `solid` | The variant of the card. |
