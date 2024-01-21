@@ -1,7 +1,4 @@
 # Tooltips
-## 🚧 TO DO
-- [x] Finish documentation for all properties, slots, and sections
-- [ ] Refine the API - change / rename the shortcut prop and other things
 
 Helpful little buggers that appear when you hover over an element. Great for giving extra context or showing keyboard shortcuts. They'll automatically use
 their parent element as a trigger.
