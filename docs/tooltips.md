@@ -14,27 +14,6 @@ Use `<x-ui::tooltip>` **_inside an element_** to trigger the tooltip by hovering
     <x-ui::tooltip title="Have a nice day!" />
     Hover for top secret info
 </x-ui::button>
-
-
-<x-ui::button color="success">
-    <x-ui::tooltip size="sm" title="Have a nice day!" />
-    Hover for top secret info
-</x-ui::button>
-
-<x-ui::button color="success">
-    <x-ui::tooltip size="base" title="Have a nice day!" />
-    Hover for top secret info
-</x-ui::button>
-
-<x-ui::button color="success">
-    <x-ui::tooltip size="md" title="Have a nice day!" />
-    Hover for top secret info
-</x-ui::button>
-
-<x-ui::button color="success">
-    <x-ui::tooltip size="lg" title="Have a nice day!" />
-    Hover for top secret info
-</x-ui::button>
 ```
 
 Tooltips will adjust their positioning if they overflow outside the viewport.
