@@ -139,7 +139,7 @@ class Install extends Command
         // \e[49m                    \e[m
         // ";`; // Welcome art
 
-        info(<<<'TEXT'
+        note(<<<'TEXT'
         ░█▀▀█ █▀▀ █▀▀█ █▀▀█ 　 ░█─░█ ▀█▀
         ░█▀▀▄ █▀▀ █▄▄█ █▄▄▀ 　 ░█─░█ ░█─
         ░█▄▄█ ▀▀▀ ▀──▀ ▀─▀▀ 　 ─▀▄▄▀ ▄█▄
