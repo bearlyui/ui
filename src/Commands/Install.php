@@ -31,8 +31,9 @@ class Install extends Command
         $this->welcome();
 
         // Choose components
+        info('📦  Choose the components to publish.');
         $componentsToPublish = multiselect(
-            label: '📦 Which components would you like to publish?',
+            label: 'Select components',
             options: $this->allComponents,
             default: ['alert', 'card', 'button', 'form-inputs', 'dropdown', 'tooltip'],
             scroll: 10,
@@ -40,8 +41,9 @@ class Install extends Command
         );
 
         // Publish location
+        info('🗡️  Where should the blade components be published?');
         $publishTo = text(
-            label: '🗡️ Where should the blade files be published?',
+            label: 'Blade Component Publish Path',
             default: 'resources/views/components',
             hint: 'Relative to the base path of your Laravel app.'
         );
