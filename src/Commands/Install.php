@@ -93,6 +93,7 @@ class Install extends Command
             }
         }
 
+        info("🎉  Done! \n 📝  You can now use the components in your views.");
         table(
             ['Component', 'Result', 'Published To'],
             collect($this->allComponents)->map(fn ($title, $slug) => [
@@ -101,6 +102,19 @@ class Install extends Command
                 in_array($slug, $components) ? $publishTo.DIRECTORY_SEPARATOR.$slug.'.blade.php' : '',
             ])
         );
+
+        info('♻️ Do you want to run `npm run build` to compile the assets?');
+        $runNpmBuild = confirm(
+            label: 'Run npm run build?',
+            default: true,
+            hint: 'This will compile the assets.'
+        );
+        // Run npm build
+        if ($runNpmBuild) {
+            info('🔨 Running npm run build...');
+            echo `npm run build`;
+        }
+
     }
 
     protected function pathsFromSlug($slug): array
