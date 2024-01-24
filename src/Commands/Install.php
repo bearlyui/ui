@@ -32,7 +32,7 @@ class Install extends Command
 
         // Choose components
         $componentsToPublish = multiselect(
-            label: 'Which components would you like to publish?',
+            label: '📦 Which components would you like to publish?',
             options: $this->allComponents,
             default: ['alert', 'card', 'button', 'form-inputs', 'dropdown', 'tooltip'],
             scroll: 10,
@@ -41,14 +41,14 @@ class Install extends Command
 
         // Publish location
         $publishTo = text(
-            label: 'Where should the blade files be published?',
+            label: '🗡️ Where should the blade files be published?',
             default: 'resources/views/components',
             hint: 'Relative to the base path of your Laravel app.'
         );
 
         // Confirmation
         $confirmed = confirm(
-            label: sprintf('Publish the selected components to %s?', $publishTo),
+            label: sprintf('Confirm and publish selected components to %s?', $publishTo),
             default: true,
             hint: 'This will not overwrite any existing files. Use the `--force` option to do that.'
         );
