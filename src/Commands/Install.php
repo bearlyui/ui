@@ -35,7 +35,8 @@ class Install extends Command
         $componentsToPublish = multiselect(
             label: 'Select components',
             options: $this->allComponents,
-            default: ['alert', 'card', 'button', 'form-inputs', 'dropdown', 'tooltip'],
+            // default: ['alert', 'card', 'button', 'form-inputs', 'dropdown', 'tooltip'],
+            default: ['button'],
             scroll: 10,
             hint: 'Spacebar to select, Enter to confirm.'
         );
@@ -50,9 +51,8 @@ class Install extends Command
 
         // Confirmation
         $confirmed = confirm(
-            label: sprintf('Confirm and publish selected components to %s?', $publishTo),
+            label: sprintf('Publish selected components to %s?', $publishTo),
             default: true,
-            hint: 'This will not overwrite any existing files. Use the `--force` option to do that.'
         );
 
         // Publish the components
@@ -76,15 +76,19 @@ class Install extends Command
 
             // Some files have multiple paths
             foreach ($this->pathsFromSlug($slug) as $path) {
-                // Check if the file exists there and skip if it does
                 if (file_exists($publishToPath.$path.'.blade.php')) {
-                    warning(sprintf('%s already exists. Skipping...', $path));
+                    if (! confirm(
+                        sprintf('%s%s%s.blade.php already exists. Overwrite?', $publishTo, DIRECTORY_SEPARATOR, $path),
+                        default: false
+                    )) {
+                        warning(sprintf('⚠️  Skipping %s...', str($path)->headline()));
 
-                    continue;
+                        continue;
+                    }
                 }
 
                 // Copy the file from package's folder to the publish location
-                note(sprintf('Publishing %s...', $publishToPath.$path.'.blade.php'));
+                note(sprintf('Publishing %s%s%s.blade.php...', $publishTo, DIRECTORY_SEPARATOR, $path));
                 copy(
                     __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.$path.'.blade.php',
                     $publishToPath.$path.'.blade.php'
