@@ -1,5 +1,6 @@
 import plugin from 'tailwindcss/plugin'
 import colors from 'tailwindcss/colors'
+import forms from '@tailwindcss/forms'
 
 const bearUI = plugin(
   function () {},
@@ -22,7 +23,8 @@ const bearUI = plugin(
             "15": .15,
         },
       },
-    }
+    },
+    plugins: [forms]
   }
 )
 

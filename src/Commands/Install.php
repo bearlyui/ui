@@ -3,6 +3,8 @@
 namespace Bearly\Ui\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Process;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
@@ -25,10 +27,58 @@ class Install extends Command
         'tooltip' => 'Tooltip',
     ];
 
+    protected function checkForTailwindConfig()
+    {
+        // Make sure @tailwindcss/forms and tailwind are already installed via npm
+        // TODO: check if the user has these already and/or wants to do this()
+        Process::run('npm install -D tailwindcss @tailwindcss/forms', function (string $type, string $output) {
+            echo $output;
+        })->throw();
+
+        // Do we have a Tailwind CSS config file already?
+        if (! file_exists(base_path('tailwind.config.js'))) {
+            $shouldCreateTailwindFile = confirm('⚠️  No tailwind.config.js file found. Do you want to create one now?');
+
+            if ($shouldCreateTailwindFile) {
+                Process::run('npx tailwindcss init', function (string $type, string $output) {
+                    echo $output;
+                })->throw();
+            }
+        }
+
+        // Get the tailwind config file and check if it has the forms plugin
+        $tailwindConfig = str(File::get(base_path('tailwind.config.js')));
+
+        // Do we already have bearUI in a plugins block?
+        // Like this
+        // plugins: [
+        //     bearUI,
+        // ],
+        $hasImport = $tailwindConfig->contains("import bearUI from './vendor/bearly/ui/ui'");
+        if (! $hasImport) {
+            $tailwindConfig = $tailwindConfig->prepend("import bearUI from './vendor/bearly/ui/ui'\n");
+        }
+
+        $plugins = $tailwindConfig->match('/plugins:[\S\s]*\[[\S\s]*\]/');
+
+        if ($plugins->isEmpty()) {
+            $afterLastBrace = $tailwindConfig->afterLast('}'); // just in case
+            $tailwindConfig = $tailwindConfig->beforeLast('}')->append("\tplugins: [\n\t    bearUI,\n\t],\n}\n")->append($afterLastBrace);
+        } else {
+            $plugins = $plugins->replace(']', "    bearUI,\n]");
+            $tailwindConfig = $tailwindConfig->replaceMatches('/plugins:[\S\s]*\[[\S\s]*\]/', $plugins);
+        }
+
+        File::put(base_path('tailwind.config.js'), $tailwindConfig);
+    }
+
     public function handle()
     {
         // Welcome art and greeting
         $this->welcome();
+
+        // Check if the user has the tailwind stuff already installed
+        $this->checkForTailwindConfig();
 
         // Choose components
         info('📦  Choose the components to publish.');
