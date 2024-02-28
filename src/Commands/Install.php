@@ -29,6 +29,8 @@ class Install extends Command
 
     protected function installPluginInTailwindConfig()
     {
+        info('🛠️  Checking for Tailwind CSS plugin installation...');
+
         // Do we have a Tailwind CSS config file already?
         if (! file_exists(base_path('tailwind.config.js'))) {
             if (confirm('⚠️  No tailwind.config.js file found. Do you want to create one now?')) {
@@ -54,7 +56,7 @@ class Install extends Command
             ->trim()
             ->explode(',')
             ->filter()
-            ->push('bearUI,')
+            ->push('bearUI')
             ->unique();
 
         // Replace the plugins array with our new one
@@ -64,6 +66,8 @@ class Install extends Command
         );
 
         File::put(base_path('tailwind.config.js'), $tailwindConfig);
+
+        info('✅  Bear UI Tailwind CSS plugin installed.');
     }
 
     protected function ensureTailwindInstalled()
