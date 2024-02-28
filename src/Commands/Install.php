@@ -27,6 +27,14 @@ class Install extends Command
         'tooltip' => 'Tooltip',
     ];
 
+    // TODO: Ensure tailwind is actually installed in app.css (with confirmation)
+    // TODO: Ensure tailwind is installed with autoprefixer and stuff
+    // TODO: Ensure Livewire is installed in app layout if necessary
+    // TODO: Add / initialize an app layout for livewire if one doesn't exist (with confirmation)
+    // TODO: Add a test route at / URL to ensure everything is working -- it should go to a demo view that shows some buttons being used
+    // TODO: Test that we can do the following: `composer require bearly/ui && php artisan bear-ui:install` and it works with a demo page
+    // TODO: Add prefix setting/class/prompt to affect publish path
+
     protected function ensureTailwindInstalled()
     {
         note('🛠️  Checking for Tailwind CSS and @tailwindcss/forms installation...');
