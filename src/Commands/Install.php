@@ -68,7 +68,7 @@ class Install extends Command
             }
         }
 
-        Process::run('npm install -D tailwindcss @tailwindcss/forms', function ($type, $output) {
+        Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms', function ($type, $output) {
             echo $output;
         })->throw();
         info('✅  Installed Tailwind CSS and @tailwindcss/forms.');
