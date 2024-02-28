@@ -48,6 +48,26 @@ class Install extends Command
             return;
         }
 
+        // Do we have tailwind installed in app.css?
+        $appCssFile = File::get(base_path('resources/css/app.css'));
+        if (! str($appCssFile)->contains([
+            '@tailwind base',
+            '@tailwind components',
+            '@tailwind utilities',
+        ])) {
+            if (confirm('⛔️  Tailwind CSS is not installed in resources/css/app.css. Do you want to install it now?')) {
+                File::put(
+                    path: base_path('resources/css/app.css'),
+                    contents: str($appCssFile)->prepend(
+                        "\n@tailwind base;\n",
+                        "@tailwind components;\n",
+                        "@tailwind utilities;\n",
+                    )
+                );
+                info('✅  Tailwind CSS installed in resources/css/app.css.');
+            }
+        }
+
         Process::run('npm install -D tailwindcss @tailwindcss/forms', function ($type, $output) {
             echo $output;
         })->throw();
@@ -60,10 +80,15 @@ class Install extends Command
 
         // Do we have a Tailwind CSS config file already?
         if (! File::exists(base_path('tailwind.config.js'))) {
-            if (confirm('⚠️  No tailwind.config.js file found. Do you want to create one now?')) {
-                Process::run('npx tailwindcss init', function (string $type, string $output) {
+            if (confirm('⛔️  No tailwind.config.js file found. Do you want to create one now?')) {
+
+                // First, publish Tailwind and PostCSS files from tailwind
+                Process::run('npx tailwindcss init -p', function (string $type, string $output) {
                     echo $output;
                 })->throw();
+
+                // Then, make sure content has been added to the tailwind.config.js file
+
             } else {
                 info('⚠️  Skipping Tailwind CSS plugin installation.');
 
@@ -77,28 +102,38 @@ class Install extends Command
         // Do we have the import statement?
         if (! $tailwindConfig->contains("import bearUI from './vendor/bearly/ui/ui'")) {
             $tailwindConfig = $tailwindConfig->prepend("import bearUI from './vendor/bearly/ui/ui'\n");
+            File::put(base_path('tailwind.config.js'), $tailwindConfig);
         }
 
-        // Get the plugins, rip out the guts of the array, and add bearUI to it
-        $plugins = $tailwindConfig->match('/plugins:[\s]*?\[.*?\],?/sm')
-            ->before(']')
+        // Make sure we have a content value in tailwind css and that it includes blade files
+        $this->ensureJsFileHasValues('tailwind.config.js', 'plugins', ['bearUI']);
+        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'"]);
+
+        info('✅  Bear UI Tailwind CSS plugin installed.');
+    }
+
+    protected function ensureJsFileHasValues(string $path, string $key, array $values)
+    {
+        $jsFile = File::get(base_path($path));
+        $arrayFromFile = str($jsFile)->match("/{$key}:[\s]*?\[.*?\],?/sm")
             ->after('[')
+            ->beforeLast(']')
             ->replaceMatches('/\s/', '')
             ->trim()
             ->explode(',')
             ->filter()
-            ->push('bearUI')
+            ->push($values)
+            ->flatten()
             ->unique();
 
-        // Replace the plugins array with our new one
-        $tailwindConfig = $tailwindConfig->replaceMatches(
-            '/plugins:[\s]*?\[.*?\],?/sm',
-            str("plugins: [\n    ")->append($plugins->implode(",\n    "))->append("\n  ],\n")
+        File::put(
+            path: base_path($path),
+            contents: str($jsFile)->replaceMatches(
+                "/{$key}:[\s]*?\[.*?\],?/sm",
+                str("{$key}: [\n    ")->append($arrayFromFile->implode(",\n    "))->append("\n  ],\n")
+
+            )
         );
-
-        File::put(base_path('tailwind.config.js'), $tailwindConfig);
-
-        info('✅  Bear UI Tailwind CSS plugin installed.');
     }
 
     protected function ensureLivewireInstalled()
@@ -174,6 +209,15 @@ class Install extends Command
 
             // Some files have multiple paths
             foreach ($this->pathsFromSlug($slug) as $path) {
+
+                // Create the folder if it doesn't exist
+                if (! File::isDirectory(str($publishToPath.$path)->beforeLast(DIRECTORY_SEPARATOR))) {
+                    File::makeDirectory(
+                        path: str($publishToPath.$path)->beforeLast(DIRECTORY_SEPARATOR),
+                        recursive: true
+                    );
+                }
+
                 if (file_exists($publishToPath.$path.'.blade.php')) {
                     if (! confirm(
                         sprintf('%s%s%s.blade.php already exists. Overwrite?', $publishTo, DIRECTORY_SEPARATOR, $path),
