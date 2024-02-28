@@ -27,19 +27,11 @@ class Install extends Command
         'tooltip' => 'Tooltip',
     ];
 
-    protected function checkForTailwindConfig()
+    protected function installPluginInTailwindConfig()
     {
-        // Make sure @tailwindcss/forms and tailwind are already installed via npm
-        // TODO: check if the user has these already and/or wants to do this()
-        Process::run('npm install -D tailwindcss @tailwindcss/forms', function (string $type, string $output) {
-            echo $output;
-        })->throw();
-
         // Do we have a Tailwind CSS config file already?
         if (! file_exists(base_path('tailwind.config.js'))) {
-            $shouldCreateTailwindFile = confirm('⚠️  No tailwind.config.js file found. Do you want to create one now?');
-
-            if ($shouldCreateTailwindFile) {
+            if (confirm('⚠️  No tailwind.config.js file found. Do you want to create one now?')) {
                 Process::run('npx tailwindcss init', function (string $type, string $output) {
                     echo $output;
                 })->throw();
@@ -49,27 +41,54 @@ class Install extends Command
         // Get the tailwind config file and check if it has the forms plugin
         $tailwindConfig = str(File::get(base_path('tailwind.config.js')));
 
-        // Do we already have bearUI in a plugins block?
-        // Like this
-        // plugins: [
-        //     bearUI,
-        // ],
-        $hasImport = $tailwindConfig->contains("import bearUI from './vendor/bearly/ui/ui'");
-        if (! $hasImport) {
+        // Do we have the import statement?
+        if (! $tailwindConfig->contains("import bearUI from './vendor/bearly/ui/ui'")) {
             $tailwindConfig = $tailwindConfig->prepend("import bearUI from './vendor/bearly/ui/ui'\n");
         }
 
-        $plugins = $tailwindConfig->match('/plugins:[\S\s]*\[[\S\s]*\]/');
+        // Get the plugins, rip out the guts of the array, and add bearUI to it
+        $plugins = $tailwindConfig->match('/plugins:[\s]*?\[.*?\],?/sm')
+            ->before(']')
+            ->after('[')
+            ->replaceMatches('/\s/', '')
+            ->trim()
+            ->explode(',')
+            ->filter()
+            ->push('bearUI,')
+            ->unique();
 
-        if ($plugins->isEmpty()) {
-            $afterLastBrace = $tailwindConfig->afterLast('}'); // just in case
-            $tailwindConfig = $tailwindConfig->beforeLast('}')->append("\tplugins: [\n\t    bearUI,\n\t],\n}\n")->append($afterLastBrace);
-        } else {
-            $plugins = $plugins->replace(']', "    bearUI,\n]");
-            $tailwindConfig = $tailwindConfig->replaceMatches('/plugins:[\S\s]*\[[\S\s]*\]/', $plugins);
-        }
+        // Replace the plugins array with our new one
+        $tailwindConfig = $tailwindConfig->replaceMatches(
+            '/plugins:[\s]*?\[.*?\],?/sm',
+            str("plugins: [\n    ")->append($plugins->implode(",\n    "))->append("\n  ],\n")
+        );
 
         File::put(base_path('tailwind.config.js'), $tailwindConfig);
+    }
+
+    protected function ensureTailwindInstalled()
+    {
+        info('🛠️  Checking for Tailwind CSS installation...');
+
+        $packageJson = File::get(base_path('package.json'));
+        $tailwindAndFormsInstalled = str($packageJson)->containsAll(['"tailwindcss":', '"@tailwindcss/forms":']);
+
+        if (! $tailwindAndFormsInstalled) {
+            info('📦  Installing Tailwind CSS and @tailwindcss/forms...');
+            Process::run('npm install -D tailwindcss @tailwindcss/forms', function (string $type, string $output) {
+                echo $output;
+            })->throw();
+
+            return;
+        }
+
+        info('✅  Tailwind CSS is installed already.');
+    }
+
+    protected function ensureLivewireInstalled()
+    {
+
+        info('🛠️  Checking for Livewire installation... TODO __ TODO __ TODO');
     }
 
     public function handle()
@@ -77,8 +96,9 @@ class Install extends Command
         // Welcome art and greeting
         $this->welcome();
 
-        // Check if the user has the tailwind stuff already installed
-        $this->checkForTailwindConfig();
+        $this->ensureTailwindInstalled();
+        $this->ensureLivewireInstalled();
+        $this->installPluginInTailwindConfig();
 
         // Choose components
         info('📦  Choose the components to publish.');
