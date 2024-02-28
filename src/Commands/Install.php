@@ -27,16 +27,39 @@ class Install extends Command
         'tooltip' => 'Tooltip',
     ];
 
+    protected function ensureTailwindInstalled()
+    {
+        note('🛠️  Checking for Tailwind CSS and @tailwindcss/forms installation...');
+
+        $tailwindAndFormsInstalled = str(File::get(base_path('package.json')))
+            ->containsAll(['"tailwindcss":', '"@tailwindcss/forms":']);
+
+        if ($tailwindAndFormsInstalled) {
+            info('👍  Tailwind CSS is already installed.');
+
+            return;
+        }
+
+        Process::run('npm install -D tailwindcss @tailwindcss/forms', function ($type, $output) {
+            echo $output;
+        })->throw();
+        info('✅  Installed Tailwind CSS and @tailwindcss/forms.');
+    }
+
     protected function installPluginInTailwindConfig()
     {
-        info('🛠️  Checking for Tailwind CSS plugin installation...');
+        note('🛠️  Checking for Tailwind CSS plugin installation...');
 
         // Do we have a Tailwind CSS config file already?
-        if (! file_exists(base_path('tailwind.config.js'))) {
+        if (! File::exists(base_path('tailwind.config.js'))) {
             if (confirm('⚠️  No tailwind.config.js file found. Do you want to create one now?')) {
                 Process::run('npx tailwindcss init', function (string $type, string $output) {
                     echo $output;
                 })->throw();
+            } else {
+                info('⚠️  Skipping Tailwind CSS plugin installation.');
+
+                return;
             }
         }
 
@@ -70,29 +93,22 @@ class Install extends Command
         info('✅  Bear UI Tailwind CSS plugin installed.');
     }
 
-    protected function ensureTailwindInstalled()
+    protected function ensureLivewireInstalled()
     {
-        info('🛠️  Checking for Tailwind CSS installation...');
+        note('🛠️  Checking for Livewire installation...');
 
-        $packageJson = File::get(base_path('package.json'));
-        $tailwindAndFormsInstalled = str($packageJson)->containsAll(['"tailwindcss":', '"@tailwindcss/forms":']);
+        $livewireInstalled = str(File::get(base_path('composer.json')))->contains('livewire/livewire');
 
-        if (! $tailwindAndFormsInstalled) {
-            info('📦  Installing Tailwind CSS and @tailwindcss/forms...');
-            Process::run('npm install -D tailwindcss @tailwindcss/forms', function (string $type, string $output) {
-                echo $output;
-            })->throw();
+        if ($livewireInstalled) {
+            info('👍  Livewire is already installed.');
 
             return;
         }
 
-        info('✅  Tailwind CSS is installed already.');
-    }
-
-    protected function ensureLivewireInstalled()
-    {
-
-        info('🛠️  Checking for Livewire installation... TODO __ TODO __ TODO');
+        Process::run('composer require livewire/livewire', function ($type, $output) {
+            echo $output;
+        })->throw();
+        info('✅  Livewire installed.');
     }
 
     public function handle()
@@ -101,11 +117,11 @@ class Install extends Command
         $this->welcome();
 
         $this->ensureTailwindInstalled();
-        $this->ensureLivewireInstalled();
         $this->installPluginInTailwindConfig();
+        $this->ensureLivewireInstalled();
 
         // Choose components
-        info('📦  Choose the components to publish.');
+        note('📦  Choose the components to publish.');
         $componentsToPublish = multiselect(
             label: 'Select components',
             options: $this->allComponents,
@@ -116,7 +132,7 @@ class Install extends Command
         );
 
         // Publish location
-        info('🗡️  Where should the blade components be published?');
+        note('🗡️  Where should the blade components be published?');
         $publishTo = text(
             label: 'Blade Component Publish Path',
             default: 'resources/views/components',
