@@ -59,10 +59,12 @@ class Install extends Command
             return;
         }
 
-        Process::run('composer require livewire/livewire', function ($type, $output) {
-            // echo $output;
-        })->throw();
-        info('✅  Livewire installed.');
+        if (confirm('⛔️  Livewire is not installed. Do you want to install it now?')) {
+            Process::run('composer require livewire/livewire', function ($type, $output) {
+                // echo $output;
+            })->throw();
+            info('✅  Livewire installed.');
+        }
     }
 
     protected function installTailwind()
@@ -145,9 +147,11 @@ class Install extends Command
     {
         $this->welcome();
         $this->installTailwind();
-        $this->newLine();
+        $this->newLine(2);
         $this->installLivewire();
-        $this->call('bear:add');
+        $this->newLine(2);
+        $this->call('bear:add', ['--skip-welcome' => true]);
+        info('✅  Bear UI installation complete. Enjoy! 🐻');
     }
 
     protected function welcome()

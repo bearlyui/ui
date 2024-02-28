@@ -15,7 +15,8 @@ use function Laravel\Prompts\warning;
 
 class Add extends Command
 {
-    public $signature = 'bear:add';
+    public $signature = 'bear:add
+        {--skip-welcome : Skip the welcome message}';
 
     public $allComponents = [
         'alert' => 'Alert',
@@ -28,7 +29,6 @@ class Add extends Command
 
     public function handle()
     {
-        // Welcome art and greeting
         $this->welcome();
 
         // Publish location
@@ -38,6 +38,7 @@ class Add extends Command
             default: 'resources/views/components',
             hint: 'Relative to the base path of your Laravel app.'
         );
+        $this->newLine();
 
         // Choose components
         note('📦  Choose components to publish.');
@@ -48,6 +49,7 @@ class Add extends Command
             scroll: 10,
             hint: 'Spacebar to select, Enter to confirm.'
         );
+        $this->newLine();
 
         // Publish the components
         if (confirm(
@@ -56,6 +58,7 @@ class Add extends Command
         )) {
             $this->publish($componentsToPublish, $publishTo);
         }
+        $this->newLine();
     }
 
     protected function publish(array $components, string $publishTo)
@@ -94,7 +97,7 @@ class Add extends Command
                 }
 
                 // Copy the file from package's folder to the publish location
-                note(sprintf('Publishing %s%s%s.blade.php...', $publishTo, DIRECTORY_SEPARATOR, $path));
+                // note(sprintf('Publishing %s%s%s.blade.php...', $publishTo, DIRECTORY_SEPARATOR, $path));
                 copy(
                     __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.$path.'.blade.php',
                     $publishToPath.$path.'.blade.php'
@@ -103,7 +106,7 @@ class Add extends Command
             }
         }
 
-        info("🎉  Done! \n 📝  You can now use the components in your views.");
+        info('🎉  Done! Published selected components.');
         table(
             ['Component', 'Result', 'Published To'],
             collect($this->allComponents)->map(fn ($title, $slug) => [
@@ -113,16 +116,17 @@ class Add extends Command
             ])
         );
 
-        info('♻️ Run `npm run build` to compile assets?');
+        $this->newLine();
+
         $runNpmBuild = confirm(
-            label: 'Run npm run build?',
+            label: 'Compile assets with `npm run build`?',
             default: true,
-            hint: 'This will compile the assets.'
+            hint: 'Tailwind needs to rebuild to include the new components.'
         );
+
         // Run npm build
         if ($runNpmBuild) {
-            info('🔨 Running npm run build...');
-            echo `npm run build`;
+            info(`npm run build`);
         }
 
     }
@@ -153,6 +157,10 @@ class Add extends Command
 
     protected function welcome()
     {
+        if ($this->option('skip-welcome')) {
+            return;
+        }
+
         // echo `printf "\e[49m                    \e[m
         // \e[49m   \e[38;5;167;48;5;203m▄\e[38;5;237;48;5;168m▄\e[38;5;236;48;5;131m▄\e[38;5;236;48;5;181m▄\e[38;5;131;48;5;210m▄\e[38;5;173;48;5;173m▄\e[38;5;167;48;5;167m▄\e[38;5;167;48;5;131m▄▄\e[38;5;209;48;5;216m▄\e[38;5;237;48;5;181m▄\e[38;5;237;48;5;174m▄\e[38;5;237;48;5;173m▄\e[38;5;173;48;5;215m▄\e[38;5;180;49m▄\e[49m  \e[m
         // \e[49m  \e[38;5;238;48;5;95m▄\e[38;5;238;48;5;131m▄\e[38;5;53;48;5;235m▄\e[38;5;239;48;5;238m▄\e[38;5;242;48;5;131m▄\e[38;5;167;48;5;203m▄\e[38;5;172;48;5;203m▄\e[38;5;166;48;5;203m▄\e[38;5;130;48;5;131m▄\e[38;5;130;48;5;209m▄\e[38;5;173;48;5;209m▄\e[38;5;137;48;5;173m▄\e[38;5;131;48;5;131m▄\e[38;5;237;48;5;235m▄\e[38;5;238;48;5;95m▄\e[38;5;137;48;5;173m▄\e[49m  \e[m
