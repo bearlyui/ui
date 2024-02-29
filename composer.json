@@ -5,7 +5,12 @@
     "type": "library",
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0"
+        "illuminate/support": "^10.0",
+        "laravel/prompts": "^0.1.0"
+    },
+    "require-dev": {
+        "livewire/livewire": "^3.1",
+        "orchestra/testbench": "^8.15"
     },
     "autoload": {
         "psr-4": {
@@ -25,19 +30,9 @@
             ]
         }
     },
-    "require-dev": {
-        "livewire/livewire": "^3.1",
-        "orchestra/testbench": "^8.15"
-    },
     "autoload-dev": {
         "psr-4": {
             "Bearly\\Ui\\Tests\\": "tests/"
         }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "@clear",
-            "@prepare"
-        ]
     }
 }
