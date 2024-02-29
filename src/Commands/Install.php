@@ -4,13 +4,13 @@ namespace Bearly\Ui\Commands;
 
 use Bearly\Ui\Welcome;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\note;
+use function Laravel\Prompts\spin;
 
 class Install extends Command
 {
@@ -19,12 +19,8 @@ class Install extends Command
     public $signature = 'bear:install
         {--skip-welcome : Skip the welcome message}';
 
-    // TODO: Ensure tailwind is actually installed in app.css (with confirmation)
-    // TODO: Ensure tailwind is installed with autoprefixer and stuff
-    // TODO: Add / initialize an app layout for livewire if one doesn't exist (with confirmation)
-    // TODO: Add a test route at / URL to ensure everything is working -- it should go to a demo view that shows some buttons being used
-    // TODO: Test that we can do the following: `composer require bearly/ui && php artisan bear-ui:install` and it works with a demo page
     // TODO: Add prefix setting/class/prompt to affect publish path
+    // TODO: Add / initialize an app layout for livewire if one doesn't exist (with confirmation)
 
     protected function ensureJsFileHasValues(string $path, string $key, array $values)
     {
@@ -92,12 +88,11 @@ class Install extends Command
 
         if (! $tailwindAndRequirementsInstalled) {
             if (confirm('⛔️  Tailwind CSS and its required packages are not installed. Do you want to install them now?')) {
-                Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms', function ($type, $output) {
-                    // echo $output;
-                })->throw();
-                info('✅  Installed Tailwind CSS and required packages.');
-
-                Process::run('npx tailwindcss init -p', fn ($type, $output) => null/* note($output)*/);
+                spin(function () {
+                    Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms', fn () => null)->throw();
+                    Process::run('npx tailwindcss init -p', fn ($type, $output) => null);
+                    info('✅  Installed Tailwind CSS and required packages.');
+                }, 'Installing Tailiwind CSS');
             }
         }
     }
