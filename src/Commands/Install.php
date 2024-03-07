@@ -51,7 +51,6 @@ class Install extends Command
         note('🛠️  Checking for Livewire installation...');
 
         $livewireInstalled = str(File::get(base_path('composer.json')))->contains('livewire/livewire');
-        $appLayoutComponentExists = File::exists(base_path('resources/views/components/layouts/app.blade.php'));
 
         if ($livewireInstalled) {
             info('👍  Livewire is already installed.');
@@ -65,12 +64,16 @@ class Install extends Command
                 info('✅  Livewire installed.');
             }, 'Installing Livewire...');
         }
+    }
 
+    protected function installAppLayoutComponent()
+    {
+        $appLayoutComponentExists = File::exists(base_path('resources/views/components/layouts/app.blade.php'));
         if (! $appLayoutComponentExists && confirm('⛔️  No `layouts.app` component found. Do you want to create one now?')) {
             File::ensureDirectoryExists(base_path('resources/views/components/layouts'));
             File::put(
                 path: base_path('resources/views/components/layouts/app.blade.php'),
-                contents: File::get(__DIR__.'/stubs/resources/views/components/layouts/app.blade.php')
+                contents: File::get(__DIR__.'/../../stubs/resources/views/components/layouts/app.blade.php')
             );
             info('✅  App layout component created.');
         }
@@ -153,6 +156,7 @@ class Install extends Command
         $this->installTailwind();
         $this->newLine();
         $this->installLivewire();
+        $this->installAppLayoutComponent();
         $this->newLine();
         $this->call('bear:add', ['--skip-welcome' => true]);
         info('✅  Bear UI installation complete. Enjoy! 🐻');
