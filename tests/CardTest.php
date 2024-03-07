@@ -6,13 +6,13 @@ class CardTest extends TestCase
 {
     public function test_renders()
     {
-        $this->blade('<x-ui::card>Foo</x-ui::card>')
+        $this->blade('<x-card>Foo</x-ui::card>')
             ->assertSeeHtmlInOrder(['<div', '>', 'Foo', '</div>']);
     }
 
     public function test_other_attributes()
     {
-        $this->blade('<x-ui::card thing="amajig">Foo</x-ui::card>')
+        $this->blade('<x-card thing="amajig">Foo</x-ui::card>')
             ->assertSeeHtmlInOrder(['<div', 'thing="amajig"', '>', 'Foo', '</div>']);
     }
 
@@ -20,7 +20,7 @@ class CardTest extends TestCase
     public function test_header_and_footer()
     {
         $this->blade(<<<'HTML'
-            <x-ui::card>
+            <x-card>
                 <x-slot:header>Foo</x-slot:header>
                 Bar
                 <x-slot:footer>Baz</x-slot:footer>

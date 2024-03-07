@@ -9,7 +9,7 @@ Simple labels. They're just `<label>` elements with some extra sugar. They attem
 to be smart about validation errors and have some extra classes applied to them.
 
 ```html +demo
-<x-ui::label>Example Label</x-ui::label>
+<x-label>Example Label</x-ui::label>
 ```
 
 ## Text Inputs
@@ -19,13 +19,13 @@ validation errors and setting the value to any `old()` input if necessary. Input
 be used with or without a label. They are meant to be smart yet, atomic and flexible.
 
 ```html +demo
-<x-ui::input placeholder="Example Input" />
+<x-input placeholder="Example Input" />
 ```
 
 Attributes are forwarded to the underlying `<input>` element, so you can do this kind of stuff, too:
 
 ```html
-<x-ui::input placeholder="Example Input" class="w-full" />
+<x-input placeholder="Example Input" class="w-full" />
 ```
 
 ## Textareas
@@ -33,7 +33,7 @@ Attributes are forwarded to the underlying `<input>` element, so you can do this
 Like inputs, but bigger. They're also smart about validation errors and `old()` values.
 
 ```html +demo
-<x-ui::textarea placeholder="Example Textarea" />
+<x-textarea placeholder="Example Textarea" />
 ```
 
 ## Checkboxes
@@ -47,8 +47,8 @@ The checkbox component handles this case and properly looks at the old input to 
 Pair them with a label for best results.
 
 ```html +demo
-<x-ui::label>
-    <x-ui::checkbox name="example" label="Example Checkbox" /> Hello!
+<x-label>
+    <x-checkbox name="example" label="Example Checkbox" /> Hello!
 </x-ui::label>
 ```
 
@@ -57,11 +57,11 @@ Pair them with a label for best results.
 Similar to checkboxes, but there can be only one.
 
 ```html +demo previewClasses={space-y-4}
-<x-ui::label>
-    <x-ui::radio name="example" label="Example Radio" value="1" /> Chosen 1
+<x-label>
+    <x-radio name="example" label="Example Radio" value="1" /> Chosen 1
 </x-ui::label>
-<x-ui::label>
-    <x-ui::radio name="example" label="Example Radio" value="2" /> Chosen 2
+<x-label>
+    <x-radio name="example" label="Example Radio" value="2" /> Chosen 2
 </x-ui::label>
 ```
 
@@ -81,13 +81,13 @@ to be smart about validation errors. These have a few props to know about:
 The `options` prop allows you to specify an array of options. The keys are the values, and the values are the labels.
 
 ```html
-<x-ui::select name="example" :options="['one' => 'One', 'two' => 'Two']" />
+<x-select name="example" :options="['one' => 'One', 'two' => 'Two']" />
 ```
 
 Alternatively, you may specify the options by using the default slot, like this:
 
 ```html
-<x-ui::select name="choices">
+<x-select name="choices">
     <option value="one">One</option>
     <option value="two">Two</option>
 </x-ui::select>
@@ -106,8 +106,8 @@ The simplest way to use an input group is to include the `for` attribute which m
 Usually you'll want to include a label, too. You can do that using the `label` prop _or the label slot_.
 
 ```html +demo
-<x-ui::input-group for="example" label="Hello, I'm an input group">
-    <x-ui::input name="example" />
+<x-input-group for="example" label="Hello, I'm an input group">
+    <x-input name="example" />
 </x-ui::input-group>
 ```
 
@@ -117,14 +117,14 @@ Using an input group has the added benefit of automatically applying validation 
 @php
     $errors->default->add('example', 'This is an example error')
 @endphp
-<x-ui::input-group for="example" label="Input group with error">
-    <x-ui::input name="example" />
+<x-input-group for="example" label="Input group with error">
+    <x-input name="example" />
 </x-ui::input-group>
 ```
 
 ## Validation Errors
 
-Usually with forms you'll want to use input groups, but when you need to display errors elsewhere, use the `<x-ui::input-error>` component.
+Usually with forms you'll want to use input groups, but when you need to display errors elsewhere, use the `<x-input-error>` component.
 
 It takes a single `for` prop which should match the name of the error key.
 When an error is present with that key, it will show. The same as Laravel's built-in `@error` directive.
@@ -134,5 +134,5 @@ When an error is present with that key, it will show. The same as Laravel's buil
 @php
     $errors->default->add('example-error', 'This is a lonely error, with no input group')
 @endphp
-<x-ui::input-error for="example-error" />
+<x-input-error for="example-error" />
 ```

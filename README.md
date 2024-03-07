@@ -2,7 +2,7 @@
 Grizzly UI components for Laravel Blade and Livewire.
 
 **You can use the components in several ways**
-- Directly from the composer package - (i.e. `<x-ui::input ...>`)
+- Directly from the composer package - (i.e. `<x-input ...>`)
 - By copying the blade components into your project - (i.e. `<x-input ...>`)
 
 In either case, it's recommended to include the Tailwind plugin for the best experience.
@@ -61,7 +61,7 @@ Either directly from the package, or copy them into your project.
 ### Using the components
 You can use the components directly from the package by prefixing them with `x-ui::`:
 ```blade
-<x-ui::input />
+<x-input />
 ```
 ### Copying the components
 WIP

@@ -7,11 +7,11 @@ Maybe you can use them for showing extra context, keyboard shortcuts, or other l
 
 ## Using Tooltips
 
-Use `<x-ui::tooltip>` **_inside an element_** to trigger the tooltip by hovering its parent element.
+Use `<x-tooltip>` **_inside an element_** to trigger the tooltip by hovering its parent element.
 
 ```html +demo title={A Basic Tooltip}
-<x-ui::button color="success">
-    <x-ui::tooltip title="Have a nice day!" />
+<x-button color="success">
+    <x-tooltip title="Have a nice day!" />
     Hover for top secret info
 </x-ui::button>
 ```
@@ -38,8 +38,8 @@ The `title` prop is interchangeable with the default slot. Use whichever style y
 
 ```blade
 {{-- `title` prop or default slot (same thing) --}}
-<x-ui::tooltip title="Hello" />
-<x-ui::tooltip>Hello</x-ui::tooltip>
+<x-tooltip title="Hello" />
+<x-tooltip>Hello</x-ui::tooltip>
 ```
 
 ### Shortcut
@@ -47,8 +47,8 @@ Use the `shortcut` prop (or slot) to add styled `<kbd>` tags to your tooltip.
 
 ```blade
 {{-- `shortcut` prop or shortcut slot (same thing) --}}
-<x-ui::tooltip shortcut="⌘+S" />
-<x-ui::tooltip>
+<x-tooltip shortcut="⌘+S" />
+<x-tooltip>
     <x-slot:shortcut>⌘+S</x-slot:shortcut>
 </x-ui::tooltip>
 ```
@@ -58,7 +58,7 @@ The offset defines how far (in pixels) the tooltip appears from the triggering e
 In other words, the gap between the tooltip and what it's attached to. The default is `4` -- although any integer value will work.
 
 ```html
-<x-ui::tooltip title="I'm a tooltip" offset="10" />
+<x-tooltip title="I'm a tooltip" offset="10" />
 ```
 
 ### Position
@@ -72,24 +72,24 @@ The size prop defines the size of the tooltip. The default is `sm`, but you can 
 Why would you want a tooltip to be large? I don't know, but you can if you want to.
 
 ```html +demo title={Tooltip Sizes} previewClasses={flex justify-between}
-<x-ui::button>
+<x-button>
     Small (sm - the default)
-    <x-ui::tooltip title="I'm a small tooltip" />
+    <x-tooltip title="I'm a small tooltip" />
 </x-ui::button>
 
-<x-ui::button>
+<x-button>
     Base (base)
-    <x-ui::tooltip size="base" title="I'm a base-sized tooltip" />
+    <x-tooltip size="base" title="I'm a base-sized tooltip" />
 </x-ui::button>
 
-<x-ui::button>
+<x-button>
     Medium (md)
-    <x-ui::tooltip size="md" title="I'm a medium-sized tooltip" />
+    <x-tooltip size="md" title="I'm a medium-sized tooltip" />
 </x-ui::button>
 
-<x-ui::button>
+<x-button>
     Large (lg)
-    <x-ui::tooltip size="lg" title="I'm a large tooltip" />
+    <x-tooltip size="lg" title="I'm a large tooltip" />
 </x-ui::button>
 ```
 
@@ -97,15 +97,15 @@ Why would you want a tooltip to be large? I don't know, but you can if you want 
 
 Here's an example of the tooltip defaults
 ```html +demo title={Default Tooltip}
-<x-ui::button>
-    <x-ui::tooltip title="Have a nice day!" />
+<x-button>
+    <x-tooltip title="Have a nice day!" />
     Hover me if you please
 </x-ui::button>
 ```
 
 You can also customize the position and offset, like this.
 ```html +demo title={Custom Offset and Position}
-<x-ui::button>
-    <x-ui::tooltip position="right" offset="20">Enjoy yourself, and be happy.</x-ui::tooltip>
+<x-button>
+    <x-tooltip position="right" offset="20">Enjoy yourself, and be happy.</x-ui::tooltip>
     Mouse over, and be happy
 </x-ui::button>
