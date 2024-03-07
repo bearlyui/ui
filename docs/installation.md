@@ -52,9 +52,9 @@ composer require bearly/ui:dev-main
 This step assumes that you already have a working Tailwind CSS installation **with the [tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms) plugin**.
 If you don't then please follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/guides/laravel) and [forms plugin installation](https://github.com/tailwindlabs/tailwindcss-forms?tab=readme-ov-file#installation) guides first.
 
-**Add the Bear UI Tailwind CSS plugin to your `tailwind.config.js` file:**
+**Import the plugin and add it to the `plugins` array in your `tailwind.config.js` file:**
 ```js
-import bearUI from './vendor/bearly/ui/ui' // [!tl add]
+import bearUI from './vendor/bearly/ui/ui' // [tl! add] [tl! focus]
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -65,9 +65,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [
-    bearUI, // [!tl add]
-  ],
+  plugins: [ // [tl! focus]
+    bearUI, // [tl! add] [tl! focus]
+  ], // [tl! focus]
 }
 ```
 
