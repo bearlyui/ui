@@ -59,10 +59,10 @@ class Install extends Command
         }
 
         if (confirm('⛔️  Livewire is not installed. Do you want to install it now?')) {
-            Process::run('composer require livewire/livewire', function ($type, $output) {
-                // echo $output;
-            })->throw();
-            info('✅  Livewire installed.');
+            spin(function () {
+                Process::run('composer require livewire/livewire')->throw();
+                info('✅  Livewire installed.');
+            }, 'Installing Livewire...');
         }
     }
 
@@ -89,8 +89,8 @@ class Install extends Command
         if (! $tailwindAndRequirementsInstalled) {
             if (confirm('⛔️  Tailwind CSS and its required packages are not installed. Do you want to install them now?')) {
                 spin(function () {
-                    Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms', fn () => null)->throw();
-                    Process::run('npx tailwindcss init -p', fn ($type, $output) => null);
+                    Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms')->throw();
+                    Process::run('npx tailwindcss init -p');
                     info('✅  Installed Tailwind CSS and required packages.');
                 }, 'Installing Tailiwind CSS');
             }
@@ -120,11 +120,7 @@ class Install extends Command
     {
         if (! File::exists(base_path('tailwind.config.js'))) {
             if (confirm('⛔️  No tailwind.config.js file found. Do you want to create one now?')) {
-
-                // First, publish Tailwind and PostCSS files from tailwind
-                Process::run('npx tailwindcss init -p', function (string $type, string $output) {
-                    // echo $output;
-                })->throw();
+                Process::run('npx tailwindcss init -p')->throw();
             }
         }
 
