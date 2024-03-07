@@ -51,6 +51,7 @@ class Install extends Command
         note('🛠️  Checking for Livewire installation...');
 
         $livewireInstalled = str(File::get(base_path('composer.json')))->contains('livewire/livewire');
+        $appLayoutComponentExists = File::exists(base_path('resources/views/components/layouts/app.blade.php'));
 
         if ($livewireInstalled) {
             info('👍  Livewire is already installed.');
@@ -63,6 +64,15 @@ class Install extends Command
                 Process::run('composer require livewire/livewire')->throw();
                 info('✅  Livewire installed.');
             }, 'Installing Livewire...');
+        }
+
+        if (! $appLayoutComponentExists && confirm('⛔️  No `layouts.app` component found. Do you want to create one now?')) {
+            File::ensureDirectoryExists(base_path('resources/views/components/layouts'));
+            File::put(
+                path: base_path('resources/views/components/layouts/app.blade.php'),
+                contents: File::get(__DIR__.'/stubs/resources/views/components/layouts/app.blade.php')
+            );
+            info('✅  App layout component created.');
         }
     }
 
