@@ -2,25 +2,27 @@
 
 namespace Bearly\Ui\Tests;
 
-use Livewire\Livewire;
-use Livewire\Component;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Livewire\Component;
+use Livewire\Livewire;
 
-class TextareaTest extends TestCase {
-    public function test_renders() {
-        $this->blade('<x-ui::textarea />')->assertSeeHtml('<textarea');
-        $this->blade('<x-ui::textarea wire:model="thing" />')->assertSeeHtml('<textarea');
+class TextareaTest extends TestCase
+{
+    public function test_renders()
+    {
+        $this->blade('<x-textarea />')->assertSeeHtml('<textarea');
+        $this->blade('<x-textarea wire:model="thing" />')->assertSeeHtml('<textarea');
     }
 
     public function test_other_attributes()
     {
-        $this->blade('<x-ui::textarea thing="amajig" />')->assertSeeHtml('thing="amajig"');
+        $this->blade('<x-textarea thing="amajig" />')->assertSeeHtml('thing="amajig"');
     }
 
     public function test_bound_to_old_input_by_default()
     {
-        Route::get('/tests/input', fn () => Blade::render('<x-ui::textarea name="bogus" />'))->middleware('web');
+        Route::get('/tests/input', fn () => Blade::render('<x-textarea name="bogus" />'))->middleware('web');
         session()->flash('_old_input', ['bogus' => 'dude']);
         $this->get('/tests/input')
             ->assertSeeHtml('name="bogus"')
@@ -37,7 +39,8 @@ class TextareaTest extends TestCase {
     }
 }
 
-class TextareaTestComponent extends Component {
+class TextareaTestComponent extends Component
+{
     public $dude = '';
 
     public function update()
@@ -49,6 +52,6 @@ class TextareaTestComponent extends Component {
 
     public function render()
     {
-        return '<x-ui::textarea wire:model="dude" />';
+        return '<x-textarea wire:model="dude" />';
     }
 }

@@ -9,14 +9,14 @@ class ToggleTest extends TestCase
 {
     public function test_renders()
     {
-        $this->blade('<x-ui::toggle />')->assertSeeHtmlInOrder([
+        $this->blade('<x-toggle />')->assertSeeHtmlInOrder([
             '<button', 'role="switch"', 'checked:', '>',
         ]);
     }
 
     public function test_other_attributes()
     {
-        $this->blade('<x-ui::toggle thing="amajig" />')->assertSeeHtmlInOrder([
+        $this->blade('<x-toggle thing="amajig" />')->assertSeeHtmlInOrder([
             '<button',
             'thing="amajig"',
             '>',
@@ -25,7 +25,7 @@ class ToggleTest extends TestCase
 
     public function test_backed_by_hidden_input_when_name_attribute_present()
     {
-        $this->blade('<x-ui::toggle name="foo" />')->assertSeeHtmlInOrder([
+        $this->blade('<x-toggle name="foo" />')->assertSeeHtmlInOrder([
             '<button', 'role="switch"', 'checked:', '>',
             '<input', 'type="checkbox"', 'class="hidden"', 'name="foo"', '>',
         ]);
@@ -33,14 +33,14 @@ class ToggleTest extends TestCase
 
     public function test_hidden_input_gets_wire_model()
     {
-        $this->blade('<x-ui::toggle wire:model="foo" />')->assertSeeHtmlInOrder([
+        $this->blade('<x-toggle wire:model="foo" />')->assertSeeHtmlInOrder([
             '<button', 'role="switch"', 'checked:', '>',
         ])->assertSeeHtmlInOrder(['type="checkbox"', 'wire:model="foo"']);
     }
 
     public function test_hidden_input_gets_value()
     {
-        $this->blade('<x-ui::toggle name="foo" value="bar" />')->assertSeeHtml([
+        $this->blade('<x-toggle name="foo" value="bar" />')->assertSeeHtml([
             '<input', 'type="checkbox"', 'class="hidden"', 'name="foo"', 'value="bar"', '>',
         ]);
     }
@@ -49,17 +49,17 @@ class ToggleTest extends TestCase
     // checked prop
     public function test_checked_prop()
     {
-        $this->blade('<x-ui::toggle :checked="true" />')->assertSeeHtmlInOrder([
+        $this->blade('<x-toggle :checked="true" />')->assertSeeHtmlInOrder([
             '<button', 'role="switch"', 'checked: true', '>',
         ]);
-        $this->blade('<x-ui::toggle :checked="false" />')->assertSeeHtmlInOrder([
+        $this->blade('<x-toggle :checked="false" />')->assertSeeHtmlInOrder([
             '<button', 'role="switch"', 'checked: false', '>',
         ]);
     }
 
     public function test_icon_slots()
     {
-        $this->blade('<x-ui::toggle icon-on="foo-icon" icon-off="bar-icon" />')->assertSeeHtmlInOrder([
+        $this->blade('<x-toggle icon-on="foo-icon" icon-off="bar-icon" />')->assertSeeHtmlInOrder([
             '<button', 'role="switch"', 'checked:', '>',
             'foo-icon', 'bar-icon',
         ]);
@@ -67,7 +67,7 @@ class ToggleTest extends TestCase
 
     public function test_bound_to_old_input_by_default()
     {
-        Route::get('/_test', fn () => Blade::render('<x-ui::toggle name="foo" />'))->middleware('web');
+        Route::get('/_test', fn () => Blade::render('<x-toggle name="foo" />'))->middleware('web');
 
         // Should be checked from old input
         session()->flash('_old_input', ['foo' => true]);
@@ -82,7 +82,7 @@ class ToggleTest extends TestCase
     {
 
         // Should be checked from old input
-        Route::get('/_test', fn () => Blade::render('<x-ui::toggle name="foo" value="bar" />'))->middleware('web');
+        Route::get('/_test', fn () => Blade::render('<x-toggle name="foo" value="bar" />'))->middleware('web');
         session()->flash('_old_input', ['foo' => true]);
         $this->get('/_test')
             ->assertSeeHtml('name="foo"')
@@ -92,7 +92,7 @@ class ToggleTest extends TestCase
             ]);
 
         // Should be unchecked from old input
-        Route::get('/_test', fn () => Blade::render('<x-ui::toggle name="foo" value="bar" />'))->middleware('web');
+        Route::get('/_test', fn () => Blade::render('<x-toggle name="foo" value="bar" />'))->middleware('web');
         session()->flash('_old_input', ['foo' => false]);
         $this->get('/_test')
             ->assertSeeHtml('name="foo"')

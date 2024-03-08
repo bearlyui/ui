@@ -1,109 +1,107 @@
-# Installation
+# Getting Started
 
-There are several ways to use these components. The easiest way is to install the package and use the components directly from the package. The other way is to copy the components into your project.
+## Philosophy
 
-While the second method may seem burdensome, it gives you the most flexibility.
-- Slim footprint -- only include the components that you use.
-- You can easily customize the components to fit your needs.
-- No extra dependencies, you own the code now!
+Creating reusable components is tough. You want them to be easy to install, but also easily customized.
+The components in this package aren't meant to be installed and used directly -- they're meant to be copied into
+your project so that you own them and can customize them. This is hugely inspired by [shadcn/ui](https://ui.shadcn.com/).
 
+## Quick Start
+
+Installing the Bear UI components is a two step process. In general, it goes like this:
+
+1. Install the package and dependencies via `composer` and `npm` (or `yarn`).
+2. Choose the components you'd like to use and publish them into your project.
+
+The easiest way to get started is to use the installer command that comes with the package.
+
+First, require the package via composer:
+```bash
+composer require bearly/ui:dev-main
+```
+
+Next, run the installer command:
+```bash
+php artisan bear:install
+```
+
+The command will prompt you to install missing dependencies, add the Tailwind CSS plugin, and choose the components you'd like to install.
 
 ## Requirements
 The components are built for Laravel, Livewire, and Tailwind CSS.
 
-**The required dependencies are:**
+**The minimum required dependencies are:**
 - Laravel 10.x
-- Livewire 3.x
+- Livewire 3.x (this also includes Alpine JS)
 - Tailwind CSS 3.4.x
 - Tailwind CSS Forms Plugin
 
-## Usage Methods
+## Manual Installation
 
-There are three ways to use the components:
+It's recommended to use the `bear:install` command to perform these steps, but if you'd like to install the components manually, here's how.
 
-1. Installing the xompowe package and using them with the `<x-ui::` prefix
-1. Use the `ui:install` command to choose the components to publish into your project (recommended)
-1. Copying them directly from the documentation (_make sure you have the Tailwind CSS plugin installed_)
+### Install the Composer Package
 
-All methods expect you have the required dependencies installed -- **including the Bear UI Tailwind CSS plugin**.
-
-
-## Installation Via Composer
-### How to Install
-Add the repository to your `composer.json` file:
-> This step is temporary (because this isn't on packagist yet), and will be removed once the package is published.
-```json
-"repositories": [
-    {
-        "type": "git",
-        "url": "https://github.com/bearly-ui/ui"
-    }
-],
-```
-
-Install the package with composer, and the Tailwind CSS forms plugin:
+First add the package to your `composer.json` file:
 ```bash
 composer require bearly/ui:dev-main
-npm i --save-dev @tailwindcss/forms
 ```
-Next, add the tailwind plugin to your `tailwind.config.js` file.
-```js
-import forms from '@tailwindcss/forms'
-import bearUI from './vendor/bearly/ui/ui'
 
-// Currently Bear UI only supports ESM -- PRs welcome!
+### Install the Tailwind CSS Plugin
+
+This step assumes that you already have a working Tailwind CSS installation **with the [tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms) plugin**.
+If you don't then please follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/guides/laravel) and [forms plugin installation](https://github.com/tailwindlabs/tailwindcss-forms?tab=readme-ov-file#installation) guides first.
+
+**Import the plugin and add it to the `plugins` array in your `tailwind.config.js` file:**
+```js
+import bearUI from './vendor/bearly/ui/ui' // [tl! add] [tl! focus]
+
+/** @type {import('tailwindcss').Config} */
 export default {
-    // This is a workaround right now until I figure out how to get the
-    // Tailwind plugin to configure its own content path automatically
-    content: [
-        // ...
-        './vendor/bearly/ui/resources/**/*.blade.php'
-    ],
-    // ...
-    plugins: [forms, bearUI],
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [ // [tl! focus]
+    bearUI, // [tl! add] [tl! focus]
+  ], // [tl! focus]
 }
 ```
 
-Run the build and start using the components:
+### Install Livewire
+
+If you haven't already, install Livewire via composer:
 ```bash
+composer require livewire/livewire
+```
+
+> **Heads up:** Livewire only injects its Javascript assets when it detects a Livewire component by default, so you'll likely want to [Manually include Livewire's frontend assets](https://livewire.laravel.com/docs/installation#manually-including-livewires-frontend-assets) or force asset injection by adding `\Livewire\Livewire::forceAssetInjection();` in your `AppServiceProvider.php` file. Otherwise Alpine and Livewire won't be injected on pages unless they contain a Livewire component.
+
+### Add the Components
+
+Now that you've installed Tailwind CSS and Livewire, you can add the components to your project. You can either run the `bear:add` command to copy them for you or copy them manually to start using the components.
+
+**To add the components with the command:**
+```bash
+php artisan bear:add
+```
+
+**To add the components manually:**
+If you wish to copy them manually, the files exist in the `vendor/bearly/ui/resources/views/components` directory. Simply copy them into your `PROJECT_ROOT/resources/views/components` directory to use them.
+
+For example:
+```bash
+cp -R vendor/bearly/ui/resources/views/components ./resources/views/components
+```
+
+### Build Your Assets
+
+Finally, run your build command to compile your assets:
+```js
 npm run dev
-```
-
-Either directly from the package, or copy them into your project.
-
-### Using Components
-You can use the components directly from the package by prefixing them with `x-ui::`
-```blade
-<x-ui::input />
-```
-
-## One-time Installation
-This is the most flexible way to use the components, but it requires you to copy the components into your project.
-To make this easy, there is an install command provided with the composer package.
-
->  **⛔️ Warning! ⛔️** _This doesn't actually work yet, but it will soon enough._
-
-### Install Package
-First, install the package via composer. Then run the interactive install command.
-
-```bash
-composer require bearly/ui:dev-main
-php artisan ui:install
-```
-
-### Run the Install Command
-
-You'll be prompted about installing the dependencies, then get to pick and choose the components you'd like to put into your project.
-
-**The prompts will happen in this order:**
-1. Install missing dependencies?
-1. Install Bear UI plugin to the Tailwind CSS config file?
-1. Choose the components you'd like to install
-
-### Using Components
-Once you've installed the components, you can use them directly in your project.
-(your location may vary -- it's your world now!)
-
-```blade
-<x-input />
+// or
+npm run build
 ```

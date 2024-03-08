@@ -66,6 +66,19 @@ class Install extends Command
         }
     }
 
+    protected function installAppLayoutComponent()
+    {
+        $appLayoutComponentExists = File::exists(base_path('resources/views/components/layouts/app.blade.php'));
+        if (! $appLayoutComponentExists && confirm('⛔️  No `layouts.app` component found. Do you want to create one now?')) {
+            File::ensureDirectoryExists(base_path('resources/views/components/layouts'));
+            File::put(
+                path: base_path('resources/views/components/layouts/app.blade.php'),
+                contents: File::get(__DIR__.'/../../stubs/resources/views/components/layouts/app.blade.php')
+            );
+            info('✅  App layout component created.');
+        }
+    }
+
     protected function installTailwind()
     {
         note('🛠️  Checking Tailwind CSS installation...');
@@ -143,6 +156,7 @@ class Install extends Command
         $this->installTailwind();
         $this->newLine();
         $this->installLivewire();
+        $this->installAppLayoutComponent();
         $this->newLine();
         $this->call('bear:add', ['--skip-welcome' => true]);
         info('✅  Bear UI installation complete. Enjoy! 🐻');
