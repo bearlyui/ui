@@ -105,13 +105,3 @@ npm run dev
 // or
 npm run build
 ```
-
-
-
-
-- Require with composer
-- Ensure you have Tailwind CSS installed with the forms plugin and a working build
-- Install Tailwind plugin
-- Install Livewire
-- Add component files manually or run add command
-- Run the build
