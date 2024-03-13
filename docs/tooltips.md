@@ -1,20 +1,39 @@
 # Tooltips
 
-Helpful little buggers that appear at the darndest times (when you hover an element). Kind of like bear cubs.
-Maybe you can use them for showing extra context, keyboard shortcuts, or other low-priority information.
+Helpful little buggers that appear at the darndest times (usually when you hover an element).
+You might use them for showing extra context, keyboard shortcuts, or other low-priority information.
 
-**Tooltips use their parent element as the trigger.**
+**Tooltips can be used two different ways:**
+1. As a wrapper, using the `<x-slot:trigger>` slot to specify the triggering element or button
+2. As a child &mdash; the `<x-tooltip />` element will use its parent element as a trigger if no trigger slot is defined
 
 ## Using Tooltips
 
+Wrap the triggering element with the `<x-tooltip>` tag and the `<x-slot:trigger>` slot tag
+
+```html +demo title={Wrapper Tooltip with Trigger Slot}
+<x-tooltip title="Have a nice day!">
+    <x-slot:trigger>
+        <x-button color="success">
+            Hover for top secret info
+        </x-ui::button>
+    </x-slot:trigger>
+</x-tooltip>
+```
+
+_**OR**_
+
 Use `<x-tooltip>` **_inside an element_** to trigger the tooltip by hovering its parent element.
 
-```html +demo title={A Basic Tooltip}
+```html +demo title={Child Tooltip (Parent Element Trigger)}
 <x-button color="success">
     <x-tooltip title="Have a nice day!" />
     Hover for top secret info
 </x-ui::button>
 ```
+
+
+
 
 Tooltips will adjust their positioning if they overflow outside the viewport.
 The anchoring behavior and the overflow handling are made possible thanks to
