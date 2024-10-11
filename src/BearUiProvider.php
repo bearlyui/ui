@@ -13,5 +13,14 @@ class BearUiProvider extends ServiceProvider
             Commands\Install::class,
         ]);
         $this->mergeConfigFrom(__DIR__.'/../config/ui.php', 'ui');
+
+        $compiler = new UiTagCompiler(
+            app('blade.compiler')->getClassComponentAliases(),
+            app('blade.compiler')->getClassComponentNamespaces(),
+            app('blade.compiler')
+        );
+
+        app()->bind('ui.compiler', fn () => $compiler);
+        app('blade.compiler')->precompiler(fn ($in) => $compiler->compile($in));
     }
 }
