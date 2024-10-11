@@ -27,7 +27,9 @@ class Install extends Command
         $this->installLivewire();
         $this->installAppLayoutComponent();
         $this->newLine();
-        $this->call('bear:add', ['--skip-welcome' => true]);
+        // TODO: clear views?
+        // TODO: build assets?
+
         info('✅  Bear UI installation complete. Enjoy! 🐻');
     }
 
