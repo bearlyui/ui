@@ -19,8 +19,17 @@ class Install extends Command
     public $signature = 'bear:install
         {--skip-welcome : Skip the welcome message}';
 
-    // TODO: Add prefix setting/class/prompt to affect publish path
-    // TODO: Add / initialize an app layout for livewire if one doesn't exist (with confirmation)
+    public function handle()
+    {
+        $this->welcome();
+        $this->installTailwind();
+        $this->newLine();
+        $this->installLivewire();
+        $this->installAppLayoutComponent();
+        $this->newLine();
+        $this->call('bear:add', ['--skip-welcome' => true]);
+        info('✅  Bear UI installation complete. Enjoy! 🐻');
+    }
 
     protected function ensureJsFileHasValues(string $path, string $key, array $values)
     {
@@ -85,7 +94,6 @@ class Install extends Command
 
         $this->tailwindPackagesInstalled();
         $this->tailwindInAppCss();
-        $this->installBearUiTailwindPlugin();
         $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'"]);
     }
 
@@ -100,7 +108,7 @@ class Install extends Command
             ]);
 
         if (! $tailwindAndRequirementsInstalled) {
-            if (confirm('⛔️  Tailwind CSS and its required packages are not installed. Do you want to install them now?')) {
+            if (confirm('⛔️  Tailwind CSS and/or its required packages (forms) aren\'t installed. Do you want to install them now?')) {
                 spin(function () {
                     Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms')->throw();
                     Process::run('npx tailwindcss init -p');
@@ -127,38 +135,5 @@ class Install extends Command
                 )
             );
         }
-    }
-
-    protected function installBearUiTailwindPlugin()
-    {
-        if (! File::exists(base_path('tailwind.config.js'))) {
-            if (confirm('⛔️  No tailwind.config.js file found. Do you want to create one now?')) {
-                Process::run('npx tailwindcss init -p')->throw();
-            }
-        }
-
-        // Get the tailwind config file and check if it has the forms plugin
-        $tailwindConfig = str(File::get(base_path('tailwind.config.js')));
-
-        // Do we have the import statement?
-        if (! $tailwindConfig->contains("import bearUI from './vendor/bearly/ui/ui'")) {
-            $tailwindConfig = $tailwindConfig->prepend("import bearUI from './vendor/bearly/ui/ui'\n");
-            File::put(base_path('tailwind.config.js'), $tailwindConfig);
-        }
-        $this->ensureJsFileHasValues('tailwind.config.js', 'plugins', ['bearUI']);
-
-        info('✅  Bear UI Tailwind CSS plugin installed.');
-    }
-
-    public function handle()
-    {
-        $this->welcome();
-        $this->installTailwind();
-        $this->newLine();
-        $this->installLivewire();
-        $this->installAppLayoutComponent();
-        $this->newLine();
-        $this->call('bear:add', ['--skip-welcome' => true]);
-        info('✅  Bear UI installation complete. Enjoy! 🐻');
     }
 }
