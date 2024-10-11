@@ -96,7 +96,20 @@ class Install extends Command
 
         $this->tailwindPackagesInstalled();
         $this->tailwindInAppCss();
-        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'"]);
+        $this->ensureTailwindConfigHasColorsImported();
+        // TODO: ensure content has ./vendor/bearly/ui/resources/**/*.blade.php in its array */
+        // TODO: ensure that theme.colors contains 'primary', 'secondary', 'success', 'warning', and 'error'
+
+        // $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/resources/**/*.blade.php'"]);
+    }
+
+    protected function ensureTailwindConfigHasColorsImported()
+    {
+        $tailwindConfig = File::get(base_path('tailwind.config.js'));
+
+        if (! str($tailwindConfig)->contains("import colors from 'tailwindcss/colors'")) {
+            File::put(base_path('tailwind.config.js'), "import colors from 'tailwindcss/colors'\n".$tailwindConfig);
+        }
     }
 
     protected function tailwindPackagesInstalled()
@@ -137,5 +150,15 @@ class Install extends Command
                 )
             );
         }
+    }
+
+    protected function tailwindConfigContainsNeededValues()
+    {
+        $tailwindConfig = File::get(base_path('tailwind.config.js'));
+
+        return str($tailwindConfig)->contains([
+            './resources/**/*.blade.php',
+            './app/**/*.php',
+        ]);
     }
 }
