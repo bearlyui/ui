@@ -13,7 +13,7 @@ return [
         'Dialogs' => '/docs/dialogs',
         'Dropdowns' => '/docs/dropdowns',
         // '🚧 Form Inputs' => '/docs/form-inputs',
-        'Toggles' => '/docs/toggle',
+        'Toggles' => '/docs/toggles',
         'Tooltips' => '/docs/tooltips',
         // '🚧 Toasts 🤔' => '/docs/toasts',
     ],
