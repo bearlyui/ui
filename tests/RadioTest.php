@@ -2,32 +2,32 @@
 
 namespace Bearly\Ui\Tests;
 
-use Livewire\Livewire;
-use Livewire\Component;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
+use Livewire\Component;
+use Livewire\Livewire;
 
-use function PHPUnit\Framework\assertNotTrue;
-
-class RadioTest extends TestCase {
-    public function test_renders() {
-        $this->blade('<x-ui::radio />')->assertSeeHtml('<input type="radio"');
+class RadioTest extends TestCase
+{
+    public function test_renders()
+    {
+        $this->blade('<ui:radio />')->assertSeeHtml('<input type="radio"');
     }
 
     public function test_other_attributes()
     {
-        $this->blade('<x-ui::radio thing="amajig" />')->assertSeeHtml('thing="amajig"');
+        $this->blade('<ui:radio thing="amajig" />')->assertSeeHtml('thing="amajig"');
     }
 
     public function test_checked_prop_specifies_checked_attribute()
     {
-        $this->blade('<x-ui::radio :checked="true" />')->assertSeeHtml('checked');
-        $this->blade('<x-ui::radio :checked="false" />')->assertDontSeeHtml('checked');
+        $this->blade('<ui:radio :checked="true" />')->assertSeeHtml('checked');
+        $this->blade('<ui:radio :checked="false" />')->assertDontSeeHtml('checked');
     }
 
     public function test_bound_to_old_input_by_default()
     {
-        Route::get('/tests/input', fn () => Blade::render('<x-ui::radio name="foo" value="bar" />'))->middleware('web');
+        Route::get('/tests/input', fn () => Blade::render('<ui:radio name="foo" value="bar" />'))->middleware('web');
 
         // Should be checked from old input
         session()->flash('_old_input', ['foo' => 'bar']);
@@ -38,7 +38,7 @@ class RadioTest extends TestCase {
 
     public function test_old_input_used_when_checked_attribute_true()
     {
-        Route::get('/tests/input', fn () => Blade::render('<x-ui::radio :checked="false" name="foo" value="bar" />'))->middleware('web');
+        Route::get('/tests/input', fn () => Blade::render('<ui:radio :checked="false" name="foo" value="bar" />'))->middleware('web');
         session()->flash('_old_input', ['foo' => 'bar']);
         $this->get('/tests/input')
             ->assertSeeHtml('name="foo"')
@@ -49,7 +49,7 @@ class RadioTest extends TestCase {
     {
         Route::get(
             '/tests/input',
-            fn () => Blade::render('<x-ui::radio :checked="true" name="foo" value="bar" />')
+            fn () => Blade::render('<ui:radio :checked="true" name="foo" value="bar" />')
         )->middleware('web');
         session()->flash('_old_input', ['foo' => 'bar2']);
         $this->get('/tests/input')
@@ -67,7 +67,8 @@ class RadioTest extends TestCase {
     }
 }
 
-class RadioTestComponent extends Component {
+class RadioTestComponent extends Component
+{
     public $thing = false;
 
     public function update()
@@ -79,6 +80,6 @@ class RadioTestComponent extends Component {
 
     public function render()
     {
-        return '<x-ui::radio wire:model="thing" />';
+        return '<ui:radio wire:model="thing" />';
     }
 }
