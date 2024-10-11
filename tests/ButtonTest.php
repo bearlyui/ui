@@ -6,19 +6,19 @@ class ButtonTest extends TestCase
 {
     public function test_renders()
     {
-        $this->blade('<x-button />')
+        $this->blade('<ui:button />')
             ->assertSeeHtmlInOrder(['<button', '</button>']);
     }
 
     public function test_other_attributes()
     {
-        $this->blade('<x-button thing="amajig" />')
+        $this->blade('<ui:button thing="amajig" />')
             ->assertSeeHtmlInOrder(['<button', 'thing="amajig"', '</button>']);
     }
 
     public function test_type_defaults_to_button()
     {
-        $this->blade('<x-button />')
+        $this->blade('<ui:button />')
             ->assertSeeHtmlInOrder(['<button', 'type="button"', '</button>']);
     }
 }

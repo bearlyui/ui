@@ -11,24 +11,24 @@ class CheckboxTest extends TestCase
 {
     public function test_renders()
     {
-        $this->blade('<x-checkbox />')->assertSeeHtml('<input type="checkbox"');
+        $this->blade('<ui:checkbox />')->assertSeeHtml('<input type="checkbox"');
     }
 
     public function test_other_attributes()
     {
-        $this->blade('<x-checkbox thing="amajig" />')->assertSeeHtml('thing="amajig"');
+        $this->blade('<ui:checkbox thing="amajig" />')->assertSeeHtml('thing="amajig"');
     }
 
     // Test checked prop
     public function test_checked_prop_specifies_checked_attribute()
     {
-        $this->blade('<x-checkbox :checked="true" />')->assertSeeHtml('checked');
-        $this->blade('<x-checkbox :checked="false" />')->assertDontSeeHtml('checked');
+        $this->blade('<ui:checkbox :checked="true" />')->assertSeeHtml('checked');
+        $this->blade('<ui:checkbox :checked="false" />')->assertDontSeeHtml('checked');
     }
 
     public function test_bound_to_old_input_by_default()
     {
-        Route::get('/tests/input', fn () => Blade::render('<x-checkbox name="bogus" />'))->middleware('web');
+        Route::get('/tests/input', fn () => Blade::render('<ui:checkbox name="bogus" />'))->middleware('web');
 
         // Should be checked from old input
         session()->flash('_old_input', ['bogus' => true]);
@@ -45,7 +45,7 @@ class CheckboxTest extends TestCase
 
     public function test_old_input_used_when_checked_attribute_true()
     {
-        Route::get('/tests/input', fn () => Blade::render('<x-checkbox :checked="false" name="bogus" />'))->middleware('web');
+        Route::get('/tests/input', fn () => Blade::render('<ui:checkbox :checked="false" name="bogus" />'))->middleware('web');
         session()->flash('_old_input', ['bogus' => true]);
         $this->get('/tests/input')
             ->assertSeeHtml('name="bogus"')
@@ -56,7 +56,7 @@ class CheckboxTest extends TestCase
     {
         Route::get(
             '/tests/input',
-            fn () => Blade::render('<x-checkbox :checked="true" name="bogus" />')
+            fn () => Blade::render('<ui:checkbox :checked="true" name="bogus" />')
         )->middleware('web');
         session()->flash('_old_input', ['somethin' => 'else']);
         $this->get('/tests/input')
@@ -87,6 +87,6 @@ class CheckboxTestComponent extends Component
 
     public function render()
     {
-        return '<x-checkbox wire:model="thing" />';
+        return '<ui:checkbox wire:model="thing" />';
     }
 }

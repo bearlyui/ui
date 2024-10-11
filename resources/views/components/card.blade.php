@@ -22,7 +22,7 @@
     'rounded-xl' => Size::XL->is($radius),
 
     {{-- Outline --}}
-    'border-gray-300/100 dark:border-white/5' => Color::None->is($color) && Variant::Outline->is($variant),
+    'border-gray-300/100 dark:border-gray-300/10' => Color::None->is($color) && Variant::Outline->is($variant),
     'border-primary-300/100 dark:border-primary-300/50' => Color::Primary->is($color) && Variant::Outline->is($variant),
     'border-secondary-300/100 dark:border-secondary-300/50' => Color::Secondary->is($color) && Variant::Outline->is($variant),
     'border-success-300/100 dark:border-success-300/50' => Color::Success->is($color) && Variant::Outline->is($variant),
@@ -30,7 +30,7 @@
     'border-error-300/100 dark:border-error-300/50' => Color::Error->is($color) && Variant::Outline->is($variant),
 
     {{-- Solid --}}
-    'bg-white dark:bg-gray-400/5 border-gray-300/75 dark:border-white/5' => Color::None->is($color) && Variant::Solid->is($variant),
+    'bg-white dark:bg-gray-400/5 border-gray-300/75 dark:border-white/15' => Color::None->is($color) && Variant::Solid->is($variant),
     'bg-primary-100 border-primary-400 text-primary-800 dark:bg-primary-400/40 dark:border-primary-600 dark:text-primary-200' => Color::Primary->is($color) && Variant::Solid->is($variant),
     'bg-secondary-100 border-secondary-300 text-secondary-800 dark:bg-secondary-400/40 dark:border-secondary-500 dark:text-secondary-200' => Color::Secondary->is($color) && Variant::Solid->is($variant),
     'bg-success-100 border-success-400 text-success-800 dark:bg-success-400/40 dark:border-success-600 dark:text-success-200' => Color::Success->is($color) && Variant::Solid->is($variant),

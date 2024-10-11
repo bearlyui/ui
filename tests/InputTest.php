@@ -11,42 +11,42 @@ class InputTest extends TestCase
 {
     public function test_renders()
     {
-        $this->blade('<x-input />')->assertSeeHtml('<input');
+        $this->blade('<ui:input />')->assertSeeHtml('<input');
     }
 
     public function test_other_attributes()
     {
-        $this->blade('<x-input thing="amajig" />')->assertSeeHtml('thing="amajig"');
+        $this->blade('<ui:input thing="amajig" />')->assertSeeHtml('thing="amajig"');
     }
 
     public function test_default_type_is_text()
     {
-        $this->blade('<x-input />')->assertSeeHtml('type="text"');
+        $this->blade('<ui:input />')->assertSeeHtml('type="text"');
     }
 
     public function test_any_other_type()
     {
-        $this->blade('<x-input type="yolo" />')->assertSeeHtml('type="yolo"');
+        $this->blade('<ui:input type="yolo" />')->assertSeeHtml('type="yolo"');
     }
 
     // What we really should be testing here is "value bound automatically if omitted and no wire:model"
     public function test_value_bound()
     {
-        $this->blade('<x-input name="bogus" value="bogus" />')
+        $this->blade('<ui:input name="bogus" value="bogus" />')
             ->assertSeeHtml('name="bogus"')
             ->assertSeeHtml('value="bogus"');
     }
 
     public function test_value_not_bound_with_wire_model()
     {
-        $this->blade('<x-input wire:model="bogus" value="bogus" />')
+        $this->blade('<ui:input wire:model="bogus" value="bogus" />')
             ->assertSeeHtml('wire:model="bogus"')
             ->assertDontSeeHtml('value="bogus"');
     }
 
     public function test_value_bound_to_old_input_by_default()
     {
-        Route::get('/tests/input', fn () => Blade::render('<x-input name="bogus" />'))->middleware('web');
+        Route::get('/tests/input', fn () => Blade::render('<ui:input name="bogus" />'))->middleware('web');
         session()->flash('_old_input', ['bogus' => 'dude']);
         $this->get('/tests/input')
             ->assertSeeHtml('name="bogus"')
@@ -76,6 +76,6 @@ class InputTestComponent extends Component
 
     public function render()
     {
-        return '<x-input wire:model="dude" />';
+        return '<ui:input wire:model="dude" />';
     }
 }
