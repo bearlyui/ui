@@ -65,7 +65,7 @@ class UiTagCompiler extends ComponentTagCompiler
 
             $attributes = $this->getAttributesFromAttributeString($matches['attributes']);
 
-            return $this->componentString($matches[1], $attributes);
+            return $this->componentString('ui::'.$matches[1], $attributes);
         }, $value);
     }
 
@@ -128,7 +128,7 @@ class UiTagCompiler extends ComponentTagCompiler
 
             $attributes = $this->getAttributesFromAttributeString($matches['attributes']);
 
-            return $this->componentString($matches[1], $attributes)."\n@endComponentClass##END-COMPONENT-CLASS##";
+            return $this->componentString('ui::'.$matches[1], $attributes)."\n@endComponentClass##END-COMPONENT-CLASS##";
         }, $value);
     }
 
