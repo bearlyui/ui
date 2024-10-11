@@ -1,11 +1,11 @@
-# Toggle Switches
+# Toggles
 
-If you need something more fancy than the standard checkbox, you can use the toggle switch component. It's
+If you need something more fancy than the standard checkbox, you can use the toggle component. It's
 a great way to get a yes or no answer from your users. Most of them probably won't even growl at you!
 
-## Using Toggle Switches
+## Using Toggles
 
-Use `<x-toggle>` to create a toggle switch. You can use the `checked` property to set the initial state of the toggle, or `wire:model`.
+Use `<x-toggle>` to create a toggle. You can use the `checked` property to set the initial state of the toggle, or `wire:model`.
 
 ```html +demo
 <x-label class="flex items-center space-x-2">
@@ -39,13 +39,13 @@ Use `<x-toggle>` to create a toggle switch. You can use the `checked` property t
 </x-ui::label>
 ```
 
-Since they're not real inputs, we bind their value to a hidden checkbox. This allows Livewire and Alpine to support arrays of toggle switches, just like they were normal checkboxes... because... well, _the hidden one is a normal checkbox_.
+Since they're not real inputs, we bind their value to a hidden checkbox. This allows Livewire and Alpine to support arrays of toggle, just like they were normal checkboxes... because... well, _the hidden one is a normal checkbox_.
 
 ## Properties
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `checked` | `boolean` | `false` | Determines the on or off state of the toggle switch. |
+| `checked` | `boolean` | `false` | Determines the on or off state of the toggle. |
 | `color` | `string \| Color` | `primary` | The color during the "on" state of the toggle. |
 | `withIcon` | `boolean` | `true` | Include icons within the toggle's circle / dot. |
 

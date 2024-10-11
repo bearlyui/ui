@@ -27,6 +27,7 @@ class Add extends Command
         'button' => 'Button',
         'form-inputs' => 'Form Inputs',
         'dropdown' => 'Dropdown',
+        'toggle' => 'Toggle',
         'tooltip' => 'Tooltip',
     ];
 
