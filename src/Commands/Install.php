@@ -51,7 +51,7 @@ class Install extends Command
             path: base_path($path),
             contents: str($jsFile)->replaceMatches(
                 "/{$key}:[\s]*?\[.*?\],?/sm",
-                str("{$key}: [\n    ")->append($arrayFromFile->implode(",\n    "))->append("\n  ],\n")
+                str("{$key}: [\n    ")->append($arrayFromFile->implode(",\n    "))->append("\n  ],")
 
             )
         );
@@ -127,25 +127,44 @@ class Install extends Command
             'error' => 'colors.red',
         ];
 
-        // Check if theme.extend.colors exists
-        if (! str($tailwindConfig)->contains('theme: {') || ! str($tailwindConfig)->contains('extend: {') || ! str($tailwindConfig)->contains('colors: {')) {
-            // If not, add the structure
-            $tailwindConfig = str($tailwindConfig)->replaceMatches(
-                '/(export default\s*{)/',
-                "$1\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },"
+        // Check if the theme.extend.colors section exists
+        if (! str($tailwindConfig)->contains('theme: {')) {
+            $tailwindConfig = str_replace(
+                'export default {',
+                "export default {\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },",
+                $tailwindConfig
+            );
+        } elseif (! str($tailwindConfig)->contains('extend: {')) {
+            $tailwindConfig = str_replace(
+                'theme: {',
+                "theme: {\n    extend: {\n      colors: {\n      },\n    },",
+                $tailwindConfig
+            );
+        } elseif (! str($tailwindConfig)->contains('colors: {')) {
+            $tailwindConfig = str_replace(
+                'extend: {',
+                "extend: {\n      colors: {\n      },\n    ",
+                $tailwindConfig
             );
         }
 
-        // Add or update each color
-        foreach ($defaultColors as $color => $defaultValue) {
-            if (! str($tailwindConfig)->contains("$color: $defaultValue")) {
-                $pattern = '/(theme:\s*{\s*extend:\s*{\s*colors:\s*{)([^}]*)(})/s';
-                if (preg_match($pattern, $tailwindConfig, $matches)) {
-                    $existingColors = $matches[2];
-                    $updatedColors = trim($existingColors)."\n        $color: $defaultValue,";
-                    $tailwindConfig = preg_replace($pattern, "$1$updatedColors\n      $3", $tailwindConfig);
-                }
-            }
+        // Prepare the colors string
+        $colorsString = '';
+        foreach ($defaultColors as $name => $value) {
+            $newline = $name === 'error' ? '' : "\n";
+            $colorsString .= "        '{$name}': {$value},{$newline}";
+        }
+
+        // Replace or add the colors
+        $pattern = '/colors:\s*{[^}]*}/s';
+        if (preg_match($pattern, $tailwindConfig)) {
+            $tailwindConfig = preg_replace($pattern, "colors: {\n{$colorsString}\n      }", $tailwindConfig);
+        } else {
+            $tailwindConfig = str_replace(
+                'colors: {',
+                "colors: {\n{$colorsString}\n      ",
+                $tailwindConfig
+            );
         }
 
         File::put(base_path('tailwind.config.js'), $tailwindConfig);
