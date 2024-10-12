@@ -106,7 +106,7 @@ class Install extends Command
         $tailwindConfig = File::get(base_path('tailwind.config.js'));
 
         if (! str($tailwindConfig)->contains("import colors from 'tailwindcss/colors'")) {
-            File::put(base_path('tailwind.config.js'), "import colors from 'tailwindcss/colors'\n".$tailwindConfig);
+            File::put(base_path('tailwind.config.js'), "import colors from 'tailwindcss/colors'\n\n".$tailwindConfig);
         }
     }
 
@@ -128,13 +128,13 @@ class Install extends Command
         ];
 
         // Check if theme.extend.colors exists
-        // if (! str($tailwindConfig)->contains('theme: {') || ! str($tailwindConfig)->contains('extend: {') || ! str($tailwindConfig)->contains('colors: {')) {
-        //     // If not, add the structure
-        //     $tailwindConfig = str($tailwindConfig)->replaceMatches(
-        //         '/(export default\s*{)/',
-        //         "$1\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },"
-        //     );
-        // }
+        if (! str($tailwindConfig)->contains('theme: {') || ! str($tailwindConfig)->contains('extend: {') || ! str($tailwindConfig)->contains('colors: {')) {
+            // If not, add the structure
+            $tailwindConfig = str($tailwindConfig)->replaceMatches(
+                '/(export default\s*{)/',
+                "$1\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },"
+            );
+        }
 
         // Add or update each color
         foreach ($defaultColors as $color => $defaultValue) {
