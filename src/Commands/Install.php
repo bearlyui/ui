@@ -118,8 +118,13 @@ class Install extends Command
 
         if (! str($tailwindConfig)->contains("'./vendor/bearly/ui/resources/**/*.blade.php'")) {
             $tailwindConfig = str($tailwindConfig)->replaceMatches(
-                '/content:[\s]*?\[.*?\],?/sm',
-                "content: [\n    './resources/**/*.blade.php',\n    './app/**/*.php',\n    './vendor/bearly/ui/resources/**/*.blade.php',\n  ],\n"
+                '/content:\s*\[(.*?)\]/s',
+                function ($matches) {
+                    $existingContent = trim($matches[1]);
+                    $vendorPath = "'./vendor/bearly/ui/resources/**/*.blade.php'";
+
+                    return "content: [$existingContent".(empty($existingContent) ? '' : ',')."\n    $vendorPath\n  ]";
+                }
             );
 
             File::put(base_path('tailwind.config.js'), $tailwindConfig);
