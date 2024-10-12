@@ -99,8 +99,6 @@ class Install extends Command
         $this->ensureTailwindConfigHasColorsImported();
         $this->ensureTailwindConfigHasUiVendorContent();
         $this->ensureTailwindConfigHasColorsExtended();
-
-        // $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/resources/**/*.blade.php'"]);
     }
 
     protected function ensureTailwindConfigHasColorsImported()
@@ -114,21 +112,23 @@ class Install extends Command
 
     protected function ensureTailwindConfigHasUiVendorContent()
     {
+        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/resources/**/*.blade.php'"]);
+
         $tailwindConfig = File::get(base_path('tailwind.config.js'));
 
-        if (! str($tailwindConfig)->contains("'./vendor/bearly/ui/resources/**/*.blade.php'")) {
-            $tailwindConfig = str($tailwindConfig)->replaceMatches(
-                '/content:\s*\[(.*?)\]/s',
-                function ($matches) {
-                    $existingContent = trim($matches[1]);
-                    $vendorPath = "'./vendor/bearly/ui/resources/**/*.blade.php'";
+        // if (! str($tailwindConfig)->contains("'./vendor/bearly/ui/resources/**/*.blade.php'")) {
+        //     $tailwindConfig = str($tailwindConfig)->replaceMatches(
+        //         '/content:\s*\[(.*?)\]/s',
+        //         function ($matches) {
+        //             $existingContent = trim($matches[1]);
+        //             $vendorPath = "'./vendor/bearly/ui/resources/**/*.blade.php'";
 
-                    return "content: [$existingContent".(empty($existingContent) ? '' : ',')."\n    $vendorPath\n  ]";
-                }
-            );
+        //             return "content: [$existingContent".(empty($existingContent) ? '' : ',')."\n    $vendorPath\n  ]";
+        //         }
+        //     );
 
-            File::put(base_path('tailwind.config.js'), $tailwindConfig);
-        }
+        //     File::put(base_path('tailwind.config.js'), $tailwindConfig);
+        // }
     }
 
     protected function ensureTailwindConfigHasColorsExtended()
