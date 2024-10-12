@@ -128,21 +128,23 @@ class Install extends Command
         ];
 
         // Check if theme.extend.colors exists
-        if (! str($tailwindConfig)->contains('theme: {') || ! str($tailwindConfig)->contains('extend: {') || ! str($tailwindConfig)->contains('colors: {')) {
-            // If not, create the structure
-            $tailwindConfig = str($tailwindConfig)->replaceMatches(
-                '/export default\s*{/',
-                "export default {\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },"
-            );
-        }
+        // if (! str($tailwindConfig)->contains('theme: {') || ! str($tailwindConfig)->contains('extend: {') || ! str($tailwindConfig)->contains('colors: {')) {
+        //     // If not, add the structure
+        //     $tailwindConfig = str($tailwindConfig)->replaceMatches(
+        //         '/(export default\s*{)/',
+        //         "$1\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },"
+        //     );
+        // }
 
         // Add or update each color
         foreach ($defaultColors as $color => $defaultValue) {
             if (! str($tailwindConfig)->contains("$color: $defaultValue")) {
-                $tailwindConfig = str($tailwindConfig)->replaceMatches(
-                    '/(theme:\s*{\s*extend:\s*{\s*colors:\s*{)([^}]*)(})/s',
-                    "$1$2        $color: $defaultValue,\n        $3"
-                );
+                $pattern = '/(theme:\s*{\s*extend:\s*{\s*colors:\s*{)([^}]*)(})/s';
+                if (preg_match($pattern, $tailwindConfig, $matches)) {
+                    $existingColors = $matches[2];
+                    $updatedColors = trim($existingColors)."\n        $color: $defaultValue,";
+                    $tailwindConfig = preg_replace($pattern, "$1$updatedColors\n      $3", $tailwindConfig);
+                }
             }
         }
 
@@ -166,7 +168,7 @@ class Install extends Command
                 spin(function () {
                     Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms')->throw();
                     Process::run('npx tailwindcss init -p');
-                    info('✅  Installed Tailwind CSS and required packages.');
+                    info('✅  Installed Tailiwind CSS');
                 }, 'Installing Tailiwind CSS');
             }
         }
