@@ -97,8 +97,8 @@ class Install extends Command
         $this->tailwindPackagesInstalled();
         $this->tailwindInAppCss();
         $this->ensureTailwindConfigHasColorsImported();
-        // TODO: ensure content has ./vendor/bearly/ui/resources/**/*.blade.php in its array */
-        // TODO: ensure that theme.colors contains 'primary', 'secondary', 'success', 'warning', and 'error'
+        $this->ensureTailwindConfigHasUiVendorContent();
+        $this->ensureTailwindConfigHasColorsExtended();
 
         // $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/resources/**/*.blade.php'"]);
     }
@@ -110,6 +110,46 @@ class Install extends Command
         if (! str($tailwindConfig)->contains("import colors from 'tailwindcss/colors'")) {
             File::put(base_path('tailwind.config.js'), "import colors from 'tailwindcss/colors'\n".$tailwindConfig);
         }
+    }
+
+    protected function ensureTailwindConfigHasUiVendorContent()
+    {
+        $tailwindConfig = File::get(base_path('tailwind.config.js'));
+
+        if (! str($tailwindConfig)->contains("'./vendor/bearly/ui/resources/**/*.blade.php'")) {
+            $tailwindConfig = str($tailwindConfig)->replaceMatches(
+                '/content:[\s]*?\[.*?\],?/sm',
+                "content: [\n    './resources/**/*.blade.php',\n    './app/**/*.php',\n    './vendor/bearly/ui/resources/**/*.blade.php',\n  ],\n"
+            );
+
+            File::put(base_path('tailwind.config.js'), $tailwindConfig);
+        }
+    }
+
+    protected function ensureTailwindConfigHasColorsExtended()
+    {
+        $tailwindConfig = File::get(base_path('tailwind.config.js'));
+
+        $defaultColors = [
+            'primary' => 'colors.cyan',
+            'secondary' => 'colors.slate',
+            'success' => 'colors.green',
+            'warning' => 'colors.amber',
+            'error' => 'colors.red',
+        ];
+
+        $themeColors = str($tailwindConfig)->match('/theme:\s*{[^}]*colors:\s*{([^}]*)}[^}]*}/s')->trim();
+
+        foreach ($defaultColors as $color => $defaultValue) {
+            if (! str($themeColors)->contains($color)) {
+                $tailwindConfig = str($tailwindConfig)->replaceMatches(
+                    '/theme:\s*{[^}]*colors:\s*{/s',
+                    "$0\n            $color: $defaultValue,"
+                );
+            }
+        }
+
+        File::put(base_path('tailwind.config.js'), $tailwindConfig);
     }
 
     protected function tailwindPackagesInstalled()
