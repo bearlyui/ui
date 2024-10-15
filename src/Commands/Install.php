@@ -4,6 +4,7 @@ namespace Bearly\Ui\Commands;
 
 use Bearly\Ui\Welcome;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
 
@@ -19,8 +20,19 @@ class Install extends Command
     public $signature = 'bear:install
         {--skip-welcome : Skip the welcome message}';
 
-    // TODO: Add prefix setting/class/prompt to affect publish path
-    // TODO: Add / initialize an app layout for livewire if one doesn't exist (with confirmation)
+    public function handle()
+    {
+        $this->welcome();
+        $this->installTailwind();
+        $this->newLine();
+        $this->installLivewire();
+        $this->installAppLayoutComponent();
+        $this->newLine();
+        Artisan::call('view:clear');
+        // TODO: build assets?
+
+        info('✅  Bear UI installation complete. Enjoy! 🐻');
+    }
 
     protected function ensureJsFileHasValues(string $path, string $key, array $values)
     {
@@ -40,7 +52,7 @@ class Install extends Command
             path: base_path($path),
             contents: str($jsFile)->replaceMatches(
                 "/{$key}:[\s]*?\[.*?\],?/sm",
-                str("{$key}: [\n    ")->append($arrayFromFile->implode(",\n    "))->append("\n  ],\n")
+                str("{$key}: [\n    ")->append($arrayFromFile->implode(",\n    "))->append("\n  ],")
 
             )
         );
@@ -85,8 +97,80 @@ class Install extends Command
 
         $this->tailwindPackagesInstalled();
         $this->tailwindInAppCss();
-        $this->installBearUiTailwindPlugin();
-        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'"]);
+        $this->ensureTailwindConfigHasColorsImported();
+        $this->ensureTailwindConfigHasUiVendorContent();
+        $this->ensureTailwindConfigHasColorsExtended();
+    }
+
+    protected function ensureTailwindConfigHasColorsImported()
+    {
+        $tailwindConfig = File::get(base_path('tailwind.config.js'));
+
+        if (! str($tailwindConfig)->contains("import colors from 'tailwindcss/colors'")) {
+            File::put(base_path('tailwind.config.js'), "import colors from 'tailwindcss/colors'\n\n".$tailwindConfig);
+        }
+    }
+
+    protected function ensureTailwindConfigHasUiVendorContent()
+    {
+        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/resources/**/*.blade.php'"]);
+    }
+
+    protected function ensureTailwindConfigHasColorsExtended()
+    {
+        $tailwindConfig = File::get(base_path('tailwind.config.js'));
+
+        $defaultColors = [
+            'primary' => 'colors.cyan',
+            'secondary' => 'colors.slate',
+            'success' => 'colors.green',
+            'warning' => 'colors.amber',
+            'error' => 'colors.red',
+        ];
+
+        // Check if the theme.extend.colors section exists
+        if (! str($tailwindConfig)->contains('theme: {')) {
+            $tailwindConfig = str_replace(
+                'export default {',
+                "export default {\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },",
+                $tailwindConfig
+            );
+        } elseif (! str($tailwindConfig)->contains('extend: {')) {
+            $tailwindConfig = str_replace(
+                'theme: {',
+                "theme: {\n    extend: {\n      colors: {\n      },\n    },",
+                $tailwindConfig
+            );
+        } elseif (! str($tailwindConfig)->contains('colors: {')) {
+            $tailwindConfig = str_replace(
+                'extend: {',
+                "extend: {\n      colors: {\n      },\n    ",
+                $tailwindConfig
+            );
+        }
+
+        // Prepare the colors string
+        $colorsString = '';
+        foreach ($defaultColors as $name => $value) {
+            $newline = $name === 'error' ? '' : "\n";
+            $colorsString .= "        '{$name}': {$value},{$newline}";
+        }
+
+        // Replace or add the colors
+        $pattern = '/colors:\s*{[^}]*}/s';
+        if (preg_match($pattern, $tailwindConfig)) {
+            $tailwindConfig = preg_replace($pattern, "colors: {\n{$colorsString}\n      }", $tailwindConfig);
+        } else {
+            $tailwindConfig = str_replace(
+                'colors: {',
+                "colors: {\n{$colorsString}\n      ",
+                $tailwindConfig
+            );
+        }
+
+        File::put(base_path('tailwind.config.js'), $tailwindConfig);
+
+        info('✅  Updated Tailwind config with extended colors.');
     }
 
     protected function tailwindPackagesInstalled()
@@ -100,11 +184,11 @@ class Install extends Command
             ]);
 
         if (! $tailwindAndRequirementsInstalled) {
-            if (confirm('⛔️  Tailwind CSS and its required packages are not installed. Do you want to install them now?')) {
+            if (confirm('⛔️  Tailwind CSS and/or its required packages aren\'t installed. Do you want to install them now?')) {
                 spin(function () {
                     Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms')->throw();
                     Process::run('npx tailwindcss init -p');
-                    info('✅  Installed Tailwind CSS and required packages.');
+                    info('✅  Installed Tailiwind CSS');
                 }, 'Installing Tailiwind CSS');
             }
         }
@@ -129,36 +213,13 @@ class Install extends Command
         }
     }
 
-    protected function installBearUiTailwindPlugin()
+    protected function tailwindConfigContainsNeededValues()
     {
-        if (! File::exists(base_path('tailwind.config.js'))) {
-            if (confirm('⛔️  No tailwind.config.js file found. Do you want to create one now?')) {
-                Process::run('npx tailwindcss init -p')->throw();
-            }
-        }
+        $tailwindConfig = File::get(base_path('tailwind.config.js'));
 
-        // Get the tailwind config file and check if it has the forms plugin
-        $tailwindConfig = str(File::get(base_path('tailwind.config.js')));
-
-        // Do we have the import statement?
-        if (! $tailwindConfig->contains("import bearUI from './vendor/bearly/ui/ui'")) {
-            $tailwindConfig = $tailwindConfig->prepend("import bearUI from './vendor/bearly/ui/ui'\n");
-            File::put(base_path('tailwind.config.js'), $tailwindConfig);
-        }
-        $this->ensureJsFileHasValues('tailwind.config.js', 'plugins', ['bearUI']);
-
-        info('✅  Bear UI Tailwind CSS plugin installed.');
-    }
-
-    public function handle()
-    {
-        $this->welcome();
-        $this->installTailwind();
-        $this->newLine();
-        $this->installLivewire();
-        $this->installAppLayoutComponent();
-        $this->newLine();
-        $this->call('bear:add', ['--skip-welcome' => true]);
-        info('✅  Bear UI installation complete. Enjoy! 🐻');
+        return str($tailwindConfig)->contains([
+            './resources/**/*.blade.php',
+            './app/**/*.php',
+        ]);
     }
 }

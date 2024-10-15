@@ -10,7 +10,7 @@ class BearUiProvider extends ServiceProvider
     public function boot(): void
     {
         $this->commands([
-            Commands\Add::class,
+            Commands\Publish::class,
             Commands\Install::class,
         ]);
         $this->mergeConfigFrom(__DIR__.'/../config/ui.php', 'ui');

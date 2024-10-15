@@ -14,11 +14,11 @@ use function Laravel\Prompts\table;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\warning;
 
-class Add extends Command
+class Publish extends Command
 {
     use Welcome;
 
-    public $signature = 'bear:add
+    public $signature = 'bear:publish
         {--skip-welcome : Skip the welcome message}';
 
     public $allComponents = [
