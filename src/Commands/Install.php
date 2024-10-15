@@ -4,6 +4,7 @@ namespace Bearly\Ui\Commands;
 
 use Bearly\Ui\Welcome;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
 
@@ -27,7 +28,7 @@ class Install extends Command
         $this->installLivewire();
         $this->installAppLayoutComponent();
         $this->newLine();
-        // TODO: clear views?
+        Artisan::call('view:clear');
         // TODO: build assets?
 
         info('✅  Bear UI installation complete. Enjoy! 🐻');
@@ -183,7 +184,7 @@ class Install extends Command
             ]);
 
         if (! $tailwindAndRequirementsInstalled) {
-            if (confirm('⛔️  Tailwind CSS and/or its required packages (forms) aren\'t installed. Do you want to install them now?')) {
+            if (confirm('⛔️  Tailwind CSS and/or its required packages aren\'t installed. Do you want to install them now?')) {
                 spin(function () {
                     Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms')->throw();
                     Process::run('npx tailwindcss init -p');
