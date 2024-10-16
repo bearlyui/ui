@@ -2,7 +2,6 @@
 
 namespace Bearly\Ui\Commands;
 
-use Bearly\Ui\Welcome;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
