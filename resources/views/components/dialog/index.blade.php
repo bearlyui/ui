@@ -16,6 +16,9 @@
                 $refs.dialog.removeAttribute('aria-hidden')
                 this.removedAriaHidden = true
             }
+
+            {{-- If the focused element is the close button, blur it --}}
+            $nextTick(() => $refs.close === document.activeElement && $refs.close.blur())
         },
         closeDialog() {
             this.open = false
@@ -44,9 +47,9 @@
                 $containerClass,
             ])
         >
-            {{-- Overlay --}}
+            {{-- Backdrop --}}
             <div
-                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/25 dark:bg-black/25 backdrop-blur"
+                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/25 dark:bg-gray-900/40 backdrop-blur xl:backdrop-blur-x"
                 x-show="open"
                 x-transition:enter.opacity.delay.0ms
                 x-transition:leave.delay.0ms.duration.0ms
@@ -97,17 +100,7 @@
                     >&nbsp;</button>
 
                     {{-- Header --}}
-                    @empty($header)
-                        {{-- No header close button --}}
-                        <div @class([
-                            'flex items-start justify-end w-full',
-                            'hidden' => $hideCloseButton,
-                        ])>
-                            <x-button x-ref="close" color="none" size="sm" class="-mr-3.5 -mt-3.5 text-gray-700 opacity-50 hover:opacity-100 focus:opacity-100" x-on:click="closeDialog">
-                                <div class="text-2xl">&times;</div>
-                            </x-button>
-                        </div>
-                    @else
+                    @if ($header ?? false)
                         <x-slot:header>
                             <div {{ $header->attributes->class(['flex justify-between items-center gap-4']) }} >
                                 {{ $header }}
@@ -136,6 +129,27 @@
                     @if ($footer ?? false)
                         <x-slot:footer>{{ $footer }}</x-slot:footer>
                     @endif
+
+                    {{--
+                    If we don't have a header, add a close button. This should be last in the DOM
+                    to help prevent it from being focused by default when the dialog is opened.
+                    --}}
+                    @empty($header)
+                        <div @class([
+                            'absolute top-0 right-0 mt-2 mr-2.5 flex items-start justify-end w-full focus:outline-none',
+                            'hidden' => $hideCloseButton,
+                        ])>
+                            <x-button
+                                x-ref="close"
+                                size="sm"
+                                color="secondary"
+                                variant="ghost"
+                                x-on:click="closeDialog"
+                            >
+                                <div class="text-2xl">&times;</div>
+                            </x-button>
+                        </div>
+                    @endempty
                 </x-card>
             </div>
         </div>
