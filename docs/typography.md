@@ -7,22 +7,22 @@ They're better when they're together, kind of like Panda bears named Jack and Jo
 ```html +demo title={Typography Example with Sizes}
 <div class="p-5 space-y-16">
     <div class="before:content-['BASE'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
-        <ui:heading tag="h4">Example Heading</ui:heading>
+        <ui:heading tag="h4">Grizzly Business: Headings</ui:heading>
         <ui:description>Bear with me, this is important.</ui:description>
     </div>
 
     <div class="before:content-['MD'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
-        <ui:heading tag="h4" size="md">Bear With Me, This Is Important</ui:heading>
+        <ui:heading tag="h4" size="md">Grizzly Business: Headings</ui:heading>
         <ui:description size="md">Bear with me, this is important.</ui:description>
     </div>
 
     <div class="before:content-['LG'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
-        <ui:heading tag="h4" size="lg">Big Bear Headlines</ui:heading>
+        <ui:heading tag="h4" size="lg">Grizzly Business: Headings</ui:heading>
         <ui:description size="lg">Bear with me, this is important.</ui:description>
     </div>
 
     <div class="before:content-['XL'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
-        <ui:heading tag="h4" size="xl">Bear With Me, This Is Important</ui:heading>
+        <ui:heading tag="h4" size="xl">Grizzly Business: Headings</ui:heading>
         <ui:description size="xl">Bear with me, this is important.</ui:description>
     </div>
 </div>

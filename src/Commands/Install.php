@@ -112,7 +112,7 @@ class Install extends Command
 
     protected function ensureTailwindConfigHasUiVendorContent()
     {
-        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/resources/**/*.blade.php'"]);
+        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/**/*.{php,blade.php}'"]);
     }
 
     protected function ensureTailwindConfigHasColorsExtended()

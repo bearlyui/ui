@@ -47,7 +47,7 @@ import colors from 'tailwindcss/colors'
 export default {
     content: [
         // ...
-        './vendor/bearly/ui/resources/**/*.blade.php'
+        './vendor/bearly/ui/**/*.{php,blade.php}'
     ],
 
     theme: {
