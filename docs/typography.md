@@ -1,6 +1,6 @@
 # Typography
-The typography components come in two flavors: `headings` and `descriptions`.
-They're best when they're together, kind of like Panda bears.
+The typography components come in two componentized flavors: `headings` and `descriptions`.
+They're usually better when they're together, kind of like Panda bears named Jack and Johnson.
 
 ## Basic Example
 
