@@ -1,6 +1,6 @@
 <?php
 
-namespace Bearly\Ui;
+namespace Bearly\Ui\Commands;
 
 trait Welcome
 {

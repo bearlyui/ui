@@ -8,12 +8,12 @@
     'size' => Size::SM
 ])
 <span x-data="{ trigger: {{ ($trigger ?? false) ? '$refs.trigger.firstElementChild' : '$el.parentNode' }} }">
-    {{-- Optional Trigger --}}
     @if ($trigger ?? false)
         <span x-ref="trigger">
             {{ $trigger }}
         </span>
     @endif
+
     <template x-teleport="body">
         <span
             x-cloak

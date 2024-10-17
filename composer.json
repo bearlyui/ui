@@ -10,7 +10,8 @@
     },
     "require-dev": {
         "livewire/livewire": "^3.4",
-        "orchestra/testbench": "^8.15"
+        "orchestra/testbench": "^9.5",
+        "laravel/pint": "^1.18"
     },
     "autoload": {
         "psr-4": {

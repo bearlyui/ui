@@ -3,17 +3,15 @@
 namespace Bearly\Ui\Tests;
 
 use Illuminate\Support\Arr;
-use Illuminate\Testing\TestView;
-use Illuminate\Testing\TestResponse;
-use PHPUnit\Framework\Assert as PHPUnit;
-use Illuminate\Testing\Constraints\SeeInOrder;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Testing\Constraints\SeeInOrder;
+use Illuminate\Testing\TestResponse;
+use Illuminate\Testing\TestView;
+use PHPUnit\Framework\Assert as PHPUnit;
 
 class HtmlTestingAssertionsProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-    }
+    public function register(): void {}
 
     public function boot(): void
     {

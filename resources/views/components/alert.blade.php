@@ -21,12 +21,6 @@
     x-transition:leave-start="opacity-100 scale-100 -translate-y-full"
     x-transition:leave-end="opacity-0 scale-75 translate-y-full"
 
-    {{-- x-transition:enter="transition duration-250 ease-in translate-y-0"
-    x-transition:enter-start="opacity-0 scale-0 translate-y-8"
-    x-transition:enter-end="opacity-100 scale-105"
-    x-transition:leave="transition duration-500 ease-out translate-y-0"
-    x-transition:leave-start="opacity-100 scale-105 -translate-y-10"
-    x-transition:leave-end="opacity-0 scale-0 translate-y-10" --}}
     {{ $attributes
         ->merge(['role' => 'status'])
         ->when(
