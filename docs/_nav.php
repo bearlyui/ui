@@ -15,6 +15,7 @@ return [
         // '🚧 Form Inputs' => '/docs/form-inputs',
         'Toggles' => '/docs/toggles',
         'Tooltips' => '/docs/tooltips',
+        'Typography' => '/docs/typography',
         // '🚧 Toasts 🤔' => '/docs/toasts',
     ],
 ];
