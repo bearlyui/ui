@@ -1,10 +1,11 @@
+@use('Bearly\Ui\Size')
 @props(['gap' => Size::BASE])
 
 <dl {{ $attributes->class([
-    'mx-auto flex flex-col gap-px bg-gray-900/5 sm:flex-row',
-    'gap-2' => Size::SM->is($gap),
+    'mx-auto flex flex-col bg-gray-900/5 sm:flex-row',
     'gap-px' => Size::BASE->is($gap),
-    'gap-4' => Size::LG->is($gap),
+    'gap-0.5' => Size::MD->is($gap),
+    'gap-1' => Size::LG->is($gap),
 ]) }}>
     {{ $slot }}
 </dl>
