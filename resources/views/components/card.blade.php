@@ -6,6 +6,7 @@
     'size' => Size::BASE,
     'radius' => Size::BASE,
     'variant' => Variant::Outline,
+    'padding' => true,
 ])
 
 <div {{ $attributes->class([
@@ -109,10 +110,10 @@
 
     {{-- Main Content --}}
     <div @class([
-        'px-3 py-1.5 text-sm' => Size::SM->is($size),
-        'px-4 py-2' => Size::BASE->is($size),
-        'px-5 py-2.5' => Size::MD->is($size),
-        'px-6 py-3 text-lg' => Size::LG->is($size),
+        'px-3 py-1.5 text-sm' => $padding === true && Size::SM->is($size),
+        'px-4 py-2' => $padding === true && Size::BASE->is($size),
+        'px-5 py-2.5' => $padding === true && Size::MD->is($size),
+        'px-6 py-3 text-lg' => $padding === true && Size::LG->is($size),
     ])>{{ $slot }}</div>
 
     {{-- Footer --}}
