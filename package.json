@@ -3,10 +3,6 @@
   "name": "bear-ui",
   "version": "0.1.0",
   "description": "Grizzly UI components for nice people.",
-  "scripts": {
-    "build": "npx tailwindcss -i ./resources/css/bear.css -o ./build/bear-dist.css",
-    "dev": "npx tailwindcss -i ./resources/css/bear.css -o ./build/bear-dist.css --watch"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bearly-ui/ui.git"

@@ -1,20 +1,39 @@
 # Tooltips
 
-Helpful little buggers that appear at the darndest times (when you hover an element). Kind of like bear cubs.
-Maybe you can use them for showing extra context, keyboard shortcuts, or other low-priority information.
+Helpful little buggers that appear at the darndest times (usually when you hover an element).
+You might use them for showing extra context, keyboard shortcuts, or other low-priority information.
 
-**Tooltips use their parent element as the trigger.**
+**Tooltips can be used two different ways:**
+1. As a wrapper, using the `<x-slot:trigger>` slot to specify the triggering element or button
+2. As a child &mdash; the `<ui:tooltip />` element will use its parent element as a trigger if no trigger slot is defined
 
 ## Using Tooltips
 
-Use `<x-tooltip>` **_inside an element_** to trigger the tooltip by hovering its parent element.
+Wrap the triggering element with the `<ui:tooltip>` tag and the `<x-slot:trigger>` slot tag
 
-```html +demo title={A Basic Tooltip}
-<x-button color="success">
-    <x-tooltip title="Have a nice day!" />
-    Hover for top secret info
-</x-ui::button>
+```html +demo title={Wrapper Tooltip with Trigger Slot}
+<ui:tooltip title="Have a nice day!">
+    <x-slot:trigger>
+        <ui:button color="success">
+            Hover for top secret info
+        </ui:button>
+    </x-slot:trigger>
+</ui:tooltip>
 ```
+
+_**OR**_
+
+Use `<ui:tooltip>` **_inside an element_** to trigger the tooltip by hovering its parent element.
+
+```html +demo title={Child Tooltip (Parent Element Trigger)}
+<ui:button color="success">
+    <ui:tooltip title="Have a nice day!" />
+    Hover for top secret info
+</ui:button>
+```
+
+
+
 
 Tooltips will adjust their positioning if they overflow outside the viewport.
 The anchoring behavior and the overflow handling are made possible thanks to
@@ -38,8 +57,8 @@ The `title` prop is interchangeable with the default slot. Use whichever style y
 
 ```blade
 {{-- `title` prop or default slot (same thing) --}}
-<x-tooltip title="Hello" />
-<x-tooltip>Hello</x-ui::tooltip>
+<ui:tooltip title="Hello" />
+<ui:tooltip>Hello</ui:tooltip>
 ```
 
 ### Shortcut
@@ -47,10 +66,10 @@ Use the `shortcut` prop (or slot) to add styled `<kbd>` tags to your tooltip.
 
 ```blade
 {{-- `shortcut` prop or shortcut slot (same thing) --}}
-<x-tooltip shortcut="⌘+S" />
-<x-tooltip>
+<ui:tooltip shortcut="⌘+S" />
+<ui:tooltip>
     <x-slot:shortcut>⌘+S</x-slot:shortcut>
-</x-ui::tooltip>
+</ui:tooltip>
 ```
 
 ### Offset
@@ -58,7 +77,7 @@ The offset defines how far (in pixels) the tooltip appears from the triggering e
 In other words, the gap between the tooltip and what it's attached to. The default is `4` -- although any integer value will work.
 
 ```html
-<x-tooltip title="I'm a tooltip" offset="10" />
+<ui:tooltip title="I'm a tooltip" offset="10" />
 ```
 
 ### Position
@@ -72,40 +91,40 @@ The size prop defines the size of the tooltip. The default is `sm`, but you can 
 Why would you want a tooltip to be large? I don't know, but you can if you want to.
 
 ```html +demo title={Tooltip Sizes} previewClasses={flex justify-between}
-<x-button>
+<ui:button>
     Small (sm - the default)
-    <x-tooltip title="I'm a small tooltip" />
-</x-ui::button>
+    <ui:tooltip title="I'm a small tooltip" />
+</ui:button>
 
-<x-button>
+<ui:button>
     Base (base)
-    <x-tooltip size="base" title="I'm a base-sized tooltip" />
-</x-ui::button>
+    <ui:tooltip size="base" title="I'm a base-sized tooltip" />
+</ui:button>
 
-<x-button>
+<ui:button>
     Medium (md)
-    <x-tooltip size="md" title="I'm a medium-sized tooltip" />
-</x-ui::button>
+    <ui:tooltip size="md" title="I'm a medium-sized tooltip" />
+</ui:button>
 
-<x-button>
+<ui:button>
     Large (lg)
-    <x-tooltip size="lg" title="I'm a large tooltip" />
-</x-ui::button>
+    <ui:tooltip size="lg" title="I'm a large tooltip" />
+</ui:button>
 ```
 
 ## Examples
 
 Here's an example of the tooltip defaults
 ```html +demo title={Default Tooltip}
-<x-button>
-    <x-tooltip title="Have a nice day!" />
+<ui:button>
+    <ui:tooltip title="Have a nice day!" />
     Hover me if you please
-</x-ui::button>
+</ui:button>
 ```
 
 You can also customize the position and offset, like this.
 ```html +demo title={Custom Offset and Position}
-<x-button>
-    <x-tooltip position="right" offset="20">Enjoy yourself, and be happy.</x-ui::tooltip>
+<ui:button>
+    <ui:tooltip position="right" offset="20">Enjoy yourself, and be happy.</ui:tooltip>
     Mouse over, and be happy
-</x-ui::button>
+</ui:button>

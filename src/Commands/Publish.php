@@ -2,7 +2,6 @@
 
 namespace Bearly\Ui\Commands;
 
-use Bearly\Ui\Welcome;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -14,11 +13,11 @@ use function Laravel\Prompts\table;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\warning;
 
-class Add extends Command
+class Publish extends Command
 {
     use Welcome;
 
-    public $signature = 'bear:add
+    public $signature = 'bear:publish
         {--skip-welcome : Skip the welcome message}';
 
     public $allComponents = [
@@ -27,6 +26,7 @@ class Add extends Command
         'button' => 'Button',
         'form-inputs' => 'Form Inputs',
         'dropdown' => 'Dropdown',
+        'toggle' => 'Toggle',
         'tooltip' => 'Tooltip',
     ];
 
