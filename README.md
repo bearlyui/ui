@@ -10,30 +10,18 @@ This package is built for Laravel and Livewire and Tailwind CSS, it requires:
 - Tailwind CSS 3.x
 - Tailwind CSS Forms Plugin
 
-> ⚠️  This step is temporary (because this isn't on packagist yet), and will be removed once the package is published.
-
-Manually add the repository to your `composer.json` file's `repositories` property:
-```json
-"repositories": [
-    {
-        "type": "git",
-        "url": "https://github.com/bearly-ui/ui"
-    }
-],
-```
-
 ### Quick Start
 
 To quickly get started, run the following commands to use the interactive installer:
 ```bash
-composer require bearly/ui:dev-main
+composer require bearly/ui
 php artisan bear:install
 ```
 
 ### Manual Installation
 Require the package with composer
 ```bash
-composer require bearly/ui:dev-main
+composer require bearly/ui
 ```
 
 Next, update your Tailwind CSS configuration file. You'll need to do two things:
