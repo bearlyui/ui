@@ -70,7 +70,7 @@
 
         {{-- Ghost Variant --}}
         'text-primary-500 hover:bg-primary-50 dark:text-primary-400 dark:hover:bg-primary-600/40 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Ghost->is($variant),
-        'text-secondary-500 hover:bg-secondary-300/50 hover:text-secondary-700 dark:text-secondary-300 dark:hover:bg-secondary-600/40 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
+        'text-secondary-500 hover:bg-secondary-300/20 hover:text-secondary-700 dark:text-secondary-300 dark:hover:bg-secondary-600/40 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
         'text-success-500 hover:bg-success-50 dark:text-success-400 dark:hover:bg-success-600/40 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Ghost->is($variant),
         'text-warning-500 hover:bg-warning-50 dark:text-warning-400 dark:hover:bg-warning-600/40 dark:hover:text-warning-100' => Color::Warning->is($color) && Variant::Ghost->is($variant),
         'text-error-500 hover:bg-error-50 dark:text-error-400 dark:hover:bg-error-600/40 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Ghost->is($variant),
