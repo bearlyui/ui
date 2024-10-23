@@ -1,6 +1,9 @@
 # Configuration
 
-There are two methods of configuring the UI package: using the `ui.php` file or using the Tailwind config file.
+There are two things you make configure in the package so far:
+
+- The colors (via Tailwind CSS config)
+- The classes used for focus states (via `config/ui.php`)
 
 ## PHP Configuration
 
@@ -18,9 +21,10 @@ return [
 
 ## Tailwind CSS Configuration
 
-The `bear:install` artisan command configures some default values in your Tailwind CSS configuration file, but you are free to change any colors you wish.
+The [installation process](/docs/installation) configures some default values in your 
+Tailwind CSS configuration file. Change these however you wish to tweak the colors of your own UI.
 
-The default color names needed are:
+The required color names are:
 
 | Color Name   | Description                                                    |
 |--------------|----------------------------------------------------------------|
@@ -30,7 +34,7 @@ The default color names needed are:
 | `warning`    | Highlights cautions or items needing attention                 |
 | `error`      | Signifies errors, failures, or critical issues                 |
 
-In terms of your Tailwind CSS configuration file, you need something like the following:
+Your Tailwind config file should look something like this:
 
 ```js
 import colors from 'tailwindcss/colors'
@@ -47,3 +51,4 @@ theme: {
   },
 },
 ```
+
