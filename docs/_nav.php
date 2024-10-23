@@ -13,9 +13,11 @@ return [
         'Dialogs' => '/docs/dialogs',
         'Dropdowns' => '/docs/dropdowns',
         // '🚧 Form Inputs' => '/docs/form-inputs',
+        'Links' => '/docs/links',
         'Toggles' => '/docs/toggles',
         'Tooltips' => '/docs/tooltips',
         'Typography' => '/docs/typography',
+        'Tiles' => '/docs/tiles'
         // '🚧 Toasts 🤔' => '/docs/toasts',
     ],
 ];
