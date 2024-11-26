@@ -6,7 +6,7 @@
     "require": {
         "php": "^8.2",
         "illuminate/support": "^11.0",
-        "laravel/prompts": "^0.3.0"
+        "laravel/prompts": "^0.3.2"
     },
     "require-dev": {
         "livewire/livewire": "^3.4",
