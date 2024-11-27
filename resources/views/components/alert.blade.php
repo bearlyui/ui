@@ -6,7 +6,6 @@
     'variant' => Variant::Outline,
 ])
 {{-- TO DO:
-- Make dismissable button account for content
 - Consider sizing
 - Reconsider title and button props -- some of these should be composable stuff
 - Before/after slots?
