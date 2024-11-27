@@ -6,7 +6,7 @@
     'icon' => null,
     'dismissable' => false,
     'color' => Color::Primary,
-    'variant' => Variant::Glow
+    'variant' => Variant::Outline,
 ])
 
 <div
@@ -34,35 +34,49 @@
             'px-4 py-2',
             'flex items-center justify-between' => $button,
 
-            'shadow-t border' => Variant::Glow->is($variant),
-            'border border-l-[6px]' => Variant::Outline->is($variant),
-
-
             {{-- Primary --}}
-            'text-primary-600 shadow-primary-400/60 border-primary-500/40' => Color::Primary->is($color),
-            'dark:text-primary-400 dark:shadow-primary-300/60' => Color::Primary->is($color),
-            'dark:border-primary-300' => Color::Primary->is($color) && Variant::Glow->is($variant),
-            'dark:border-l-primary-300 dark:border-primary-300/60' => Color::Primary->is($color) && Variant::Outline->is($variant),
+            'text-primary-700 shadow-primary-400/20 border-primary-500/25 bg-primary-50/30' => Color::Primary->is($color),
+            'dark:text-primary-400 dark:shadow-primary-300/20 dark:bg-primary-900/20' => Color::Primary->is($color),
 
             {{-- Secondary --}}
-            'text-secondary-600 shadow-secondary-400/60 border-secondary-500/40' => Color::Secondary->is($color),
-            'dark:text-secondary-400 dark:shadow-secondary-300/60 dark:border-secondary-300/40' => Color::Secondary->is($color),
-            'dark:border-l-secondary-300 dark:border-secondary-300/60' => Color::Secondary->is($color) && Variant::Outline->is($variant),
+            'text-secondary-700 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/30' => Color::Secondary->is($color),
+            'dark:text-secondary-400 dark:shadow-secondary-400/15 dark:bg-secondary-700/40' => Color::Secondary->is($color),
 
             {{-- Success --}}
-            'text-success-600 shadow-success-400/60 border-success-500/40' => Color::Success->is($color),
-            'dark:text-success-400 dark:shadow-success-300/60 dark:border-success-300/40' => Color::Success->is($color),
-            'dark:border-l-success-300 dark:border-success-300/60' => Color::Success->is($color) && Variant::Outline->is($variant),
+            'text-success-700 shadow-success-400/20 border-success-500/25 bg-success-50/10' => Color::Success->is($color),
+            'dark:text-success-400 dark:shadow-success-400/15 dark:bg-success-900/20' => Color::Success->is($color),
 
             {{-- Warning --}}
-            'text-warning-600 shadow-warning-400/60 border-warning-500/40' => Color::Warning->is($color),
-            'dark:text-warning-400 dark:shadow-warning-300/60 dark:border-warning-300/40' => Color::Warning->is($color),
-            'dark:border-l-warning-300 dark:border-warning-300/60' => Color::Warning->is($color) && Variant::Outline->is($variant),
+            'text-warning-700 shadow-warning-400/20 border-warning-500/30 bg-warning-50/15' => Color::Warning->is($color),
+            'dark:text-warning-400 dark:shadow-warning-400/15 dark:bg-warning-900/20' => Color::Warning->is($color),
 
             {{-- Error --}}
-            'text-error-600 shadow-error-400/60 border-error-500/40' => Color::Error->is($color),
-            'dark:text-error-400 dark:shadow-error-300/60 dark:border-error-300/40' => Color::Error->is($color),
-            'dark:border-l-error-400 dark:border-error-300/60' => Color::Error->is($color) && Variant::Outline->is($variant),
+            'text-error-700 shadow-error-400/20 border-error-500/25 bg-error-50/30' => Color::Error->is($color),
+            'dark:text-error-400 dark:shadow-error-400/15 dark:bg-error-900/20' => Color::Error->is($color),
+
+            {{-- Outline Variant --}}
+            'border' => Variant::Outline->is($variant),
+            'dark:border-l-primary-300 dark:border-primary-300/60' => Color::Primary->is($color) && Variant::Outline->is($variant),
+            'dark:border-l-secondary-300 dark:border-secondary-300/60' => Color::Secondary->is($color) && Variant::Outline->is($variant),
+            'dark:border-l-success-300 dark:border-success-300/60' => Color::Success->is($color) && Variant::Outline->is($variant),
+            'dark:border-l-warning-300 dark:border-warning-300/60' => Color::Warning->is($color) && Variant::Outline->is($variant),
+            'dark:border-l-error-400 dark:border-error-400/60' => Color::Error->is($color) && Variant::Outline->is($variant),
+
+            {{-- Solid Variant --}}
+            'border border-l-[6px]' => Variant::Solid->is($variant),
+            'dark:border-l-primary-300 dark:border-primary-300/60' => Color::Primary->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-secondary-300 dark:border-secondary-300/60' => Color::Secondary->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-success-300 dark:border-success-300/60' => Color::Success->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-warning-300 dark:border-warning-300/60' => Color::Warning->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-error-400 dark:border-error-400/60' => Color::Error->is($color) && Variant::Solid->is($variant),
+
+            {{-- Glow Variant --}}
+            'shadow-md border' => Variant::Glow->is($variant),
+            'dark:border-primary-300/20' => Color::Primary->is($color) && Variant::Glow->is($variant),
+            'dark:border-secondary-300/20' => Color::Secondary->is($color) && Variant::Glow->is($variant),
+            'dark:border-success-300/20' => Color::Success->is($color) && Variant::Glow->is($variant),
+            'dark:border-warning-300/20' => Color::Warning->is($color) && Variant::Glow->is($variant),
+            'dark:border-error-300/20' => Color::Error->is($color) && Variant::Glow->is($variant),
         ])
     }}
 >
@@ -121,7 +135,4 @@
             </button>
         </div>
     @endif
-
-    {{-- Button Slot --}}
-    {{ $button }}
 </div>

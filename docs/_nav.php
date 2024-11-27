@@ -6,7 +6,7 @@ return [
         'Configuration' => '/docs/configuration',
     ],
     'Components' => [
-        // 'Alerts' => '/docs/alerts',
+        'Alerts' => '/docs/alerts',
         'Buttons' => '/docs/buttons',
         'Cards' => '/docs/cards',
         // '🚧 Context Menus' => '/docs/context-menus',
@@ -17,7 +17,7 @@ return [
         'Toggles' => '/docs/toggles',
         'Tooltips' => '/docs/tooltips',
         'Typography' => '/docs/typography',
-        'Tiles' => '/docs/tiles'
+        'Tiles' => '/docs/tiles',
         // '🚧 Toasts 🤔' => '/docs/toasts',
     ],
 ];

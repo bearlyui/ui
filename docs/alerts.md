@@ -1,6 +1,6 @@
 # Alerts
 
-Give important messages some extra **_growl_**. Alerts are almost as versatile as a bear's claws for getting your users' attention. You can customize their color, variant, and even add dismissable functionality.
+Alerts are almost as a bear's growl for getting your users' attention. You can customize their color, variant, and even add dismissable functionality.
 
 ```html +demo title={Alert Examples} previewClasses={space-y-4}
 <ui:alert color="primary" :dismissable="true" x-init="$watch('open', value => { setTimeout(() => { open = true }, 750) })">I'm a primary alert, hear me roar!</ui:alert>
