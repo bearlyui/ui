@@ -1,9 +1,7 @@
 {{-- TO DO:
-- Fix borders of solid variant in dark mode
 - Test with screen reader
-- Try text shadows or other subtle design elements
-- Consider icon component?
 - Write documentation
+- Consider icon component?
  --}}
 
 @use('Bearly\Ui\Color')
