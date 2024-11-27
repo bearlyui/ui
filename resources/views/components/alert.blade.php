@@ -6,10 +6,9 @@
     'variant' => Variant::Outline,
 ])
 {{-- TO DO:
+- Fix heading and subheading colors
+- Test with heading and button
 - Consider sizing
-- Reconsider title and button props -- some of these should be composable stuff
-- Before/after slots?
-- Other variants?
 - Write documentation
  --}}
 <div
@@ -84,7 +83,7 @@
     }}
 >
     <div @class([
-        'flex-1 flex h-full items-start sm:items-center gap-1' => $dismissable,
+        'flex-1 flex justify-between items-start sm:items-center gap-1' => $dismissable,
     ])>
         <div>{{ $slot }}</div>
         {{-- Close Button --}}
