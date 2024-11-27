@@ -1,16 +1,19 @@
+{{-- TO DO:
+- Fix borders of solid variant in dark mode
+- Test with screen reader
+- Try text shadows or other subtle design elements
+- Consider icon component?
+- Write documentation
+ --}}
+
 @use('Bearly\Ui\Color')
 @use('Bearly\Ui\Variant')
+
 @props([
     'dismissable' => false,
     'color' => Color::Primary,
     'variant' => Variant::Outline,
 ])
-{{-- TO DO:
-- Aria attributes on heading and subheading by default
-- Other aria attributes?
-- Test with screen reader
-- Write documentation
- --}}
 <div
     x-data="{
         open: true,
