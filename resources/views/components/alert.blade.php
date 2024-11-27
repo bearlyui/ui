@@ -106,7 +106,9 @@
     <div @class([
         'flex-1 flex justify-between items-start sm:items-center gap-1' => $dismissable,
     ])>
+        {{-- Main content --}}
         <div>{{ $slot }}</div>
+
         {{-- Close Button --}}
         @if ($dismissable)
             <div @class([
