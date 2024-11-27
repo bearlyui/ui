@@ -1,14 +1,18 @@
 @use('Bearly\Ui\Color')
 @use('Bearly\Ui\Variant')
 @props([
-    'title' => null,
-    'button' => null,
-    'icon' => null,
     'dismissable' => false,
     'color' => Color::Primary,
     'variant' => Variant::Outline,
 ])
-
+{{-- TO DO:
+- Make dismissable button account for content
+- Consider sizing
+- Reconsider title and button props -- some of these should be composable stuff
+- Before/after slots?
+- Other variants?
+- Write documentation
+ --}}
 <div
     x-data="{
         open: true,
@@ -23,16 +27,16 @@
 
     {{ $attributes
         ->merge(['role' => 'status'])
-        ->when(
+        {{-- TODO: figure out how to do this with heading automatically --}}
+        {{-- ->when(
             $title,
             fn ($a) => $a->merge(['x-id' => "['alert-title']"])
                 ->merge([':aria-labelledby' => "\$id('alert-title')"])
-        )
+        ) --}}
         ->class([
             'relative rounded transition ease-in-out',
             'bg-white dark:bg-gray-950/40',
-            'px-4 py-2',
-            'flex items-center justify-between' => $button,
+            'px-3 py-2',
 
             {{-- Primary --}}
             'text-primary-700 shadow-primary-400/20 border-primary-500/25 bg-primary-50/30' => Color::Primary->is($color),
@@ -80,59 +84,37 @@
         ])
     }}
 >
-    {{-- Title --}}
-    <div>
-        @if ($title)
-            <h4 x-bind:id="$id('alert-title')" @class([
-                'text-lg font-medium tracking-tight',
-                'text-primary-700 dark:text-primary-200' => Color::Primary->is($color),
-                'text-success-700 dark:text-success-200' => Color::Success->is($color),
-                'text-warning-700 dark:text-warning-200' => Color::Warning->is($color),
-                'text-error-700 dark:text-error-200' => Color::Error->is($color),
-            ]) >{{ $title }}</h4>
+    <div @class([
+        'flex-1 flex h-full items-start sm:items-center gap-1' => $dismissable,
+    ])>
+        <div>{{ $slot }}</div>
+        {{-- Close Button --}}
+        @if ($dismissable)
+            <div @class([
+                'flex items-center align-top'
+            ])>
+                <button
+                    type="button"
+                    x-ref="closeButton"
+                    aria-label="Close"
+                    @class([
+                        'p-1.5 pr-0 transition ease-in-out rounded',
+                        'text-primary-500 hover:text-primary-800 dark:hover:text-primary-100' => Color::Primary->is($color),
+                        'text-secondary-500 hover:text-secondary-800 dark:hover:text-secondary-100' => Color::Secondary->is($color),
+                        'text-success-500 hover:text-success-800 dark:hover:text-success-100' => Color::Success->is($color),
+                        'text-warning-500 hover:text-warning-800 dark:hover:text-warning-100' => Color::Warning->is($color),
+                        'text-error-500 hover:text-error-800 dark:hover:text-error-100' => Color::Error->is($color),
+                        ...config('ui.focusClasses')
+                    ])
+                    @keyup.enter="open = false"
+                    @keyup.space="open = false"
+                    @click.prevent="open = false"
+                >
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                    </svg>
+                </button>
+            </div>
         @endif
-        <div @class(['mt-1.5' => $title])>{{ $slot }}</div>
     </div>
-
-    {{-- Icon --}}
-    @if ($icon)
-        <div {{ $icon->attributes->class([
-            'absolute top-0 right-0 mt-1 opacity-30 saturate-[.7]',
-            'mr-2' => !$dismissable,
-            'mr-7' => $dismissable,
-        ]) }}>
-            {{ $icon }}
-        </div>
-    @endif
-
-    {{-- Close Button --}}
-    @if ($dismissable && !$button)
-        <div @class([
-            'absolute top-0 right-0',
-            'mt-2' => $title,
-            'inset-y-0 flex items-center' => !$title,
-        ])>
-            <button
-                type="button"
-                x-ref="closeButton"
-                aria-label="Close"
-                @class([
-                    'p-2.5 transition ease-in-out rounded',
-                    'text-primary-500 hover:text-primary-800 dark:hover:text-primary-100' => Color::Primary->is($color),
-                    'text-secondary-500 hover:text-secondary-800 dark:hover:text-secondary-100' => Color::Secondary->is($color),
-                    'text-success-500 hover:text-success-800 dark:hover:text-success-100' => Color::Success->is($color),
-                    'text-warning-500 hover:text-warning-800 dark:hover:text-warning-100' => Color::Warning->is($color),
-                    'text-error-500 hover:text-error-800 dark:hover:text-error-100' => Color::Error->is($color),
-                    ...config('ui.focusClasses')
-                ])
-                @keyup.enter="open = false"
-                @keyup.space="open = false"
-                @click.prevent="open = false"
-            >
-                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" data-slot="icon">
-                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-                </svg>
-            </button>
-        </div>
-    @endif
 </div>
