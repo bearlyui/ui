@@ -6,15 +6,31 @@
     'variant' => Variant::Outline,
 ])
 {{-- TO DO:
-- Fix heading and subheading colors
-- Test with heading and button
-- Consider sizing
+- Aria attributes on heading and subheading by default
+- Other aria attributes?
+- Test with screen reader
 - Write documentation
  --}}
 <div
     x-data="{
         open: true,
+        init() {
+            this.$nextTick(() => {
+                const heading = this.$el.querySelector('[data-ui-heading]')
+                if (heading) {
+                    heading.setAttribute('x-bind:id', '$id(\'alert-title\')')
+                    this.$el.setAttribute('x-bind:aria-labelledby', '$id(\'alert-title\')')
+                }
+
+                const subheading = this.$el.querySelector('[data-ui-subheading]')
+                if (subheading) {
+                    subheading.setAttribute('x-bind:id', '$id(\'alert-description\')')
+                    this.$el.setAttribute('x-bind:aria-describedby', '$id(\'alert-description\')')
+                }
+            })
+        }
     }"
+    x-id="['alert-title', 'alert-description']"
     x-show="open"
     x-transition:enter="transition ease-out duration-300"
     x-transition:enter-start="opacity-0 scale-75 translate-y-full"
@@ -25,12 +41,6 @@
 
     {{ $attributes
         ->merge(['role' => 'status'])
-        {{-- TODO: figure out how to do this with heading automatically --}}
-        {{-- ->when(
-            $title,
-            fn ($a) => $a->merge(['x-id' => "['alert-title']"])
-                ->merge([':aria-labelledby' => "\$id('alert-title')"])
-        ) --}}
         ->class([
             'relative rounded transition ease-in-out',
             'bg-white dark:bg-gray-950/40',
