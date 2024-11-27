@@ -119,7 +119,7 @@
                     x-ref="closeButton"
                     aria-label="Close"
                     @class([
-                        'p-1.5 -mr-3.5 -mt-0.5 pt-0 sm:mt-0 sm:mr-0 transition ease-in-out rounded',
+                        'p-1.5 pr-0 -mr-1.5 -mt-0.5 pt-0 sm:mt-0 sm:mr-0 transition ease-in-out rounded',
                         'text-primary-500 hover:text-primary-800 dark:hover:text-primary-100' => Color::Primary->is($color),
                         'text-secondary-500 hover:text-secondary-800 dark:hover:text-secondary-100' => Color::Secondary->is($color),
                         'text-success-500 hover:text-success-800 dark:hover:text-success-100' => Color::Success->is($color),
@@ -131,7 +131,8 @@
                     @keyup.space="open = false"
                     @click.prevent="open = false"
                 >
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
                     </svg>
                 </button>
