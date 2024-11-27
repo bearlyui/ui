@@ -117,7 +117,7 @@
                     x-ref="closeButton"
                     aria-label="Close"
                     @class([
-                        'p-1.5 pr-0 transition ease-in-out rounded',
+                        'p-1.5 -mr-3.5 -mt-0.5 pt-0 sm:mt-0 sm:mr-0 transition ease-in-out rounded',
                         'text-primary-500 hover:text-primary-800 dark:hover:text-primary-100' => Color::Primary->is($color),
                         'text-secondary-500 hover:text-secondary-800 dark:hover:text-secondary-100' => Color::Secondary->is($color),
                         'text-success-500 hover:text-success-800 dark:hover:text-success-100' => Color::Success->is($color),
