@@ -41,19 +41,19 @@
             'dark:text-primary-400 dark:shadow-primary-300/20 dark:bg-primary-900/20' => Color::Primary->is($color),
 
             {{-- Secondary --}}
-            'text-secondary-700 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/30' => Color::Secondary->is($color),
+            'text-secondary-700 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/40' => Color::Secondary->is($color),
             'dark:text-secondary-400 dark:shadow-secondary-400/15 dark:bg-secondary-700/40' => Color::Secondary->is($color),
 
             {{-- Success --}}
-            'text-success-700 shadow-success-400/20 border-success-500/25 bg-success-50/10' => Color::Success->is($color),
+            'text-success-700 shadow-success-400/20 border-success-500/25 bg-success-50/40' => Color::Success->is($color),
             'dark:text-success-400 dark:shadow-success-400/15 dark:bg-success-900/20' => Color::Success->is($color),
 
             {{-- Warning --}}
-            'text-warning-700 shadow-warning-400/20 border-warning-500/30 bg-warning-50/15' => Color::Warning->is($color),
+            'text-warning-700 shadow-warning-400/20 border-warning-500/30 bg-warning-50/30' => Color::Warning->is($color),
             'dark:text-warning-400 dark:shadow-warning-400/15 dark:bg-warning-900/20' => Color::Warning->is($color),
 
             {{-- Error --}}
-            'text-error-700 shadow-error-400/20 border-error-500/25 bg-error-50/30' => Color::Error->is($color),
+            'text-error-700 shadow-error-400/20 border-error-500/25 bg-error-50/40' => Color::Error->is($color),
             'dark:text-error-400 dark:shadow-error-400/15 dark:bg-error-900/20' => Color::Error->is($color),
 
             {{-- Outline Variant --}}
@@ -79,6 +79,17 @@
             'dark:border-success-300/20' => Color::Success->is($color) && Variant::Glow->is($variant),
             'dark:border-warning-300/20' => Color::Warning->is($color) && Variant::Glow->is($variant),
             'dark:border-error-300/20' => Color::Error->is($color) && Variant::Glow->is($variant),
+
+            {{-- Headings should match text color  --}}
+            '[&_[data-ui-heading]]:text-inherit' => empty($color),
+            '[&_[data-ui-heading]]:text-primary-800 dark:[&_[data-ui-heading]]:text-primary-200' => Color::Primary->is($color),
+            '[&_[data-ui-heading]]:text-secondary-800 dark:[&_[data-ui-heading]]:text-secondary-200' => Color::Secondary->is($color),
+            '[&_[data-ui-heading]]:text-success-800 dark:[&_[data-ui-heading]]:text-success-200' => Color::Success->is($color),
+            '[&_[data-ui-heading]]:text-warning-800 dark:[&_[data-ui-heading]]:text-warning-200' => Color::Warning->is($color),
+            '[&_[data-ui-heading]]:text-error-800 dark:[&_[data-ui-heading]]:text-error-200' => Color::Error->is($color),
+
+            {{-- Subheadings should match text color --}}
+            '[&_[data-ui-subheading]]:text-inherit [&_[data-ui-subheading]]:opacity-80',
         ])
     }}
 >
