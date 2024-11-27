@@ -13,6 +13,7 @@
     'dismissable' => false,
     'color' => Color::Primary,
     'variant' => Variant::Outline,
+    'role' => 'status',
 ])
 <div
     x-data="{
@@ -43,10 +44,10 @@
     x-transition:leave-end="opacity-0 scale-75 translate-y-full"
 
     {{ $attributes
-        ->merge(['role' => 'status'])
+        ->merge(['role' => $role])
         ->class([
             'relative rounded transition ease-in-out',
-            'bg-white dark:bg-gray-950/40',
+            '',
             'px-3 py-2',
 
             {{-- Primary --}}
@@ -71,27 +72,27 @@
 
             {{-- Outline Variant --}}
             'border' => Variant::Outline->is($variant),
-            'dark:border-l-primary-300 dark:border-primary-300/60' => Color::Primary->is($color) && Variant::Outline->is($variant),
-            'dark:border-l-secondary-300 dark:border-secondary-300/60' => Color::Secondary->is($color) && Variant::Outline->is($variant),
-            'dark:border-l-success-300 dark:border-success-300/60' => Color::Success->is($color) && Variant::Outline->is($variant),
-            'dark:border-l-warning-300 dark:border-warning-300/60' => Color::Warning->is($color) && Variant::Outline->is($variant),
-            'dark:border-l-error-400 dark:border-error-400/60' => Color::Error->is($color) && Variant::Outline->is($variant),
+            'dark:border-primary-300/25' => Color::Primary->is($color) && Variant::Outline->is($variant),
+            'dark:border-secondary-300/25' => Color::Secondary->is($color) && Variant::Outline->is($variant),
+            'dark:border-success-300/25' => Color::Success->is($color) && Variant::Outline->is($variant),
+            'dark:border-warning-300/25' => Color::Warning->is($color) && Variant::Outline->is($variant),
+            'dark:border-error-400/25' => Color::Error->is($color) && Variant::Outline->is($variant),
 
             {{-- Solid Variant --}}
             'border border-l-[6px]' => Variant::Solid->is($variant),
-            'dark:border-l-primary-300 dark:border-primary-300/60' => Color::Primary->is($color) && Variant::Solid->is($variant),
-            'dark:border-l-secondary-300 dark:border-secondary-300/60' => Color::Secondary->is($color) && Variant::Solid->is($variant),
-            'dark:border-l-success-300 dark:border-success-300/60' => Color::Success->is($color) && Variant::Solid->is($variant),
-            'dark:border-l-warning-300 dark:border-warning-300/60' => Color::Warning->is($color) && Variant::Solid->is($variant),
-            'dark:border-l-error-400 dark:border-error-400/60' => Color::Error->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-primary-300/30 dark:border-primary-300/30' => Color::Primary->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-secondary-300/30 dark:border-secondary-300/30' => Color::Secondary->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-success-300/30 dark:border-success-300/30' => Color::Success->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-warning-300/30 dark:border-warning-300/30' => Color::Warning->is($color) && Variant::Solid->is($variant),
+            'dark:border-l-error-400/30 dark:border-error-400/30' => Color::Error->is($color) && Variant::Solid->is($variant),
 
             {{-- Glow Variant --}}
             'shadow-md border' => Variant::Glow->is($variant),
-            'dark:border-primary-300/20' => Color::Primary->is($color) && Variant::Glow->is($variant),
-            'dark:border-secondary-300/20' => Color::Secondary->is($color) && Variant::Glow->is($variant),
-            'dark:border-success-300/20' => Color::Success->is($color) && Variant::Glow->is($variant),
-            'dark:border-warning-300/20' => Color::Warning->is($color) && Variant::Glow->is($variant),
-            'dark:border-error-300/20' => Color::Error->is($color) && Variant::Glow->is($variant),
+            'dark:border-primary-300/25' => Color::Primary->is($color) && Variant::Glow->is($variant),
+            'dark:border-secondary-300/25' => Color::Secondary->is($color) && Variant::Glow->is($variant),
+            'dark:border-success-300/25' => Color::Success->is($color) && Variant::Glow->is($variant),
+            'dark:border-warning-300/25' => Color::Warning->is($color) && Variant::Glow->is($variant),
+            'dark:border-error-300/25' => Color::Error->is($color) && Variant::Glow->is($variant),
 
             {{-- Headings should match text color  --}}
             '[&_[data-ui-heading]]:text-inherit' => empty($color),
