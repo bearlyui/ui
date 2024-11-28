@@ -1,7 +1,6 @@
 {{-- TO DO:
 - Test with screen reader
 - Write documentation
-- Consider icon component?
  --}}
 
 @use('Bearly\Ui\Color')
