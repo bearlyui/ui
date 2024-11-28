@@ -1,8 +1,3 @@
-{{-- TO DO:
-- Test with screen reader
-- Write documentation
- --}}
-
 @use('Bearly\Ui\Color')
 @use('Bearly\Ui\Variant')
 
@@ -120,7 +115,7 @@
                     x-ref="closeButton"
                     aria-label="Close"
                     @class([
-                        'p-1.5 pr-0 -mr-1.5 -mt-0.5 pt-0 sm:mt-0 sm:mr-0 transition ease-in-out rounded',
+                        'p-0.5 -mr-2.5 -mt-1.5 sm:mt-0 sm:mr-0 transition ease-in-out rounded',
                         'text-primary-500 hover:text-primary-900 dark:hover:text-primary-100' => Color::Primary->is($color),
                         'text-secondary-500 hover:text-secondary-900 dark:hover:text-secondary-100' => Color::Secondary->is($color),
                         'text-success-500 hover:text-success-900 dark:hover:text-success-100' => Color::Success->is($color),
