@@ -54,19 +54,19 @@
 
             {{-- Secondary --}}
             'text-secondary-700 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/40' => Color::Secondary->is($color),
-            'dark:text-secondary-400 dark:shadow-secondary-400/15 dark:bg-secondary-700/40' => Color::Secondary->is($color),
+            'dark:text-secondary-400 dark:shadow-secondary-400/15 dark:bg-secondary-800/50' => Color::Secondary->is($color),
 
             {{-- Success --}}
             'text-success-700 shadow-success-400/20 border-success-500/25 bg-success-50/40' => Color::Success->is($color),
-            'dark:text-success-400 dark:shadow-success-400/15 dark:bg-success-900/20' => Color::Success->is($color),
+            'dark:text-success-400 dark:shadow-success-400/15 dark:bg-success-900/15' => Color::Success->is($color),
 
             {{-- Warning --}}
             'text-warning-700 shadow-warning-400/20 border-warning-500/30 bg-warning-50/30' => Color::Warning->is($color),
-            'dark:text-warning-400 dark:shadow-warning-400/15 dark:bg-warning-900/20' => Color::Warning->is($color),
+            'dark:text-warning-400 dark:shadow-warning-400/15 dark:bg-warning-900/15' => Color::Warning->is($color),
 
             {{-- Error --}}
             'text-error-700 shadow-error-400/20 border-error-500/25 bg-error-50/40' => Color::Error->is($color),
-            'dark:text-error-400 dark:shadow-error-400/15 dark:bg-error-900/20' => Color::Error->is($color),
+            'dark:text-error-400 dark:shadow-error-400/15 dark:bg-error-900/15' => Color::Error->is($color),
 
             {{-- Outline Variant --}}
             'border' => Variant::Outline->is($variant),
@@ -122,11 +122,11 @@
                     aria-label="Close"
                     @class([
                         'p-1.5 pr-0 -mr-1.5 -mt-0.5 pt-0 sm:mt-0 sm:mr-0 transition ease-in-out rounded',
-                        'text-primary-500 hover:text-primary-800 dark:hover:text-primary-100' => Color::Primary->is($color),
-                        'text-secondary-500 hover:text-secondary-800 dark:hover:text-secondary-100' => Color::Secondary->is($color),
-                        'text-success-500 hover:text-success-800 dark:hover:text-success-100' => Color::Success->is($color),
-                        'text-warning-500 hover:text-warning-800 dark:hover:text-warning-100' => Color::Warning->is($color),
-                        'text-error-500 hover:text-error-800 dark:hover:text-error-100' => Color::Error->is($color),
+                        'text-primary-500 hover:text-primary-900 dark:hover:text-primary-100' => Color::Primary->is($color),
+                        'text-secondary-500 hover:text-secondary-900 dark:hover:text-secondary-100' => Color::Secondary->is($color),
+                        'text-success-500 hover:text-success-900 dark:hover:text-success-100' => Color::Success->is($color),
+                        'text-warning-500 hover:text-warning-900 dark:hover:text-warning-100' => Color::Warning->is($color),
+                        'text-error-500 hover:text-error-900 dark:hover:text-error-100' => Color::Error->is($color),
                         ...config('ui.focusClasses')
                     ])
                     @keyup.enter="open = false"
