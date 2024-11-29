@@ -2,7 +2,7 @@
 @use('Bearly\Ui\Size')
 @use('Bearly\Ui\Variant')
 @props([
-    'color' => Color::Primary,
+    'color' => Color::Secondary,
     'size' => Size::BASE,
     'variant' => Variant::Solid,
     'radius' => Size::BASE,
@@ -57,6 +57,13 @@
             'bg-warning-400 text-warning-900 border-warning-600/60 hover:bg-warning-600 hover:text-white dark:text-warning-500 dark:hover:text-warning-200 dark:border-warning-500/30 dark:bg-warning-400/15 dark:hover:bg-warning-400/40' => Color::Warning->is($color) && Variant::Solid->is($variant),
             'bg-error-500/80 text-error-950/90 border-error-600/60 hover:bg-error-700 hover:text-white dark:text-error-400 dark:hover:text-error-200 dark:border-error-500/30 dark:bg-error-500/15 dark:hover:bg-error-400/40' => Color::Error->is($color) && Variant::Solid->is($variant),
 
+            {{-- Ghost Variant --}}
+            'text-primary-500 hover:bg-primary-50 dark:text-primary-400 dark:hover:bg-primary-600/40 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Ghost->is($variant),
+            'text-secondary-500 hover:bg-secondary-300/20 hover:text-secondary-700 dark:text-secondary-300 dark:hover:bg-secondary-600/40 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
+            'text-success-500 hover:bg-success-50 dark:text-success-400 dark:hover:bg-success-600/40 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Ghost->is($variant),
+            'text-warning-500 hover:bg-warning-50 dark:text-warning-400 dark:hover:bg-warning-600/40 dark:hover:text-warning-100' => Color::Warning->is($color) && Variant::Ghost->is($variant),
+            'text-error-500 hover:bg-error-50 dark:text-error-400 dark:hover:bg-error-600/40 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Ghost->is($variant),
+
             {{-- Outline Variant --}}
             'text-primary-500 border-primary-500 hover:bg-primary-50 dark:text-primary-400 dark:border-primary-400 dark:hover:bg-primary-600/40 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Outline->is($variant),
             'text-secondary-500 border-secondary-500 hover:bg-secondary-300/50 hover:text-secondary-700 dark:text-secondary-300 dark:border-secondary-400 dark:hover:bg-secondary-600 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Outline->is($variant),
@@ -71,13 +78,6 @@
             'text-success-500 hover:text-success-800 dark:text-success-400 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Link->is($variant),
             'text-warning-500 hover:text-warning-800 dark:text-warning-400 dark:hover:text-warning-100' => Color::Warning->is($color) && Variant::Link->is($variant),
             'text-error-500 hover:text-error-800 dark:text-error-400 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Link->is($variant),
-
-            {{-- Ghost Variant --}}
-            'text-primary-500 hover:bg-primary-50 dark:text-primary-400 dark:hover:bg-primary-600/40 dark:hover:text-primary-100' => Color::Primary->is($color) && Variant::Ghost->is($variant),
-            'text-secondary-500 hover:bg-secondary-300/20 hover:text-secondary-700 dark:text-secondary-300 dark:hover:bg-secondary-600/40 dark:hover:text-secondary-100' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
-            'text-success-500 hover:bg-success-50 dark:text-success-400 dark:hover:bg-success-600/40 dark:hover:text-success-100' => Color::Success->is($color) && Variant::Ghost->is($variant),
-            'text-warning-500 hover:bg-warning-50 dark:text-warning-400 dark:hover:bg-warning-600/40 dark:hover:text-warning-100' => Color::Warning->is($color) && Variant::Ghost->is($variant),
-            'text-error-500 hover:bg-error-50 dark:text-error-400 dark:hover:bg-error-600/40 dark:hover:text-error-100' => Color::Error->is($color) && Variant::Ghost->is($variant),
 
             {{-- Glow Variant --}}
             'shadow hover:shadow-lg border-t' => Variant::Glow->is($variant),
