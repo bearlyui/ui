@@ -95,7 +95,7 @@
             '[&_[data-ui-heading]]:text-error-800 dark:[&_[data-ui-heading]]:text-error-200' => Color::Error->is($color),
 
             {{-- Subheadings should match text color --}}
-            '[&_[data-ui-subheading]]:text-inherit [&_[data-ui-subheading]]:opacity-80',
+            '[&_[data-ui-subheading]]:text-inherit [&_[data-ui-subheading]]:opacity-90',
         ])
     }}
 >
