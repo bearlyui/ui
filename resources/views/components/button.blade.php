@@ -48,7 +48,7 @@
 
             {{-- Base Variant Styles --}}
             'border shadow-sm hover:shadow' => Variant::Outline->is($variant) || Variant::Solid->is($variant),
-            {{-- '[text-shadow:1px_0.5px_0px_rgba(0,0,0,0.24)]' => Variant::Solid->is($variant) || Variant::Gradient->is($variant), --}}
+            '[text-shadow:0.5px_0.5px_0px_rgba(255,255,255,0.24)] dark:[text-shadow:0.5px_0.5px_0px_rgba(0,0,0,0.24)]' => Variant::Solid->is($variant) || Variant::Gradient->is($variant),
 
             {{-- Solid Variant --}}
             'bg-primary-700 text-white border-primary-600/60 hover:bg-primary-900 dark:text-primary-300 dark:hover:text-primary-200 dark:border-primary-500/30 dark:bg-primary-400/30 dark:hover:bg-primary-400/50' => Color::Primary->is($color) && Variant::Solid->is($variant),
