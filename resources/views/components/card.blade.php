@@ -8,7 +8,7 @@
 <div {{ $attributes->class([
     'text-sm bg-white shadow rounded ring-1 ring-gray-900/5 text-gray-600',
     'dark:bg-gray-800 dark:shadow-md dark:ring-gray-50/15 dark:text-gray-400',
-    '[&>[data-ui-card]]:bg-gray-50/60 [&>[data-ui-card]]:dark:bg-gray-900/30',
+    '[&>[data-ui-card]]:bg-gray-50/60 [&>[data-ui-card]]:dark:bg-gray-700/30',
     'px-3 py-1.5' => Size::SM->is($padding),
     'px-4 py-2' => Size::BASE->is($padding),
     'px-5 py-2.5' => Size::MD->is($padding),
