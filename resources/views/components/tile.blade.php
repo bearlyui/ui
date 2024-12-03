@@ -13,11 +13,11 @@
     'bg-transparent' => Variant::Ghost->is($variant),
 ])>
     @if (!empty($label))
-        <ui:description tag="dt" :attributes="$label->attributes->class([
+        <ui:subheading tag="dt" :attributes="$label->attributes->class([
             'text-sm font-medium leading-6 opacity-40',
         ])">
             {{ $label }}
-        </ui:description>
+        </ui:subheading>
     @endif
 
     @if (!empty($description))

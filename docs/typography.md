@@ -6,24 +6,29 @@ They're better when they're together, kind of like Panda bears named Jack and Jo
 
 ```html +demo title={Typography Example with Sizes}
 <div class="p-5 space-y-16">
+    <div class="before:content-['SM'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
+        <ui:heading tag="h4">Grizzly Business: Headings</ui:heading>
+        <ui:subheading size="sm">Bear with me, this is important.</ui:subheading>
+    </div>
+
     <div class="before:content-['BASE'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
         <ui:heading tag="h4">Grizzly Business: Headings</ui:heading>
-        <ui:description>Bear with me, this is important.</ui:description>
+        <ui:subheading>Bear with me, this is important.</ui:subheading>
     </div>
 
     <div class="before:content-['MD'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
         <ui:heading tag="h4" size="md">Grizzly Business: Headings</ui:heading>
-        <ui:description size="md">Bear with me, this is important.</ui:description>
+        <ui:subheading size="md">Bear with me, this is important.</ui:subheading>
     </div>
 
     <div class="before:content-['LG'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
         <ui:heading tag="h4" size="lg">Grizzly Business: Headings</ui:heading>
-        <ui:description size="lg">Bear with me, this is important.</ui:description>
+        <ui:subheading size="lg">Bear with me, this is important.</ui:subheading>
     </div>
 
     <div class="before:content-['XL'] before:opacity-50 before:text-xs before:uppercase before:block before:mb-6 before:pb-2.5 before:border-b before:border-white/10">
         <ui:heading tag="h4" size="xl">Grizzly Business: Headings</ui:heading>
-        <ui:description size="xl">Bear with me, this is important.</ui:description>
+        <ui:subheading size="xl">Bear with me, this is important.</ui:subheading>
     </div>
 </div>
 ```
@@ -67,9 +72,9 @@ The font size and weight. Also affects the vertical spacing on description compo
 
 ```html +demo title={Example Description}
 <div class="p-5 space-y-8">
-    <ui:description>Bear with me, this is important.</ui:description>
-    <ui:description size="md">Bear with me, this is important.</ui:description>
-    <ui:description size="lg">Bear with me, this is important.</ui:description>
-    <ui:description size="xl">Bear with me, this is important.</ui:description>
+    <ui:subheading>Bear with me, this is important.</ui:subheading>
+    <ui:subheading size="md">Bear with me, this is important.</ui:subheading>
+    <ui:subheading size="lg">Bear with me, this is important.</ui:subheading>
+    <ui:subheading size="xl">Bear with me, this is important.</ui:subheading>
 </div>
 ```
