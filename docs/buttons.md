@@ -24,11 +24,11 @@ Buttons forward all attributes to the underlying `<button></button>` HTML tag. T
 ---
 
 ### Colors
-Buttons come in 5 colors: `primary` (default), `secondary`, `success`, `warning`, and `error`.
+Buttons come in 5 colors: `primary`, `secondary` (default), `success`, `warning`, and `error`.
 The `color` prop accepts a string or a `Color` enum to define this value.
 
 ```html +demo title={Simple Buttons} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button>Primary</ui:button>
+<ui:button color="primary">Primary</ui:button>
 <ui:button color="secondary">Secondary</ui:button>
 <ui:button color="success">Success</ui:button>
 <ui:button color="warning">Warning</ui:button>
@@ -210,4 +210,3 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="warning" variant="glow">Warning</ui:button>
 <ui:button :disabled="true" color="error" variant="glow">Error</ui:button>
 ```
-
