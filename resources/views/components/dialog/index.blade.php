@@ -47,7 +47,7 @@
         >
             {{-- Overlay --}}
             <div
-                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/25 dark:bg-black/25 backdrop-blur"
+                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/30 dark:bg-black/30 backdrop-blur"
                 x-show="open"
                 x-transition:enter.opacity.delay.0ms
                 x-transition:leave.delay.0ms.duration.0ms
@@ -67,7 +67,7 @@
                 :aria-labelledby="$id('dialog-title')"
                 :aria-describedby="$id('dialog-description')"
                 @class([
-                    'flex-1 shadow-xl relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto',
+                    'rounded flex-1 shadow-lg relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-gray-700/60',
                     'sm:max-w-xl' => $size === 'sm',
                     'sm:max-w-2xl' => $size === 'md',
                     'sm:max-w-4xl' => $size === 'lg',
@@ -130,8 +130,8 @@
                                     x-on:click="closeDialog"
                                     x-effect="open && setTimeout(() => $el.removeAttribute('inert'), 100)"
                                     @class([
-                                        'text-gray-700 dark:text-gray-300 opacity-50 hover:opacity-100 focus:opacity-100',
-                                        'hidden' => $hideCloseButton,
+                                        'hidden sm:block text-gray-700 dark:text-gray-300 opacity-50 hover:opacity-100 focus:opacity-100',
+                                        'hidden sm:hidden' => $hideCloseButton,
                                     ])
                                 >
                                     <span class="text-2xl">&times;</span>
