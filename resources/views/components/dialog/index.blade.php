@@ -9,6 +9,21 @@
     x-data="{
         open: false,
         removedAriaHidden: false,
+        init() {
+            this.$nextTick(() => {
+                const heading = this.$refs.content.querySelector('[data-ui-heading]')
+                if (heading) {
+                    heading.setAttribute('x-bind:id', '$id(\'dialog-title\')')
+                    this.$refs.content.setAttribute('x-bind:aria-labelledby', '$id(\'dialog-title\')')
+                }
+
+                const subheading = this.$refs.content.querySelector('[data-ui-subheading]')
+                if (subheading) {
+                    subheading.setAttribute('x-bind:id', '$id(\'dialog-description\')')
+                    this.$refs.content.setAttribute('x-bind:aria-describedby', '$id(\'dialog-description\')')
+                }
+            })
+        },
         openDialog() {
             this.open = true
 
@@ -64,8 +79,6 @@
                 role="dialog"
                 aria-modal="true"
                 x-id="['dialog-title', 'dialog-description']"
-                :aria-labelledby="$id('dialog-title')"
-                :aria-describedby="$id('dialog-description')"
                 @class([
                     'rounded flex-1 shadow-lg relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-gray-700/60',
                     'sm:max-w-xl' => $size === 'sm',
@@ -101,7 +114,7 @@
                     @empty($header)
                         {{-- No header, add an absolutely positioned close button so it doesn't mess with layout of other stuff --}}
                         <div @class([
-                            'absolute top-0 right-0 mr-1 mt-1 flex items-start justify-end w-full',
+                            'absolute top-0 right-0 mr-1 mt-1',
                             'hidden' => $hideCloseButton,
                         ])>
                             <ui:button
@@ -118,20 +131,21 @@
                         </div>
                     @else
                         <x-slot:header>
-                            <div {{ $header->attributes->class(['flex justify-between items-center gap-4 text-gray-800 dark:text-gray-200']) }} >
+                            <div {{ $header->attributes->class(['text-gray-800 dark:text-gray-200']) }} >
                                 {{ $header }}
 
                                 {{-- Close button --}}
                                 <ui:button
-                                    color="none"
+                                    color="secondary"
                                     size="sm"
+                                    variant="ghost"
                                     inert
                                     x-ref="close"
                                     x-on:click="closeDialog"
                                     x-effect="open && setTimeout(() => $el.removeAttribute('inert'), 100)"
                                     @class([
-                                        'hidden sm:block text-gray-700 dark:text-gray-300 opacity-50 hover:opacity-100 focus:opacity-100',
-                                        'hidden sm:hidden' => $hideCloseButton,
+                                        'absolute top-0 right-0 mr-1 mt-1',
+                                        'hidden' => $hideCloseButton,
                                     ])
                                 >
                                     <span class="text-2xl">&times;</span>
