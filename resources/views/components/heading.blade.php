@@ -7,6 +7,7 @@
 
 <{{ $tag }} data-ui-heading {{ $attributes->class([
     'text-gray-700 dark:text-gray-300',
+    '[&+[data-ui-subheading]]:mb-2.5',
     'text-base font-medium' => Size::BASE->is($size),
     'text-lg font-medium' => Size::MD->is($size),
     'text-xl tracking-tight font-semibold' => Size::LG->is($size),
