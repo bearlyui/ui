@@ -4,7 +4,7 @@
     'tag' => 'p',
 ])
 <{{ $tag }} {{ $attributes->class([
-    'opacity-60',
+    'text-gray-500',
     'text-sm [[data-ui-heading]+&]:mt-1' => Size::BASE->is($size),
     'text-base [[data-ui-heading]+&]:mt-1.5' => Size::MD->is($size),
     'text-base font-light [[data-ui-heading]+&]:mt-2' => Size::LG->is($size),
