@@ -73,9 +73,10 @@
             <div
                 x-ref="content"
                 x-show="open"
-                x-transition:enter.delay.75ms
-                x-transition:leave.duration.0ms
-                x-on:transition:enter.end="$refs.close === document.activeElement && $refs.close.blur()"
+                x-transition:enter="transition ease-out duration-150 delay-75 origin-bottom"
+                x-transition:enter-start="opacity-0 transform scale-90 translate-y-4"
+                x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
+                x-transition:leave.duration.0ms.delay.0ms
                 role="dialog"
                 aria-modal="true"
                 x-id="['dialog-title', 'dialog-description']"
