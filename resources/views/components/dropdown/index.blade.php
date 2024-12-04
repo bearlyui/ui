@@ -43,6 +43,7 @@
 
             this.searchQuery += e.key
 
+            // Look for the first child with textContent that starts with the search query
             const found = Array.from($refs.content.children).find((child) => {
                 return child.textContent.trim().toLowerCase().startsWith(this.searchQuery.toLowerCase())
             })

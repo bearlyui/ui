@@ -1,6 +1,7 @@
 @props([
     'focusOnHover' => true,
     'spacing' => 'space-x-2',
+    'dismiss' => false,
 ])
 <{{ $attributes->get('href') ? 'a' : 'button' }}
     {{ $attributes->merge([
@@ -36,7 +37,9 @@
         fn ($a) => $a-merge([
             'x-bind:class' => '{ "hover:bg-black/5 hover:text-gray-800 hover:bg-black/5 dark:hover:text-gray-200 dark:hover:bg-white/5": true }',
         ])
-    ) }}
+    )->when($dismiss, fn ($a) => $a->merge([
+        'x-on:click.stop.prevent' => 'closeDropdown',
+    ])) }}
 >
     <span @class([
         'flex items-center antialiased',
