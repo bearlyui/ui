@@ -95,9 +95,9 @@
                 x-on:keydown="search"
                 {{ $attributes->class([
                     'block p-1.5 rounded transition-all ease-in-out',
-                    'shadow-xl backdrop-blur-xl border',
-                    'bg-white/80 border-black/15',
-                    'dark:bg-gray-700/80 dark:border-white/10',
+                    'shadow-xl backdrop-blur-xl ring-1',
+                    'bg-white/60 ring-black/5',
+                    'dark:bg-gray-700/60 dark:ring-white/20',
                 ]) }}
             >{{ $slot }}</span>
         </span>
