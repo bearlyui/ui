@@ -39,18 +39,18 @@ $trackClasses = match($color) {
     x-on:click="$refs.checkbox.click()"
     x-bind:aria-checked="checked"
     x-bind:class="{
-        'bg-gray-200 dark:bg-black/25': !checked,
+        'bg-gray-200 dark:bg-gray-950/25': !checked,
         @js($trackClasses): checked,
     }"
     {{ $attributes
         ->whereDoesntStartWith(['wire:model', 'x-model'])
         ->except('name', 'value')
         ->class([
-            'rounded-full border-2',
+            'group rounded-full border-2',
             'border-transparent' => !$hasError,
             'border-red-500 dark:border-red-400' => $hasError,
             'relative inline-flex h-6 w-11 flex-shrink-0',
-            'outline outline-1 focus:outline-1 outline-black/10 outline-offset-[-1px]',
+            'outline focus:outline outline-1 focus:outline-1 outline-black/10 outline-offset-[-1px] dark:outline-white/10',
             'cursor-pointer group transition-all duration-200 ease-in-out',
             'focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white/80',
             'dark:focus:ring-primary-400 dark:focus:ring-offset-black/80',
@@ -63,12 +63,12 @@ $trackClasses = match($color) {
     <span
         x-cloak
         x-bind:class="{
-            'translate-x-5 dark:bg-gray-900/90': checked,
-            'translate-x-0': !checked,
+            'translate-x-5 bg-white dark:bg-gray-800': checked,
+            'translate-x-0 bg-gray-50 group-hover:bg-white dark:bg-gray-700 dark:group-hover:bg-gray-600': !checked,
         }"
         @class([
-            'rounded-full relative inline-block h-5 w-5 pointer-events-none',
-            'bg-white dark:bg-gray-700 shadow dark:shadow-black/25 ring-0 transition duration-200 ease-in-out',
+            'rounded-full relative inline-block h-5 w-5 pointer-events-none transition duration-200 ease-in-out',
+            'shadow dark:shadow-black/25 ring-0',
         ])
     >
         {{-- "On" icon --}}
@@ -104,7 +104,7 @@ $trackClasses = match($color) {
             @if ($iconOff ?? false)
                 {{ $iconOff }}
             @else
-                <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+                <svg class="h-3 w-3 transition duration-200 ease-in-out text-gray-400 group-hover:text-gray-500 dark:group-hover:text-gray-200" fill="none" viewBox="0 0 12 12">
                     <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             @endempty

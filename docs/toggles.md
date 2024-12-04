@@ -55,7 +55,7 @@ Since they're not real inputs, we bind their value to a hidden checkbox. This al
 Use the `checked` property to set the initial state of the toggle.
 
 ```html
-<ui:toggle :checked="$boolean" />
+<ui:toggle :checked="true" />
 ```
 
 ### Color
