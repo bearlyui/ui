@@ -110,23 +110,9 @@ Optional footer content for the dialog.
 </x-slot:footer>
 ```
 
-## Dialog Subcomponents
+## Dialog Accessibility
 
-### ui:dialog.title
-
-Used to set the title of the dialog. This component is automatically associated with the dialog's `aria-labelledby` attribute for accessibility.
-
-```html
-<ui:dialog.title>Dialog Title</ui:dialog.title>
-```
-
-### ui:dialog.description
-
-Used to set the description of the dialog. This component is automatically associated with the dialog's `aria-describedby` attribute for accessibility.
-
-```html
-<ui:dialog.description>This dialog allows you to configure settings.</ui:dialog.description>
-```
+TODO: explain how using the ui:heading and ui:subheading components make the dialog automatically associate the `aria-labelledby` and `aria-describedby` attributes for accessibility.
 
 ## Accessibility
 
