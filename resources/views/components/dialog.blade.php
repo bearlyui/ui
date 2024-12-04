@@ -9,6 +9,21 @@
     x-data="{
         open: false,
         removedAriaHidden: false,
+        init() {
+            this.$nextTick(() => {
+                const heading = this.$refs.content.querySelector('[data-ui-heading]')
+                if (heading) {
+                    heading.setAttribute('x-bind:id', '$id(\'dialog-title\')')
+                    this.$refs.content.setAttribute('x-bind:aria-labelledby', '$id(\'dialog-title\')')
+                }
+
+                const subheading = this.$refs.content.querySelector('[data-ui-subheading]')
+                if (subheading) {
+                    subheading.setAttribute('x-bind:id', '$id(\'dialog-description\')')
+                    this.$refs.content.setAttribute('x-bind:aria-describedby', '$id(\'dialog-description\')')
+                }
+            })
+        },
         openDialog() {
             this.open = true
 
@@ -16,13 +31,11 @@
                 $refs.dialog.removeAttribute('aria-hidden')
                 this.removedAriaHidden = true
             }
-
-            {{-- If the focused element is the close button, blur it --}}
-            $nextTick(() => $refs.close === document.activeElement && $refs.close.blur())
         },
         closeDialog() {
             this.open = false
             this.removedAriaHidden && $refs.dialog.setAttribute('aria-hidden', 'true')
+            this.$refs.close?.setAttribute('inert', 'true')
         },
         closeOnEscape() {
             $refs.dialog.getAttribute('aria-hidden') === null && this.closeDialog()
@@ -47,9 +60,9 @@
                 $containerClass,
             ])
         >
-            {{-- Backdrop --}}
+            {{-- Overlay --}}
             <div
-                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/25 dark:bg-gray-900/40 backdrop-blur xl:backdrop-blur-x"
+                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/30 dark:bg-black/30 backdrop-blur"
                 x-show="open"
                 x-transition:enter.opacity.delay.0ms
                 x-transition:leave.delay.0ms.duration.0ms
@@ -60,16 +73,15 @@
             <div
                 x-ref="content"
                 x-show="open"
-                x-transition:enter.delay.75ms
-                x-transition:leave.duration.0ms
+                x-transition:enter="transition ease-out duration-150 delay-75 origin-bottom"
+                x-transition:enter-start="opacity-0 transform scale-90 translate-y-4"
+                x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
+                x-transition:leave.duration.0ms.delay.0ms
                 role="dialog"
                 aria-modal="true"
                 x-id="['dialog-title', 'dialog-description']"
-                :aria-labelledby="$id('dialog-title')"
-                :aria-describedby="$id('dialog-description')"
                 @class([
-                    'flex-1 shadow-xl relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto',
-                    'sm:max-w-sm' => $size === 'xs',
+                    'rounded flex-1 shadow-lg relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-gray-700/60',
                     'sm:max-w-xl' => $size === 'sm',
                     'sm:max-w-2xl' => $size === 'md',
                     'sm:max-w-4xl' => $size === 'lg',
@@ -78,8 +90,8 @@
                 ])
             >
                 {{-- Card --}}
-                <x-card
-                    class="w-full border border-black/10 !mb-0 rounded-b-none sm:rounded-b {{ $cardClass }}"
+                <ui:card
+                    class="relative w-full border border-black/10 !mb-0 rounded-b-none sm:rounded-b {{ $cardClass }}"
                 >
                     {{-- Mobile drag-to-close --}}
                     <button
@@ -100,24 +112,45 @@
                     >&nbsp;</button>
 
                     {{-- Header --}}
-                    @if ($header ?? false)
+                    @empty($header)
+                        {{-- No header, add an absolutely positioned close button so it doesn't mess with layout of other stuff --}}
+                        <div @class([
+                            'absolute top-0 right-0 mr-1 mt-1',
+                            'hidden' => $hideCloseButton,
+                        ])>
+                            <ui:button
+                                color="secondary"
+                                size="sm"
+                                variant="ghost"
+                                inert
+                                x-ref="close"
+                                x-on:click="closeDialog"
+                                x-effect="open && setTimeout(() => $el.removeAttribute('inert'), 100)"
+                            >
+                                <div class="text-2xl">&times;</div>
+                            </ui:button>
+                        </div>
+                    @else
                         <x-slot:header>
-                            <div {{ $header->attributes->class(['flex justify-between items-center gap-4']) }} >
+                            <div {{ $header->attributes->class(['text-gray-800 dark:text-gray-200']) }} >
                                 {{ $header }}
 
                                 {{-- Close button --}}
-                                <x-button
-                                    x-ref="close"
-                                    color="none"
+                                <ui:button
+                                    color="secondary"
                                     size="sm"
+                                    variant="ghost"
+                                    inert
+                                    x-ref="close"
                                     x-on:click="closeDialog"
+                                    x-effect="open && setTimeout(() => $el.removeAttribute('inert'), 100)"
                                     @class([
-                                        'text-gray-700 opacity-50 hover:opacity-100 focus:opacity-100',
+                                        'absolute top-0 right-0 mr-1 mt-1',
                                         'hidden' => $hideCloseButton,
                                     ])
                                 >
                                     <span class="text-2xl">&times;</span>
-                                </x-button>
+                                </ui:button>
                             </div>
                         </x-slot:header>
                     @endempty
@@ -129,27 +162,6 @@
                     @if ($footer ?? false)
                         <x-slot:footer>{{ $footer }}</x-slot:footer>
                     @endif
-
-                    {{--
-                    If we don't have a header, add a close button. This should be last in the DOM
-                    to help prevent it from being focused by default when the dialog is opened.
-                    --}}
-                    @empty($header)
-                        <div @class([
-                            'absolute top-0 right-0 mt-2 mr-2.5 flex items-start justify-end w-full focus:outline-none',
-                            'hidden' => $hideCloseButton,
-                        ])>
-                            <x-button
-                                x-ref="close"
-                                size="sm"
-                                color="secondary"
-                                variant="ghost"
-                                x-on:click="closeDialog"
-                            >
-                                <div class="text-2xl">&times;</div>
-                            </x-button>
-                        </div>
-                    @endempty
                 </x-card>
             </div>
         </div>

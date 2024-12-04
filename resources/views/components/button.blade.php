@@ -27,11 +27,7 @@
 
             {{-- Focus states --}}
             ...config('ui.focusClasses'),
-            'focus-visible:ring-primary-400/80 focus-visible:dark:ring-primary-300/80' => Color::Primary->is($color),
-            'focus-visible:ring-secondary-400/80 focus-visible:dark:ring-secondary-300/80' => Color::Secondary->is($color),
-            'focus-visible:ring-success-400/80 focus-visible:dark:ring-success-300/80' => Color::Success->is($color),
-            'focus-visible:ring-warning-400/80 focus-visible:dark:ring-warning-300/80' => Color::Warning->is($color),
-            'focus-visible:ring-error-400/80 focus-visible:dark:ring-error-300/80' => Color::Error->is($color),
+            'focus-visible:ring-primary-400/80 focus-visible:dark:ring-primary-300/80',
 
             {{-- Sizing --}}
             'px-1.5 py-1 text-xs' => Size::XS->is($size),
