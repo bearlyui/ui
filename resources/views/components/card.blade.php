@@ -19,7 +19,7 @@
     @if ($header ?? false)
         <div {{ $header->attributes->class([
             'rounded-t border-b bg-gray-50 dark:bg-black/10 border-gray-900/5 dark:border-gray-50/10',
-            'p-0' => Size::NONE->is($padding),
+            'px-4 py-2' => Size::NONE->is($padding),
             '-mx-3 -mt-1.5 mb-1.5 px-3 py-1.5' => Size::SM->is($padding),
             '-mx-4 -mt-2 mb-2 px-4 py-2' => Size::BASE->is($padding),
             '-mx-5 -mt-2.5 mb-2.5 px-5 py-2.5' => Size::MD->is($padding),
@@ -36,6 +36,7 @@
     @if ($footer ?? false)
         <div {{ $footer->attributes->class([
             'border-t bg-gray-50/50 dark:bg-black/10 rounded-b border-gray-900/5 dark:border-gray-50/10',
+            'px-4 py-2' => Size::NONE->is($padding),
             '-mx-3 -mb-1.5 mt-1.5 px-3 py-1.5' => Size::SM->is($padding),
             '-mx-4 -mb-2 mt-2 px-4 py-2' => Size::BASE->is($padding),
             '-mx-5 -mb-2.5 mt-2.5 px-5 py-2.5' => Size::MD->is($padding),
