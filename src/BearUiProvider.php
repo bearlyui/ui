@@ -12,7 +12,6 @@ class BearUiProvider extends ServiceProvider
         $this->commands([
             Commands\Publish::class,
             Commands\Install::class,
-            Commands\CompileHeroicons::class,
         ]);
         $this->mergeConfigFrom(__DIR__.'/../config/ui.php', 'ui');
 
