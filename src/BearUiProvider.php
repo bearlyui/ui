@@ -15,6 +15,13 @@ class BearUiProvider extends ServiceProvider
         ]);
         $this->mergeConfigFrom(__DIR__.'/../config/ui.php', 'ui');
 
+        // if local env register icon import command
+        if (app()->environment('local')) {
+            $this->commands([
+                Commands\ImportHeroicons::class,
+            ]);
+        }
+
         $this->bootAnonymousComponents();
         $this->bootUiTagCompiler();
     }
@@ -33,6 +40,8 @@ class BearUiProvider extends ServiceProvider
             path: __DIR__.'/../resources/views/components',
             prefix: 'ui'
         );
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views/icons', 'ui-icon');
     }
 
     protected function bootUiTagCompiler(): void
