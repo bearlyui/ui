@@ -128,6 +128,7 @@
                                 x-on:click="closeDialog"
                                 x-effect="open && setTimeout(() => $el.removeAttribute('inert'), 100)"
                             >
+                                <span class="sr-only">Close</span>
                                 <ui:icon.x-mark class="opacity-75 group-hover:opacity-100" variant="mini" />
                             </ui:button>
                         </div>
@@ -151,6 +152,7 @@
                                         'hidden' => $hideCloseButton,
                                     ])
                                 >
+                                    <span class="sr-only">Close</span>
                                     <ui:icon.x-mark class="opacity-75 group-hover:opacity-100" variant="mini" />
                                 </ui:button>
                             </div>

@@ -29,6 +29,8 @@ class ImportHeroicons extends Command
 
             $file = fopen($path, 'w');
 
+            // Thank Heroicons for this SVG
+            fwrite($file, "{{-- Icon from Heroicons (thank you!) - https://heroicons.com/ --}}\n\n");
             // Write the component header
             fwrite($file, "@props([\n    'variant' => 'outline',\n])\n\n");
 

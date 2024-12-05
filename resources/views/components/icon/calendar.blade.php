@@ -1,3 +1,5 @@
+{{-- Icon from Heroicons (thank you!) - https://heroicons.com/ --}}
+
 @props([
     'variant' => 'outline',
 ])
