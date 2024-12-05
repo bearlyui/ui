@@ -2,7 +2,7 @@
 @use('Bearly\Ui\Variant')
 
 @props([
-    'dismissable' => false,
+    'dismiss' => false,
     'color' => Color::Primary,
     'variant' => Variant::Outline,
     'role' => 'status',
@@ -99,13 +99,13 @@
     }}
 >
     <div @class([
-        'flex-1 flex justify-between items-start sm:items-center gap-1' => $dismissable,
+        'flex-1 flex justify-between items-start sm:items-center gap-1' => $dismiss,
     ])>
         {{-- Main content --}}
         <div>{{ $slot }}</div>
 
         {{-- Close Button --}}
-        @if ($dismissable)
+        @if ($dismiss)
             <div @class([
                 'flex items-center align-top'
             ])>
