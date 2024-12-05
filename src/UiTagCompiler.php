@@ -128,7 +128,11 @@ class UiTagCompiler extends ComponentTagCompiler
 
             $attributes = $this->getAttributesFromAttributeString($matches['attributes']);
 
-            return $this->componentString('ui::'.$matches[1], $attributes)."\n@endComponentClass##END-COMPONENT-CLASS##";
+            $tagName = str($matches[1])->contains('icon-')
+                ? str($matches[1])->replace('icon-', 'icon.')->toString()
+                : $matches[1];
+
+            return $this->componentString('ui::'.$tagName, $attributes)."\n@endComponentClass##END-COMPONENT-CLASS##";
         }, $value);
     }
 

@@ -122,12 +122,13 @@
                                 color="secondary"
                                 size="sm"
                                 variant="ghost"
+                                class="group"
                                 inert
                                 x-ref="close"
                                 x-on:click="closeDialog"
                                 x-effect="open && setTimeout(() => $el.removeAttribute('inert'), 100)"
                             >
-                                <div class="text-2xl">&times;</div>
+                                <ui:icon.x-mark class="opacity-75 group-hover:opacity-100" variant="mini" />
                             </ui:button>
                         </div>
                     @else
@@ -140,6 +141,7 @@
                                     color="secondary"
                                     size="sm"
                                     variant="ghost"
+                                    class="group"
                                     inert
                                     x-ref="close"
                                     x-on:click="closeDialog"
@@ -149,7 +151,7 @@
                                         'hidden' => $hideCloseButton,
                                     ])
                                 >
-                                    <span class="text-2xl">&times;</span>
+                                    <ui:icon.x-mark class="opacity-75 group-hover:opacity-100" variant="mini" />
                                 </ui:button>
                             </div>
                         </x-slot:header>
