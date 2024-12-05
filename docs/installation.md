@@ -65,7 +65,7 @@ export default {
         secondary: colors.slate, // [tl! add] [tl! focus]
         success: colors.green, // [tl! add] [tl! focus]
         warning: colors.amber, // [tl! add] [tl! focus]
-        error: colors.red, // [tl! add] [tl! focus]
+        danger: colors.red, // [tl! add] [tl! focus]
       } // [tl! add] [tl! focus]
     }, // [tl! focus]
   }, // [tl! focus]

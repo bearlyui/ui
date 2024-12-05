@@ -45,7 +45,7 @@ export default {
                 secondary: colors.slate,
                 success: colors.green,
                 warning: colors.amber,
-                error: colors.red,
+                danger: colors.red,
             }
         }
     }

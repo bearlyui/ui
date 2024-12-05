@@ -23,7 +23,7 @@ $trackClasses = match($color) {
     Color::Secondary, 'secondary'  => 'bg-secondary-500 dark:bg-secondary-400/70 text-secondary-600 dark:text-secondary-200',
     Color::Success, 'success'  => 'bg-success-500 dark:bg-success-400/70 text-success-600 dark:text-success-200',
     Color::Warning, 'warning'  => 'bg-warning-500 dark:bg-warning-400/70 text-warning-600 dark:text-warning-200',
-    Color::Error, 'error'  => 'bg-error-500 dark:bg-error-400/70 text-error-600 dark:text-error-200',
+    Color::Danger, 'danger'  => 'bg-danger-500 dark:bg-danger-400/70 text-danger-600 dark:text-danger-200',
     default => ''
 };
 

@@ -34,7 +34,7 @@ Use `<ui:toggle>` to create a toggle. You can use the `checked` property to set 
 </ui:label>
 
 <ui:label class="flex mt-4 items-center space-x-2">
-    <ui:toggle :checked="true" color="error" />
+    <ui:toggle :checked="true" color="danger" />
     <span>Yes, or no?</span>
 </ui:label>
 ```
@@ -61,7 +61,7 @@ Use the `checked` property to set the initial state of the toggle.
 ### Color
 
 Use the `color` property to set the color of the toggle when it's on. It can be any of the following:
-`primary`, `secondary`, `success`, `warning`, `error`.
+`primary`, `secondary`, `success`, `warning`, `danger`.
 
 ```html +demo
 <ui:label class="flex mt-4 items-center space-x-2">
@@ -85,8 +85,8 @@ Use the `color` property to set the color of the toggle when it's on. It can be 
 </ui:label>
 
 <ui:label class="flex mt-4 items-center space-x-2">
-    <ui:toggle :checked="true" color="error" />
-    <span>Error</span>
+    <ui:toggle :checked="true" color="danger" />
+    <span>Danger</span>
 </ui:label>
 ```
 

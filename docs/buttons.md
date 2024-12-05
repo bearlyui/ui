@@ -24,7 +24,7 @@ Buttons forward all attributes to the underlying `<button></button>` HTML tag. T
 ---
 
 ### Colors
-Buttons come in 5 colors: `primary`, `secondary` (default), `success`, `warning`, and `error`.
+Buttons come in 5 colors: `primary`, `secondary` (default), `success`, `warning`, and `danger`.
 The `color` prop accepts a string or a `Color` enum to define this value.
 
 ```html +demo title={Simple Buttons} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -32,7 +32,7 @@ The `color` prop accepts a string or a `Color` enum to define this value.
 <ui:button color="secondary">Secondary</ui:button>
 <ui:button color="success">Success</ui:button>
 <ui:button color="warning">Warning</ui:button>
-<ui:button color="error">Error</ui:button>
+<ui:button color="danger">Danger</ui:button>
 ```
 
 ### Sizing
@@ -110,7 +110,7 @@ Buttons come in six variants (flavors if you like that better): `solid` (default
 <ui:button color="secondary">Secondary</ui:button>
 <ui:button color="success">Success</ui:button>
 <ui:button color="warning">Warning</ui:button>
-<ui:button color="error">Error</ui:button>
+<ui:button color="danger">Danger</ui:button>
 ```
 
 ```html +demo title={Outline Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -118,7 +118,7 @@ Buttons come in six variants (flavors if you like that better): `solid` (default
 <ui:button color="secondary" variant="outline">Secondary</ui:button>
 <ui:button color="success" variant="outline">Success</ui:button>
 <ui:button color="warning" variant="outline">Warning</ui:button>
-<ui:button color="error" variant="outline">Error</ui:button>
+<ui:button color="danger" variant="outline">Danger</ui:button>
 ```
 
 ```html +demo title={Link Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -126,7 +126,7 @@ Buttons come in six variants (flavors if you like that better): `solid` (default
 <ui:button color="secondary" variant="link">Secondary</ui:button>
 <ui:button color="success" variant="link">Success</ui:button>
 <ui:button color="warning" variant="link">Warning</ui:button>
-<ui:button color="error" variant="link">Error</ui:button>
+<ui:button color="danger" variant="link">Danger</ui:button>
 ```
 
 ```html +demo title={Gradient Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -134,7 +134,7 @@ Buttons come in six variants (flavors if you like that better): `solid` (default
 <ui:button color="secondary" variant="gradient">Secondary</ui:button>
 <ui:button color="success" variant="gradient">Success</ui:button>
 <ui:button color="warning" variant="gradient">Warning</ui:button>
-<ui:button color="error" variant="gradient">Error</ui:button>
+<ui:button color="danger" variant="gradient">Danger</ui:button>
 ```
 
 ```html +demo title={Ghost Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -142,7 +142,7 @@ Buttons come in six variants (flavors if you like that better): `solid` (default
 <ui:button color="secondary" variant="ghost">Secondary</ui:button>
 <ui:button color="success" variant="ghost">Success</ui:button>
 <ui:button color="warning" variant="ghost">Warning</ui:button>
-<ui:button color="error" variant="ghost">Error</ui:button>
+<ui:button color="danger" variant="ghost">Danger</ui:button>
 ```
 
 ```html +demo title={Glow Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -150,14 +150,14 @@ Buttons come in six variants (flavors if you like that better): `solid` (default
 <ui:button color="secondary" variant="glow">Secondary</ui:button>
 <ui:button color="success" variant="glow">Success</ui:button>
 <ui:button color="warning" variant="glow">Warning</ui:button>
-<ui:button color="error" variant="glow">Error</ui:button>
+<ui:button color="danger" variant="glow">Danger</ui:button>
 ```
 
 ### Links (href)
 Use the `href` prop to turn a button into a link. It uses an `onclick` handler to redirect to the specified URL since buttons don't have the `href` attribute in HTML. If you really want it to be an anchor tag (`<a>`), use [the link component](/docs/links) instead.
 
 ```html +demo title={Buttons as Links} previewClasses={flex items-center justify-center py-6}
-<ui:button href="https://laravel.com" variant="glow" color="error">This Button Links to the Laravel Docs</ui:button>
+<ui:button href="https://laravel.com" variant="glow" color="danger">This Button Links to the Laravel Docs</ui:button>
 ```
 
 ### Disabled State
@@ -168,7 +168,7 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="secondary">Secondary</ui:button>
 <ui:button :disabled="true" color="success">Success</ui:button>
 <ui:button :disabled="true" color="warning">Warning</ui:button>
-<ui:button :disabled="true" color="error">Error</ui:button>
+<ui:button :disabled="true" color="danger">Danger</ui:button>
 ```
 
 ```html +demo title={Outline Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -176,7 +176,7 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="secondary" variant="outline">Secondary</ui:button>
 <ui:button :disabled="true" color="success" variant="outline">Success</ui:button>
 <ui:button :disabled="true" color="warning" variant="outline">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="outline">Error</ui:button>
+<ui:button :disabled="true" color="danger" variant="outline">Danger</ui:button>
 ```
 
 ```html +demo title={Link Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -184,7 +184,7 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="secondary" variant="link">Secondary</ui:button>
 <ui:button :disabled="true" color="success" variant="link">Success</ui:button>
 <ui:button :disabled="true" color="warning" variant="link">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="link">Error</ui:button>
+<ui:button :disabled="true" color="danger" variant="link">Danger</ui:button>
 ```
 
 ```html +demo title={Gradient Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -192,7 +192,7 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="secondary" variant="gradient">Secondary</ui:button>
 <ui:button :disabled="true" color="success" variant="gradient">Success</ui:button>
 <ui:button :disabled="true" color="warning" variant="gradient">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="gradient">Error</ui:button>
+<ui:button :disabled="true" color="danger" variant="gradient">Danger</ui:button>
 ```
 
 ```html +demo title={Ghost Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -200,7 +200,7 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="secondary" variant="ghost">Secondary</ui:button>
 <ui:button :disabled="true" color="success" variant="ghost">Success</ui:button>
 <ui:button :disabled="true" color="warning" variant="ghost">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="ghost">Error</ui:button>
+<ui:button :disabled="true" color="danger" variant="ghost">Danger</ui:button>
 ```
 
 ```html +demo title={Glow Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
@@ -208,5 +208,5 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="secondary" variant="glow">Secondary</ui:button>
 <ui:button :disabled="true" color="success" variant="glow">Success</ui:button>
 <ui:button :disabled="true" color="warning" variant="glow">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="glow">Error</ui:button>
+<ui:button :disabled="true" color="danger" variant="glow">Danger</ui:button>
 ```

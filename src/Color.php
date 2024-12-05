@@ -10,6 +10,6 @@ enum Color: string
     case Secondary = 'secondary';
     case Success = 'success';
     case Warning = 'warning';
-    case Error = 'error';
+    case Danger = 'danger';
     case None = 'none';
 }

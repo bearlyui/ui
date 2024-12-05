@@ -21,7 +21,7 @@ return [
 
 ## Tailwind CSS Configuration
 
-The [installation process](/docs/installation) configures some default values in your 
+The [installation process](/docs/installation) configures some default values in your
 Tailwind CSS configuration file. Change these however you wish to tweak the colors of your own UI.
 
 The required color names are:
@@ -32,7 +32,7 @@ The required color names are:
 | `secondary`  | Supporting color, used for secondary actions and elements      |
 | `success`    | Indicates successful actions or positive status                |
 | `warning`    | Highlights cautions or items needing attention                 |
-| `error`      | Signifies errors, failures, or critical issues                 |
+| `danger`      | Signifies dangers, failures, or critical issues                 |
 
 Your Tailwind config file should look something like this:
 
@@ -46,9 +46,8 @@ theme: {
       'secondary': colors.slate, // [tl! focus]
       'success': colors.green, // [tl! focus]
       'warning': colors.amber, // [tl! focus]
-      'error': colors.red, // [tl! focus]
+      'danger': colors.red, // [tl! focus]
     }, // [tl! focus]
   },
 },
 ```
-

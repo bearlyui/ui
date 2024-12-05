@@ -124,7 +124,7 @@ class Install extends Command
             'secondary' => 'colors.slate',
             'success' => 'colors.green',
             'warning' => 'colors.amber',
-            'error' => 'colors.red',
+            'danger' => 'colors.red',
         ];
 
         // Check if the theme.extend.colors section exists
@@ -151,7 +151,7 @@ class Install extends Command
         // Prepare the colors string
         $colorsString = '';
         foreach ($defaultColors as $name => $value) {
-            $newline = $name === 'error' ? '' : "\n";
+            $newline = $name === 'danger' ? '' : "\n";
             $colorsString .= "        '{$name}': {$value},{$newline}";
         }
 
