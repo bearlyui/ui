@@ -1,10 +1,10 @@
 # Cards
 
-Cards to put stuff in. They're great when you need 'em!
+Cards... or are they boxes? Rectangles on a screen! Put stuff in them, love them like one of your own. Nest them in other cards, or put them in a grid, the choice is yours!
 
 ## Using Cards
 
-Use `<ui:card>` to create a card with the default variant, padding, and radius.
+Use `<ui:card>` to create a card with the default `variant`, `padding`, and `radius`.
 
 ```html +demo title={Basic Cards} previewClasses={space-y-5}
 <ui:card>I'm a Happy Little Card</ui:card>
@@ -17,11 +17,10 @@ Use `<ui:card>` to create a card with the default variant, padding, and radius.
 
 ## Properties
 
-Customize your cards with the following properties.
+Cards suppport the following properties:
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `color` | `string \| Color` | `none` | The color of the card. |
 | `size` | `string \| Size` | `true` | The padding and text size of the card. |
 | `radius` | `string \| Size` | `base` | The border radius of the card. |
 | `variant` | `string \| Variant` | `solid` | The variant of the card. |
