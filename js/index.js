@@ -1,5 +1,7 @@
 import dialog from './dialog'
 
 export default function(Alpine) {
-    dialog(Alpine)
+    document.addEventListener('alpine:init', () => {
+        dialog(Alpine)
+    })
 }
