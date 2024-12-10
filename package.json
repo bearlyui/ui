@@ -15,7 +15,9 @@
   "main": "js/index.js",
   "homepage": "https://github.com/bearly-ui/ui#readme",
   "scripts": {
-    "build": "esbuild js/cdn.js --bundle --sourcemap --outfile=dist/ui.js --target=chrome58,firefox57,safari11,edge16"
+    "dev": "esbuild js/cdn.js --bundle --sourcemap --outfile=dist/ui.js --target=chrome58,firefox57,safari11,edge16",
+    "build": "esbuild js/cdn.js --bundle --minify --outfile=dist/ui.min.js --target=chrome58,firefox57,safari11,edge16",
+    "build:all": "npm run dev && npm run build"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
