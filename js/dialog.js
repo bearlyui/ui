@@ -1,9 +1,11 @@
+import { useHeadingsAsLabelAndDescription } from './utils'
+
 export default function(Alpine) {
     Alpine.data('uiDialog', () => ({
         open: false,
         removedAriaHidden: false,
         init() {
-            this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$el, 'ui-dialog'))
+            this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$refs.content, 'ui-dialog'))
         },
         openDialog() {
             this.open = true
