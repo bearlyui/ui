@@ -3,7 +3,6 @@ export default function(Alpine) {
         open: false,
         removedAriaHidden: false,
         init() {
-            this.$el.setAttribute('x-modelable', 'open')
             this.$nextTick(() => {
                 const heading = this.$refs.content.querySelector('[data-ui-heading]')
                 if (heading) {

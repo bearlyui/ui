@@ -7,6 +7,7 @@
 
 <span
     x-data="uiDialog"
+    x-modelable="open"
     {{ $attributes }}
 >
     {{-- Trigger --}}
