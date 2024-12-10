@@ -70,5 +70,17 @@ export default function(Alpine) {
             ':aria-controls'() { return this.open && this.$id('dropdown-items') },
             ':id'() { return this.$id('dropdown-trigger') },
         },
+        uiDropdownContent: {
+            'x-transition': true,
+            'x-ref': 'content',
+            'x-show'() { return this.open },
+            'x-trap'() { return this.open },
+            'x-on:keydown': 'search',
+            ':id'() { return this.$id('dropdown-items') },
+            'role': 'menu',
+            'aria-orientation': 'vertical',
+            ':aria-labelledby'() { return this.$id('dropdown-trigger') },
+            ':aria-activedescendant'() { return this.activeItem && this.activeItem.id },
+        }
     }))
 }
