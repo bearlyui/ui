@@ -32,7 +32,7 @@
         this.removedAriaHidden && $refs.dialog.setAttribute("aria-hidden", "true");
         (_a = this.$refs.close) == null ? void 0 : _a.setAttribute("inert", "true");
       },
-      container: {
+      uiDialogContainer: {
         "x-show"() {
           return this.open;
         },
@@ -47,7 +47,7 @@
           return ["ui-dialog-title", "ui-dialog-description"];
         }
       },
-      overlay: {
+      uiDialogOverlay: {
         "x-show"() {
           return this.open;
         },
@@ -57,7 +57,7 @@
           return this.closeDialog();
         }
       },
-      content: {
+      uiDialogContent: {
         ["role"]: "dialog",
         ["aria-modal"]: true,
         ["x-ref"]: "content",
@@ -80,9 +80,14 @@
     }));
   }
 
+  // js/index.js
+  var ui = function(alpine) {
+    dialog_default(alpine);
+  };
+
   // js/cdn.js
   document.addEventListener("alpine:init", () => {
-    dialog_default(window.Alpine);
+    ui(window.Alpine);
   });
 })();
 //# sourceMappingURL=ui.js.map

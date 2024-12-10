@@ -1,5 +1,5 @@
-import dialog from './dialog'
+import { ui } from './index'
 
 document.addEventListener('alpine:init', () => {
-  dialog(window.Alpine)
+    ui(window.Alpine)
 })
