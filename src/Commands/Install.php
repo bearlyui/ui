@@ -27,10 +27,38 @@ class Install extends Command
         $this->installLivewire();
         $this->installAppLayoutComponent();
         $this->newLine();
+        $this->installJsAssets();
         Artisan::call('view:clear');
         // TODO: build assets?
 
         info('✅  Bear UI installation complete. Enjoy! 🐻');
+    }
+
+    protected function installJsAssets()
+    {
+        $jsFile = File::get(base_path('resources/js/app.js'));
+        // If there's Livewire.start() in the JS file, we need to add the Alpine plugin
+        if (str($jsFile)->contains('Livewire.start()')) {
+            File::put(base_path('resources/js/app.js'), str($jsFile)->prepend("import ui from '../../vendor/bearly/ui/js/index.js'\n"));
+            File::put(base_path('resources/js/app.js'), str($jsFile)->replace('Livewire.start()', "Alpine.plugin(ui)\n Livewire.start()"));
+            info('✅  Alpine plugin installed.');
+
+            return;
+        }
+
+        $output = str($jsFile);
+        // Otherwise, we just call the ui function when Alpine init happens
+        if (! $output->contains("import { ui } from '../../vendor/bearly/ui/js/index.js'")) {
+            $output = $output->prepend("import { ui } from '../../vendor/bearly/ui/js/index.js'\n");
+        }
+
+        if (! $output->contains("document.addEventListener('alpine:init', () => {")) {
+            $output = $output->append("document.addEventListener('alpine:init', () => {\n  ui(window.Alpine)\n})\n");
+        }
+
+        File::put(base_path('resources/js/app.js'), $output);
+
+        info('✅  Script assets installed.');
     }
 
     protected function ensureJsFileHasValues(string $path, string $key, array $values)

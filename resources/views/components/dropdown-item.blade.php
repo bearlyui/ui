@@ -5,20 +5,7 @@
 ])
 <{{ $attributes->get('href') ? 'a' : 'button' }}
     {{ $attributes->merge([
-        'role' => 'menuitem',
-        ':id' => '$id("dropdown-menu-item")',
-        '@focus' => 'activeItem = $el',
-        '@keydown.escape.stop.prevent' => 'closeDropdown',
-        '@keydown.home.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().first()',
-        '@keydown.end.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().last()',
-        '@keydown.page-up.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().first()',
-        '@keydown.page-down.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().last()',
-        '@keydown.arrow-left.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().previous()',
-        '@keydown.arrow-up.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().previous()',
-        '@keydown.arrow-right.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().next()',
-        '@keydown.arrow-down.stop.prevent' => '$focus.within($el.parentNode.closest("[role=menu]")).wrap().next()',
-        '@keydown.space.stop.prevent' => '$el.click()',
-        '@keydown.enter.stop.prevent' => '$el.click()',
+        'x-bind' => 'uiDropdownItem',
     ])->class([
         'group px-2.5 py-1.5',
         'w-full min-w-[200px] flex items-center justify-between',

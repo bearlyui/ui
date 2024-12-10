@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "bear-ui",
+  "name": "@bearly-ui/ui",
   "version": "0.1.0",
   "description": "Grizzly UI components for nice people.",
   "repository": {
@@ -12,9 +12,16 @@
   "bugs": {
     "url": "https://github.com/bearly-ui/ui/issues"
   },
+  "main": "js/index.js",
   "homepage": "https://github.com/bearly-ui/ui#readme",
+  "scripts": {
+    "dev": "esbuild js/cdn.js --bundle --sourcemap --outfile=dist/ui.js --target=chrome58,firefox57,safari11,edge16",
+    "build": "esbuild js/cdn.js --bundle --minify --outfile=dist/ui.min.js --target=chrome58,firefox57,safari11,edge16",
+    "build:all": "npm run dev && npm run build"
+  },
   "devDependencies": {
-    "tailwindcss": "^3.3.5",
-    "@tailwindcss/forms": "^0.5.7"
+    "@tailwindcss/forms": "^0.5.7",
+    "esbuild": "0.24.0",
+    "tailwindcss": "^3.3.5"
   }
 }

@@ -32,12 +32,8 @@ $trackClasses = match($color) {
 <button
     type="button"
     role="switch"
-    x-data="{
-        checked: @js($isChecked),
-    }"
-    x-modelable="checked"
-    x-on:click="$refs.checkbox.click()"
-    x-bind:aria-checked="checked"
+    x-data="uiToggle(@js($isChecked))"
+    x-bind="uiToggleAttributes"
     x-bind:class="{
         'bg-gray-200 dark:bg-gray-950/25': !checked,
         @js($trackClasses): checked,
@@ -59,6 +55,7 @@ $trackClasses = match($color) {
     }}
 >
     <span class="sr-only">{{ $idOrName }}</span>
+
     {{-- Dot --}}
     <span
         x-cloak

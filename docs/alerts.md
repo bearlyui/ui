@@ -45,10 +45,7 @@ You may optionally include a close button on your alert by setting the `dismiss`
 
 If you need manual control over the alert dismissal, set the `open` property with Alpine.js. For example:
 ```html
-<ui:alert
-    :dismiss="true"
-    x-init="$watch('open', value => { setTimeout(() => { open = true }, 750) })"
->Dismiss me, if you please</ui:alert>
+<ui:alert :dismiss="true">Dismiss me, if you please</ui:alert>
 ```
 
 ```html +demo title={Manual Control with Alpine.js}
