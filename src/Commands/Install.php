@@ -46,14 +46,17 @@ class Install extends Command
             return;
         }
 
+        $output = str($jsFile);
         // Otherwise, we just call the ui function when Alpine init happens
-        if (! str($jsFile)->contains("import { ui } from '../../vendor/bearly/ui/js/index.js'")) {
-            File::put(base_path('resources/js/app.js'), str($jsFile)->prepend("import { ui } from '../../vendor/bearly/ui/js/index.js'\n"));
+        if (! $output->contains("import { ui } from '../../vendor/bearly/ui/js/index.js'")) {
+            $output = $output->prepend("import { ui } from '../../vendor/bearly/ui/js/index.js'\n");
         }
 
-        if (! str($jsFile)->contains("document.addEventListener('alpine:init', () => {")) {
-            File::put(base_path('resources/js/app.js'), str($jsFile)->prepend("document.addEventListener('alpine:init', () => {\n  ui(window.Alpine)\n})\n"));
+        if (! $output->contains("document.addEventListener('alpine:init', () => {")) {
+            $output = $output->append("document.addEventListener('alpine:init', () => {\n  ui(window.Alpine)\n})\n");
         }
+
+        File::put(base_path('resources/js/app.js'), $output);
 
         info('✅  Script assets installed.');
     }
