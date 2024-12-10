@@ -8,35 +8,12 @@
     'role' => 'status',
 ])
 <div
-    x-data="{
-        open: true,
-        init() {
-            this.$nextTick(() => {
-                const heading = this.$el.querySelector('[data-ui-heading]')
-                if (heading) {
-                    heading.setAttribute('x-bind:id', '$id(\'alert-title\')')
-                    this.$el.setAttribute('x-bind:aria-labelledby', '$id(\'alert-title\')')
-                }
-
-                const subheading = this.$el.querySelector('[data-ui-subheading]')
-                if (subheading) {
-                    subheading.setAttribute('x-bind:id', '$id(\'alert-description\')')
-                    this.$el.setAttribute('x-bind:aria-describedby', '$id(\'alert-description\')')
-                }
-            })
-        }
-    }"
-    x-id="['alert-title', 'alert-description']"
-    x-show="open"
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0 scale-75 translate-y-full"
-    x-transition:enter-end="opacity-100 scale-[1.02] -translate-y-1"
-    x-transition:leave="transition ease-in-out duration-300"
-    x-transition:leave-start="opacity-100 scale-100 -translate-y-full"
-    x-transition:leave-end="opacity-0 scale-75 translate-y-full"
-
     {{ $attributes
-        ->merge(['role' => $role])
+        ->merge([
+            'role' => $role,
+            'x-data' => 'uiAlert',
+            'x-bind' => 'uiAlertAttributes',
+        ])
         ->class([
             'relative rounded transition ease-in-out text-sm',
             'px-3 py-2',
@@ -111,7 +88,7 @@
             ])>
                 <button
                     type="button"
-                    x-ref="closeButton"
+                    x-bind="uiAlertClose"
                     aria-label="Close"
                     @class([
                         'p-0.5 -mr-2.5 -mt-1.5 sm:mt-0 sm:mr-0 transition ease-in-out rounded',
@@ -122,12 +99,9 @@
                         'text-danger-500 hover:text-danger-900 dark:hover:text-danger-100' => Color::Danger->is($color),
                         ...config('ui.focusClasses')
                     ])
-                    @keyup.enter="open = false"
-                    @keyup.space="open = false"
-                    @click.prevent="open = false"
                 >
                     <span class="sr-only">Close</span>
-                    <ui:icon-x-mark variant="micro" />
+                    <ui:icon-x-mark variant="mini" />
                 </button>
             </div>
         @endif
