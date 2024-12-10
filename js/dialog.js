@@ -19,7 +19,7 @@ export default function(Alpine) {
             this.$refs.close?.setAttribute('inert', 'true')
         },
 
-        uiDialogContainer: {
+        uiDialogAttributes: {
             'x-show'() { return this.open },
             'x-trap.inert.noscroll'() { return this.open },
             'x-on:keyup.escape.window'() { this.$refs.dialog.getAttribute('aria-hidden') === null && this.closeDialog() },

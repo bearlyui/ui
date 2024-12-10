@@ -16,7 +16,7 @@
     {{-- Dialog --}}
     <template x-teleport="body">
         <div
-            x-bind="uiDialogContainer"
+            x-bind="uiDialogAttributes"
             @class([
                 'sm:px-5' => $size === 'full',
                 'fixed flex items-end sm:items-center justify-center top-0 right-0 bottom-0 left-0',
