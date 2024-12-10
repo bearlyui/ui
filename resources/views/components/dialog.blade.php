@@ -15,7 +15,7 @@
     {{-- Dialog --}}
     <template x-teleport="body">
         <div
-            x-bind="container"
+            x-bind="uiDialogContainer"
             @class([
                 'sm:px-5' => $size === 'full',
                 'fixed flex items-end sm:items-center justify-center top-0 right-0 bottom-0 left-0',
@@ -24,13 +24,13 @@
         >
             {{-- Overlay --}}
             <div
-                x-bind="overlay"
+                x-bind="uiDialogOverlay"
                 class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/30 dark:bg-black/30 backdrop-blur"
             ></div>
 
             {{-- Content --}}
             <div
-                x-bind="content"
+                x-bind="uiDialogContent"
                 @class([
                     'rounded flex-1 shadow-lg relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-gray-700/60',
                     'sm:max-w-xl' => $size === 'sm',

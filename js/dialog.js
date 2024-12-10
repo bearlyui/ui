@@ -32,7 +32,7 @@ export default function(Alpine) {
             this.$refs.close?.setAttribute('inert', 'true')
         },
 
-        container: {
+        uiDialogContainer: {
             'x-show'() { return this.open },
             ['x-trap.inert.noscroll']() { return this.open },
             ['x-on:keyup.escape.window']() { this.$refs.dialog.getAttribute('aria-hidden') === null && this.closeDialog() },
@@ -40,14 +40,14 @@ export default function(Alpine) {
             ['x-id']() { return ['ui-dialog-title', 'ui-dialog-description'] },
         },
 
-        overlay: {
+        uiDialogOverlay: {
             'x-show'() { return this.open },
             ['x-transition:enter.opacity.delay.0ms']: '',
             ['x-transition:leave.delay.0ms.duration.0ms']: '',
             ['x-on:click.stop']() { return this.closeDialog() },
         },
 
-        content: {
+        uiDialogContent: {
             ['role']: 'dialog',
             ['aria-modal']: true,
             ['x-ref']: 'content',
