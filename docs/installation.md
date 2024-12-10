@@ -75,6 +75,30 @@ export default {
 }
 ```
 
+### Add the JS build
+
+The last step is to add the Javascript assets to your project. If you're [manually bundling Livewire and Alpine](https://livewire.laravel.com/docs/installation#manually-bundling-livewire-and-alpine) use the Alpine plugin.
+
+```js
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+import UI from '../../vendor/bearly/ui/js/index.js'; // [tl! add] [tl! focus]
+
+// Needs to come before Livewire.start() [tl! focus]
+Alpine.plugin(UI) // [tl! add] [tl! focus]
+
+Livewire.start()
+```
+
+Alternatively, add the script assets to your JS bundle. Usually this is done in your `resources/js/app.js` file.
+
+```js
+import UI from '../../vendor/bearly/ui/js/index.js'; // [tl! add] [tl! focus]
+
+document.addEventListener('alpine:init', () => {
+  UI(window.Alpine)
+})
+```
+
 ### Livewire Assets
 
 > **Heads up:** Livewire only injects its Javascript assets when it detects a Livewire component by default, so you'll likely want to [Manually include Livewire's frontend assets](https://livewire.laravel.com/docs/installation#manually-including-livewires-frontend-assets) or force asset injection by adding `\Livewire\Livewire::forceAssetInjection();` in your `AppServiceProvider.php` file. Otherwise Alpine and Livewire won't be injected on pages unless they contain a Livewire component.
