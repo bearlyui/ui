@@ -81,6 +81,22 @@ export default function(Alpine) {
             'aria-orientation': 'vertical',
             ':aria-labelledby'() { return this.$id('dropdown-trigger') },
             ':aria-activedescendant'() { return this.activeItem && this.activeItem.id },
-        }
+        },
+        uiDropdownItem: {
+            'role': 'menuitem',
+            ':id'() { return this.$id('dropdown-menu-item') },
+            '@focus'() { this.activeItem = this.$el },
+            '@keydown.escape.stop.prevent'() { this.closeDropdown() },
+            '@keydown.home.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().first() },
+            '@keydown.end.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().last() },
+            '@keydown.page-up.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().first() },
+            '@keydown.page-down.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().last() },
+            '@keydown.arrow-left.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().previous() },
+            '@keydown.arrow-up.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().previous() },
+            '@keydown.arrow-right.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().next() },
+            '@keydown.arrow-down.stop.prevent'() { this.$focus.within(this.$el.parentNode.closest('[role=menu]')).wrap().next() },
+            '@keydown.space.stop.prevent'() { this.$el.click() },
+            '@keydown.enter.stop.prevent'() { this.$el.click() },
+        },
     }))
 }
