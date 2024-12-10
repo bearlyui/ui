@@ -17,29 +17,14 @@
     <template x-teleport="body">
         <span
             x-anchor.{{ $position }}.offset.{{ $offset }}="trigger"
-            x-data="{
-                show: false,
-                title: @js($title),
-                openHandler: null,
-                closeHandler: null,
-                init() {
-                    this.openHandler = () => { this.show = true }
-                    this.closeHandler = () => { this.show = false }
-                    trigger.addEventListener('mouseenter', this.openHandler)
-                    trigger.addEventListener('mouseleave', this.closeHandler)
-                },
-                destroy() {
-                    trigger.removeEventListener('mouseenter', this.openHandler)
-                    trigger.removeEventListener('mouseleave', this.closeHandler)
-                }
-            }"
+            x-data="uiTooltip(@js($title))"
             class="absolute mx-2 sm:mx-0 sm:w-max pointer-events-none z-50"
         >
 
             <span
+                x-cloak
                 x-show="show"
                 x-transition
-                x-cloak
                 role="tooltip"
                 {{ $attributes->class([
                     'block sm:w-max transition-all ease-in-out pointer-events-none',
