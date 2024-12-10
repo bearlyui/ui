@@ -1,25 +1,15 @@
+import { useHeadingsAsLabelAndDescription } from './utils'
+
 export default function(Alpine) {
     Alpine.data('uiAlert', () => ({
         open: true,
 
         init() {
-            this.$nextTick(() => {
-                const heading = this.$el.querySelector('[data-ui-heading]')
-                if (heading) {
-                    heading.setAttribute('x-bind:id', '$id(\'alert-title\')')
-                    this.$el.setAttribute('x-bind:aria-labelledby', '$id(\'alert-title\')')
-                }
-
-                const subheading = this.$el.querySelector('[data-ui-subheading]')
-                if (subheading) {
-                    subheading.setAttribute('x-bind:id', '$id(\'alert-description\')')
-                    this.$el.setAttribute('x-bind:aria-describedby', '$id(\'alert-description\')')
-                }
-            })
+            this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$el, 'ui-alert'))
         },
 
         uiAlertAttributes: {
-            'x-id'() { return ['alert-title', 'alert-description'] },
+            'x-id'() { return ['ui-alert-title', 'ui-alert-description'] },
             'x-show'() { return this.open },
             'x-transition:enter': 'transition ease-out duration-300',
             'x-transition:enter-start': 'opacity-0 scale-75 translate-y-full',

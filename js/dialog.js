@@ -3,19 +3,7 @@ export default function(Alpine) {
         open: false,
         removedAriaHidden: false,
         init() {
-            this.$nextTick(() => {
-                const heading = this.$refs.content.querySelector('[data-ui-heading]')
-                if (heading) {
-                    heading.setAttribute('x-bind:id', '$id(\'ui-dialog-title\')')
-                    this.$refs.content.setAttribute('x-bind:aria-labelledby', '$id(\'ui-dialog-title\')')
-                }
-
-                const subheading = this.$refs.content.querySelector('[data-ui-subheading]')
-                if (subheading) {
-                    subheading.setAttribute('x-bind:id', '$id(\'ui-dialog-description\')')
-                    this.$refs.content.setAttribute('x-bind:aria-describedby', '$id(\'ui-dialog-description\')')
-                }
-            })
+            this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$el, 'ui-dialog'))
         },
         openDialog() {
             this.open = true
