@@ -24,7 +24,7 @@ Buttons support several other properties that can be used to customize their app
 ---
 
 ### Colors
-Buttons come in the following colors: `primary`, `secondary` _(default)_, `success`, `warning`, and `danger`.
+Buttons support colors `primary`, `secondary` _(default)_, `success`, `warning`, and `danger`.
 The `color` prop accepts a string or a `Color` enum to define this value.
 
 ```html +demo title={Button Colors} previewClasses={flex flex-col sm:flex-row gap-3 items-center justify-center}
@@ -36,7 +36,7 @@ The `color` prop accepts a string or a `Color` enum to define this value.
 ```
 
 ### Sizing
-Buttons support these sizes: `xs`, `sm`, `base` (default), `md`, `lg`, and `xl`. You can
+Buttons support sizes `xs`, `sm`, `base` (default), `md`, `lg`, and `xl`. You can
 disable default sizing and specify your own by using the size attribute with an unsupported value like `size="none"`... or even `size="bogus"` if that's your jam.
 
 ```html +demo title={Button Sizing} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}

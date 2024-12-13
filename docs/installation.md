@@ -12,24 +12,28 @@ The components are built for Laravel, Livewire, and Tailwind CSS.
 
 ## Quick Start
 
-Installing the Bear UI components is a two step process:
+Installing the Bear UI components is generally a three step process:
 
 1. Install the package and dependencies via `composer` and `npm` (or `yarn`).
 2. Modify your Tailwind CSS configuration to include the Bear UI theme and components.
+3. Add the Javascript assets to your project.
 
-The easiest way to get started is to use the installer command that comes with the package. Using this in an existing project? You will probably want to use [Manual Installation](#manual-installation)
+However, we recommend you use the `bear:install` command to get started. This will install the package, add the Tailwind CSS configuration, and add the Javascript assets to your project automatically... hopefully.
 
-First, require the package via composer:
+> Using in an existing project? You will probably want to use [Manual Installation](#manual-installation)
+
+**First, require the package via composer:**
 ```bash
 composer require bearly/ui:dev-main
 ```
 
-Next, run the installer command:
+**Next, run the installer command:**
 ```bash
 php artisan bear:install
 ```
 
-The command will prompt you to install missing dependencies, add the Tailwind CSS configuration. Once it's done you can run your build and use the components in your blade views!
+Once that's done you can run your build with `npm run dev` and use the components in your blade views!
+
 
 ## Manual Installation
 
