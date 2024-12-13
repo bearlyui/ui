@@ -1,15 +1,15 @@
 # Dialogs
 
-Pop! ...goes the dialog. Or is it a modal? Once you pop, you can't stop. Dialogs are overlay windows that appear on top of the main content, requiring user interaction before returning to the main view.
+Pop! ...goes the dialog. Or is it a modal? In our case, it's technically a "modal dialog". They're overlay windows that appear on top of the main content, requiring user interaction before returning to the main page.
 
 ## Using Dialogs
 
-To use a dialog in your Blade templates, you can use the `<ui:dialog>` component. Here's a basic example:
+Use the `<ui:dialog>` tag to create a dialog. In their simplest form, they require a `trigger` slot and content in the main slot. Here's a basic example:
 
 ```html +demo title={Basic Dialog}
 <ui:dialog>
     <x-slot:trigger>
-        <ui:button>Modal, or Dialog? You choose.</ui:button>
+        <ui:button>Modal, or Dialog? Who knows.</ui:button>
     </x-slot:trigger>
 
     <p class="min-h-[200px] text-center mt-20">All my happy little content mistakes end up here.</p>
@@ -85,7 +85,7 @@ Custom header content for the dialog. If not provided, a default close button wi
 
 ```html
 <x-slot:header>
-    <h2 class="text-xl font-bold">Custom Header</h2>
+    <ui:heading>Custom Header</ui:heading>
 </x-slot:header>
 ```
 
@@ -95,6 +95,7 @@ The main content of the dialog.
 
 ```html
 <ui:dialog>
+    <!-- ... -->
     <p>This is the main content of the dialog.</p>
 </ui:dialog>
 ```
@@ -110,17 +111,14 @@ Optional footer content for the dialog.
 </x-slot:footer>
 ```
 
-## Dialog Accessibility
-
-TODO: explain how using the ui:heading and ui:subheading components make the dialog automatically associate the `aria-labelledby` and `aria-describedby` attributes for accessibility.
 
 ## Accessibility
 
-The dialog component includes several accessibility features:
-- Uses `role="dialog"` and `aria-modal="true"`
-- Automatically sets `aria-labelledby` and `aria-describedby` attributes
-- Traps focus within the dialog when open
-- Closes the dialog when the Escape key is pressed
+Dialog components include many accessibility considerations. Here are some key features:
+
+- Traps focus within the dialog when open, returns it when it closes
+- Automatically sets ARIA label and description when `ui:heading` and `ui:subheading` components present
+- Includes the `role` and other modal-related `aria` attributes by default
 - Implements a mobile-friendly drag-to-close feature
 
 ## JavaScript Interaction
