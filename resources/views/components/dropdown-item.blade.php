@@ -1,7 +1,7 @@
 @props([
+    'dismiss' => false,
     'focusOnHover' => true,
     'spacing' => 'space-x-2',
-    'dismiss' => false,
 ])
 <{{ $attributes->get('href') ? 'a' : 'button' }}
     {{ $attributes->merge([

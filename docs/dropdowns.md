@@ -1,11 +1,16 @@
 # Dropdowns
 
-Dropdowns give you the power to pawsitively enhance your user interface. They can be used for navigation, settings, or any other list of options.
+Dropdown menus that just work. They're built on top of [Floating UI](https://floating-ui.com) and [Alpine.js](https://alpinejs.dev).
+While they often seem simple on the surface, you might be surprised how complex they are under the hood. Things like focus states,
+keyboard navigation, accessibility, and positioning are all (usually) handled for you.
+
+---
 
 ## Using Dropdowns
-Define the element that opens the dropdown with the `trigger` slot. It can be anything you want,
-but it's usually a button. An example dropdown looks like this:
 
+To use a dropdown, use the `<ui:dropdown>` tag with an `<x-slot:trigger>` to define the triggering element (usually a button).
+
+Here's what an example dropdown might look like:
 
 ```html +demo title={Basic Dropdown Menu}
 <ui:dropdown>
@@ -23,21 +28,10 @@ but it's usually a button. An example dropdown looks like this:
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `open` | `boolean` | `false` | Whether the dropdown is open or not. |
 | `offset` | `integer` | `4` | The pixel-value gap between the menu and the trigger element. <br> _See the [Alpine docs on offset](https://alpinejs.dev/plugins/anchor#offset) for more._ |
 | `position` | `string` | `bottom` | The dropdown's location relative to the trigger element. <br> _See the [Alpine docs on positioning](https://alpinejs.dev/plugins/anchor#positioning) for possible values._ |
 
 ---
-
-### Open
-
-The `open` property is a boolean that determines whether the dropdown is shown or not. You can use this property to control the dropdown's state from outside the component.
-
-```html
-<ui:dropdown :open="true">
-    ...
-</ui:dropdown>
-```
 
 ### Offset
 
@@ -68,15 +62,15 @@ Use `<x-slot:trigger>` to define the trigger element.
 </x-slot:trigger>
 ```
 
-## Menu Item Component
+## Dropdown Items
 
-### Basics
-
-Use the `<ui:dropdown-item>` component to define menu items. The default slot is the item's main content label.
-The default slot content gets wrapped in a `<span>` tag to allow for automatic spacing within menu items.
+Use the `<ui:dropdown-item>` component to define menu items. The default slot is the item's main label.
+Note that content gets wrapped in a `<span>` tag to allow for automatic spacing within menu items.
 
 ```html title={Dropdown Item}
-<ui:dropdown-item>...</ui:dropdown-item>
+<ui:dropdown-item>
+    Make it grrreat!
+</ui:dropdown-item>
 ```
 
 ### Properties
