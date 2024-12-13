@@ -1,6 +1,12 @@
 # Typography
-The typography components come in two componentized flavors: `headings` and `descriptions`.
-They're better when they're together, kind of like Panda bears named Jack and Johnson.
+The typography components are not only convenient, they can help make your interfaces more accessible too! There are three main components:
+
+- [Links](/docs/typography#links)
+- [Headings](/docs/typography#headings)
+- [Subheadings](/docs/typography#subheadings)
+
+Some components (like [Alerts](/docs/alerts) or [Dialogs](/docs/dialogs)) automatically apply aria attributes based on the
+presence of child `<ui:heading>` and/or `<ui:subheading>` component tags.
 
 ## Basic Example
 
