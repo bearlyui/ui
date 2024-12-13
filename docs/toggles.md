@@ -5,7 +5,7 @@ a great way to get a yes or no answer from your users. Most of them probably won
 
 ## Using Toggles
 
-Use `<ui:toggle>` to create a toggle. You can use the `checked` property to set the initial state of the toggle, or `wire:model`.
+Create a toggle with the `<ui:toggle>` tag. Bind it to your data with `wire:model` or by using the `checked` property.
 
 ```html +demo
 <ui:label class="flex items-center space-x-2">
@@ -39,7 +39,7 @@ Use `<ui:toggle>` to create a toggle. You can use the `checked` property to set 
 </ui:label>
 ```
 
-Since they're not real inputs, we bind their value to a hidden checkbox. This allows Livewire and Alpine to support arrays of toggle, just like they were normal checkboxes... because... well, _the hidden one is a normal checkbox_.
+Since they're not real inputs, we bind their value to a hidden checkbox. This allows Livewire and Alpine to support arrays of toggles as if they were normal checkboxes... because... well, _the hidden one **is** a normal checkbox_.
 
 ## Properties
 
