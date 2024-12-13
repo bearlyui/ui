@@ -1,7 +1,7 @@
 # Alerts
 
 ## Using Alerts
-Alerts are nearly as effective as a bear's growl for getting your users' attention. Use `<ui:alert>` to create an alert. They use the `outline` variant and the `primary` color values by default.
+Alerts! Very important stuff! Why are we yelling? Use `<ui:alert>` to create an alert. They use the `outline` variant and the `primary` color values by default. They can be dismissed, and support all the colors and variants listed in the [Colors](#colors) and [Variants](#variants) sections.
 
 ```html +demo title={Default Alert} previewClasses={space-y-4}
 <ui:alert>I'm a default alert.</ui:alert>
