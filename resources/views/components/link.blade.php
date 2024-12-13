@@ -1,8 +1,8 @@
+{{-- There should be NO NEWLINES AT THE END OF THIS FILE. NO COMMENTS. NO SPACES. --}}
 @props([
     'when' => true,
     'href' => null,
 ])
-
 <a {{ $attributes
     ->when(
         $when === true && $href !== null,

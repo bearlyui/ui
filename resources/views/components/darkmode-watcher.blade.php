@@ -11,5 +11,5 @@
 
     const darkModeSetting = window.matchMedia('(prefers-color-scheme: dark)');
     darkModeSetting.addEventListener('change', (event) => { toggleDarkmode(event.matches) })
-    toggleDarkmode(darkModeSetting.matches)
+    darkModeSetting.matches && toggleDarkmode()
 </script>

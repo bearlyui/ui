@@ -1,12 +1,28 @@
 # Typography
-The typography components are not only convenient, they can help make your interfaces more accessible too! There are three main components:
+The typography components are really just convenient helpers for text styling. When used within [Alert](/docs/alerts) or [Dialog](/docs/dialogs) components, they automatically get used as aria labels and descriptions too. Hooray for accessibility!
 
 - [Links](/docs/typography#links)
 - [Headings](/docs/typography#headings)
 - [Subheadings](/docs/typography#subheadings)
 
-Some components (like [Alerts](/docs/alerts) or [Dialogs](/docs/dialogs)) automatically apply aria attributes based on the
-presence of child `<ui:heading>` and/or `<ui:subheading>` component tags.
+## Links
+
+Use `<ui:link>` to create an `<a>` tag with some default styling. You may use the `when` property to control whether the `href` attribute is included or not. This can be very useful for labels and other conditionally-linked parts of your application. There are two main benefits to using this component over the native `<a>` tag:
+
+1. It allows you to have consistent styling for links _without using global anchor tag styles_.
+2. It provides the convenient `when` property that only applies the `href` attribute when true.
+
+```html +demo title={Links}
+This is a <ui:link href="#this-page-lol">an unbearable link</ui:link> to something.
+```
+
+#### The `when` Property
+
+The `when` property is a boolean that controls whether the `href` attribute is included or not. This is sometimes useful for labels and other conditionally-linked parts of your application.
+
+```html +demo title={Links}
+This is a <ui:link :when="false" href="#this-page-lol">an unbearable link</ui:link>... but it doesn't link since "when" is <span class="font-mono text-sm font-medium text-primary-600 dark:text-primary-400">false</span>.
+```
 
 ## Basic Example
 
