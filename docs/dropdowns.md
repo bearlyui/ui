@@ -83,8 +83,8 @@ Dropdown items have a few properties:
 | `focusOnHover` | `boolean` | `true` | Focus the item when hovered over. Use kebab-case like `:focus-on-hover="false"` |
 | `spacing` | `string` | `space-x-2` | A [Tailwind CSS Spacing Utility](https://tailwindcss.com/docs/space) class, like `space-x-2`. |
 | `icon` | `string` | `null` | Include [an Icon](/docs/icons) _before_ the dropdown item's main content. |
-| `iconVariant` | `string` | `micro` | The icon variant to use. `micro` (default), `mini`, `solid`, or `outline` |
 | `iconAfter` | `string` | `null` | Include [an Icon](/docs/icons) _after_ the dropdown item's main content. |
+| `iconVariant` | `string` | `micro` | The icon variant to use. `micro` (default), `mini`, `solid`, or `outline` |
 ---
 
 #### Icons
