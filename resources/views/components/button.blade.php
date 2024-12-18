@@ -31,7 +31,7 @@
 
             {{-- Sizing --}}
             'px-1.5 py-1 text-xs' => Size::XS->is($size),
-            'px-3 py-1.5 text-sm font-medium' => Size::SM->is($size),
+            'px-2 py-1.5 text-sm font-medium' => Size::SM->is($size),
             'px-4 py-2 text-sm font-medium' => Size::BASE->is($size),
             'px-5 py-2.5 text-base font-medium' => Size::MD->is($size),
             'px-6 py-3 text-lg font-medium' => Size::LG->is($size),

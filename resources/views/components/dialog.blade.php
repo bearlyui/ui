@@ -33,7 +33,7 @@
             <div
                 x-bind="uiDialogContent"
                 @class([
-                    'rounded flex-1 shadow-lg relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-gray-700/60',
+                    'flex-1 relative not-prose mx-auto max-w-full w-full max-h-[96vh] sm:rounded',
                     'sm:max-w-xl' => $size === 'sm',
                     'sm:max-w-2xl' => $size === 'md',
                     'sm:max-w-4xl' => $size === 'lg',
@@ -43,7 +43,7 @@
             >
                 {{-- Card --}}
                 <ui:card
-                    class="relative w-full border border-black/10 !mb-0 rounded-b-none sm:rounded-b {{ $cardClass }}"
+                    class="relative w-full max-w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-white/5 rounded-none sm:rounded shadow-lg dark:shadow-2xl {{ $cardClass }}"
                 >
                     {{-- Mobile drag-to-close --}}
                     <button
