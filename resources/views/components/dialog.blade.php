@@ -47,20 +47,11 @@
                 >
                     {{-- Mobile drag-to-close --}}
                     <button
-                        x-data="{
-                            start: null,
-                            current: null,
-                            dragging: false,
-                            get distance() {
-                                return this.dragging ? Math.max(0, this.current - this.start) : 0
-                            },
-                        }"
                         type="button"
+                        tabindex="-1"
+                        aria-hidden="true"
+                        x-bind="uiDialogMobileDragToClose"
                         class="sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-1.5"
-                        x-on:touchstart="dragging = true; start = current = $event.touches[0].clientY"
-                        x-on:touchmove="current = $event.touches[0].clientY"
-                        x-on:touchend="if (distance > 100) closeDialog(); dragging = false"
-                        x-effect="$el.parentElement.style.transform = 'translateY('+distance+'px)'"
                     >&nbsp;</button>
 
                     {{-- Header --}}

@@ -52,6 +52,31 @@ export default function(Alpine) {
             'x-ref': 'close',
             'x-on:click': 'closeDialog',
             'x-effect'() { return this.open && setTimeout(() => this.$el.removeAttribute('inert'), 100) },
+        },
+
+        uiDialogMobileDragToClose: {
+            'x-data'() {
+                return {
+                    start: null,
+                    current: null,
+                    dragging: false,
+                    get distance() {
+                        return this.dragging ? Math.max(0, this.current - this.start) : 0
+                    },
+                }
+            },
+            'x-on:touchstart'(event) {
+                this.dragging = true
+                this.start = this.current = event.touches[0].clientY
+            },
+            'x-on:touchmove'(event) { this.current = event.touches[0].clientY },
+            'x-on:touchend'() {
+                if (this.distance > 100) {
+                    this.closeDialog()
+                    this.dragging = false
+                }
+            },
+            'x-effect'() { this.$el.parentElement.style.transform = `translateY(${this.distance}px)` },
         }
     }))
 }
