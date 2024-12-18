@@ -61,6 +61,7 @@ export default {
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     './vendor/bearly/ui/**/*.{php,blade.php}', // [tl! add] [tl! focus]
+    './vendor/bearly/ui/js/**/*.js', // [tl! add] [tl! focus]
   ], // [tl! focus]
   theme: { // [tl! focus]
     extend: { // [tl! focus]

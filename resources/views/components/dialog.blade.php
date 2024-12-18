@@ -33,7 +33,7 @@
             <div
                 x-bind="uiDialogContent"
                 @class([
-                    'rounded flex-1 shadow-lg relative not-prose mx-auto max-w-full w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-gray-700/60',
+                    'flex-1 relative not-prose mx-auto max-w-full w-full max-h-[96vh] sm:rounded',
                     'sm:max-w-xl' => $size === 'sm',
                     'sm:max-w-2xl' => $size === 'md',
                     'sm:max-w-4xl' => $size === 'lg',
@@ -41,27 +41,11 @@
                     'sm:max-w-full' => $size === 'full',
                 ])
             >
+
                 {{-- Card --}}
                 <ui:card
-                    class="relative w-full border border-black/10 !mb-0 rounded-b-none sm:rounded-b {{ $cardClass }}"
+                    class="relative w-full max-w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-white/5 rounded-none sm:rounded shadow-lg dark:shadow-2xl {{ $cardClass }}"
                 >
-                    {{-- Mobile drag-to-close --}}
-                    <button
-                        x-data="{
-                            start: null,
-                            current: null,
-                            dragging: false,
-                            get distance() {
-                                return this.dragging ? Math.max(0, this.current - this.start) : 0
-                            },
-                        }"
-                        type="button"
-                        class="sm:hidden bg-black/10 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-1.5"
-                        x-on:touchstart="dragging = true; start = current = $event.touches[0].clientY"
-                        x-on:touchmove="current = $event.touches[0].clientY"
-                        x-on:touchend="if (distance > 100) closeDialog(); dragging = false"
-                        x-effect="$el.parentElement.style.transform = 'translateY('+distance+'px)'"
-                    >&nbsp;</button>
 
                     {{-- Header --}}
                     @empty($header)
@@ -112,7 +96,24 @@
                     @if ($footer ?? false)
                         <x-slot:footer>{{ $footer }}</x-slot:footer>
                     @endif
+
+                    {{-- Mobile drag-to-close --}}
+                    {{-- Expects to be IN card --}}
+                    <button
+                        type="button"
+                        tabindex="-1"
+                        aria-hidden="true"
+                        x-bind="uiDialogMobileDragToClose"
+                        @class([
+                            'sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0',
+                            'top-4' => empty($header),
+                            'top-1' => !empty($header),
+                        ])
+                    >
+                        <span class="block relative h-10 -mt-5 w-full"></span>
+                    </button>
                 </x-card>
+
             </div>
         </div>
     </template>
