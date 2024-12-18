@@ -41,20 +41,11 @@
                     'sm:max-w-full' => $size === 'full',
                 ])
             >
+
                 {{-- Card --}}
                 <ui:card
                     class="relative w-full max-w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-white/5 rounded-none sm:rounded shadow-lg dark:shadow-2xl {{ $cardClass }}"
                 >
-                    {{-- Mobile drag-to-close --}}
-                    <button
-                        type="button"
-                        tabindex="-1"
-                        aria-hidden="true"
-                        x-bind="uiDialogMobileDragToClose"
-                        class="sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-1.5"
-                    >
-                        <span class="block relative h-6 -mt-3 w-full"></span>
-                    </button>
 
                     {{-- Header --}}
                     @empty($header)
@@ -105,7 +96,20 @@
                     @if ($footer ?? false)
                         <x-slot:footer>{{ $footer }}</x-slot:footer>
                     @endif
+
+                    {{-- Mobile drag-to-close --}}
+                    {{-- Expects to be IN card --}}
+                    <button
+                        type="button"
+                        tabindex="-1"
+                        aria-hidden="true"
+                        x-bind="uiDialogMobileDragToClose"
+                        class="sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-4"
+                    >
+                        <span class="block relative h-10 -mt-5 w-full"></span>
+                    </button>
                 </x-card>
+
             </div>
         </div>
     </template>
