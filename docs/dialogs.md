@@ -89,6 +89,20 @@ Custom header content for the dialog. If not provided, a default close button wi
 </x-slot:header>
 ```
 
+```html +demo title={Dialog with Header}
+<ui:dialog>
+    <x-slot:trigger>
+        <ui:button>Example - Header slot</ui:button>
+    </x-slot:trigger>
+
+    <x-slot:header>
+        <ui:heading>There are no mistakes</ui:heading>
+    </x-slot:header>
+
+    <p class="min-h-[200px] text-center mt-20">We'll play with clouds today.</p>
+</ui:dialog>
+```
+
 ### default
 
 The main content of the dialog.
@@ -111,6 +125,19 @@ Optional footer content for the dialog.
 </x-slot:footer>
 ```
 
+```html +demo title={Dialog with Header}
+<ui:dialog>
+    <x-slot:trigger>
+        <ui:button>Example - Footer slot</ui:button>
+    </x-slot:trigger>
+
+    <p class="min-h-[200px] text-center mt-20">We'll play with clouds today.</p>
+
+    <x-slot:footer>
+        I'm a footer, put buttons in me!
+    </x-slot:footer>
+</ui:dialog>
+```
 
 ## Accessibility
 

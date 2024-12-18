@@ -104,7 +104,11 @@
                         tabindex="-1"
                         aria-hidden="true"
                         x-bind="uiDialogMobileDragToClose"
-                        class="sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-4"
+                        @class([
+                            'sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0',
+                            'top-4' => empty($header),
+                            'top-1' => !empty($header),
+                        ])
                     >
                         <span class="block relative h-10 -mt-5 w-full"></span>
                     </button>
