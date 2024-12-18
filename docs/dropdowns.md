@@ -82,13 +82,14 @@ Dropdown items have a few properties:
 | `dismiss` | `boolean` | `true` | Close the outer dropdown menu when the item is clicked (or focused and enter is pressed)  |
 | `focusOnHover` | `boolean` | `true` | Focus the item when hovered over. Use kebab-case like `:focus-on-hover="false"` |
 | `spacing` | `string` | `space-x-2` | A [Tailwind CSS Spacing Utility](https://tailwindcss.com/docs/space) class, like `space-x-2`. |
-| `icon` | `string` | `null` | Include [an Icon](/docs/icons) before the dropdown item's main content. |
+| `icon` | `string` | `null` | Include [an Icon](/docs/icons) _before_ the dropdown item's main content. |
 | `iconVariant` | `string` | `micro` | The icon variant to use. `micro` (default), `mini`, `solid`, or `outline` |
+| `iconAfter` | `string` | `null` | Include [an Icon](/docs/icons) _after_ the dropdown item's main content. |
 ---
 
 #### Icons
 
-The `icon` property is used to include an icon before the dropdown item's main content.
+The `icon` property is used to include an icon _before_ the dropdown item's main content.
 
 ```html
 <ui:dropdown-item icon="arrow-down">...</ui:dropdown-item>
@@ -107,7 +108,7 @@ The `icon` property is used to include an icon before the dropdown item's main c
 
 #### Icon Position
 
-The `icon-after` property is used to include an icon after the dropdown item's main content.
+The `icon-after` property is used to include an icon _after_ the dropdown item's main content.
 
 ```html
 <ui:dropdown-item icon-after="arrow-down">...</ui:dropdown-item>
