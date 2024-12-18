@@ -30,6 +30,31 @@ Alerts support the following values for the `variant` property: `outline` _(defa
 <ui:alert variant="glow">I'm a glow variant.</ui:alert>
 ```
 
+## Icons
+
+You can easily include an [Icon](/docs/icons) in your alert by using the `icon` property.
+
+```html
+<ui:alert icon="exclamation-triangle">I'm an alert with an icon.</ui:alert>
+```
+
+```html +demo title={Alert Icons} previewClasses={space-y-4}
+<ui:alert color="primary" icon="question-mark-circle">I'm a primary alert.</ui:alert>
+<ui:alert color="secondary" icon="information-circle">I'm a secondary alert.</ui:alert>
+<ui:alert color="success" icon="check-circle">I'm an alert of success.</ui:alert>
+<ui:alert color="warning" icon="exclamation-circle">I'm a warning alert, you've been warned!</ui:alert>
+<ui:alert color="danger" icon="exclamation-triangle">I'm a scary alert, danger is my middle name!</ui:alert>
+```
+
+### Icon Variants
+
+The icon variant can be set using the `iconVariant` property.
+
+```html
+<ui:alert color="primary" icon="exclamation-triangle" icon-variant="solid">
+    I'm a primary alert with a solid icon.
+</ui:alert>
+```
 
 ## Dismissable
 You may optionally include a close button on your alert by setting the `dismiss` property to `true`:

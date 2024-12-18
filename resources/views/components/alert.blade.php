@@ -6,6 +6,8 @@
     'color' => Color::Primary,
     'variant' => Variant::Outline,
     'role' => 'status',
+    'icon' => null,
+    'iconVariant' => 'outline',
 ])
 <div
     {{ $attributes
@@ -77,7 +79,14 @@
 >
     <div @class([
         'flex-1 flex justify-between items-start sm:items-center gap-1' => $dismiss,
+        'flex items-center' => $icon,
     ])>
+        {{-- Icon --}}
+        @if ($icon)
+            <x-dynamic-component :component="'ui::icon.' . $icon" :variant="$iconVariant" class="opacity-50 mr-3" />
+        @endif
+
+
         {{-- Main content --}}
         <div>{{ $slot }}</div>
 
