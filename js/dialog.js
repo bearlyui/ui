@@ -44,7 +44,7 @@ export default function(Alpine) {
             'x-transition:enter': 'transition-all ease-out origin-bottom',
             'x-transition:enter-start': 'translate-y-full sm:opacity-0 sm:scale-90 sm:translate-y-4',
             'x-transition:enter-end': 'translate-y-0 sm:opacity-100 sm:scale-100 sm:translate-y-0',
-            // 'x-transition:leave.duration.0ms.delay.0ms': '',
+            'x-transition:leave': 'duration-0 delay-0',
         },
 
         uiDialogClose: {
