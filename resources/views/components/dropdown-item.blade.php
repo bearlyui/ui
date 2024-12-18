@@ -44,7 +44,7 @@
         @endif
 
         {{-- Content --}}
-        <span>{{ $slot }}</span>
+        <span class="flex-grow">{{ $slot }}</span>
 
         {{-- After --}}
         @if ($iconAfter)
