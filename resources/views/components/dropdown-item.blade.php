@@ -1,4 +1,7 @@
 @props([
+    'icon' => null,
+    'iconAfter' => false,
+    'iconVariant' => 'micro',
     'dismiss' => false,
     'focusOnHover' => true,
     'spacing' => 'space-x-2',
@@ -29,18 +32,26 @@
     ])) }}
 >
     <span @class([
-        'flex items-center antialiased',
+        'flex items-center antialiased w-full',
         $spacing => !empty($spacing),
     ])>
         {{-- Before --}}
         @if ($before ?? false)
             <span {{ $before->attributes }}>{{ $before }}</span>
         @endif
+        @if ($icon)
+            <x-dynamic-component :component="'ui::icon.' . $icon" :variant="$iconVariant" class="opacity-50" />
+        @endif
 
         {{-- Content --}}
         <span>{{ $slot }}</span>
 
         {{-- After --}}
+        @if ($iconAfter)
+            <span class="justify-self-end">
+                <x-dynamic-component :component="'ui::icon.' . $iconAfter" :variant="$iconVariant" class="opacity-50" />
+            </span>
+        @endif
         @if ($after ?? false)
             <span {{ $after->attributes }}>{{ $after }}</span>
         @endif
