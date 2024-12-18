@@ -52,7 +52,9 @@
                         aria-hidden="true"
                         x-bind="uiDialogMobileDragToClose"
                         class="sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-1.5"
-                    >&nbsp;</button>
+                    >
+                        <span class="block relative h-6 -mt-3 w-full"></span>
+                    </button>
 
                     {{-- Header --}}
                     @empty($header)
