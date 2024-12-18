@@ -41,9 +41,9 @@ export default function(Alpine) {
             'aria-modal': true,
             'x-ref': 'content',
             'x-show'() { return this.open },
-            'x-transition:enter': 'transition ease-out duration-150 delay-75 origin-bottom',
-            'x-transition:enter-start': 'opacity-0 transform scale-90 translate-y-4',
-            'x-transition:enter-end': 'opacity-100 transform scale-100 translate-y-0',
+            'x-transition:enter': 'transition-all ease-out delay-75 origin-bottom',
+            'x-transition:enter-start': 'translate-y-full sm:opacity-0 sm:scale-90 sm:translate-y-4',
+            'x-transition:enter-end': 'translate-y-0 sm:opacity-100 sm:scale-100 sm:translate-y-0',
             'x-transition:leave.duration.0ms.delay.0ms': '',
         },
 

@@ -56,7 +56,7 @@
                             },
                         }"
                         type="button"
-                        class="sm:hidden bg-black/10 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-1.5"
+                        class="sm:hidden bg-black/10 dark:bg-white/15 w-10 h-1 rounded-full absolute mx-auto left-0 right-0 top-1.5"
                         x-on:touchstart="dragging = true; start = current = $event.touches[0].clientY"
                         x-on:touchmove="current = $event.touches[0].clientY"
                         x-on:touchend="if (distance > 100) closeDialog(); dragging = false"
