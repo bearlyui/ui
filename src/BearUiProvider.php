@@ -22,6 +22,7 @@ class BearUiProvider extends ServiceProvider
             ]);
         }
 
+        // Blade::component('ui:dynamic-component', DynamicUiComponent::class);
         $this->bootAnonymousComponents();
         $this->bootUiTagCompiler();
     }
