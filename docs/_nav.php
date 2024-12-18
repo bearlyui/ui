@@ -12,6 +12,7 @@ return [
         // '🚧 Context Menus' => '/docs/context-menus',
         'Dialog' => '/docs/dialogs',
         'Dropdown' => '/docs/dropdowns',
+        'Icon' => '/docs/icons',
         // '🚧 Form Inputs' => '/docs/form-inputs',
         'Tile' => '/docs/tiles',
         'Toggle' => '/docs/toggles',
