@@ -8,11 +8,11 @@
         @if ($label instanceof \Illuminate\View\ComponentSlot)
             {{ $label }}
         @else
-            <ui:label :$for>{{ $label }}</ui:label>
+            <ui:wip.label :$for>{{ $label }}</ui:label>
         @endif
     @endif
     {{ $slot }}
     @if ($for ?? false)
-        {{-- <ui:input-error class="mt-1" :$for /> --}}
+        <ui:wip.input-error class="mt-1" :$for />
     @endif
 </div>
