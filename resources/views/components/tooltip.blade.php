@@ -14,13 +14,13 @@
             {{ $trigger }}
         </span>
     @endif
+
     <template x-teleport="body">
         <span
             x-anchor.{{ $position }}.offset.{{ $offset }}="trigger"
             x-data="uiTooltip(@js($title))"
             class="absolute mx-2 sm:mx-0 sm:w-max pointer-events-none z-50"
         >
-
             <span
                 x-cloak
                 x-show="show"
