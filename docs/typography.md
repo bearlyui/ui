@@ -23,7 +23,7 @@ This is a <ui:link href="#this-page-lol">an unbearable link</ui:link> to somethi
 The `when` property is a boolean that controls whether the `href` attribute is included or not. This is sometimes useful for labels and other conditionally-linked parts of your application.
 
 ```html +demo title={Conditional Link}
-This is a <ui:link :when="false" href="#this-page-lol" class="font-bold italic">an unbearable link</ui:link>... but it doesn't link since "when" is <span class="font-mono text-sm font-medium text-primary-600 dark:text-primary-400">false</span>.
+This is a <ui:link :when="false" href="#this-page-lol">an unbearable link</ui:link>... but it doesn't link since "when" is <span class="font-mono text-sm font-medium text-primary-600 dark:text-primary-400">false</span>.
 ```
 
 ## Heading & Subheading

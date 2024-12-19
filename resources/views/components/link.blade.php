@@ -6,6 +6,10 @@
 <a {{ $attributes
     ->when(
         $when === true && $href !== null,
-        fn ($attributes) => $attributes->merge(['href' => $href])->class('text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-200')
+        fn ($attributes) => $attributes->merge(['href' => $href])
+            ->class([
+                ...config('ui.linkClasses'),
+                ...config('ui.focusClasses'),
+            ])
     )
 }}>{{ $slot }}</a>

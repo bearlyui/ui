@@ -1,14 +1,15 @@
 # Configuration
 
-There are two things you make configure in the package so far:
+The following things can be configured to customize the UI components:
 
 - The colors (via Tailwind CSS config)
 - The classes used for focus states (via `config/ui.php`)
+- The classes used for links (via `config/ui.php`)
 
 ## PHP Configuration
 
-There is only one PHP configuration option at the moment, and it's for the focus states.
-You can modify this by publishing the config file to `PROJECT_ROOT/config/ui.php`:
+There are only two PHP configuration options at the moment, classes for focus states and links.
+You can modify them by publishing the config file to `PROJECT_ROOT/config/ui.php`:
 
 ```php
 return [
@@ -16,8 +17,15 @@ return [
         'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500/70 focus:ring-offset-white/80',
         'dark:focus:ring-primary-400/70 dark:focus:ring-offset-black/80',
     ],
+    'linkClasses' => [
+        'font-medium transition text-gray-800 dark:text-gray-200 rounded-sm',
+        'hover:text-primary-800 dark:hover:text-primary-200',
+        'underline decoration-2 decoration-primary-500/20 hover:decoration-primary-500/50',
+    ],
 ];
 ```
+
+Alternatively, you can choose to own the blade template for the component(s) you want to customize. This is more flexible, but less convenient.
 
 ## Tailwind CSS Configuration
 
