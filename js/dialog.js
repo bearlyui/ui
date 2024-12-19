@@ -29,6 +29,12 @@ export default function(Alpine) {
             'x-id'() { return ['ui-dialog-title', 'ui-dialog-description'] },
         },
 
+        uiDialogTrigger: {
+            ':aria-expanded'() { return this.open },
+            ':aria-controls'() { return this.open && this.$id('ui-dialog-content') },
+            'x-on:click.stop'() { return this.openDialog() }
+        },
+
         uiDialogOverlay: {
             'x-show'() { return this.open },
             'x-transition:enter.opacity.delay.0ms': '',
@@ -45,6 +51,7 @@ export default function(Alpine) {
             'x-transition:enter-start': 'translate-y-full sm:opacity-0 sm:scale-90 sm:translate-y-4',
             'x-transition:enter-end': 'translate-y-0 sm:opacity-100 sm:scale-100 sm:translate-y-0',
             'x-transition:leave': 'duration-0 delay-0',
+            ':id'() { return this.$id('ui-dialog-content') },
         },
 
         uiDialogClose: {

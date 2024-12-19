@@ -6,12 +6,14 @@
 ])
 
 <span
-    x-data="uiDialog"
-    x-modelable="open"
-    {{ $attributes }}
+    {{ $attributes->merge([
+        'x-data' => 'uiDialog',
+        'x-modelable' => 'open',
+        'x-id' => "['ui-dialog-content']",
+    ]) }}
 >
     {{-- Trigger --}}
-    <span {{ $trigger->attributes->merge(['x-on:click.stop' => 'openDialog']) }}>{{ $trigger }}</span>
+    <span x-bind="uiDialogTrigger" {{ $trigger->attributes }}>{{ $trigger }}</span>
 
     {{-- Dialog --}}
     <template x-teleport="body">
