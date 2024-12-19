@@ -25,7 +25,7 @@
             'dark:text-primary-400 dark:shadow-primary-300/20 dark:bg-primary-900/35' => Color::Primary->is($color),
 
             {{-- Secondary --}}
-            'text-secondary-700 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/60' => Color::Secondary->is($color),
+            'text-secondary-600/85 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/60' => Color::Secondary->is($color),
             'dark:text-secondary-300/85 dark:shadow-secondary-400/15 dark:bg-secondary-800/25' => Color::Secondary->is($color),
 
             {{-- Success --}}
