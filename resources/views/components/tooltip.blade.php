@@ -8,6 +8,7 @@
     'size' => Size::SM
 ])
 <span x-data="{ trigger: {{ ($trigger ?? false) ? '$refs.trigger.firstElementChild' : '$el.parentNode' }} }">
+    {{-- Optional Trigger --}}
     @if ($trigger ?? false)
         <span x-ref="trigger">
             {{ $trigger }}
@@ -16,36 +17,20 @@
 
     <template x-teleport="body">
         <span
-            x-cloak
             x-anchor.{{ $position }}.offset.{{ $offset }}="trigger"
-            x-data="{
-                show: false,
-                title: @js($title),
-                openHandler: null,
-                closeHandler: null,
-                init() {
-                    this.openHandler = () => { this.show = true }
-                    this.closeHandler = () => { this.show = false }
-                    trigger.addEventListener('mouseenter', this.openHandler)
-                    trigger.addEventListener('mouseleave', this.closeHandler)
-                },
-                destroy() {
-                    trigger.removeEventListener('mouseenter', this.openHandler)
-                    trigger.removeEventListener('mouseleave', this.closeHandler)
-                }
-            }"
-            class="absolute w-max pointer-events-none z-50"
+            x-data="uiTooltip(@js($title))"
+            class="absolute mx-2 sm:mx-0 sm:w-max pointer-events-none z-50"
         >
-
             <span
+                x-cloak
                 x-show="show"
                 x-transition
                 role="tooltip"
                 {{ $attributes->class([
-                    'block w-max transition-all ease-in-out pointer-events-none',
-                    'border rounded backdrop-blur-lg',
-                    'bg-gradient-to-b from-white/80 to-white/50 border-black/15a text-gray-700 shadow',
-                    'dark:from-white/10 dark:to-white/5 dark:border-white/10 dark:text-white/80 dark:shadow-lg dark:shadow-black/30',
+                    'block sm:w-max transition-all ease-in-out pointer-events-none',
+                    'ring-1 rounded backdrop-blur-lg',
+                    'bg-gradient-to-b from-white/80 to-white/50 ring-black/5 text-gray-700 shadow',
+                    'dark:from-gray-700/70 dark:to-gray-700/50 dark:ring-white/15 dark:text-white/80 dark:shadow-lg dark:shadow-black/30',
                     'px-1.5 py-1 text-xs' => Size::SM->is($size),
                     'px-3 py-1.5 text-sm' => Size::BASE->is($size),
                     'px-4 py-2 text-base' => Size::MD->is($size),
@@ -63,7 +48,6 @@
                         {{ $shortcut }}
                     </span>
                 @endif
-
             </span>
         </span>
     </template>

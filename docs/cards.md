@@ -1,10 +1,10 @@
 # Cards
 
-Cards to put stuff in. They're great when you need 'em!
+Cards... or are they boxes? Rectangles on a screen! Put stuff in them, love them like one of your own. Nest them in other cards, or put them in a grid, the choice is yours!
 
 ## Using Cards
 
-Use `<ui:card>` to create a card with the default variant, padding, and radius.
+Use `<ui:card>` to create a card with the default `variant`, `padding`, and `radius`.
 
 ```html +demo title={Basic Cards} previewClasses={space-y-5}
 <ui:card>I'm a Happy Little Card</ui:card>
@@ -12,16 +12,15 @@ Use `<ui:card>` to create a card with the default variant, padding, and radius.
 <ui:card color="secondary">I'm a Happy Little Card</ui:card>
 <ui:card color="success">I'm a Happy Little Card</ui:card>
 <ui:card color="warning">I'm a Happy Little Card</ui:card>
-<ui:card color="error">I'm a Happy Little Card</ui:card>
+<ui:card color="danger">I'm a Happy Little Card</ui:card>
 ```
 
 ## Properties
 
-Customize your cards with the following properties.
+Cards suppport the following properties:
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `color` | `string \| Color` | `none` | The color of the card. |
 | `size` | `string \| Size` | `true` | The padding and text size of the card. |
 | `radius` | `string \| Size` | `base` | The border radius of the card. |
 | `variant` | `string \| Variant` | `solid` | The variant of the card. |
@@ -94,7 +93,7 @@ Cards come in several variants: `solid`, `outline`, `glow`, and `gradient`. The 
 <ui:card color="secondary">I'm a happy little secondary card.</ui:card>
 <ui:card color="success">I'm a happy little success card.</ui:card>
 <ui:card color="warning">I'm a happy little warning card.</ui:card>
-<ui:card color="error">I'm a happy little error card.</ui:card>
+<ui:card color="danger">I'm a happy little danger card.</ui:card>
 ```
 
 ```html +demo title={Solid Variant} previewClasses={space-y-3}
@@ -103,7 +102,7 @@ Cards come in several variants: `solid`, `outline`, `glow`, and `gradient`. The 
 <ui:card variant="solid" color="secondary">I'm a happy little secondary card.</ui:card>
 <ui:card variant="solid" color="success">I'm a happy little success card.</ui:card>
 <ui:card variant="solid" color="warning">I'm a happy little warning card.</ui:card>
-<ui:card variant="solid" color="error">I'm a happy little error card.</ui:card>
+<ui:card variant="solid" color="danger">I'm a happy little danger card.</ui:card>
 ```
 
 ```html +demo title={Gradient Variant} previewClasses={space-y-3}
@@ -112,7 +111,7 @@ Cards come in several variants: `solid`, `outline`, `glow`, and `gradient`. The 
 <ui:card variant="gradient" color="secondary">I'm a happy little secondary card.</ui:card>
 <ui:card variant="gradient" color="success">I'm a happy little success card.</ui:card>
 <ui:card variant="gradient" color="warning">I'm a happy little warning card.</ui:card>
-<ui:card variant="gradient" color="error">I'm a happy little error card.</ui:card>
+<ui:card variant="gradient" color="danger">I'm a happy little danger card.</ui:card>
 ```
 
 ```html +demo title={Glow Variant} previewClasses={space-y-3}
@@ -121,7 +120,7 @@ Cards come in several variants: `solid`, `outline`, `glow`, and `gradient`. The 
 <ui:card variant="glow" color="secondary">I'm a happy little secondary card.</ui:card>
 <ui:card variant="glow" color="success">I'm a happy little success card.</ui:card>
 <ui:card variant="glow" color="warning">I'm a happy little warning card.</ui:card>
-<ui:card variant="glow" color="error">I'm a happy little error card.</ui:card>
+<ui:card variant="glow" color="danger">I'm a happy little danger card.</ui:card>
 ```
 
 
@@ -161,7 +160,7 @@ The ol' top-n-bottom.
     <x-slot:footer>Example Footer</x-slot:footer>
 </ui:card>
 
-<ui:card color="error">
+<ui:card color="danger">
     <x-slot:header>Card with Header &amp; Footer</x-slot:header>
     <div class="my-4 text-base text-black/60 dark:text-white/60">This is a card with a header. It lives in our world.</div>
     <x-slot:footer>Example Footer</x-slot:footer>

@@ -2,7 +2,7 @@
 
 ## Using Buttons
 
-Use `<ui:button>` to create a button of the default variant and color.
+Use `<ui:button>` to create a button of the default variant _(solid)_ and color _(secondary)_.
 
 ```html +demo title={Using Buttons} previewClasses={py-8 flex items-center justify-center}
 <ui:button>Happy Little Button</ui:button>
@@ -10,11 +10,11 @@ Use `<ui:button>` to create a button of the default variant and color.
 
 ## Properties
 
-Buttons forward all attributes to the underlying `<button></button>` HTML tag by default. They also recognize the following properties in order to customize behavior, theme, and size.
+Buttons support several other properties that can be used to customize their appearance and/or functionality. Here's an overview of all the available properties:
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `color` | `string \| Color` | `primary` | The color of the button. |
+| `color` | `string \| Color` | `secondary` | The color of the button. |
 | `size` | `string \| Size` | `base` | The size of the button. |
 | `variant` | `string \| Variant` | `solid` | The variant of the button. |
 | `radius` | `string \| Size` | `base` | The border radius of the button. |
@@ -24,22 +24,22 @@ Buttons forward all attributes to the underlying `<button></button>` HTML tag by
 ---
 
 ### Colors
-Buttons come in 5 colors: `primary` (default), `secondary`, `success`, `warning`, and `error`.
+Buttons support colors `primary`, `secondary` _(default)_, `success`, `warning`, and `danger`.
 The `color` prop accepts a string or a `Color` enum to define this value.
 
-```html +demo title={Simple Buttons} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button>Primary</ui:button>
+```html +demo title={Button Colors} previewClasses={flex flex-col sm:flex-row gap-3 items-center justify-center}
+<ui:button color="primary">Primary</ui:button>
 <ui:button color="secondary">Secondary</ui:button>
 <ui:button color="success">Success</ui:button>
 <ui:button color="warning">Warning</ui:button>
-<ui:button color="error">Error</ui:button>
+<ui:button color="danger">Danger</ui:button>
 ```
 
 ### Sizing
-Buttons come in 5 sizes: `xs`, `sm`, `md` (default), `lg`, and `xl`. You can
-disable any default sizing and specify your own by including `size="none"`.
+Buttons support sizes `xs`, `sm`, `base` (default), `md`, `lg`, and `xl`. You can
+disable default sizing and specify your own by using the size attribute with an unsupported value like `size="none"`... or even `size="bogus"` if that's your jam.
 
-```html +demo title={Button Sizing} previewClasses={flex space-x-5 items-end justify-center py-12}
+```html +demo title={Button Sizing} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
 <div class="text-center">
     <ui:button size="xs">Button</ui:button>
     <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">xs</div>
@@ -68,12 +68,12 @@ disable any default sizing and specify your own by including `size="none"`.
 
 ### Radius
 
-Control the amount of corner rounding with the radii: `none`, `sm`, `md` (default), `lg`, `xl`, and `full`.
+Control the border radius with these options: `none`, `sm`, `md` (default), `lg`, `xl`, and `full`.
 
-```html +demo title={Button Sizing} previewClasses={flex space-x-5 items-end justify-center py-12}
+```html +demo title={Button Corner Radius} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
 <div class="text-center">
     <ui:button radius="none">Button</ui:button>
-    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">xs</div>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">none</div>
 </div>
 <div class="text-center">
     <ui:button radius="sm">Button</ui:button>
@@ -103,110 +103,47 @@ Control the amount of corner rounding with the radii: `none`, `sm`, `md` (defaul
 
 
 ### Variant
-Buttons come in 6 variants (themes if you like that better): `solid` (default), `outline`, `link`, `gradient`, `ghost`, and `glow`.
+Buttons come in two variants: `solid` _(default)_ and  `ghost`.
 
-```html +demo title={Solid Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button>Primary</ui:button>
+```html +demo title={Solid Variant} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
+<ui:button color="primary">Primary</ui:button>
 <ui:button color="secondary">Secondary</ui:button>
 <ui:button color="success">Success</ui:button>
 <ui:button color="warning">Warning</ui:button>
-<ui:button color="error">Error</ui:button>
+<ui:button color="danger">Danger</ui:button>
 ```
 
-```html +demo title={Outline Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button variant="outline">Primary</ui:button>
-<ui:button color="secondary" variant="outline">Secondary</ui:button>
-<ui:button color="success" variant="outline">Success</ui:button>
-<ui:button color="warning" variant="outline">Warning</ui:button>
-<ui:button color="error" variant="outline">Error</ui:button>
-```
-
-```html +demo title={Link Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button variant="link">Primary</ui:button>
-<ui:button color="secondary" variant="link">Secondary</ui:button>
-<ui:button color="success" variant="link">Success</ui:button>
-<ui:button color="warning" variant="link">Warning</ui:button>
-<ui:button color="error" variant="link">Error</ui:button>
-```
-
-```html +demo title={Gradient Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button variant="gradient">Primary</ui:button>
-<ui:button color="secondary" variant="gradient">Secondary</ui:button>
-<ui:button color="success" variant="gradient">Success</ui:button>
-<ui:button color="warning" variant="gradient">Warning</ui:button>
-<ui:button color="error" variant="gradient">Error</ui:button>
-```
-
-```html +demo title={Ghost Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button variant="ghost">Primary</ui:button>
+```html +demo title={Ghost Variant} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
+<ui:button color="primary" variant="ghost">Primary</ui:button>
 <ui:button color="secondary" variant="ghost">Secondary</ui:button>
 <ui:button color="success" variant="ghost">Success</ui:button>
 <ui:button color="warning" variant="ghost">Warning</ui:button>
-<ui:button color="error" variant="ghost">Error</ui:button>
-```
-
-```html +demo title={Glow Variant} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button variant="glow">Primary</ui:button>
-<ui:button color="secondary" variant="glow">Secondary</ui:button>
-<ui:button color="success" variant="glow">Success</ui:button>
-<ui:button color="warning" variant="glow">Warning</ui:button>
-<ui:button color="error" variant="glow">Error</ui:button>
+<ui:button color="danger" variant="ghost">Danger</ui:button>
 ```
 
 ### Links (href)
-Use the `href` prop to turn a button into a link. It uses an `onclick` handler to redirect to the specified URL since buttons don't have the `href` attribute.
+Use the `href` prop to turn a button into a pseudo-link. It uses an `onclick` handler to redirect to the specified URL since buttons don't have an `href` attribute in HTML.
+If you really want it to be an anchor tag (`<a>`), use [the link component](/docs/typography#links) (`<ui:link>`) instead.
 
 ```html +demo title={Buttons as Links} previewClasses={flex items-center justify-center py-6}
-<ui:button href="https://laravel.com" variant="glow" color="error">This Button Links to the Laravel Docs</ui:button>
+<ui:button href="https://laravel.com" variant="ghost" color="danger">This Button Links to the Laravel Docs</ui:button>
 ```
 
 ### Disabled State
 Each variant also has a disabled state. The `disabled` prop accepts a boolean value.
 
-```html +demo title={Solid Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
+```html +demo title={Solid Variant (Disabled)} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
 <ui:button :disabled="true">Primary</ui:button>
 <ui:button :disabled="true" color="secondary">Secondary</ui:button>
 <ui:button :disabled="true" color="success">Success</ui:button>
 <ui:button :disabled="true" color="warning">Warning</ui:button>
-<ui:button :disabled="true" color="error">Error</ui:button>
+<ui:button :disabled="true" color="danger">Danger</ui:button>
 ```
 
-```html +demo title={Outline Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button :disabled="true" variant="outline">Primary</ui:button>
-<ui:button :disabled="true" color="secondary" variant="outline">Secondary</ui:button>
-<ui:button :disabled="true" color="success" variant="outline">Success</ui:button>
-<ui:button :disabled="true" color="warning" variant="outline">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="outline">Error</ui:button>
-```
-
-```html +demo title={Link Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button :disabled="true" variant="link">Primary</ui:button>
-<ui:button :disabled="true" color="secondary" variant="link">Secondary</ui:button>
-<ui:button :disabled="true" color="success" variant="link">Success</ui:button>
-<ui:button :disabled="true" color="warning" variant="link">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="link">Error</ui:button>
-```
-
-```html +demo title={Gradient Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button :disabled="true" variant="gradient">Primary</ui:button>
-<ui:button :disabled="true" color="secondary" variant="gradient">Secondary</ui:button>
-<ui:button :disabled="true" color="success" variant="gradient">Success</ui:button>
-<ui:button :disabled="true" color="warning" variant="gradient">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="gradient">Error</ui:button>
-```
-
-```html +demo title={Ghost Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button :disabled="true" variant="ghost">Primary</ui:button>
+```html +demo title={Ghost Variant (Disabled)} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
+<ui:button :disabled="true" color="primary" variant="ghost">Primary</ui:button>
 <ui:button :disabled="true" color="secondary" variant="ghost">Secondary</ui:button>
 <ui:button :disabled="true" color="success" variant="ghost">Success</ui:button>
 <ui:button :disabled="true" color="warning" variant="ghost">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="ghost">Error</ui:button>
-```
-
-```html +demo title={Glow Variant (Disabled)} previewClasses={grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 items-end justify-center py-12}
-<ui:button :disabled="true" variant="glow">Primary</ui:button>
-<ui:button :disabled="true" color="secondary" variant="glow">Secondary</ui:button>
-<ui:button :disabled="true" color="success" variant="glow">Success</ui:button>
-<ui:button :disabled="true" color="warning" variant="glow">Warning</ui:button>
-<ui:button :disabled="true" color="error" variant="glow">Error</ui:button>
+<ui:button :disabled="true" color="danger" variant="ghost">Danger</ui:button>
 ```

@@ -5,41 +5,41 @@ a great way to get a yes or no answer from your users. Most of them probably won
 
 ## Using Toggles
 
-Use `<ui:toggle>` to create a toggle. You can use the `checked` property to set the initial state of the toggle, or `wire:model`.
+Create a toggle with the `<ui:toggle>` tag. Bind it to your data with `wire:model` or by using the `checked` property.
 
 ```html +demo
-<ui:label class="flex items-center space-x-2">
+<label class="flex items-center space-x-2">
     <ui:toggle />
     <span>Yes, or no?</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" />
     <span>Yes, or no?</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" color="secondary" />
     <span>Yes, or no?</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" color="success" />
     <span>Yes, or no?</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" color="warning" />
     <span>Yes, or no?</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
-    <ui:toggle :checked="true" color="error" />
+<label class="flex mt-4 items-center space-x-2">
+    <ui:toggle :checked="true" color="danger" />
     <span>Yes, or no?</span>
-</ui:label>
+</label>
 ```
 
-Since they're not real inputs, we bind their value to a hidden checkbox. This allows Livewire and Alpine to support arrays of toggle, just like they were normal checkboxes... because... well, _the hidden one is a normal checkbox_.
+Since they're not real inputs, we bind their value to a hidden checkbox. This allows Livewire and Alpine to support arrays of toggles as if they were normal checkboxes... because... well, _the hidden one **is** a normal checkbox_.
 
 ## Properties
 
@@ -55,39 +55,39 @@ Since they're not real inputs, we bind their value to a hidden checkbox. This al
 Use the `checked` property to set the initial state of the toggle.
 
 ```html
-<ui:toggle :checked="$boolean" />
+<ui:toggle :checked="true" />
 ```
 
 ### Color
 
 Use the `color` property to set the color of the toggle when it's on. It can be any of the following:
-`primary`, `secondary`, `success`, `warning`, `error`.
+`primary`, `secondary`, `success`, `warning`, `danger`.
 
 ```html +demo
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" color="primary" />
     <span>Primary</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" color="secondary" />
     <span>Secondary</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" color="success" />
     <span>Success</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
+<label class="flex mt-4 items-center space-x-2">
     <ui:toggle :checked="true" color="warning" />
     <span>Warning</span>
-</ui:label>
+</label>
 
-<ui:label class="flex mt-4 items-center space-x-2">
-    <ui:toggle :checked="true" color="error" />
-    <span>Error</span>
-</ui:label>
+<label class="flex mt-4 items-center space-x-2">
+    <ui:toggle :checked="true" color="danger" />
+    <span>Danger</span>
+</label>
 ```
 
 

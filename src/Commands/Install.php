@@ -27,10 +27,38 @@ class Install extends Command
         $this->installLivewire();
         $this->installAppLayoutComponent();
         $this->newLine();
+        $this->installJsAssets();
         Artisan::call('view:clear');
         // TODO: build assets?
 
         info('✅  Bear UI installation complete. Enjoy! 🐻');
+    }
+
+    protected function installJsAssets()
+    {
+        $jsFile = File::get(base_path('resources/js/app.js'));
+        // If there's Livewire.start() in the JS file, we need to add the Alpine plugin
+        if (str($jsFile)->contains('Livewire.start()')) {
+            File::put(base_path('resources/js/app.js'), str($jsFile)->prepend("import ui from '../../vendor/bearly/ui/js/index.js'\n"));
+            File::put(base_path('resources/js/app.js'), str($jsFile)->replace('Livewire.start()', "Alpine.plugin(ui)\n Livewire.start()"));
+            info('✅  Alpine plugin installed.');
+
+            return;
+        }
+
+        $output = str($jsFile);
+        // Otherwise, we just call the ui function when Alpine init happens
+        if (! $output->contains("import { ui } from '../../vendor/bearly/ui/js/index.js'")) {
+            $output = $output->prepend("import { ui } from '../../vendor/bearly/ui/js/index.js'\n");
+        }
+
+        if (! $output->contains("document.addEventListener('alpine:init', () => {")) {
+            $output = $output->append("document.addEventListener('alpine:init', () => {\n  ui(window.Alpine)\n})\n");
+        }
+
+        File::put(base_path('resources/js/app.js'), $output);
+
+        info('✅  Script assets installed.');
     }
 
     protected function ensureJsFileHasValues(string $path, string $key, array $values)
@@ -112,7 +140,7 @@ class Install extends Command
 
     protected function ensureTailwindConfigHasUiVendorContent()
     {
-        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/**/*.{php,blade.php}'"]);
+        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/**/*.{php,blade.php}'", "'./vendor/bearly/ui/js/**/*.js'"]);
     }
 
     protected function ensureTailwindConfigHasColorsExtended()
@@ -124,7 +152,7 @@ class Install extends Command
             'secondary' => 'colors.slate',
             'success' => 'colors.green',
             'warning' => 'colors.amber',
-            'error' => 'colors.red',
+            'danger' => 'colors.red',
         ];
 
         // Check if the theme.extend.colors section exists
@@ -151,7 +179,7 @@ class Install extends Command
         // Prepare the colors string
         $colorsString = '';
         foreach ($defaultColors as $name => $value) {
-            $newline = $name === 'error' ? '' : "\n";
+            $newline = $name === 'danger' ? '' : "\n";
             $colorsString .= "        '{$name}': {$value},{$newline}";
         }
 

@@ -12,28 +12,32 @@ The components are built for Laravel, Livewire, and Tailwind CSS.
 
 ## Quick Start
 
-Installing the Bear UI components is a two step process. In general, it goes like this:
+Installing the Bear UI components is generally a three step process:
 
 1. Install the package and dependencies via `composer` and `npm` (or `yarn`).
 2. Modify your Tailwind CSS configuration to include the Bear UI theme and components.
+3. Add the Javascript assets to your project.
 
-The easiest way to get started is to use the installer command that comes with the package.
+However, we recommend you use the `bear:install` command to get started. This will install the package, add the Tailwind CSS configuration, and add the Javascript assets to your project automatically... hopefully.
 
-First, require the package via composer:
+> Using in an existing project? You will probably want to use [Manual Installation](#manual-installation)
+
+**First, require the package via composer:**
 ```bash
 composer require bearly/ui:dev-main
 ```
 
-Next, run the installer command:
+**Next, run the installer command:**
 ```bash
 php artisan bear:install
 ```
 
-The command will prompt you to install missing dependencies, add the Tailwind CSS plugin, and choose the components you'd like to install.
+Once that's done you can run your build with `npm run dev` and use the components in your blade views!
+
 
 ## Manual Installation
 
-It's recommended to use the `bear:install` command to perform these steps, but if you'd like to install the components manually, here's how.
+If you're installing the package in a new project, we recommend you use the `bear:install` command. If you're installing in an existing project or want full control you can use the following steps to install manually:
 
 ### Install the Composer Package
 
@@ -57,6 +61,7 @@ export default {
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     './vendor/bearly/ui/**/*.{php,blade.php}', // [tl! add] [tl! focus]
+    './vendor/bearly/ui/js/**/*.js', // [tl! add] [tl! focus]
   ], // [tl! focus]
   theme: { // [tl! focus]
     extend: { // [tl! focus]
@@ -65,7 +70,7 @@ export default {
         secondary: colors.slate, // [tl! add] [tl! focus]
         success: colors.green, // [tl! add] [tl! focus]
         warning: colors.amber, // [tl! add] [tl! focus]
-        error: colors.red, // [tl! add] [tl! focus]
+        danger: colors.red, // [tl! add] [tl! focus]
       } // [tl! add] [tl! focus]
     }, // [tl! focus]
   }, // [tl! focus]
@@ -75,14 +80,31 @@ export default {
 }
 ```
 
-### Install Livewire
+### Add Script Assets
 
-If you haven't already, install Livewire via composer:
-```bash
-composer require livewire/livewire
+The last step is to add the Javascript assets to your project. Usually this is done in thes `resources/js/app.js` file.
+```js
+import { ui } from '../../vendor/bearly/ui/js/index.js'( ) // [tl! add]
+
+document.addEventListener('alpine:init', () => { // [tl! add]
+  ui(window.Alpine) // [tl! add]
+}) // [tl! add]
+
+// ...
 ```
 
-> **Heads up:** Livewire only injects its Javascript assets when it detects a Livewire component by default, so you'll likely want to [Manually include Livewire's frontend assets](https://livewire.laravel.com/docs/installation#manually-including-livewires-frontend-assets) or force asset injection by adding `\Livewire\Livewire::forceAssetInjection();` in your `AppServiceProvider.php` file. Otherwise Alpine and Livewire won't be injected on pages unless they contain a Livewire component.
+If you're [manually bundling Livewire and Alpine](https://livewire.laravel.com/docs/installation#manually-bundling-livewire-and-alpine) you can use the Alpine plugin instead:
+```js
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm'
+import ui from '../../vendor/bearly/ui/js/index.js' // [tl! add] [tl! focus]
+
+// Needs to come before Livewire.start() [tl! focus]
+Alpine.plugin(ui) // [tl! add] [tl! focus]
+
+Livewire.start()
+```
+
+> **Note:** Livewire only injects its Javascript assets when it detects a Livewire component by default, so you'll likely want to [Manually include Livewire's frontend assets](https://livewire.laravel.com/docs/installation#manually-including-livewires-frontend-assets) or force asset injection by adding `\Livewire\Livewire::forceAssetInjection();` in your `AppServiceProvider.php` file. Otherwise Alpine and Livewire won't be injected on pages unless they contain a Livewire component.
 
 ### Use the components
 
@@ -94,16 +116,16 @@ Run your frontend build with `npm run dev` and start using the components!
 ```
 
 ## Customization
-You can publish the components to `resources/views/vendor/ui/components`, take ownership of them, and customize however you wish.
+Publish the components you'd like to customize to `resources/views/vendor/ui/components` and change however you wish. You own them now!
 
 To publish the components, run the `php artisan bear:publish` command:
 ```bash
 php artisan bear:publish
 ```
-Choose your components and they will be copied to your `resources/views/vendor/ui` directory.
+The components you choose will be copied to your `resources/views/vendor/ui` directory.
 
-**To add the components manually:**
-If you wish to copy them manually, the files exist in the `vendor/bearly/ui/resources/views/components` directory. Simply copy them into your `PROJECT_ROOT/resources/views/vendor/ui/components` directory to extend them.
+**Publishing components manually:**
+If you wish to publish components manually, the files exist in the `vendor/bearly/ui/resources/views/components` directory. Duplicate to your `PROJECT_ROOT/resources/views/vendor/ui/components` directory to extend them.
 
 For example:
 ```bash

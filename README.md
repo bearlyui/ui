@@ -10,54 +10,9 @@ This package is built for Laravel and Livewire and Tailwind CSS, it requires:
 - Tailwind CSS 3.x
 - Tailwind CSS Forms Plugin
 
-### Quick Start
+### How to Install
+To install the package follow the [Installation instructions in the docs](https://ui.austencam.com/docs/installation).
 
-To quickly get started, run the following commands to use the interactive installer:
-```bash
-composer require bearly/ui
-php artisan bear:install
-```
-
-### Manual Installation
-Require the package with composer
-```bash
-composer require bearly/ui
-```
-
-Next, update your Tailwind CSS configuration file. You'll need to do two things:
-
-1. Add the components' path to the `content` property
-2. Ensure you have the colors the components expect
-
-```js
-import colors from 'tailwindcss/colors'
-
-export default {
-    content: [
-        // ...
-        './vendor/bearly/ui/**/*.{php,blade.php}'
-    ],
-
-    theme: {
-        extend: {
-            colors: {
-                primary: colors.cyan,
-                secondary: colors.slate,
-                success: colors.green,
-                warning: colors.amber,
-                error: colors.red,
-            }
-        }
-    }
-
-    // ...
-}
-```
-
-Run the build and start using the components:
-```bash
-npm run dev
-```
 
 ## Usage
 ### Using the components

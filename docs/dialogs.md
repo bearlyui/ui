@@ -1,15 +1,15 @@
 # Dialogs
 
-Pop! ...goes the dialog. Or is it a modal? Once you pop, you can't stop. Dialogs are overlay windows that appear on top of the main content, requiring user interaction before returning to the main view.
+Pop! ...goes the dialog. Or is it a modal? In our case, it's technically a "modal dialog". They're overlay windows that appear on top of the main content, requiring user interaction before returning to the main page.
 
 ## Using Dialogs
 
-To use a dialog in your Blade templates, you can use the `<ui:dialog>` component. Here's a basic example:
+Use the `<ui:dialog>` tag to create a dialog. In their simplest form, they require a `trigger` slot and content in the main slot. Here's a basic example:
 
 ```html +demo title={Basic Dialog}
 <ui:dialog>
     <x-slot:trigger>
-        <ui:button>Modal, or Dialog? You choose.</ui:button>
+        <ui:button>Modal, or Dialog? Who knows.</ui:button>
     </x-slot:trigger>
 
     <p class="min-h-[200px] text-center mt-20">All my happy little content mistakes end up here.</p>
@@ -85,8 +85,22 @@ Custom header content for the dialog. If not provided, a default close button wi
 
 ```html
 <x-slot:header>
-    <h2 class="text-xl font-bold">Custom Header</h2>
+    <ui:heading>Custom Header</ui:heading>
 </x-slot:header>
+```
+
+```html +demo title={Dialog with Header}
+<ui:dialog>
+    <x-slot:trigger>
+        <ui:button>Example - Header slot</ui:button>
+    </x-slot:trigger>
+
+    <x-slot:header>
+        <ui:heading>There are no mistakes</ui:heading>
+    </x-slot:header>
+
+    <p class="min-h-[200px] text-center mt-20">We'll play with clouds today.</p>
+</ui:dialog>
 ```
 
 ### default
@@ -95,6 +109,7 @@ The main content of the dialog.
 
 ```html
 <ui:dialog>
+    <!-- ... -->
     <p>This is the main content of the dialog.</p>
 </ui:dialog>
 ```
@@ -110,31 +125,27 @@ Optional footer content for the dialog.
 </x-slot:footer>
 ```
 
-## Dialog Subcomponents
+```html +demo title={Dialog with Header}
+<ui:dialog>
+    <x-slot:trigger>
+        <ui:button>Example - Footer slot</ui:button>
+    </x-slot:trigger>
 
-### ui:dialog.title
+    <p class="min-h-[200px] text-center mt-20">We'll play with clouds today.</p>
 
-Used to set the title of the dialog. This component is automatically associated with the dialog's `aria-labelledby` attribute for accessibility.
-
-```html
-<ui:dialog.title>Dialog Title</ui:dialog.title>
-```
-
-### ui:dialog.description
-
-Used to set the description of the dialog. This component is automatically associated with the dialog's `aria-describedby` attribute for accessibility.
-
-```html
-<ui:dialog.description>This dialog allows you to configure settings.</ui:dialog.description>
+    <x-slot:footer>
+        I'm a footer, put buttons in me!
+    </x-slot:footer>
+</ui:dialog>
 ```
 
 ## Accessibility
 
-The dialog component includes several accessibility features:
-- Uses `role="dialog"` and `aria-modal="true"`
-- Automatically sets `aria-labelledby` and `aria-describedby` attributes
-- Traps focus within the dialog when open
-- Closes the dialog when the Escape key is pressed
+Dialog components include many accessibility considerations. Here are some key features:
+
+- Traps focus within the dialog when open, returns it when it closes
+- Automatically sets ARIA label and description when `ui:heading` and `ui:subheading` components present
+- Includes the `role` and other modal-related `aria` attributes by default
 - Implements a mobile-friendly drag-to-close feature
 
 ## JavaScript Interaction

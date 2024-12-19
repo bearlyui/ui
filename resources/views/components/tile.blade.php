@@ -9,15 +9,15 @@
     'flex-1 flex flex-wrap items-baseline justify-between',
     'gap-y-2 px-2 py-6 sm:px-6 xl:px-8',
     'bg-white dark:bg-gray-900/50' => Variant::Solid->is($variant),
-    'bg-white border border-gray-900/10 dark:border-white/5' => Variant::Outline->is($variant),
+    'bg-transparent rounded ring-1 ring-inset ring-gray-900/10 dark:ring-white/5' => Variant::Outline->is($variant),
     'bg-transparent' => Variant::Ghost->is($variant),
 ])>
     @if (!empty($label))
-        <ui:description tag="dt" :attributes="$label->attributes->class([
-            'text-sm font-medium leading-6 opacity-40',
+        <ui:subheading tag="dt" :attributes="$label->attributes->class([
+            'text-sm font-medium leading-6 text-gray-500 dark:text-gray-400',
         ])">
             {{ $label }}
-        </ui:description>
+        </ui:subheading>
     @endif
 
     @if (!empty($description))
