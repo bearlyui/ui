@@ -22,28 +22,28 @@
 
             {{-- Primary --}}
             'text-primary-700 shadow-primary-400/20 border-primary-500/25 bg-primary-50/30' => Color::Primary->is($color),
-            'dark:text-primary-400 dark:shadow-primary-300/20 dark:bg-primary-900/20' => Color::Primary->is($color),
+            'dark:text-primary-400 dark:shadow-primary-300/20 dark:bg-primary-900/35' => Color::Primary->is($color),
 
             {{-- Secondary --}}
-            'text-secondary-700 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/40' => Color::Secondary->is($color),
-            'dark:text-secondary-400 dark:shadow-secondary-400/15 dark:bg-secondary-800/50' => Color::Secondary->is($color),
+            'text-secondary-700 shadow-secondary-400/20 border-secondary-500/25 bg-secondary-50/60' => Color::Secondary->is($color),
+            'dark:text-secondary-300/85 dark:shadow-secondary-400/15 dark:bg-secondary-800/25' => Color::Secondary->is($color),
 
             {{-- Success --}}
-            'text-success-700 shadow-success-400/20 border-success-500/25 bg-success-50/40' => Color::Success->is($color),
-            'dark:text-success-400 dark:shadow-success-400/15 dark:bg-success-900/15' => Color::Success->is($color),
+            'text-success-700 shadow-success-400/20 border-success-500/25 bg-success-50/65' => Color::Success->is($color),
+            'dark:text-success-400 dark:shadow-success-400/15 dark:bg-success-900/30' => Color::Success->is($color),
 
             {{-- Warning --}}
             'text-warning-700 shadow-warning-400/20 border-warning-500/30 bg-warning-50/30' => Color::Warning->is($color),
-            'dark:text-warning-400 dark:shadow-warning-400/15 dark:bg-warning-900/15' => Color::Warning->is($color),
+            'dark:text-warning-400 dark:shadow-warning-400/15 dark:bg-warning-900/30' => Color::Warning->is($color),
 
             {{-- Danger --}}
             'text-danger-700 shadow-danger-400/20 border-danger-500/25 bg-danger-50/40' => Color::Danger->is($color),
-            'dark:text-danger-400 dark:shadow-danger-400/15 dark:bg-danger-900/15' => Color::Danger->is($color),
+            'dark:text-danger-400 dark:shadow-danger-400/15 dark:bg-danger-950/55' => Color::Danger->is($color),
 
             {{-- Outline Variant --}}
             'border' => Variant::Outline->is($variant),
             'dark:border-primary-300/25' => Color::Primary->is($color) && Variant::Outline->is($variant),
-            'dark:border-secondary-300/25' => Color::Secondary->is($color) && Variant::Outline->is($variant),
+            'dark:border-secondary-300/30' => Color::Secondary->is($color) && Variant::Outline->is($variant),
             'dark:border-success-300/25' => Color::Success->is($color) && Variant::Outline->is($variant),
             'dark:border-warning-300/25' => Color::Warning->is($color) && Variant::Outline->is($variant),
             'dark:border-danger-400/25' => Color::Danger->is($color) && Variant::Outline->is($variant),
@@ -73,7 +73,7 @@
             '[&_[data-ui-heading]]:text-danger-800 dark:[&_[data-ui-heading]]:text-danger-200' => Color::Danger->is($color),
 
             {{-- Subheadings should match text color --}}
-            '[&_[data-ui-subheading]]:text-inherit [&_[data-ui-subheading]]:opacity-90',
+            '[&_[data-ui-subheading]]:text-inherit [&_[data-ui-subheading]]:opacity-95',
         ])
     }}
 >
