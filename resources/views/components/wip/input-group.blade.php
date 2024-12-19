@@ -13,6 +13,6 @@
     @endif
     {{ $slot }}
     @if ($for ?? false)
-        <ui:input-error class="mt-1" :$for />
+        {{-- <ui:input-error class="mt-1" :$for /> --}}
     @endif
 </div>
