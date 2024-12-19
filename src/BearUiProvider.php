@@ -40,8 +40,6 @@ class BearUiProvider extends ServiceProvider
             path: __DIR__.'/../resources/views/components',
             prefix: 'ui'
         );
-
-        $this->loadViewsFrom(__DIR__.'/../resources/views/icons', 'ui-icon');
     }
 
     protected function bootUiTagCompiler(): void
