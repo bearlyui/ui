@@ -35,6 +35,23 @@ The `color` prop accepts a string or a `Color` enum to define this value.
 <ui:button color="danger">Danger</ui:button>
 ```
 
+### Icons
+Easily add an [Icon](/docs/icons) before the button's text with the `icon` prop.
+```html
+<ui:button icon="arrow-left">Icon Example</ui:button>
+```
+
+You can also add an icon after the button's text with the `icon-after` prop.
+```html
+<ui:button icon-after="arrow-right">Icon Example</ui:button>
+```
+
+```html +demo title={Buttons with Icons} previewClasses={flex flex-col sm:flex-row gap-3 items-center justify-center}
+<ui:button icon="arrow-left">Icon Before</ui:button>
+<ui:button icon="arrow-left" icon-after="arrow-right">Why Not Both?</ui:button>
+<ui:button icon-after="arrow-right">Icon After</ui:button>
+```
+
 ### Sizing
 Buttons support sizes `xs`, `sm`, `base` (default), `md`, `lg`, and `xl`. You can
 disable default sizing and specify your own by using the size attribute with an unsupported value like `size="none"`... or even `size="bogus"` if that's your jam.
