@@ -7,6 +7,9 @@
     'variant' => Variant::Solid,
     'radius' => Size::BASE,
     'href' => null,
+    'icon' => null,
+    'iconAfter' => null,
+    'iconVariant' => 'micro',
 ])
 
 <button
@@ -14,7 +17,7 @@
         ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
         ->merge(['type' => 'button'])
         ->class([
-            'transition-all ease-in-out',
+            'transition-all ease-in-out inline-flex items-center',
 
             {{-- Border Radius --}}
             'rounded-none' => Size::NONE->is($radius),
@@ -76,4 +79,23 @@
             '[&[disabled]]:hover:text-danger-600 [&[disabled]]:dark:hover:text-danger-400' => Color::Danger->is($color) && Variant::Ghost->is($variant),
 
         ])
-}}>{{ $slot }}</button>
+}}>
+    @if ($icon)
+        <x-dynamic-component
+            :component="'ui::icon.' . $icon"
+            :variant="$iconVariant"
+            class="opacity-80 mr-2"
+        />
+    @endif
+
+    {{-- Main Slot --}}
+    {{ $slot }}
+
+    @if ($iconAfter)
+        <x-dynamic-component
+            :component="'ui::icon.' . $iconAfter"
+            :variant="$iconVariant"
+            class="opacity-80 ml-2"
+        />
+    @endif
+</button>
