@@ -18,4 +18,22 @@ class AlertTest extends BrowserTestCase
             ->waitUntilMissing('@alert')
             ->assertMissing('@alert');
     }
+
+    public function test_dismissing_one_doesnt_dismiss_others()
+    {
+        $this->blade(<<<'HTML'
+            <ui:alert dusk="alert" :dismiss="true">Hello World</ui:alert>
+            <ui:alert dusk="other" :dismiss="true">Other World</ui:alert>
+        HTML)
+            ->click('@alert button')
+            ->waitUntilMissing('@alert')
+            ->assertMissing('@alert')
+            ->assertVisible('@other');
+    }
+
+    // TODO: Test the following:
+    // - Icons
+    // - General styling?
+    // - Headings and Subheadings as automatically generated aria labels and descriptions
+    // - Keyboard gestures for space and enter work when close button dismissed
 }
