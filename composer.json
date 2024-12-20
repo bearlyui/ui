@@ -9,9 +9,10 @@
         "laravel/prompts": "^0.3.2"
     },
     "require-dev": {
+        "laravel/pint": "^1.18",
         "livewire/livewire": "^3.4",
         "orchestra/testbench": "^9.5",
-        "laravel/pint": "^1.18"
+        "orchestra/testbench-dusk": "^9.9"
     },
     "autoload": {
         "psr-4": {
