@@ -38,7 +38,6 @@ class BrowserTestCase extends TestCase
 
     protected function blade(string $template)
     {
-        // First, register the route that will render the blade template
         $this->beforeServingApplication(function () use ($template) {
             Artisan::call('view:clear');
             Route::view('/_test_ui', 'render-blade-template', ['slot' => $template]);
