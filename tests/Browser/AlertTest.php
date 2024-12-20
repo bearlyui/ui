@@ -31,9 +31,24 @@ class AlertTest extends BrowserTestCase
             ->assertVisible('@other');
     }
 
+    public function test_alert_close_works_on_enter_keypress()
+    {
+        $this->blade('<ui:alert dusk="alert" :dismiss="true">Hello World</ui:alert>')
+            ->keys('@alert button', '{enter}')
+            ->waitUntilMissing('@alert')
+            ->assertMissing('@alert');
+    }
+
+    public function test_alert_close_works_on_space_keypress()
+    {
+        $this->blade('<ui:alert dusk="alert" :dismiss="true">Hello World</ui:alert>')
+            ->keys('@alert button', '{space}')
+            ->waitUntilMissing('@alert')
+            ->assertMissing('@alert');
+    }
+
     // TODO: Test the following:
     // - Icons
-    // - General styling?
     // - Headings and Subheadings as automatically generated aria labels and descriptions
-    // - Keyboard gestures for space and enter work when close button dismissed
+    // - General styling?
 }
