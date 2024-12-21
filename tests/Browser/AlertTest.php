@@ -47,8 +47,38 @@ class AlertTest extends BrowserTestCase
             ->assertMissing('@alert');
     }
 
-    // TODO: Test the following:
-    // - Icons
-    // - Headings and Subheadings as automatically generated aria labels and descriptions
-    // - General styling?
+    public function test_no_icon_by_default()
+    {
+        $this->blade('<ui:alert dusk="alert">Hello World</ui:alert>')
+            ->assertMissing('@alert svg');
+    }
+
+    public function test_icon_property_adds_icon_svg()
+    {
+        $this->blade('<ui:alert icon="exclamation-triangle" dusk="alert">Hello World</ui:alert>')
+            ->assertPresent('@alert svg')
+            ->assertVisible('@alert svg');
+    }
+
+    public function test_including_heading_automatically_binds_aria_label()
+    {
+        $this->blade(<<<'HTML'
+            <ui:alert dusk="alert">
+                <ui:heading dusk="heading">Hello World</ui:heading>
+            </ui:alert>
+        HTML)
+            ->assertAttribute('@heading', 'id', 'ui-alert-title-1')
+            ->assertAttribute('@alert', 'aria-labelledby', 'ui-alert-title-1');
+    }
+
+    public function test_including_subheading_automatically_binds_aria_description()
+    {
+        $this->blade(<<<'HTML'
+            <ui:alert dusk="alert">
+                <ui:subheading dusk="subheading">Subheading</ui:subheading>
+            </ui:alert>
+        HTML)
+            ->assertAttribute('@subheading', 'id', 'ui-alert-description-1')
+            ->assertAttribute('@alert', 'aria-describedby', 'ui-alert-description-1');
+    }
 }
