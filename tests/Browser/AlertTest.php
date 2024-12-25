@@ -81,4 +81,34 @@ class AlertTest extends BrowserTestCase
             ->assertAttribute('@subheading', 'id', 'ui-alert-description-1')
             ->assertAttribute('@alert', 'aria-describedby', 'ui-alert-description-1');
     }
+
+    public function test_has_correct_role()
+    {
+        $this->blade('<ui:alert dusk="alert">Hello World</ui:alert>')
+            ->assertAttribute('@alert', 'role', 'status');
+    }
+
+    public function test_role_can_be_overridden()
+    {
+        $this->blade('<ui:alert role="alert" dusk="alert">Hello World</ui:alert>')
+            ->assertAttribute('@alert', 'role', 'alert');
+    }
+
+    public function test_color_variants()
+    {
+        $this->blade('<ui:alert color="danger" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'text-danger-700');
+
+        $this->blade('<ui:alert color="success" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'text-success-700');
+    }
+
+    public function test_display_variants()
+    {
+        $this->blade('<ui:alert variant="solid" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'border-l-[6px]');
+
+        $this->blade('<ui:alert variant="glow" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'shadow-md');
+    }
 }
