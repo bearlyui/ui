@@ -31,7 +31,7 @@ class AlertTest extends BrowserTestCase
             ->assertVisible('@other');
     }
 
-    public function test_alert_close_works_on_enter_keypress()
+    public function test_close_works_on_enter_keypress()
     {
         $this->blade('<ui:alert dusk="alert" :dismiss="true">Hello World</ui:alert>')
             ->keys('@alert button', '{enter}')
@@ -39,7 +39,7 @@ class AlertTest extends BrowserTestCase
             ->assertMissing('@alert');
     }
 
-    public function test_alert_close_works_on_space_keypress()
+    public function test_close_works_on_space_keypress()
     {
         $this->blade('<ui:alert dusk="alert" :dismiss="true">Hello World</ui:alert>')
             ->keys('@alert button', '{space}')
@@ -53,11 +53,11 @@ class AlertTest extends BrowserTestCase
             ->assertMissing('@alert svg');
     }
 
-    public function test_icon_property_adds_icon_svg()
+    public function test_icon_property_adds_svg()
     {
-        $this->blade('<ui:alert icon="exclamation-triangle" dusk="alert">Hello World</ui:alert>')
-            ->assertPresent('@alert svg')
-            ->assertVisible('@alert svg');
+        $this->blade('<ui:alert icon="exclamation-triangle" dusk="alert"><span dusk="content">Hello World</span></ui:alert>')
+            ->assertPresent('@alert svg + div > @content')
+            ->assertVisible('@alert svg + div > @content');
     }
 
     public function test_including_heading_automatically_binds_aria_label()
@@ -94,21 +94,46 @@ class AlertTest extends BrowserTestCase
             ->assertAttribute('@alert', 'role', 'alert');
     }
 
+    public function test_heading_and_subheading_inherit_text_color()
+    {
+        $this->blade('<ui:alert color="primary" dusk="alert"><ui:heading>Heading</ui:heading><ui:subheading>Subheading</ui:subheading></ui:alert>')
+            ->assertHasClass('@alert', '[&_[data-ui-heading]]:text-primary-800')
+            ->assertHasClass('@alert', '[&_[data-ui-subheading]]:text-inherit');
+    }
+
     public function test_color_variants()
     {
         $this->blade('<ui:alert color="danger" dusk="alert">Hello World</ui:alert>')
             ->assertHasClass('@alert', 'text-danger-700');
 
+        $this->blade('<ui:alert color="secondary" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'text-secondary-600/85');
+
         $this->blade('<ui:alert color="success" dusk="alert">Hello World</ui:alert>')
             ->assertHasClass('@alert', 'text-success-700');
+
+        $this->blade('<ui:alert color="warning" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'text-warning-700');
+
+        $this->blade('<ui:alert color="danger" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'text-danger-700');
     }
 
     public function test_display_variants()
     {
+        $this->blade('<ui:alert variant="outline" dusk="alert">Hello World</ui:alert>')
+            ->assertHasClass('@alert', 'border')
+            ->assertClassMissing('@alert', 'border-l-[6px]')
+            ->assertClassMissing('@alert', 'shadow-md');
+
         $this->blade('<ui:alert variant="solid" dusk="alert">Hello World</ui:alert>')
-            ->assertHasClass('@alert', 'border-l-[6px]');
+            ->assertHasClass('@alert', 'border')
+            ->assertHasClass('@alert', 'border-l-[6px]')
+            ->assertClassMissing('@alert', 'shadow-md');
 
         $this->blade('<ui:alert variant="glow" dusk="alert">Hello World</ui:alert>')
-            ->assertHasClass('@alert', 'shadow-md');
+            ->assertHasClass('@alert', 'border')
+            ->assertHasClass('@alert', 'shadow-md')
+            ->assertClassMissing('@alert', 'border-l-[6px]');
     }
 }
