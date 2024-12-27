@@ -8,7 +8,6 @@ class LivewireAssetsProvider extends ServiceProvider
 {
     public function boot()
     {
-        \Livewire\Livewire::forceAssetInjection();
         \Livewire\Livewire::component('example-livewire-dialog', ExampleLivewireDialog::class);
     }
 }

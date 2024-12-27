@@ -288,6 +288,46 @@ class DialogTest extends BrowserTestCase
             ->assertAttribute('[x-bind="uiDialogAttributes"]:last-child [x-bind="uiDialogContent"]', 'aria-describedby', 'ui-dialog-description-2');
     }
 
+    // Can't get this one to work due to Dusk prefixing 'body' by default.
+    // Changing the prefix manually doesn't seem to work, either!
+    // public function test_page_not_scrollable_when_dialog_is_open()
+    // {
+    //     $this->blade(<<<'HTML'
+    //         <div>
+    //             <ui:dialog dusk="dialog">
+    //                 <x-slot:trigger>
+    //                     <ui:button dusk="trigger">Open Dialog</ui:button>
+    //                 </x-slot:trigger>
+    //                 Dialog Content
+    //             </ui:dialog>
+    //         </div>
+    //     HTML)
+    //         ->click('@trigger')
+    //         ->waitForText('Dialog Content')
+    //         ->assertAttribute('html', 'style', 'overflow: hidden; padding-right: 0px;')
+    //         ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+    //         ->assertAttributeMissing('html', 'style');
+    // }
+
+    public function test_opening_dialog_makes_sibling_element_inert()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content <ui:button dusk="btn">Button</ui:button>
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertVisible('[x-bind="uiDialogContent"]')
+            ->assertFocused('@btn')
+            ->assertAriaAttribute(' > div:first-child', 'hidden', 'true')
+            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->assertAttributeMissing(' > div:first-child', 'aria-hidden');
+    }
+
     public function test_works_with_wire_model()
     {
         $this->blade('<livewire:example-livewire-dialog />')
