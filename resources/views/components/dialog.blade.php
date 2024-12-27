@@ -20,7 +20,7 @@
         <div
             x-bind="uiDialogAttributes"
             @class([
-                'sm:px-5' => $size === 'full',
+                'sm:px-5' => $size == 'full',
                 'fixed flex items-end sm:items-center justify-center top-0 right-0 bottom-0 left-0',
                 $containerClass,
             ])
@@ -36,11 +36,11 @@
                 x-bind="uiDialogContent"
                 @class([
                     'flex-1 relative not-prose mx-auto max-w-full w-full max-h-[96vh] sm:rounded',
-                    'sm:max-w-xl' => $size === 'sm',
-                    'sm:max-w-2xl' => $size === 'md',
-                    'sm:max-w-4xl' => $size === 'lg',
-                    'sm:max-w-6xl' => $size === 'xl',
-                    'sm:max-w-full' => $size === 'full',
+                    'sm:max-w-xl' => $size == 'sm',
+                    'sm:max-w-2xl' => $size == 'md',
+                    'sm:max-w-4xl' => $size == 'lg',
+                    'sm:max-w-6xl' => $size == 'xl',
+                    'sm:max-w-full' => $size == 'full',
                 ])
             >
 

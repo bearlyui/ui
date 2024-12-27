@@ -13,6 +13,12 @@ class BrowserTestCase extends TestCase
 {
     protected $browserHandle;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        exec('npm run build');
+    }
+
     public static function defineWebDriverOptions()
     {
         // To show the UI during testing
