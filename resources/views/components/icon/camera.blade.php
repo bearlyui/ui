@@ -4,7 +4,7 @@
     'variant' => 'outline',
 ])
 
-<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-slot="icon" {{ $attributes
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-slot="icon" data-ui-icon-camera {{ $attributes
     ->when(
         $variant === 'outline',
         fn ($a) => $a->merge([

@@ -149,4 +149,204 @@ class DropdownTest extends BrowserTestCase
         HTML)
             ->assertSourceHas('x-anchor.top.offset.99');
     }
+
+    public function test_can_navigate_to_first_and_last_items()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown dusk="dropdown">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dropdown</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item1">Item 1</ui:dropdown-item>
+                <ui:dropdown-item dusk="item2">Item 2</ui:dropdown-item>
+                <ui:dropdown-item dusk="item3">Item 3</ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertFocused('@item1')
+            ->keys('@item1', ['{end}'])
+            ->assertFocused('@item3')
+            ->keys('@item3', ['{home}'])
+            ->assertFocused('@item1')
+            ->keys('@item1', ['{page_down}'])
+            ->assertFocused('@item3')
+            ->keys('@item3', ['{page_up}'])
+            ->assertFocused('@item1');
+    }
+
+    public function test_can_navigate_with_left_and_right_arrows()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown dusk="dropdown">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dropdown</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item1">Item 1</ui:dropdown-item>
+                <ui:dropdown-item dusk="item2">Item 2</ui:dropdown-item>
+                <ui:dropdown-item dusk="item3">Item 3</ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertFocused('@item1')
+            ->keys('@item1', ['{arrow_right}'])
+            ->assertFocused('@item2')
+            ->keys('@item2', ['{arrow_left}'])
+            ->assertFocused('@item1');
+    }
+
+    public function test_can_select_item_with_space_and_enter()
+    {
+        $this->blade(<<<'HTML'
+            <div x-data="{ clicked: false }">
+                <ui:dropdown dusk="dropdown">
+                    <x-slot:trigger>
+                        <ui:button dusk="trigger">Open Dropdown</ui:button>
+                    </x-slot:trigger>
+                    <ui:dropdown-item dusk="item1" x-on:click="clicked = 'item1'">Item 1</ui:dropdown-item>
+                    <ui:dropdown-item dusk="item2" x-on:click="clicked = 'item2'">Item 1</ui:dropdown-item>
+                </ui:dropdown>
+                <span dusk="result" x-text="clicked"></span>
+            </div>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertFocused('@item1')
+            ->keys('@item1', ['{space}'])
+            ->assertSeeIn('@result', 'item1')
+            ->keys('@item2', ['{enter}'])
+            ->assertSeeIn('@result', 'item2');
+
+    }
+
+    public function test_item_renders_as_button_by_default()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item">Item</ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertVisible('@item')
+            ->assertPresent('button[dusk="item"]')
+            ->assertAttribute('@item', 'type', 'button');
+    }
+
+    public function test_item_renders_as_link_with_href()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item" href="/test">Item</ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertVisible('@item')
+            ->assertPresent('a[dusk="item"]')
+            ->assertAttribute('@item', 'href', 'http://127.0.0.1:8001/test');
+    }
+
+    public function test_item_renders_icon_before()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item" icon="check"><span>Item</span></ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertVisible('@item')
+            ->assertVisible('@item [data-ui-icon-check]')
+            ->assertMissing('.justify-self-end');
+    }
+
+    public function test_item_renders_icon_after()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item" icon-after="arrow-right"><span>Item</span></ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertVisible('@item')
+            ->assertVisible('@item [data-ui-icon-arrow-right]')
+            ->assertPresent('.justify-self-end');
+    }
+
+    public function test_item_dismiss_property_closes_dropdown()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item" dismiss>Close Menu</ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->click('@item')
+            ->waitUntilMissing('[x-bind="uiDropdownContent"]')
+            ->assertMissing('[x-bind="uiDropdownContent"]');
+    }
+
+    public function test_item_renders_before_and_after_slots()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item">
+                    <x-slot:before>
+                        <span dusk="before">Before</span>
+                    </x-slot:before>
+                    Item
+                    <x-slot:after>
+                        <span dusk="after">After</span>
+                    </x-slot:after>
+                </ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->assertSeeIn('@before', 'Before')
+            ->assertSeeIn('@after', 'After');
+    }
+
+    public function test_item_focus_on_hover_behavior()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item1">Item 1</ui:dropdown-item>
+                <ui:dropdown-item dusk="item2" focus-on-hover="false">Item 2</ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->mouseover('@item1')
+            ->assertFocused('@item1')
+            ->assertNotFocused('@item2')
+            ->mouseover('@item2')
+            ->assertFocused('@item2')
+            ->assertNotFocused('@item1');
+    }
 }

@@ -56,7 +56,7 @@ class ImportHeroicons extends Command
         fwrite($file, "@props([\n    'variant' => 'outline',\n])\n\n");
 
         // Write the SVG opening tag with dynamic attributes
-        fwrite($file, '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-slot="icon" {{ $attributes
+        fwrite($file, '<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-slot="icon" data-ui-icon-'.$icon.' {{ $attributes
     ->when(
         $variant === \'outline\',
         fn ($a) => $a->merge([
