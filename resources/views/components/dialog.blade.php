@@ -1,8 +1,8 @@
 @props([
     'size' => 'md',
-    'hideCloseButton' => false,
     'cardClass' => null,
     'containerClass' => null,
+    'hideCloseButton' => false,
 ])
 
 <span

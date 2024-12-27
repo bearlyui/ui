@@ -226,4 +226,66 @@ class DialogTest extends BrowserTestCase
             ->assertHasClass('[x-bind="uiDialogAttributes"]', 'test-container-class')
             ->assertHasClass('[data-ui-card]', 'test-card-class');
     }
+
+    public function test_headings_and_subheadings_are_bound_to_aria_labelledby_and_describedby()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                <ui:heading>Dialog Title</ui:heading>
+                <ui:subheading>Dialog Subtitle</ui:subheading>
+                <ui:heading>Dialog Title 2</ui:heading>
+                <ui:subheading>Dialog Subtitle 2</ui:subheading>
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Title')
+            ->assertVisible('#ui-dialog-title-1')
+            ->assertVisible('#ui-dialog-description-1')
+            ->assertMissing('#ui-dialog-title-2')
+            ->assertMissing('#ui-dialog-description-2')
+            ->assertAttribute('[x-bind="uiDialogContent"]', 'aria-labelledby', 'ui-dialog-title-1')
+            ->assertAttribute('[x-bind="uiDialogContent"]', 'aria-describedby', 'ui-dialog-description-1');
+    }
+
+    public function test_multiple_headings_and_subheadings_get_unique_ids()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                <ui:heading>Dialog Title</ui:heading>
+                <ui:subheading>Dialog Subtitle</ui:subheading>
+            </ui:dialog>
+            <ui:dialog dusk="dialog2">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger2">Open Dialog 2</ui:button>
+                </x-slot:trigger>
+                <ui:heading>Dialog Title</ui:heading>
+                <ui:subheading>Dialog Subtitle</ui:subheading>
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Title')
+            ->assertVisible('#ui-dialog-title-1')
+            ->assertVisible('#ui-dialog-description-1')
+            ->assertMissing('#ui-dialog-title-2')
+            ->assertMissing('#ui-dialog-description-2')
+            ->assertAttribute('[x-bind="uiDialogContent"]', 'aria-labelledby', 'ui-dialog-title-1')
+            ->assertAttribute('[x-bind="uiDialogContent"]', 'aria-describedby', 'ui-dialog-description-1')
+            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->pause(300)
+            ->click('@trigger2')
+            ->waitForText('Dialog Title')
+            ->assertVisible('#ui-dialog-title-2')
+            ->assertVisible('#ui-dialog-description-2')
+            ->assertMissing('#ui-dialog-title-1')
+            ->assertMissing('#ui-dialog-description-1')
+            ->assertAttribute('[x-bind="uiDialogContent"]:last-child', 'aria-labelledby', 'ui-dialog-title-2')
+            ->assertAttribute('[x-bind="uiDialogContent"]:last-child', 'aria-describedby', 'ui-dialog-description-2');
+    }
+    // test that the dialog can be used with wire:model and responds correctly
 }
