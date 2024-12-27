@@ -7,7 +7,10 @@
     x-data="uiDropdown"
 >
     {{-- Trigger --}}
-    <span class="inline-block" x-bind="uiTrigger">{{ $trigger }}</span>
+    <span {{ $trigger->attributes->merge([
+        'class' => 'inline-block',
+        'x-bind' => 'uiDropdownTrigger',
+    ]) }}>{{ $trigger }}</span>
 
     {{-- Content --}}
     <template x-teleport="body">

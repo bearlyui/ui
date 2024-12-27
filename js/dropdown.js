@@ -61,7 +61,7 @@ export default function(Alpine) {
             }, 500)
         },
 
-        uiTrigger: {
+        uiDropdownTrigger: {
             'x-ref': 'trigger',
             'x-init'() { this.focusableTrigger = this.$focus.getFirst() },
             'x-on:click.prevent'() { this.toggle() },
