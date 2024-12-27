@@ -91,7 +91,7 @@ class DialogTest extends BrowserTestCase
             ->click('@trigger')
             ->waitForText('Hello Dialog')
             ->waitFor('@first')
-            ->pause(1000)
+            ->pause(200)
             ->assertFocused('@first');
     }
 
