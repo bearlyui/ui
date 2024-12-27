@@ -11,7 +11,7 @@ class DialogTest extends BrowserTestCase
     {
         return $this->blade(<<<'HTML'
             <ui:dialog dusk="dialog">
-                <x-slot:trigger>
+                <x-slot:trigger dusk="trigger-span">
                     <ui:button dusk="trigger">Open Dialog</ui:button>
                 </x-slot:trigger>
                 Hello Dialog
@@ -334,5 +334,48 @@ class DialogTest extends BrowserTestCase
             ->click('@toggle')
             ->waitForText('Dialog Content')
             ->assertVisible('[x-bind="uiDialogContent"]');
+    }
+
+    public function test_trigger_element_gets_aria_expanded_and_controls_attributes()
+    {
+        $this->dialog()
+            ->click('@trigger')
+            ->waitForText('Hello Dialog')
+            ->assertAttribute('@trigger-span', 'aria-expanded', 'true')
+            ->assertAttribute('@trigger-span', 'aria-controls', 'ui-dialog-content-1');
+    }
+
+    public function test_nesting_works()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                <span dusk="content">Dialog Content</span>
+                <ui:dialog dusk="dialog2">
+                    <x-slot:trigger>
+                        <ui:button dusk="trigger2">Open Dialog 2</ui:button>
+                    </x-slot:trigger>
+                    <span dusk="content2">Dialog Content 2</span>
+                </ui:dialog>
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertVisible('@content')
+            ->assertMissing('@content2')
+            ->click('@trigger2')
+            ->waitForText('Dialog Content 2')
+            ->assertVisible('@content2')
+            ->assertVisible('@content')
+            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->waitForText('Dialog Content')
+            ->assertVisible('@content')
+            ->assertMissing('@content2')
+            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->pause(100)
+            ->assertMissing('@content2')
+            ->assertMissing('@content');
     }
 }
