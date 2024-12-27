@@ -3,7 +3,6 @@
 namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
-use Facebook\WebDriver\WebDriverKeys;
 
 class DialogTest extends BrowserTestCase
 {
@@ -71,7 +70,7 @@ class DialogTest extends BrowserTestCase
         $this->dialog()
             ->click('@trigger')
             ->waitForText('Hello Dialog')
-            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->pressEscape()
             ->waitUntilMissing('[x-bind="uiDialogOverlay"]')
             ->waitUntilMissing('[x-bind="uiDialogContent"]')
             ->assertFocused('@trigger');
@@ -276,7 +275,7 @@ class DialogTest extends BrowserTestCase
             ->assertMissing('#ui-dialog-description-2')
             ->assertAttribute('[x-bind="uiDialogAttributes"] [x-bind="uiDialogContent"]', 'aria-labelledby', 'ui-dialog-title-1')
             ->assertAttribute('[x-bind="uiDialogAttributes"] [x-bind="uiDialogContent"]', 'aria-describedby', 'ui-dialog-description-1')
-            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->pressEscape()
             ->pause(300)
             ->click('@trigger2')
             ->waitForText('Dialog Title')
@@ -305,7 +304,7 @@ class DialogTest extends BrowserTestCase
     //         ->click('@trigger')
     //         ->waitForText('Dialog Content')
     //         ->assertAttribute('html', 'style', 'overflow: hidden; padding-right: 0px;')
-    //         ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+    //         ->pressEscape()
     //         ->assertAttributeMissing('html', 'style');
     // }
 
@@ -324,7 +323,7 @@ class DialogTest extends BrowserTestCase
             ->assertVisible('[x-bind="uiDialogContent"]')
             ->assertFocused('@btn')
             ->assertAriaAttribute(' > div:first-child', 'hidden', 'true')
-            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->pressEscape()
             ->assertAttributeMissing(' > div:first-child', 'aria-hidden');
     }
 
@@ -369,11 +368,11 @@ class DialogTest extends BrowserTestCase
             ->waitForText('Dialog Content 2')
             ->assertVisible('@content2')
             ->assertVisible('@content')
-            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->pressEscape()
             ->waitForText('Dialog Content')
             ->assertVisible('@content')
             ->assertMissing('@content2')
-            ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
+            ->pressEscape()
             ->pause(100)
             ->assertMissing('@content2')
             ->assertMissing('@content');

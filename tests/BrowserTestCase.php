@@ -29,8 +29,8 @@ class BrowserTestCase extends TestCase
     {
         return [
             \Bearly\Ui\BearUiProvider::class,
-            \Bearly\Ui\Tests\Browser\LivewireAssetsProvider::class,
             \Livewire\LivewireServiceProvider::class,
+            \Bearly\Ui\Tests\Browser\BrowserTestingProvider::class,
         ];
     }
 
