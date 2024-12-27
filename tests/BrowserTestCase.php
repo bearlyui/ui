@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Laravel\Dusk\Browser;
-use Orchestra\Testbench\Dusk\Options;
 use Orchestra\Testbench\Dusk\TestCase;
 
 class BrowserTestCase extends TestCase
@@ -17,21 +16,12 @@ class BrowserTestCase extends TestCase
     {
         parent::setUp();
         exec('npm run build');
-        Artisan::call('view:clear');
-    }
-
-    public static function defineWebDriverOptions()
-    {
-        // To show the UI during testing
-        Options::withUI();
     }
 
     protected function defineEnvironment($app)
     {
         $app['config']->set('view.paths', [__DIR__.'/views', resource_path('views')]);
-
         $app['config']->set('app.key', 'base64:mtRfAnfSSDRoAtc6yu9X6IlQEk4u6HyZKkz0Pp8Vm2o=');
-
         Route::get('/_test_ui/scripts.js', fn () => File::get(__DIR__.'/../dist/ui.min.js'));
     }
 
@@ -39,6 +29,7 @@ class BrowserTestCase extends TestCase
     {
         return [
             \Bearly\Ui\BearUiProvider::class,
+            \Bearly\Ui\Tests\Browser\LivewireAssetsProvider::class,
             \Livewire\LivewireServiceProvider::class,
         ];
     }
@@ -47,7 +38,7 @@ class BrowserTestCase extends TestCase
     {
         $this->beforeServingApplication(function () use ($template) {
             Artisan::call('view:clear');
-            Route::view('/_test_ui', 'render-blade-template', ['slot' => $template]);
+            Route::view('/_test_ui', 'render-blade-template', ['slot' => $template])->middleware('web');
         });
 
         $this->browse(function (Browser $browser) {

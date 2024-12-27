@@ -274,8 +274,8 @@ class DialogTest extends BrowserTestCase
             ->assertVisible('#ui-dialog-description-1')
             ->assertMissing('#ui-dialog-title-2')
             ->assertMissing('#ui-dialog-description-2')
-            ->assertAttribute('[x-bind="uiDialogContent"]', 'aria-labelledby', 'ui-dialog-title-1')
-            ->assertAttribute('[x-bind="uiDialogContent"]', 'aria-describedby', 'ui-dialog-description-1')
+            ->assertAttribute('[x-bind="uiDialogAttributes"] [x-bind="uiDialogContent"]', 'aria-labelledby', 'ui-dialog-title-1')
+            ->assertAttribute('[x-bind="uiDialogAttributes"] [x-bind="uiDialogContent"]', 'aria-describedby', 'ui-dialog-description-1')
             ->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE))
             ->pause(300)
             ->click('@trigger2')
@@ -284,8 +284,15 @@ class DialogTest extends BrowserTestCase
             ->assertVisible('#ui-dialog-description-2')
             ->assertMissing('#ui-dialog-title-1')
             ->assertMissing('#ui-dialog-description-1')
-            ->assertAttribute('[x-bind="uiDialogContent"]:last-child', 'aria-labelledby', 'ui-dialog-title-2')
-            ->assertAttribute('[x-bind="uiDialogContent"]:last-child', 'aria-describedby', 'ui-dialog-description-2');
+            ->assertAttribute('[x-bind="uiDialogAttributes"]:last-child [x-bind="uiDialogContent"]', 'aria-labelledby', 'ui-dialog-title-2')
+            ->assertAttribute('[x-bind="uiDialogAttributes"]:last-child [x-bind="uiDialogContent"]', 'aria-describedby', 'ui-dialog-description-2');
     }
-    // test that the dialog can be used with wire:model and responds correctly
+
+    public function test_works_with_wire_model()
+    {
+        $this->blade('<livewire:example-livewire-dialog />')
+            ->click('@toggle')
+            ->waitForText('Dialog Content')
+            ->assertVisible('[x-bind="uiDialogContent"]');
+    }
 }
