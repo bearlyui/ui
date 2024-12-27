@@ -18,7 +18,6 @@ export default function(Alpine) {
         closeDialog() {
             this.open = false
             this.removedAriaHidden && $refs.dialog.setAttribute('aria-hidden', 'true')
-            this.$refs.close?.setAttribute('inert', 'true')
         },
 
         uiDialogAttributes: {
@@ -55,10 +54,8 @@ export default function(Alpine) {
         },
 
         uiDialogClose: {
-            'inert': true,
             'x-ref': 'close',
             'x-on:click': 'closeDialog',
-            'x-effect'() { return this.open && setTimeout(() => this.$el.removeAttribute('inert'), 100) },
         },
 
         uiDialogMobileDragToClose: {

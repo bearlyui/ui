@@ -17,6 +17,7 @@ class BrowserTestCase extends TestCase
     {
         parent::setUp();
         exec('npm run build');
+        Artisan::call('view:clear');
     }
 
     public static function defineWebDriverOptions()
