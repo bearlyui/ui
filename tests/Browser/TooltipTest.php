@@ -4,6 +4,11 @@ namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
 
+/**
+ * ALL OF THESE TESTS ARE FLAKY when ran together.
+ * It seems like any amount of pausing doesn't fix it.
+ * It's like the mouseover isn't working consistently.
+ */
 class TooltipTest extends BrowserTestCase
 {
     public function test_tooltip_with_parent_tag()
