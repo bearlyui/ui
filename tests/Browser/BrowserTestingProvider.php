@@ -13,5 +13,10 @@ class BrowserTestingProvider extends ServiceProvider
         \Livewire\Livewire::component('example-livewire-dialog', ExampleLivewireDialog::class);
 
         Browser::macro('pressEscape', fn () => $this->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE)));
+        Browser::macro('hoverWithJs', function ($selector) {
+            $this->script("document.querySelector('{$selector}').dispatchEvent(new MouseEvent('mouseover', { bubbles: true }))");
+
+            return $this;
+        });
     }
 }

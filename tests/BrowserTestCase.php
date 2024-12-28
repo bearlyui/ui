@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Laravel\Dusk\Browser;
+use Orchestra\Testbench\Dusk\Options;
 use Orchestra\Testbench\Dusk\TestCase;
 
 class BrowserTestCase extends TestCase
@@ -15,6 +16,11 @@ class BrowserTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+    }
+
+    public static function defineWebDriverOptions()
+    {
+        Options::withUI();
     }
 
     protected function defineEnvironment($app)
