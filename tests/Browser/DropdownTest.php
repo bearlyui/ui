@@ -329,7 +329,7 @@ class DropdownTest extends BrowserTestCase
             ->assertSeeIn('@after', 'After');
     }
 
-    public function test_item_focus_on_hover_behavior()
+    public function test_item_focus_on_hover_enabled_by_default()
     {
         $this->blade(<<<'HTML'
             <ui:dropdown>
@@ -337,7 +337,7 @@ class DropdownTest extends BrowserTestCase
                     <ui:button dusk="trigger">Open</ui:button>
                 </x-slot:trigger>
                 <ui:dropdown-item dusk="item1">Item 1</ui:dropdown-item>
-                <ui:dropdown-item dusk="item2" focus-on-hover="false">Item 2</ui:dropdown-item>
+                <ui:dropdown-item dusk="item2" :focus-on-hover="false">Item 2</ui:dropdown-item>
             </ui:dropdown>
         HTML)
             ->click('@trigger')
@@ -346,7 +346,7 @@ class DropdownTest extends BrowserTestCase
             ->assertFocused('@item1')
             ->assertNotFocused('@item2')
             ->mouseover('@item2')
-            ->assertFocused('@item2')
-            ->assertNotFocused('@item1');
+            ->assertFocused('@item1')
+            ->assertNotFocused('@item2');
     }
 }

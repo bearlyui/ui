@@ -24,7 +24,7 @@
             'x-on:mousemove.prevent' => 'if (activeItem != $el) { activeItem = $el && $focus.focus($el) }',
             'x-bind:class' => '{ "hover:bg-black/5 hover:text-gray-800 hover:bg-black/5 dark:hover:text-gray-200 dark:hover:bg-white/5": activeItem == $el }',
         ]),
-        fn ($a) => $a-merge([
+        fn ($a) => $a->merge([
             'x-bind:class' => '{ "hover:bg-black/5 hover:text-gray-800 hover:bg-black/5 dark:hover:text-gray-200 dark:hover:bg-white/5": true }',
         ])
     )->when($dismiss, fn ($a) => $a->merge([
