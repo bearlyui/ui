@@ -12,9 +12,13 @@ class BrowserTestCase extends TestCase
 {
     protected $browserHandle;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
+
     protected function defineEnvironment($app)
     {
-        exec('npm run build');
         $app['config']->set('view.paths', [__DIR__.'/views', resource_path('views')]);
         $app['config']->set('app.key', 'base64:mtRfAnfSSDRoAtc6yu9X6IlQEk4u6HyZKkz0Pp8Vm2o=');
         Route::get('/_test_ui/scripts.js', fn () => File::get(__DIR__.'/../dist/ui.min.js'));
