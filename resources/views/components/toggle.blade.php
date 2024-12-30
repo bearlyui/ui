@@ -1,23 +1,13 @@
 @use('Bearly\Ui\Color')
 
 @props([
-    'checked' => false,
     'withIcon' => true,
     'color' => Color::Primary,
+    'name' => $attributes->whereStartsWith('wire:model')->first(),
+    'value' => 'on',
 ])
 
 @php
-$idOrName = $attributes->get('id') ?? $attributes->get('name') ?? false;
-$dotName = preg_replace('/\[(.*?)\]/', '.$1', $idOrName);
-$nameWithoutBrackets = str($idOrName)->before('[')->toString();
-// For toggles, you might be using as a single toggle, or as an array.
-// In the case of the array, we should also look at the "name" string before
-// any [] characters
-$hasError = $idOrName
-    ? $errors?->hasAny([$idOrName, $dotName, $nameWithoutBrackets]) ?? false
-    : false;
-$isChecked = empty(old()) ? $checked : (boolean) old($dotName);
-
 $trackClasses = match($color) {
     Color::Primary, 'primary' => 'bg-primary-500 dark:bg-primary-400/70 text-primary-600 dark:text-primary-200',
     Color::Secondary, 'secondary'  => 'bg-secondary-500 dark:bg-secondary-400/70 text-secondary-600 dark:text-secondary-200',
@@ -32,19 +22,17 @@ $trackClasses = match($color) {
 <button
     type="button"
     role="switch"
-    x-data="uiToggle(@js($isChecked))"
+    x-data="uiToggle"
     x-bind="uiToggleAttributes"
     x-bind:class="{
         'bg-gray-200 dark:bg-gray-950/25': !checked,
         @js($trackClasses): checked,
     }"
     {{ $attributes
-        ->whereDoesntStartWith(['wire:model', 'x-model'])
-        ->except('name', 'value')
         ->class([
             'group rounded-full border-2',
-            'border-transparent' => !$hasError,
-            'border-red-500 dark:border-red-400' => $hasError,
+            {{-- 'border-transparent' => !$hasError,
+            'border-red-500 dark:border-red-400' => $hasError, --}}
             'relative inline-flex h-6 w-11 flex-shrink-0',
             'outline focus:outline outline-1 focus:outline-1 outline-black/10 outline-offset-[-1px] dark:outline-white/10',
             'cursor-pointer group transition-all duration-200 ease-in-out',
@@ -54,7 +42,7 @@ $trackClasses = match($color) {
         ])
     }}
 >
-    <span class="sr-only">{{ $idOrName }}</span>
+    <span class="sr-only">{{ $name }}</span>
 
     {{-- Dot --}}
     <span
@@ -107,15 +95,17 @@ $trackClasses = match($color) {
             @endempty
         </span>
 
+
         {{-- Bind a hidden checkbox so everything works well with x-model, wire:model, and normal form submits --}}
         <input
             type="checkbox"
             x-ref="checkbox"
-            class="hidden"
-            {{ $attributes->merge([
-                'value' => 'on',
-                'x-model' => 'checked'
-            ]) }}
+            x-model="checked"
+            class="invisible opacity-0"
+            aria-hidden="true"
+            name="{{ $name }}"
+            value="{{ $value }}"
         >
     </span>
 </button>
+<ui:error :for="$name" />    {{-- TODO: Reimplement name --}}

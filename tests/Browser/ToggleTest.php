@@ -98,12 +98,46 @@ class ToggleTest extends BrowserTestCase
     //         ->assertHasClass('@toggle', 'border-red-500');
     // }
 
-    // TODO: FIX THIS
-    // public function test_works_with_wire_model()
-    // {
-    //     $this->blade('<livewire:example-livewire-toggle />')
-    //         ->assertHasClass('@toggle', 'bg-gray-200')
-    //         ->click('@toggle-status')
-    //         ->assertHasClass('@toggle', 'bg-primary-500');
-    // }
+    public function test_submits_like_normal_input_in_form()
+    {
+        $this->blade(<<<'HTML'
+            <form action="/_test_ui/post-dumper" method="post">
+                <ui:toggle name="toggle" dusk="toggle" />
+                <button type="submit" dusk="submit">Submit</button>
+            </form>
+        HTML)
+            ->click('@toggle')
+            ->pause(400)
+            ->assertChecked('@toggle input[type=checkbox]')
+            ->press('@submit')
+            ->pause(400)
+            ->assertSee('"toggle":"on"');
+    }
+
+    public function test_works_with_wire_model()
+    {
+        $this->blade('<livewire:example-livewire-toggle />')
+            ->assertAttribute('@toggle', 'aria-checked', 'false')
+            ->assertNotChecked('@toggle input[type=checkbox]')
+            ->click('@toggle-status')
+            ->pause(400)
+            ->assertAttribute('@toggle', 'aria-checked', 'true')
+            ->assertChecked('@toggle input[type=checkbox]')
+            ->click('@toggle-status')
+            ->pause(400)
+            ->assertAttribute('@toggle', 'aria-checked', 'false')
+            ->assertNotChecked('@toggle input[type=checkbox]');
+    }
+
+    // Assert multiple toggles via an array does the errors as you'd expect
+
+    // Things to test with form binding stuff:
+    // - Works as normal form input with a POST request
+    // - Works when bound to wire:model as a single variable
+    // - Works when bound to wire:model as an array
+    // - Errors show in all three of the above cases
+    // - Old input values work in all three of the above cases?
+    // - Test wire:model sets it properly on init
+    // - Compare to checkbox?
+
 }
