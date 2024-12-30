@@ -114,6 +114,19 @@ class ToggleTest extends BrowserTestCase
             ->assertSee('"toggle":"on"');
     }
 
+    public function test_no_data_submitted_when_not_checked()
+    {
+        $this->blade(<<<'HTML'
+            <form action="/_test_ui/post-dumper" method="post">
+                <ui:toggle name="toggle" dusk="toggle" />
+                <button type="submit" dusk="submit">Submit</button>
+            </form>
+        HTML)
+            ->press('@submit')
+            ->pause(400)
+            ->assertDontSee('"toggle"');
+    }
+
     public function test_works_with_wire_model()
     {
         $this->blade('<livewire:example-livewire-toggle />')
