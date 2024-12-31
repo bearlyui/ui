@@ -24,9 +24,6 @@ $trackClasses = match($color) {
     role="switch"
     x-data="uiToggle"
     x-bind="uiToggleAttributes"
-    {{-- x-bind:class="{
-        'bg-gray-200 dark:bg-gray-950/25': !checked,
-    }" --}}
     {{ $attributes
         ->when(
             {{-- This when clause needs to be first! --}}
@@ -36,6 +33,7 @@ $trackClasses = match($color) {
         ->class([
             'group/toggle rounded-full border-2 border-transparent',
             'bg-gray-200 dark:bg-gray-950/70 dark:hover:bg-gray-900/70',
+            {{-- <ui:error :for="$name" /> --}}
             {{-- 'border-transparent' => !$hasError,
             'border-red-500 dark:border-red-400' => $hasError, --}}
             'relative inline-flex h-6 w-11 flex-shrink-0',
@@ -50,7 +48,6 @@ $trackClasses = match($color) {
         ->except(['checked'])
     }}
 >
-    {{-- IS: <span x-text="isChecked"></span> --}}
     <span class="sr-only">{{ $name }}</span>
 
     {{-- Dot --}}
@@ -117,5 +114,3 @@ $trackClasses = match($color) {
         </span>
     </span> {{-- Dot --}}
 </button>
-
-{{-- <ui:error :for="$name" /> --}}

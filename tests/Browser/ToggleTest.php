@@ -132,6 +132,7 @@ class ToggleTest extends BrowserTestCase
     public function test_works_with_wire_model()
     {
         $this->blade('<livewire:example-livewire-toggle />')
+            // ->tinker()
             ->assertAttribute('@toggle', 'aria-checked', 'false')
             ->assertNotChecked('@toggle input[type=checkbox]')
             ->click('@toggle-status')
@@ -147,6 +148,7 @@ class ToggleTest extends BrowserTestCase
     public function test_works_with_wire_model_as_array()
     {
         $this->blade('<livewire:example-livewire-toggle-array />')
+            // ->tinker()
             ->assertAttribute('@toggle-one', 'aria-checked', 'true')
             ->assertAttribute('@toggle-two', 'aria-checked', 'false')
             ->assertAttribute('@toggle-three', 'aria-checked', 'false')
@@ -161,7 +163,7 @@ class ToggleTest extends BrowserTestCase
             ->assertNotChecked('@toggle-one input[type=checkbox]')
             ->assertNotChecked('@toggle-two input[type=checkbox]')
             ->assertNotChecked('@toggle-three input[type=checkbox]')
-            ->tinker()
+            // ->tinker()
             ->click('@set-1-3')
             ->pause(400)
             ->assertAttribute('@toggle-one', 'aria-checked', 'true')
