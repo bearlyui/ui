@@ -108,4 +108,4 @@ $trackClasses = match($color) {
         >
     </span>
 </button>
-<ui:error :for="$name" />    {{-- TODO: Reimplement name --}}
+{{-- <ui:error :for="$name" /> --}}

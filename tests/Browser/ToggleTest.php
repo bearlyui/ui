@@ -142,15 +142,21 @@ class ToggleTest extends BrowserTestCase
             ->assertNotChecked('@toggle input[type=checkbox]');
     }
 
-    // Assert multiple toggles via an array does the errors as you'd expect
+    public function test_works_with_wire_model_as_array()
+    {
+        $this->blade('<livewire:example-livewire-toggle-array />')
+            ->tinker()
+            ->assertAttribute('@toggle', 'aria-checked', 'false');
 
-    // Things to test with form binding stuff:
-    // - Works as normal form input with a POST request
-    // - Works when bound to wire:model as a single variable
-    // - Works when bound to wire:model as an array
-    // - Errors show in all three of the above cases
-    // - Old input values work in all three of the above cases?
-    // - Test wire:model sets it properly on init
-    // - Compare to checkbox?
+        // Assert multiple toggles via an array does the errors as you'd expect
 
+        // Things to test with form binding stuff:
+        // - [x] Works as normal form input with a POST request
+        // - [x] Works when bound to wire:model as a single variable
+        // - [x] No data submitted when not checked
+        // - [ ] Works when bound to wire:model as an array
+        // - [ ] Errors show in all three of the above cases
+        // - [ ] Old input values work in all three of the above cases?
+        // - [ ] Test wire:model sets it properly on
+    }
 }
