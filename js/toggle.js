@@ -1,5 +1,6 @@
 export default function(Alpine) {
-    Alpine.data('uiToggle', () => ({
+    Alpine.data('uiToggle', (value) => ({
+        value: value,
         checked: false,
 
         uiToggleAttributes: {

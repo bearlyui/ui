@@ -29,6 +29,8 @@ $trackClasses = match($color) {
         @js($trackClasses): checked,
     }"
     {{ $attributes
+        ->whereDoesntStartWith('x-model')
+        ->whereDoesntStartWith('wire:model')
         ->class([
             'group rounded-full border-2',
             {{-- 'border-transparent' => !$hasError,
@@ -100,12 +102,15 @@ $trackClasses = match($color) {
         <input
             type="checkbox"
             x-ref="checkbox"
-            x-model="checked"
             class="invisible opacity-0"
             aria-hidden="true"
             name="{{ $name }}"
             value="{{ $value }}"
+            {{ $attributes->wire('model') }}
+            x-on:click="checked = $el.checked"
         >
     </span>
+{{-- CHK: <span x-text="checked"></span> --}}
 </button>
+
 {{-- <ui:error :for="$name" /> --}}

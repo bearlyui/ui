@@ -1,13 +1,13 @@
 <div
     x-data="{
-        groupItems: [],
+        {{-- groupItems: [], --}}
         init() {
-            $el.querySelectorAll('input[type=checkbox]').forEach(el => {
-                console.log(el)
-            });
+            // $el.querySelectorAll('input[type=checkbox]').forEach(el => {
+               // console.log(el)
+            // })
         }
     }"
-    x-modelable="groupItems"
+    {{-- x-modelable="groupItems" --}}
     {{ $attributes }}
 >
     {{ $slot }}
