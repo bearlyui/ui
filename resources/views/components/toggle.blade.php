@@ -108,14 +108,13 @@ $trackClasses = match($color) {
             value="{{ $value }}"
             x-model="checked"
             x-on:change="console.log('change', $el.checked)"
-            x-effect="console.log('effect', $el.checked)"
             {{ $attributes
                 ->wire('model')
                 {{-- ->class('invisible opacity-0') --}}
             }}
         >
     </span>
-{{-- CHK: <span x-text="checked"></span> --}}
+CHK: <span x-text="checked"></span>
 </button>
 
 {{-- <ui:error :for="$name" /> --}}
