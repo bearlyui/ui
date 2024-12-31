@@ -144,9 +144,27 @@ class ToggleTest extends BrowserTestCase
 
     public function test_works_with_wire_model_as_array()
     {
+        // TODO: fix this test to assert that the toggle is visually checked when we mutate livewire state
         $this->blade('<livewire:example-livewire-toggle-array />')
             ->tinker()
-            ->assertAttribute('@toggle', 'aria-checked', 'false');
+            ->assertAttribute('@toggle-one', 'aria-checked', 'false')
+            ->assertAttribute('@toggle-two', 'aria-checked', 'false')
+            ->assertAttribute('@toggle-three', 'aria-checked', 'false')
+            ->click('@set-1-3')
+            ->pause(2000)
+            ->assertChecked('@toggle-one input[type=checkbox]')
+            ->assertNotChecked('@toggle-two input[type=checkbox]')
+            ->assertChecked('@toggle-three input[type=checkbox]')
+            ->click('@set-2')
+            ->pause(400)
+            ->assertNotChecked('@toggle-one input[type=checkbox]')
+            ->assertChecked('@toggle-two input[type=checkbox]')
+            ->assertNotChecked('@toggle-three input[type=checkbox]')
+            ->click('@toggle-three')
+            ->pause(400)
+            ->assertNotChecked('@toggle-one input[type=checkbox]')
+            ->assertChecked('@toggle-two input[type=checkbox]')
+            ->assertChecked('@toggle-three input[type=checkbox]');
 
         // Assert multiple toggles via an array does the errors as you'd expect
 

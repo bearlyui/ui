@@ -5,6 +5,7 @@
     'color' => Color::Primary,
     'name' => $attributes->whereStartsWith('wire:model')->first(),
     'value' => 'on',
+    'checked' => false,
 ])
 
 @php
@@ -22,7 +23,7 @@ $trackClasses = match($color) {
 <button
     type="button"
     role="switch"
-    x-data="uiToggle"
+    x-data="uiToggle(@js($checked))"
     x-bind="uiToggleAttributes"
     x-bind:class="{
         'bg-gray-200 dark:bg-gray-950/25': !checked,
@@ -102,12 +103,16 @@ $trackClasses = match($color) {
         <input
             type="checkbox"
             x-ref="checkbox"
-            class="invisible opacity-0"
             aria-hidden="true"
             name="{{ $name }}"
             value="{{ $value }}"
-            {{ $attributes->wire('model') }}
-            x-on:click="checked = $el.checked"
+            x-model="checked"
+            x-on:change="console.log('change', $el.checked)"
+            x-effect="console.log('effect', $el.checked)"
+            {{ $attributes
+                ->wire('model')
+                {{-- ->class('invisible opacity-0') --}}
+            }}
         >
     </span>
 {{-- CHK: <span x-text="checked"></span> --}}
