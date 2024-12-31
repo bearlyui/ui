@@ -6,7 +6,7 @@ export default function(Alpine) {
             'x-modelable': 'checked',
             'x-on:click'() { this.$refs.checkbox.click() },
             // TODO: fix this to work with the real checkbox's state
-            ':aria-checked'() { return this.checked },
+            ':aria-checked'() { return this.$refs.checkbox?.checked },
         },
     }))
 }

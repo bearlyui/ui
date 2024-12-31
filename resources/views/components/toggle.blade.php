@@ -5,7 +5,6 @@
     'color' => Color::Secondary,
     'name' => $attributes->whereStartsWith('wire:model')->first(),
     'value' => 'on',
-    'checked' => false,
 ])
 
 @php
@@ -23,7 +22,7 @@ $trackClasses = match($color) {
 <button
     type="button"
     role="switch"
-    x-data="uiToggle(@js($checked))"
+    x-data="uiToggle"
     x-bind="uiToggleAttributes"
     {{-- x-bind:class="{
         'bg-gray-200 dark:bg-gray-950/25': !checked,
@@ -85,7 +84,7 @@ $trackClasses = match($color) {
             aria-hidden="true"
             name="{{ $name }}"
             value="{{ $value }}"
-            x-model="checkedState"
+            @checked($attributes->get('checked') ?? false)
             class="invisible opacity-0 pointer-events-none"
             {{ $attributes->wire('model') }}
         >
@@ -109,7 +108,6 @@ $trackClasses = match($color) {
             @endempty
         </span>
     </span> {{-- Dot --}}
-{{-- CHK: <span x-text="checkedState"></span> --}}
 </button>
 
 {{-- <ui:error :for="$name" /> --}}

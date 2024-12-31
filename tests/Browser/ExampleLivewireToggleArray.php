@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class ExampleLivewireToggleArray extends Component
 {
-    public $selection = [];
+    public $selection = ['one'];
 
     public function render()
     {
@@ -23,7 +23,7 @@ class ExampleLivewireToggleArray extends Component
 
                 <ui:button dusk="set-1-3" wire:click="$set('selection', ['one', 'three'])">Set 1,3</ui:button>
                 <ui:button dusk="set-2" wire:click="$set('selection', ['two'])">Set 2</ui:button>
-                <div class="dark:text-white">selection: {{ var_dump($selection) }}</div>
+                <div class="dark:text-white">selection: @dump($selection)</div>
             </div>
             HTML, ['selection' => $this->selection]);
     }

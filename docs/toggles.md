@@ -14,7 +14,7 @@ Create a toggle with the `<ui:toggle>` tag. Bind it to your data with `wire:mode
 </label>
 
 <label class="flex mt-4 items-center space-x-2">
-    <ui:toggle color="primary" :checked="true" />
+    <ui:toggle :checked="true" color="primary" />
     <span>Yes, or no?</span>
 </label>
 
