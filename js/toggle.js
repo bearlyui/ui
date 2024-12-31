@@ -2,6 +2,8 @@ export default function(Alpine) {
     Alpine.data('uiToggle', (checked) => ({
         checked: checked,
 
+        checkedState: false,
+
         uiToggleAttributes: {
             'role': 'switch',
             'type': 'button',

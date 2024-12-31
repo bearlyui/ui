@@ -10,11 +10,11 @@
 
 @php
 $trackClasses = match($color) {
-    Color::Primary, 'primary' => 'bg-primary-500 dark:bg-primary-400/70 text-primary-600 dark:text-primary-200',
-    Color::Secondary, 'secondary'  => 'bg-secondary-500 dark:bg-secondary-400/70 text-secondary-600 dark:text-secondary-200',
-    Color::Success, 'success'  => 'bg-success-500 dark:bg-success-400/70 text-success-600 dark:text-success-200',
-    Color::Warning, 'warning'  => 'bg-warning-500 dark:bg-warning-400/70 text-warning-600 dark:text-warning-200',
-    Color::Danger, 'danger'  => 'bg-danger-500 dark:bg-danger-400/70 text-danger-600 dark:text-danger-200',
+    Color::Primary, 'primary' => 'has-[input:checked]:bg-primary-500 dark:has-[input:checked]:bg-primary-400/70 has-[input:checked]:text-primary-600 dark:has-[input:checked]:text-primary-200',
+    // Color::Secondary, 'secondary'  => 'bg-secondary-500 dark:bg-secondary-400/70 text-secondary-600 dark:text-secondary-200',
+    // Color::Success, 'success'  => 'bg-success-500 dark:bg-success-400/70 text-success-600 dark:text-success-200',
+    // Color::Warning, 'warning'  => 'bg-warning-500 dark:bg-warning-400/70 text-warning-600 dark:text-warning-200',
+    // Color::Danger, 'danger'  => 'bg-danger-500 dark:bg-danger-400/70 text-danger-600 dark:text-danger-200',
     default => ''
 };
 
@@ -27,7 +27,7 @@ $trackClasses = match($color) {
     x-bind="uiToggleAttributes"
     x-bind:class="{
         'bg-gray-200 dark:bg-gray-950/25': !checked,
-        @js($trackClasses): checked,
+        {{-- @js($trackClasses): checked, --}}
     }"
     {{ $attributes
         ->whereDoesntStartWith('x-model')
@@ -41,7 +41,7 @@ $trackClasses = match($color) {
             'cursor-pointer group transition-all duration-200 ease-in-out',
             'focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white/80',
             'dark:focus:ring-primary-400 dark:focus:ring-offset-black/80',
-
+            $trackClasses,
         ])
     }}
 >
@@ -50,25 +50,29 @@ $trackClasses = match($color) {
     {{-- Dot --}}
     <span
         x-cloak
-        x-bind:class="{
-            'translate-x-5 bg-white dark:bg-gray-800': checked,
-            'translate-x-0 bg-gray-50 group-hover:bg-white dark:bg-gray-700 dark:group-hover:bg-gray-600': !checked,
-        }"
         @class([
             'rounded-full relative inline-block h-5 w-5 pointer-events-none transition duration-200 ease-in-out',
             'shadow dark:shadow-black/25 ring-0',
+            'translate-x-0 bg-gray-50 group-hover:bg-white dark:bg-gray-700 dark:group-hover:bg-gray-600',
+
+            {{-- Checked state --}}
+            'has-[input:checked]:translate-x-5 has-[input:checked]:bg-white dark:has-[input:checked]:bg-gray-800',
+
+            {{-- Icon On --}}
+            'has-[input:checked]:[&>[data-ui-checkbox-icon-on]]:opacity-100 has-[input:checked]:[&>[data-ui-checkbox-icon-on]]:duration-200 has-[input:checked]:[&>[data-ui-checkbox-icon-on]]:ease-in',
+
+            {{-- Icon Off --}}
+            'has-[input:checked]:[&>[data-ui-checkbox-icon-off]]:opacity-0 has-[input:checked]:[&>[data-ui-checkbox-icon-off]]:duration-100 has-[input:checked]:[&>[data-ui-checkbox-icon-off]]:ease-out',
         ])
     >
         {{-- "On" icon --}}
         <span
             aria-hidden="true"
-            x-bind:class="{
-                'opacity-100 duration-200 ease-in': checked,
-                'opacity-0 duration-100 ease-out': !checked,
-                'absolute inset-0 flex h-full w-full': true,
-                'items-center justify-center transition-opacity': true,
-            }"
-            @class(['hidden' => !$withIcon])
+            @class([
+                'hidden' => !$withIcon,
+                'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity',
+                'opacity-0 duration-100 ease-out',
+            ])
         >
             @if ($iconOn ?? false)
                 {{ $iconOn }}
@@ -82,12 +86,12 @@ $trackClasses = match($color) {
         {{-- "Off" icon --}}
         <span
             aria-hidden="true"
-            x-bind:class="{
-                'opacity-0 duration-100 ease-out': checked,
-                'opacity-100 duration-200 ease-in': !checked,
-                'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity': true,
-            }"
-            @class(['hidden' => !$withIcon])
+            data-ui-checkbox-icon-off
+            @class([
+                'hidden' => !$withIcon,
+                'opacity-100 duration-200 ease-in',
+                'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity',
+            ])
         >
             @if ($iconOff ?? false)
                 {{ $iconOff }}
@@ -99,22 +103,18 @@ $trackClasses = match($color) {
         </span>
 
 
-        {{-- Bind a hidden checkbox so everything works well with x-model, wire:model, and normal form submits --}}
         <input
             type="checkbox"
             x-ref="checkbox"
             aria-hidden="true"
             name="{{ $name }}"
             value="{{ $value }}"
-            x-model="checked"
-            x-on:change="console.log('change', $el.checked)"
-            {{ $attributes
-                ->wire('model')
-                {{-- ->class('invisible opacity-0') --}}
-            }}
+            x-model="checkedState"
+            class="invisible opacity-0"
+            {{ $attributes->wire('model') }}
         >
-    </span>
-CHK: <span x-text="checked"></span>
+    </span> {{-- Dot --}}
+{{-- CHK: <span x-text="checkedState"></span> --}}
 </button>
 
 {{-- <ui:error :for="$name" /> --}}
