@@ -28,8 +28,11 @@ $trackClasses = match($color) {
         'bg-gray-200 dark:bg-gray-950/25': !checked,
     }" --}}
     {{ $attributes
-        ->whereDoesntStartWith('x-model')
-        ->whereDoesntStartWith('wire:model')
+        ->when(
+            {{-- This when clause needs to be first! --}}
+            $attributes->whereStartsWith('wire:model')->isNotEmpty(),
+            fn($a) => $a->merge(['x-bind:aria-checked' => '$wire.'.$a->wire('model')->value])
+        )
         ->class([
             'group/toggle rounded-full border-2 border-transparent',
             'bg-gray-200 dark:bg-gray-950/70 dark:hover:bg-gray-900/70',
@@ -42,8 +45,12 @@ $trackClasses = match($color) {
             'dark:focus:ring-primary-400 dark:focus:ring-offset-black/80',
             $trackClasses,
         ])
+        ->whereDoesntStartWith('x-model')
+        ->whereDoesntStartWith('wire:model')
+        ->except(['checked'])
     }}
 >
+    {{-- IS: <span x-text="isChecked"></span> --}}
     <span class="sr-only">{{ $name }}</span>
 
     {{-- Dot --}}
@@ -84,6 +91,7 @@ $trackClasses = match($color) {
             aria-hidden="true"
             name="{{ $name }}"
             value="{{ $value }}"
+            x-effect="console.log('effect', $el.checked)"
             @checked($attributes->get('checked') ?? false)
             class="invisible opacity-0 pointer-events-none"
             {{ $attributes->wire('model') }}

@@ -9,7 +9,7 @@ class ToggleTest extends BrowserTestCase
     protected function toggle()
     {
         return $this->blade(<<<'HTML'
-            <ui:toggle dusk="toggle" />
+            <ui:toggle dusk="toggle" color="primary" />
         HTML);
     }
 
@@ -25,11 +25,13 @@ class ToggleTest extends BrowserTestCase
     {
         $this->toggle()
             ->click('@toggle')
-            ->assertHasClass('@toggle', 'bg-primary-500')
+            ->assertHasClass('@toggle', 'has-[input:checked]:bg-primary-500')
             ->assertAttribute('@toggle', 'aria-checked', 'true')
+            ->assertAttribute('@toggle input[type=checkbox]', 'checked', 'true')
             ->click('@toggle')
-            ->assertHasClass('@toggle', 'bg-gray-200')
-            ->assertAttribute('@toggle', 'aria-checked', 'false');
+            ->pause(400)
+            ->assertAttribute('@toggle', 'aria-checked', 'false')
+            ->assertAttributeMissing('@toggle input[type=checkbox]', 'checked');
     }
 
     public function test_can_be_initialized_as_checked()
@@ -37,7 +39,7 @@ class ToggleTest extends BrowserTestCase
         $this->blade(<<<'HTML'
             <ui:toggle :checked="true" dusk="toggle" />
         HTML)
-            ->assertHasClass('@toggle', 'bg-primary-500')
+            ->assertAttribute('@toggle input[type=checkbox]', 'checked', 'true')
             ->assertAttribute('@toggle', 'aria-checked', 'true');
     }
 
@@ -55,7 +57,7 @@ class ToggleTest extends BrowserTestCase
             $this->blade(<<<HTML
                 <ui:toggle :checked="true" color="$color" dusk="toggle" />
             HTML)
-                ->assertHasClass('@toggle', $class);
+                ->assertHasClass('@toggle', 'has-[input:checked]:'.$class);
         }
     }
 
@@ -82,7 +84,7 @@ class ToggleTest extends BrowserTestCase
             ->assertVisible('@custom-off')
             ->assertMissing('@custom-on')
             ->click('@toggle')
-            ->waitFor('@custom-on')
+            ->waitUntilMissing('@custom-off')
             ->assertVisible('@custom-on')
             ->assertMissing('@custom-off');
     }
@@ -145,22 +147,42 @@ class ToggleTest extends BrowserTestCase
     public function test_works_with_wire_model_as_array()
     {
         $this->blade('<livewire:example-livewire-toggle-array />')
-            ->tinker()
-            ->assertAttribute('@toggle-one', 'aria-checked', 'false')
+            ->assertAttribute('@toggle-one', 'aria-checked', 'true')
             ->assertAttribute('@toggle-two', 'aria-checked', 'false')
             ->assertAttribute('@toggle-three', 'aria-checked', 'false')
+            ->assertChecked('@toggle-one input[type=checkbox]')
+            ->assertNotChecked('@toggle-two input[type=checkbox]')
+            ->assertNotChecked('@toggle-three input[type=checkbox]')
+            ->click('@toggle-one')
+            ->pause(400)
+            ->assertAttribute('@toggle-one', 'aria-checked', '')
+            ->assertAttribute('@toggle-two', 'aria-checked', '')
+            ->assertAttribute('@toggle-three', 'aria-checked', '')
+            ->assertNotChecked('@toggle-one input[type=checkbox]')
+            ->assertNotChecked('@toggle-two input[type=checkbox]')
+            ->assertNotChecked('@toggle-three input[type=checkbox]')
+            ->tinker()
             ->click('@set-1-3')
             ->pause(400)
+            ->assertAttribute('@toggle-one', 'aria-checked', 'true')
+            ->assertAttribute('@toggle-two', 'aria-checked', 'false')
+            ->assertAttribute('@toggle-three', 'aria-checked', 'true')
             ->assertChecked('@toggle-one input[type=checkbox]')
             ->assertNotChecked('@toggle-two input[type=checkbox]')
             ->assertChecked('@toggle-three input[type=checkbox]')
             ->click('@set-2')
             ->pause(400)
+            ->assertAttribute('@toggle-one', 'aria-checked', 'false')
+            ->assertAttribute('@toggle-two', 'aria-checked', 'true')
+            ->assertAttribute('@toggle-three', 'aria-checked', 'false')
             ->assertNotChecked('@toggle-one input[type=checkbox]')
             ->assertChecked('@toggle-two input[type=checkbox]')
             ->assertNotChecked('@toggle-three input[type=checkbox]')
             ->click('@toggle-three')
             ->pause(400)
+            ->assertAttribute('@toggle-one', 'aria-checked', 'false')
+            ->assertAttribute('@toggle-two', 'aria-checked', 'true')
+            ->assertAttribute('@toggle-three', 'aria-checked', 'true')
             ->assertNotChecked('@toggle-one input[type=checkbox]')
             ->assertChecked('@toggle-two input[type=checkbox]')
             ->assertChecked('@toggle-three input[type=checkbox]');
