@@ -28,7 +28,11 @@ $trackClasses = match($color) {
         ->when(
             {{-- This when clause needs to be first! --}}
             $attributes->whereStartsWith('wire:model')->isNotEmpty(),
-            fn($a) => $a->merge(['x-bind:aria-checked' => '$wire.'.$a->wire('model')->value])
+            fn($a) => $a->merge(['x-bind:aria-checked' =>
+                'Array.isArray($wire.' . $a->wire('model')->value . ') ? ' .
+                '$wire.' . $a->wire('model')->value . '.includes("' . $value . '") : ' .
+                '$wire.' . $a->wire('model')->value
+            ])
         )
         ->class([
             'group/toggle rounded-full border-2 border-transparent',
