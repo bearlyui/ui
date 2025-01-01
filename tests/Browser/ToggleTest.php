@@ -199,4 +199,13 @@ class ToggleTest extends BrowserTestCase
             ->assertVisible('[data-ui-toggle-icon-on]')
             ->assertMissing('[data-ui-toggle-icon-off]');
     }
+
+    public function test_outlined_in_red_when_livewire_errors()
+    {
+        $this->blade('<livewire:example-livewire-toggle-single-error />')
+            ->tinker()
+            ->click('@submit')
+            ->pause(400)
+            ->assertHasClass('@toggle', 'border-red-500');
+    }
 }
