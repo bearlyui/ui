@@ -132,7 +132,6 @@ class ToggleTest extends BrowserTestCase
     public function test_works_with_wire_model()
     {
         $this->blade('<livewire:example-livewire-toggle />')
-            // ->tinker()
             ->assertAttribute('@toggle', 'aria-checked', 'false')
             ->assertNotChecked('@toggle input[type=checkbox]')
             ->click('@toggle-status')
@@ -148,7 +147,6 @@ class ToggleTest extends BrowserTestCase
     public function test_works_with_wire_model_as_array()
     {
         $this->blade('<livewire:example-livewire-toggle-array />')
-            // ->tinker()
             ->assertAttribute('@toggle-one', 'aria-checked', 'true')
             ->assertAttribute('@toggle-two', 'aria-checked', 'false')
             ->assertAttribute('@toggle-three', 'aria-checked', 'false')
@@ -163,7 +161,6 @@ class ToggleTest extends BrowserTestCase
             ->assertNotChecked('@toggle-one input[type=checkbox]')
             ->assertNotChecked('@toggle-two input[type=checkbox]')
             ->assertNotChecked('@toggle-three input[type=checkbox]')
-            // ->tinker()
             ->click('@set-1-3')
             ->pause(400)
             ->assertAttribute('@toggle-one', 'aria-checked', 'true')
@@ -188,16 +185,18 @@ class ToggleTest extends BrowserTestCase
             ->assertNotChecked('@toggle-one input[type=checkbox]')
             ->assertChecked('@toggle-two input[type=checkbox]')
             ->assertChecked('@toggle-three input[type=checkbox]');
+    }
 
-        // Assert multiple toggles via an array does the errors as you'd expect
-
-        // Things to test with form binding stuff:
-        // - [x] Works as normal form input with a POST request
-        // - [x] Works when bound to wire:model as a single variable
-        // - [x] No data submitted when not checked
-        // - [ ] Works when bound to wire:model as an array
-        // - [ ] Errors show in all three of the above cases
-        // - [ ] Old input values work in all three of the above cases?
-        // - [ ] Test wire:model sets it properly on
+    public function test_on_and_off_icons_show_and_hide_correctly()
+    {
+        $this->blade(<<<'HTML'
+                <ui:toggle dusk="toggle" />
+            HTML)
+            ->assertVisible('[data-ui-toggle-icon-off]')
+            ->assertMissing('[data-ui-toggle-icon-on]')
+            ->click('@toggle')
+            ->pause(400)
+            ->assertVisible('[data-ui-toggle-icon-on]')
+            ->assertMissing('[data-ui-toggle-icon-off]');
     }
 }

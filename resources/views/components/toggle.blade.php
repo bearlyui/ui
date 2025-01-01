@@ -9,11 +9,11 @@
 
 @php
 $trackClasses = match($color) {
-    Color::Primary, 'primary' => 'has-[input:checked]:bg-primary-500 dark:has-[input:checked]:bg-primary-400/70 has-[input:checked]:text-primary-600 dark:has-[input:checked]:text-primary-200',
-    Color::Secondary, 'secondary'  => 'has-[input:checked]:bg-secondary-500 dark:has-[input:checked]:bg-secondary-400/70',
-    Color::Success, 'success'  => 'has-[input:checked]:bg-success-500 dark:has-[input:checked]:bg-success-400/70 has-[input:checked]:text-success-600 dark:has-[input:checked]:text-success-200',
-    Color::Warning, 'warning'  => 'has-[input:checked]:bg-warning-500 dark:has-[input:checked]:bg-warning-400/70 has-[input:checked]:text-warning-600 dark:has-[input:checked]:text-warning-200',
-    Color::Danger, 'danger'  => 'has-[input:checked]:bg-danger-500 dark:has-[input:checked]:bg-danger-400/70 has-[input:checked]:text-danger-600 dark:has-[input:checked]:text-danger-200',
+    Color::Primary, 'primary' => 'has-[input:checked]:bg-primary-500/80 dark:has-[input:checked]:bg-primary-400/60 has-[input:checked]:text-primary-600 dark:has-[input:checked]:text-primary-200',
+    Color::Secondary, 'secondary'  => 'has-[input:checked]:bg-secondary-500/80 dark:has-[input:checked]:bg-secondary-400/60',
+    Color::Success, 'success'  => 'has-[input:checked]:bg-success-500/80 dark:has-[input:checked]:bg-success-400/60 has-[input:checked]:text-success-600 dark:has-[input:checked]:text-success-200',
+    Color::Warning, 'warning'  => 'has-[input:checked]:bg-warning-500/80 dark:has-[input:checked]:bg-warning-400/60 has-[input:checked]:text-warning-600 dark:has-[input:checked]:text-warning-200',
+    Color::Danger, 'danger'  => 'has-[input:checked]:bg-danger-500/80 dark:has-[input:checked]:bg-danger-400/60 has-[input:checked]:text-danger-600 dark:has-[input:checked]:text-danger-200',
     default => ''
 };
 
@@ -69,6 +69,7 @@ $trackClasses = match($color) {
         {{-- "On" icon --}}
         <span
             aria-hidden="true"
+            data-ui-toggle-icon-on
             @class([
                 'hidden' => !$withIcon,
                 'has-[~input:checked]:opacity-100 dark:has-[~input:checked]:text-gray-50',
@@ -101,6 +102,7 @@ $trackClasses = match($color) {
         {{-- "Off" icon --}}
         <span
             aria-hidden="true"
+            data-ui-toggle-icon-off
             @class([
                 'hidden' => !$withIcon,
                 '[input:checked~&]:opacity-0',
