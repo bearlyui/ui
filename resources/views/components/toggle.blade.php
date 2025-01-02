@@ -8,6 +8,8 @@
 ])
 
 @php
+$hasError = $errors?->has($name) ?? false;
+
 $trackClasses = match($color) {
     Color::Primary, 'primary' => 'has-[input:checked]:bg-primary-500/80 dark:has-[input:checked]:bg-primary-400/60 has-[input:checked]:text-primary-600 dark:has-[input:checked]:text-primary-200',
     Color::Secondary, 'secondary'  => 'has-[input:checked]:bg-secondary-500/80 dark:has-[input:checked]:bg-secondary-400/60',
@@ -16,7 +18,6 @@ $trackClasses = match($color) {
     Color::Danger, 'danger'  => 'has-[input:checked]:bg-danger-500/80 dark:has-[input:checked]:bg-danger-400/60 has-[input:checked]:text-danger-600 dark:has-[input:checked]:text-danger-200',
     default => ''
 };
-
 @endphp
 
 <button
@@ -35,17 +36,16 @@ $trackClasses = match($color) {
             ])
         )
         ->class([
-            'group/toggle rounded-full border-2 border-transparent',
+            'group/toggle rounded-full border-2',
             'bg-gray-200 dark:bg-gray-950/70 dark:hover:bg-gray-900/70',
-            {{-- <ui:error :for="$name" /> --}}
-            {{-- 'border-transparent' => !$hasError,
-            'border-red-500 dark:border-red-400' => $hasError, --}}
             'relative inline-flex h-6 w-11 flex-shrink-0',
             'outline focus:outline outline-1 focus:outline-1 outline-black/10  dark:outline-gray-500/10',
             'cursor-pointer transition-all duration-200 ease-in-out',
             'focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white/80',
             'dark:focus:ring-primary-400 dark:focus:ring-offset-black/80',
             $trackClasses,
+            'border-transparent' => !$hasError,
+            'border-red-500/80 dark:border-red-400/80' => $hasError,
         ])
         ->whereDoesntStartWith('x-model')
         ->whereDoesntStartWith('wire:model')
@@ -93,7 +93,6 @@ $trackClasses = match($color) {
             aria-hidden="true"
             name="{{ $name }}"
             value="{{ $value }}"
-            x-effect="console.log('effect', $el.checked)"
             @checked($attributes->get('checked') ?? false)
             class="invisible opacity-0 pointer-events-none"
             {{ $attributes->wire('model') }}

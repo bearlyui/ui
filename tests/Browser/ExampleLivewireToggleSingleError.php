@@ -2,32 +2,32 @@
 
 namespace Bearly\Ui\Tests\Browser;
 
-use Illuminate\Support\Facades\Blade;
 use Livewire\Component;
 
 class ExampleLivewireToggleSingleError extends Component
 {
-    public $state = false;
+    public $toggleState = false;
 
     public function submit()
     {
         $this->validate([
-            'state' => 'accepted',
+            'toggleState' => 'accepted',
         ]);
-        dd('good');
+
+        dd('validation passed');
     }
 
     public function render()
     {
-        return Blade::render(<<<'HTML'
+        return <<<'HTML'
             <div>
                 <form wire:submit="submit">
-                    <input type="checkbox" name="state" wire:model.live="state" />
-                    <div>@error('title') {{ $message }} @enderror</div>
+                    <ui:toggle dusk="toggle" value="thing" wire:model.live="toggleState" /> Thing
                     <ui:button dusk="submit" type="submit">Submit</ui:button>
                 </form>
             </div>
-            HTML, ['state' => $this->state]);
+            HTML;
     }
+    // @dump($errors?->default?->messages() ?? ['none'])
+    // <div>@error('toggleState') {{ $message }} @enderror</div>
 }
-// <ui:toggle dusk="toggle" value="thing" wire:model.live="toggleState" /> Thing

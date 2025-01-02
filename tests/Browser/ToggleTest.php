@@ -3,6 +3,7 @@
 namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
+use Livewire\Livewire;
 
 class ToggleTest extends BrowserTestCase
 {
@@ -202,10 +203,39 @@ class ToggleTest extends BrowserTestCase
 
     public function test_outlined_in_red_when_livewire_errors()
     {
+        // This doesn't work due to it trying to create a new reflectionclass out of null here?? Solve this at some point so we can inline components in tests like this...
+        // https://github.com/livewire/livewire/blob/master/src/helpers.php#L35
+        // Livewire::visit(new class extends Component
+        // {
+        //     public $toggleState = false;
+
+        //     public function submit()
+        //     {
+        //         $this->validate(['toggleState' => 'accepted']);
+        //     }
+
+        //     public function render()
+        //     {
+        //         return <<<'HTML'
+        //             <div>
+        //             <form wire:submit="submit">
+        //                     <ui:toggle dusk="toggle" value="thing" wire:model.live="toggleState" /> Thing
+        //                     <ui:button dusk="submit" type="submit">Submit</ui:button>
+        //                 </form>
+        //             </div>
+        //         HTML;
+        //     }
+        // });
+
+        Livewire::test(ExampleLivewireToggleSingleError::class)
+            ->assertHasNoErrors()
+            ->call('submit')
+            ->assertHasErrors(['toggleState' => 'accepted'])
+            ->assertSeeHtml('border-red-500/80');
+
         $this->blade('<livewire:example-livewire-toggle-single-error />')
-            ->tinker()
             ->click('@submit')
             ->pause(400)
-            ->assertHasClass('@toggle', 'border-red-500');
+            ->assertHasClass('@toggle', 'border-red-500/80');
     }
 }
