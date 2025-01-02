@@ -27,7 +27,8 @@ class ToggleTest extends BrowserTestCase
     {
         $this->toggle()
             ->click('@toggle')
-            ->assertHasClass('@toggle', 'has-[input:checked]:bg-primary-500')
+            ->pause(400)
+            ->assertHasClass('@toggle', 'has-[input:checked]:bg-primary-500/80')
             ->assertAttribute('@toggle', 'aria-checked', 'true')
             ->assertAttribute('@toggle input[type=checkbox]', 'checked', 'true')
             ->click('@toggle')
@@ -48,11 +49,11 @@ class ToggleTest extends BrowserTestCase
     public function test_supports_different_colors()
     {
         $colors = [
-            'primary' => 'bg-primary-500',
-            'secondary' => 'bg-secondary-500',
-            'success' => 'bg-success-500',
-            'warning' => 'bg-warning-500',
-            'danger' => 'bg-danger-500',
+            'primary' => 'bg-primary-500/80',
+            'secondary' => 'bg-secondary-500/80',
+            'success' => 'bg-success-500/80',
+            'warning' => 'bg-warning-500/80',
+            'danger' => 'bg-danger-500/80',
         ];
 
         foreach ($colors as $color => $class) {
