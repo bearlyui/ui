@@ -9,13 +9,34 @@ use Laravel\Dusk\Browser;
 use Orchestra\Testbench\Dusk\Options;
 use Orchestra\Testbench\Dusk\TestCase;
 
+use function Livewire\trigger;
+
 class BrowserTestCase extends TestCase
 {
     protected $browserHandle;
 
+    /**
+     * Huge thanks to Caleb Porzio and the Livewire repository for this boilerplate!
+     * We need to trigger the events for Livewire::visit to work for DuskTestable
+     * so we need tweakApplicationHook to be defined and to trigger the events
+     */
+    public static function tweakApplicationHook()
+    {
+        return function () {};
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        trigger('browser.testCase.setUp', $this);
+    }
+
+    protected function tearDown(): void
+    {
+        trigger('browser.testCase.tearDown', $this);
+
+        parent::tearDown();
     }
 
     public static function defineWebDriverOptions()

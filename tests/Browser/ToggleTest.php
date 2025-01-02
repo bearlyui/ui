@@ -3,6 +3,7 @@
 namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
+use Livewire\Component;
 use Livewire\Livewire;
 
 class ToggleTest extends BrowserTestCase
@@ -90,17 +91,6 @@ class ToggleTest extends BrowserTestCase
             ->assertMissing('@custom-off');
     }
 
-    // public function test_shows_error_state()
-    // {
-    //     $this->blade(<<<'HTML'
-    //         <div>
-    //             @php $errors = new \Illuminate\Support\MessageBag(['test' => 'Error']) @endphp
-    //             <ui:toggle name="test" dusk="toggle" />
-    //         </div>
-    //     HTML)
-    //         ->assertHasClass('@toggle', 'border-red-500');
-    // }
-
     public function test_submits_like_normal_input_in_form()
     {
         $this->blade(<<<'HTML'
@@ -132,7 +122,7 @@ class ToggleTest extends BrowserTestCase
 
     public function test_works_with_wire_model()
     {
-        $this->blade('<livewire:example-livewire-toggle />')
+        Livewire::visit(ExampleLivewireToggle::class)
             ->assertAttribute('@toggle', 'aria-checked', 'false')
             ->assertNotChecked('@toggle input[type=checkbox]')
             ->click('@toggle-status')
@@ -147,7 +137,7 @@ class ToggleTest extends BrowserTestCase
 
     public function test_works_with_wire_model_as_array()
     {
-        $this->blade('<livewire:example-livewire-toggle-array />')
+        Livewire::visit(ExampleLivewireToggleArray::class)
             ->assertAttribute('@toggle-one', 'aria-checked', 'true')
             ->assertAttribute('@toggle-two', 'aria-checked', 'false')
             ->assertAttribute('@toggle-three', 'aria-checked', 'false')
@@ -203,39 +193,84 @@ class ToggleTest extends BrowserTestCase
 
     public function test_outlined_in_red_when_livewire_errors()
     {
-        // This doesn't work due to it trying to create a new reflectionclass out of null here?? Solve this at some point so we can inline components in tests like this...
-        // https://github.com/livewire/livewire/blob/master/src/helpers.php#L35
-        // Livewire::visit(new class extends Component
-        // {
-        //     public $toggleState = false;
 
-        //     public function submit()
-        //     {
-        //         $this->validate(['toggleState' => 'accepted']);
-        //     }
-
-        //     public function render()
-        //     {
-        //         return <<<'HTML'
-        //             <div>
-        //             <form wire:submit="submit">
-        //                     <ui:toggle dusk="toggle" value="thing" wire:model.live="toggleState" /> Thing
-        //                     <ui:button dusk="submit" type="submit">Submit</ui:button>
-        //                 </form>
-        //             </div>
-        //         HTML;
-        //     }
-        // });
-
-        Livewire::test(ExampleLivewireToggleSingleError::class)
+        Livewire::test(ExampleLivewireToggleWithSingleError::class)
             ->assertHasNoErrors()
             ->call('submit')
             ->assertHasErrors(['toggleState' => 'accepted'])
             ->assertSeeHtml('border-red-500/80');
 
-        $this->blade('<livewire:example-livewire-toggle-single-error />')
+        Livewire::visit(ExampleLivewireToggleWithSingleError::class)
             ->click('@submit')
             ->pause(400)
             ->assertHasClass('@toggle', 'border-red-500/80');
+    }
+}
+
+class ExampleLivewireToggle extends Component
+{
+    public $toggleState = false;
+
+    public function toggleStatus()
+    {
+        $this->toggleState = ! $this->toggleState;
+    }
+
+    public function render()
+    {
+        return <<<'HTML'
+            <div>
+                <ui:toggle dusk="toggle" wire:model="toggleState" />
+                <div>
+                    <ui:button dusk="toggle-status" wire:click="toggleStatus">Toggle Status</ui:button>
+                    PHP STATE: {{ var_dump($toggleState) }}
+                </div>
+            </div>
+        HTML;
+    }
+}
+
+class ExampleLivewireToggleArray extends Component
+{
+    public $selection = ['one'];
+
+    public function render()
+    {
+        return <<<'HTML'
+            <div>
+                <ui:group class="flex flex-col gap-2 p-5">
+                    @foreach (['one', 'two', 'three'] as $item)
+                        <div class="flex items-center gap-2" wire:key="{{ $item }}">
+                            <ui:toggle dusk="toggle-{{ $item }}" value="{{ $item }}" wire:model.live="selection" /> {{ $item }}
+                        </div>
+                    @endforeach
+                </ui:group>
+
+                <ui:button dusk="set-1-3" wire:click="$set('selection', ['one', 'three'])">Set 1,3</ui:button>
+                <ui:button dusk="set-2" wire:click="$set('selection', ['two'])">Set 2</ui:button>
+            </div>
+        HTML;
+    }
+}
+
+class ExampleLivewireToggleWithSingleError extends Component
+{
+    public $toggleState = false;
+
+    public function submit()
+    {
+        $this->validate(['toggleState' => 'accepted']);
+    }
+
+    public function render()
+    {
+        return <<<'HTML'
+            <div>
+            <form wire:submit="submit">
+                    <ui:toggle dusk="toggle" value="thing" wire:model.live="toggleState" /> Thing
+                    <ui:button dusk="submit" type="submit">Submit</ui:button>
+                </form>
+            </div>
+        HTML;
     }
 }
