@@ -268,7 +268,7 @@ class ExampleLivewireToggleWithSingleError extends Component
         return <<<'HTML'
             <div>
             <form wire:submit="submit">
-                    <ui:toggle dusk="toggle" value="thing" wire:model.live="toggleState" /> Thing
+                    <ui:toggle dusk="toggle" value="thing" wire:model="toggleState" /> Thing
                     <ui:button dusk="submit" type="submit">Submit</ui:button>
                 </form>
             </div>
