@@ -15,9 +15,12 @@
 <button
     {{ $attributes
         ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
-        ->merge(['type' => 'button'])
+        ->merge([
+            'type' => 'button',
+            'wire:loading.attr' => 'data-ui-loading',
+        ])
         ->class([
-            'transition-all ease-in-out inline-flex items-center',
+            'transition-all ease-in-out inline-flex items-center relative',
 
             {{-- Border Radius --}}
             'rounded-none' => Size::NONE->is($radius),
@@ -80,22 +83,26 @@
 
         ])
 }}>
-    @if ($icon)
-        <x-dynamic-component
-            :component="'ui::icon.' . $icon"
-            :variant="$iconVariant"
-            class="opacity-80 mr-2"
-        />
-    @endif
+    <span class="[[data-ui-loading]>&]:opacity-0 transition ease-in-out">
+        @if ($icon)
+            <x-dynamic-component
+                :component="'ui::icon.' . $icon"
+                :variant="$iconVariant"
+                class="opacity-80 mr-2"
+            />
+        @endif
+        {{-- Main Slot --}}
+        {{ $slot }}
+        @if ($iconAfter)
+            <x-dynamic-component
+                :component="'ui::icon.' . $iconAfter"
+                :variant="$iconVariant"
+                class="opacity-80 ml-2"
+            />
+        @endif
+    </span>
 
-    {{-- Main Slot --}}
-    {{ $slot }}
-
-    @if ($iconAfter)
-        <x-dynamic-component
-            :component="'ui::icon.' . $iconAfter"
-            :variant="$iconVariant"
-            class="opacity-80 ml-2"
-        />
-    @endif
+    <span class="[[data-ui-loading]>&]:opacity-100 opacity-0 transition ease-in-out absolute inset-0 flex items-center justify-center">
+        <ui:icon-academic-cap class="animate-spin" />
+    </span>
 </button>

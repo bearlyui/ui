@@ -3,6 +3,8 @@
 namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
+use Livewire\Component;
+use Livewire\Livewire;
 
 class ButtonTest extends BrowserTestCase
 {
@@ -134,5 +136,34 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button :disabled="true" dusk="btn">Button</ui:button>')
             ->assertAttribute('@btn', 'disabled', true)
             ->assertHasClass('@btn', '[&[disabled]]:opacity-60');
+    }
+
+    public function test_loading_state()
+    {
+        Livewire::visit(ExampleLoadingButton::class)
+            ->tinker()
+            ->click('@btn')
+            ->pause(400)
+            ->assertHasClass('@btn', '[&[data-ui-loading]>&]:opacity-0')
+            ->assertHasClass('@btn', '[&[data-ui-loading]>&]:opacity-100');
+
+        $this->blade('<ui:button wire:loading dusk="btn">Button</ui:button>')
+            ->assertHasClass('@btn', '[&[data-ui-loading]>&]:opacity-0')
+            ->assertHasClass('@btn', '[&[data-ui-loading]>&]:opacity-100');
+    }
+}
+
+class ExampleLoadingButton extends Component
+{
+    public function simulateLoading()
+    {
+        sleep(1);
+    }
+
+    public function render()
+    {
+        return <<<'HTML'
+            <ui:button dusk="btn" wire:click="simulateLoading">Simulate Loading</ui:button>
+        HTML;
     }
 }
