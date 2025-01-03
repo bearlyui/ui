@@ -349,4 +349,42 @@ class DropdownTest extends BrowserTestCase
             ->assertFocused('@item1')
             ->assertNotFocused('@item2');
     }
+
+    public function test_dropdown_nested_in_dialog_nested_in_dropdown()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="open-dropdown">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dialog dusk="dialog">
+                    <x-slot:trigger>
+                        <ui:button dusk="open-dialog">Open Dialog</ui:button>
+                    </x-slot:trigger>
+                    <p>Happy Little Dialog</p>
+                    <ui:dropdown>
+                        <x-slot:trigger>
+                            <ui:button dusk="open-dropdown-in-dialog">Open Dropdown in Dialog</ui:button>
+                        </x-slot:trigger>
+                        <ui:dropdown-item dusk="item">
+                            <ui:tooltip dusk="tooltip" title="Tooltipper" />
+                            Nested Item
+                        </ui:dropdown-item>
+                    </ui:dropdown>
+                </ui:dialog>
+            </ui:dropdown>
+        HTML)
+            ->click('@open-dropdown')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->click('@open-dialog')
+            ->waitFor('[x-bind="uiDialogContent"]')
+            ->assertSee('Happy Little Dialog')
+            ->click('@open-dropdown-in-dialog')
+            ->waitFor('@item')
+            ->assertSee('Nested Item')
+            ->clickAndHold('@item')
+            ->waitFor('@tooltip')
+            ->assertVisible('@tooltip')
+            ->releaseMouse();
+    }
 }
