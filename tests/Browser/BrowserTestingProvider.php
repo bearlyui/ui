@@ -11,8 +11,11 @@ class BrowserTestingProvider extends ServiceProvider
     public function boot()
     {
         Browser::macro('pressEscape', fn () => $this->withKeyboard(fn ($k) => $k->sendKeys(WebDriverKeys::ESCAPE)));
-        Browser::macro('hoverWithJs', function ($selector) {
-            $this->script("document.querySelector('{$selector}').dispatchEvent(new MouseEvent('mouseover', { bubbles: true }))");
+
+        Browser::macro('assertHasClasses', function ($selector, array $classes) {
+            foreach ($classes as $class) {
+                $this->assertHasClass($selector, $class);
+            }
 
             return $this;
         });
