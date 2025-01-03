@@ -90,12 +90,13 @@ $trackClasses = match($color) {
         <input
             type="checkbox"
             x-ref="checkbox"
+            x-bind="uiToggleCheckboxAttributes"
             aria-hidden="true"
             name="{{ $name }}"
             value="{{ $value }}"
-            @checked($attributes->get('checked') ?? false)
             class="invisible opacity-0 pointer-events-none"
             {{ $attributes->wire('model') }}
+            @checked($attributes->get('checked') ?? false)
         >
 
         {{-- "Off" icon --}}
