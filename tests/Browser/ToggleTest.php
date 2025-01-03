@@ -221,7 +221,9 @@ class ExampleLivewireToggle extends Component
     {
         return <<<'HTML'
             <div>
-                <ui:toggle dusk="toggle" wire:model="toggleState" />
+                <label for="toggler">
+                    <ui:toggle id="toggler" dusk="toggle" wire:model="toggleState" /> Label!
+                </label>
                 <div>
                     <ui:button dusk="toggle-status" wire:click="toggleStatus">Toggle Status</ui:button>
                     PHP STATE: {{ var_dump($toggleState) }}

@@ -14,7 +14,7 @@ export default function(Alpine) {
 
         uiToggleCheckboxAttributes: {
             'x-on:change'() {
-                this.$root.setAttribute('aria-checked', this.$refs.checkbox.checked);
+                this.$root.setAttribute('aria-checked', this.$el.checked);
             }
         },
     }))
