@@ -21,6 +21,16 @@ Badges support several properties that can be used to customize their appearance
 | `icon` | `string` | `null` | The icon to display before the badge text. |
 | `iconAfter` | `string` | `null` | The icon to display after the badge text. |
 | `iconVariant` | `string` | `micro` | The variant of the icon. |
+| `href` | `string` | `null` | The URL the badge should link to, making it an anchor element. |
+
+### Linkable Badges
+
+You can make a badge act as a link by using the `href` prop. This will render the badge as an `<a>` element.
+
+```html +demo title={Linkable Badges} previewClasses={flex flex-col sm:flex-row gap-3 items-center justify-center}
+<ui:badge href="#happy-little-link">Visit Example</ui:badge>
+<ui:badge href="#happy-little-link" color="primary">Primary Link</ui:badge>
+```
 
 ---
 

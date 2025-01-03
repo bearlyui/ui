@@ -23,7 +23,7 @@ class BadgeTest extends BrowserTestCase
             <ui:badge color="danger" dusk="danger-badge">Danger</ui:badge>
         HTML)
             ->assertHasClasses('@primary-badge', ['bg-primary-200/60', 'text-primary-900'])
-            ->assertHasClasses('@secondary-badge', ['bg-secondary-300/60', 'text-secondary-800'])
+            ->assertHasClasses('@secondary-badge', ['bg-secondary-300/40', 'text-secondary-800'])
             ->assertHasClasses('@success-badge', ['bg-success-200/60', 'text-success-900'])
             ->assertHasClasses('@warning-badge', ['bg-warning-200/60', 'text-warning-900'])
             ->assertHasClasses('@danger-badge', ['bg-danger-200/60', 'text-danger-900']);
@@ -96,5 +96,13 @@ class BadgeTest extends BrowserTestCase
     {
         $this->blade('<ui:badge icon="arrow-left" icon-variant="micro" dusk="badge"><span>Badge</span></ui:badge>')
             ->assertHasClass('@badge svg', 'size-4');
+    }
+
+    public function test_href_prop()
+    {
+        $this->blade('<ui:badge href="https://example.com/" dusk="link-badge">Link Badge</ui:badge>')
+            ->assertVisible('@link-badge')
+            ->assertAttribute('@link-badge', 'href', 'https://example.com/')
+            ->assertSee('Link Badge');
     }
 }
