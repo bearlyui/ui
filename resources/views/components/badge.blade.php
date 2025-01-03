@@ -7,16 +7,10 @@
     'radius' => Size::BASE,
     'color' => Color::Secondary,
     'variant' => Variant::Solid,
+    'icon' => null,
+    'iconAfter' => null,
+    'iconVariant' => 'micro',
 ])
-
-{{-- TODO:
-- variants
-- number support / numeric-only visibility?
-- check / adjust color contrast for light mode
-- check / adjust color contrast for dark mode
-- icons?
- --}}
-
 <div {{ $attributes->class([
     'inline-flex items-center tabular-nums',
 
@@ -49,5 +43,21 @@
     'rounded-xl' => Size::XL->is($radius),
     'rounded-full' => Size::FULL->is($radius),
 ]) }}>
+    @if ($icon)
+        <x-dynamic-component
+            :component="'ui::icon.' . $icon"
+            :variant="$iconVariant"
+            class="opacity-80 mr-2"
+        />
+    @endif
+
     {{ $slot }}
+
+    @if ($iconAfter)
+        <x-dynamic-component
+            :component="'ui::icon.' . $iconAfter"
+            :variant="$iconVariant"
+            class="opacity-80 ml-2"
+        />
+    @endif
 </div>

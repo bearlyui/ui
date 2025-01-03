@@ -7,6 +7,7 @@ return [
     ],
     'Components' => [
         'Alert' => '/docs/alerts',
+        'Badge' => '/docs/badges',
         'Button' => '/docs/buttons',
         'Card' => '/docs/cards',
         // '🚧 Context Menus' => '/docs/context-menus',
