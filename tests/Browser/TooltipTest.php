@@ -23,9 +23,10 @@ class TooltipTest extends BrowserTestCase
             </ui:tooltip>
         HTML)
             ->assertMissing('Happy little tooltip')
-            ->mouseover('@btn')
-            ->waitFor('@tooltip')
-            ->assertSee('Happy little tooltip');
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertSee('Happy little tooltip')
+            ->releaseMouse();
     }
 
     public function test_tooltip_with_trigger_slot()
@@ -39,9 +40,10 @@ class TooltipTest extends BrowserTestCase
             </ui:tooltip>
         HTML)
             ->assertMissing('Tooltip with trigger slot')
-            ->mouseover('@btn')
-            ->waitFor('@tooltip')
-            ->assertSee('Tooltip with trigger slot');
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertSee('Tooltip with trigger slot')
+            ->releaseMouse();
     }
 
     public function test_tooltip_with_title_prop()
@@ -53,9 +55,10 @@ class TooltipTest extends BrowserTestCase
             </ui:button>
         HTML)
             ->assertMissing('Title prop tooltip')
-            ->mouseover('@btn')
-            ->waitFor('@tooltip')
-            ->assertSee('Title prop tooltip');
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertSee('Title prop tooltip')
+            ->releaseMouse();
     }
 
     public function test_tooltip_with_shortcut()
@@ -68,10 +71,11 @@ class TooltipTest extends BrowserTestCase
         HTML)
             ->assertMissing('Save changes')
             ->assertMissing('⌘+S')
-            ->mouseover('@btn')
-            ->waitFor('@tooltip')
+            ->clickAndHold('@btn')
+            ->pause(500)
             ->assertSee('Save changes')
-            ->assertSee('⌘+S');
+            ->assertSee('⌘+S')
+            ->releaseMouse();
     }
 
     public function test_sm_size()
@@ -82,9 +86,10 @@ class TooltipTest extends BrowserTestCase
                 Small
             </ui:button>
         HTML)
-            ->mouseover('@btn')
-            ->waitFor('@tooltip')
-            ->assertSourceHas('px-1.5 py-1 text-xs');
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertSourceHas('px-1.5 py-1 text-xs')
+            ->releaseMouse();
     }
 
     public function test_base_size()
@@ -95,9 +100,10 @@ class TooltipTest extends BrowserTestCase
                 Base
             </ui:button>
         HTML)
-            ->mouseover('@btn-base')
-            ->waitFor('@tooltip-base')
-            ->assertSourceHas('px-3 py-1.5 text-sm');
+            ->clickAndHold('@btn-base')
+            ->pause(500)
+            ->assertSourceHas('px-3 py-1.5 text-sm')
+            ->releaseMouse();
     }
 
     public function test_md_size()
@@ -108,9 +114,10 @@ class TooltipTest extends BrowserTestCase
                 Medium
             </ui:button>
         HTML)
-            ->mouseover('@btn-md')
-            ->waitFor('@tooltip-md')
-            ->assertSourceHas('px-4 py-2 text-base');
+            ->clickAndHold('@btn-md')
+            ->pause(500)
+            ->assertSourceHas('px-4 py-2 text-base')
+            ->releaseMouse();
     }
 
     public function test_lg_size()
@@ -121,9 +128,10 @@ class TooltipTest extends BrowserTestCase
                 Large
             </ui:button>
         HTML)
-            ->mouseover('@btn-lg')
-            ->waitFor('@tooltip-lg')
-            ->assertSourceHas('px-5 py-2.5 text-lg');
+            ->clickAndHold('@btn-lg')
+            ->pause(500)
+            ->assertSourceHas('px-5 py-2.5 text-lg')
+            ->releaseMouse();
     }
 
     public function test_positions()
@@ -134,9 +142,10 @@ class TooltipTest extends BrowserTestCase
                 Bottom
             </ui:button>
         HTML)
-            ->mouseover('@btn')
-            ->waitFor('@tooltip')
-            ->assertPresent('[x-anchor\\.bottom\\.offset\\.4]');
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertPresent('[x-anchor\\.bottom\\.offset\\.4]')
+            ->releaseMouse();
     }
 
     public function test_tooltip_with_custom_offset()
@@ -147,8 +156,9 @@ class TooltipTest extends BrowserTestCase
                 Offset
             </ui:button>
         HTML)
-            ->mouseover('@btn')
-            ->waitFor('@tooltip')
-            ->assertPresent('[x-anchor\\.top\\.offset\\.20]');
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertPresent('[x-anchor\\.top\\.offset\\.20]')
+            ->releaseMouse();
     }
 }
