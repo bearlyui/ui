@@ -15,9 +15,13 @@
 <button
     {{ $attributes
         ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
-        ->merge(['type' => 'button'])
+        ->merge([
+            'type' => 'button',
+            'wire:loading.attr' => 'data-ui-loading',
+        ])
+        ->when($attributes->has('type') == 'submit', fn ($a) => $a->merge(['wire:submit.attr' => 'data-ui-loading']))
         ->class([
-            'transition-all ease-in-out inline-flex items-center',
+            'transition-all ease-in-out inline-flex items-center relative',
 
             {{-- Border Radius --}}
             'rounded-none' => Size::NONE->is($radius),
@@ -80,22 +84,44 @@
 
         ])
 }}>
-    @if ($icon)
-        <x-dynamic-component
-            :component="'ui::icon.' . $icon"
-            :variant="$iconVariant"
-            class="opacity-80 mr-2"
-        />
-    @endif
+    <span @class([
+        '[[disabled]>&]:opacity-0',
+        '[[data-ui-loading]>&]:opacity-0',
+        'transition ease-in-out inline-flex items-center justify-center'
+    ])>
+        @if ($icon)
+            <x-dynamic-component
+                :component="'ui::icon.' . $icon"
+                :variant="$iconVariant"
+                class="opacity-80 mr-2"
+            />
+        @endif
+        {{-- Main Slot --}}
+        {{ $slot }}
+        @if ($iconAfter)
+            <x-dynamic-component
+                :component="'ui::icon.' . $iconAfter"
+                :variant="$iconVariant"
+                class="opacity-80 ml-2"
+            />
+        @endif
+    </span>
 
-    {{-- Main Slot --}}
-    {{ $slot }}
-
-    @if ($iconAfter)
-        <x-dynamic-component
-            :component="'ui::icon.' . $iconAfter"
-            :variant="$iconVariant"
-            class="opacity-80 ml-2"
-        />
-    @endif
+    <span @class([
+        'opacity-0 transition ease-in-out absolute inset-0 flex items-center justify-center',
+        '[[disabled]>&]:opacity-100 [[disabled]>&]:pointer-events-none',
+        '[[data-ui-loading]>&]:opacity-100 [[data-ui-loading]>&]:pointer-events-none'
+    ])>
+        <span @class([
+            'block',
+            'size-3' => Size::XS->is($size),
+            'size-4' => Size::SM->is($size),
+            'size-5' => Size::BASE->is($size),
+            'size-6' => Size::MD->is($size),
+            'size-7' => Size::LG->is($size),
+            'size-8' => Size::XL->is($size),
+        ])>
+            <ui:icon-spinner class="w-full h-full" />
+        </span>
+    </span>
 </button>

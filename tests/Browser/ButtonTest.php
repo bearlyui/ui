@@ -3,6 +3,8 @@
 namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
+use Livewire\Component;
+use Livewire\Livewire;
 
 class ButtonTest extends BrowserTestCase
 {
@@ -134,5 +136,129 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button :disabled="true" dusk="btn">Button</ui:button>')
             ->assertAttribute('@btn', 'disabled', true)
             ->assertHasClass('@btn', '[&[disabled]]:opacity-60');
+    }
+
+    public function test_loading_state()
+    {
+        Livewire::visit(ExampleLoadingButton::class)
+            ->assertVisible('@btn-content')
+            ->assertMissing('@btn [data-ui-icon-spinner]')
+            ->click('@btn')
+            ->waitFor('@btn [data-ui-icon-spinner]')
+            ->assertMissing('@btn-content')
+            ->assertVisible('@btn [data-ui-icon-spinner]')
+            ->waitUntilMissing('@btn [data-ui-icon-spinner]')
+            ->assertVisible('@btn-content')
+            ->assertMissing('@btn [data-ui-icon-spinner]');
+    }
+
+    public function test_loading_state_sizes()
+    {
+        Livewire::visit(ExampleLoadingButtonSizes::class)
+            ->click('@btn-xs')
+            ->waitFor('@btn-xs [data-ui-icon-spinner]')
+            ->assertVisible('@btn-xs [data-ui-icon-spinner]')
+            ->assertVisible('@btn-xs span.size-3')
+            ->assertVisible('@btn-sm [data-ui-icon-spinner]')
+            ->assertVisible('@btn-sm span.size-4')
+            ->assertVisible('@btn [data-ui-icon-spinner]')
+            ->assertVisible('@btn span.size-5')
+            ->assertVisible('@btn-md [data-ui-icon-spinner]')
+            ->assertVisible('@btn-md span.size-6')
+            ->assertVisible('@btn-lg [data-ui-icon-spinner]')
+            ->assertVisible('@btn-lg span.size-7')
+            ->assertVisible('@btn-xl [data-ui-icon-spinner]')
+            ->assertVisible('@btn-xl span.size-8');
+    }
+
+    public function test_only_submit_button_gets_loading_state_with_wire_submit()
+    {
+        Livewire::visit(ExampleLoadingFormWithTwoButtons::class)
+            ->assertMissing('@no-loading [data-ui-icon-spinner]')
+            ->assertMissing('@submit [data-ui-icon-spinner]')
+            ->click('@submit')
+            ->waitFor('@submit [data-ui-icon-spinner]')
+            ->assertMissing('@no-loading [data-ui-icon-spinner]')
+            ->assertVisible('@submit [data-ui-icon-spinner]')
+            ->waitUntilMissing('@submit [data-ui-icon-spinner]')
+            ->assertMissing('@submit [data-ui-icon-spinner]')
+            ->assertMissing('@no-loading [data-ui-icon-spinner]')
+            ->click('@no-loading')
+            ->waitFor('@no-loading [data-ui-icon-spinner]')
+            ->assertVisible('@no-loading [data-ui-icon-spinner]')
+            ->assertMissing('@submit [data-ui-icon-spinner]')
+            ->waitUntilMissing('@no-loading [data-ui-icon-spinner]')
+            ->assertMissing('@no-loading [data-ui-icon-spinner]')
+            ->assertMissing('@submit [data-ui-icon-spinner]');
+    }
+}
+
+class ExampleLoadingButton extends Component
+{
+    public function simulateLoading()
+    {
+        sleep(1);
+    }
+
+    public function render()
+    {
+        return <<<'HTML'
+            <form wire:submit="simulateLoading">
+                <div>
+                    <ui:button size="base" dusk="btn" type="submit">
+                        <span dusk="btn-content">Simulate Loading</span>
+                    </ui:button>
+                </div>
+            </form>
+        HTML;
+    }
+}
+
+class ExampleLoadingButtonSizes extends Component
+{
+    public function simulateLoading()
+    {
+        sleep(1);
+    }
+
+    public function render()
+    {
+        return <<<'HTML'
+            <form wire:submit="simulateLoading">
+                <div>
+                    <ui:button size="xs" dusk="btn-xs" type="submit">Simulate Loading</ui:button>
+                    <ui:button size="sm" dusk="btn-sm" type="submit">Simulate Loading</ui:button>
+                    <ui:button size="base" dusk="btn" type="submit">Simulate Loading</ui:button>
+                    <ui:button size="md" dusk="btn-md" type="submit">Simulate Loading</ui:button>
+                    <ui:button size="lg" dusk="btn-lg" type="submit">Simulate Loading</ui:button>
+                    <ui:button size="xl" dusk="btn-xl" type="submit">Simulate Loading</ui:button>
+                </div>
+            </form>
+        HTML;
+    }
+}
+
+class ExampleLoadingFormWithTwoButtons extends Component
+{
+    public function simulateLoadingStateFromWireClick()
+    {
+        sleep(1);
+    }
+
+    public function simulateLoading()
+    {
+        sleep(1);
+    }
+
+    public function render()
+    {
+        return <<<'HTML'
+            <form wire:submit="simulateLoading">
+                <div>
+                    <ui:button dusk="no-loading" type="button" wire:click="simulateLoadingStateFromWireClick">No Loading</ui:button>
+                    <ui:button dusk="submit" type="submit">Simulate Loading</ui:button>
+                </div>
+            </form>
+        HTML;
     }
 }
