@@ -3,6 +3,8 @@
 namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
+use Livewire\Component;
+use Livewire\Livewire;
 
 class DialogTest extends BrowserTestCase
 {
@@ -329,7 +331,7 @@ class DialogTest extends BrowserTestCase
 
     public function test_works_with_wire_model()
     {
-        $this->blade('<livewire:example-livewire-dialog />')
+        Livewire::visit(ExampleLivewireDialog::class)
             ->click('@toggle')
             ->waitForText('Dialog Content')
             ->assertVisible('[x-bind="uiDialogContent"]');
@@ -376,5 +378,30 @@ class DialogTest extends BrowserTestCase
             ->pause(100)
             ->assertMissing('@content2')
             ->assertMissing('@content');
+    }
+}
+
+class ExampleLivewireDialog extends Component
+{
+    public $dialogOpenInLivewire = false;
+
+    public function toggleDialog()
+    {
+        $this->dialogOpenInLivewire = ! $this->dialogOpenInLivewire;
+    }
+
+    public function render()
+    {
+        return <<<'HTML'
+            <div>
+                <ui:dialog dusk="dialog" wire:model="dialogOpenInLivewire">
+                    <x-slot:trigger>
+                        <ui:button dusk="trigger">Open Dialog</ui:button>
+                    </x-slot:trigger>
+                    Dialog Content
+                </ui:dialog>
+                <ui:button dusk="toggle" wire:click="toggleDialog">Toggle Dialog</ui:button>
+            </div>
+        HTML;
     }
 }

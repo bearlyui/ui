@@ -65,10 +65,8 @@
         }
       },
       closeDialog() {
-        var _a;
         this.open = false;
         this.removedAriaHidden && $refs.dialog.setAttribute("aria-hidden", "true");
-        (_a = this.$refs.close) == null ? void 0 : _a.setAttribute("inert", "true");
       },
       uiDialogAttributes: {
         "x-show"() {
@@ -122,10 +120,8 @@
         }
       },
       uiDialogClose: {
-        // 'inert': true,
         "x-ref": "close",
         "x-on:click": "closeDialog"
-        // 'x-effect'() { return this.open && setTimeout(() => this.$el.removeAttribute('inert'), 100) },
       },
       uiDialogMobileDragToClose: {
         "x-data"() {
@@ -210,7 +206,7 @@
           this.searchQuery = "";
         }, 500);
       },
-      uiTrigger: {
+      uiDropdownTrigger: {
         "x-ref": "trigger",
         "x-init"() {
           this.focusableTrigger = this.$focus.getFirst();
@@ -300,7 +296,10 @@
   function toggle_default(Alpine) {
     Alpine.data("uiToggle", (checked) => ({
       checked,
+      checkedState: false,
       uiToggleAttributes: {
+        "role": "switch",
+        "type": "button",
         "x-modelable": "checked",
         "x-on:click"() {
           this.$refs.checkbox.click();

@@ -1,11 +1,21 @@
 export default function(Alpine) {
-    Alpine.data('uiToggle', (checked) => ({
-        checked: checked,
+    Alpine.data('uiToggle', () => ({
+        init() {
+            this.$el.setAttribute('aria-checked', this.$refs.checkbox.checked);
+        },
 
         uiToggleAttributes: {
-            'x-modelable': 'checked',
-            'x-on:click'() { this.$refs.checkbox.click() },
-            ':aria-checked'() { return this.checked },
+            'role': 'switch',
+            'type': 'button',
+            'x-on:click'() {
+                this.$refs.checkbox.click();
+            },
+        },
+
+        uiToggleCheckboxAttributes: {
+            'x-on:change'() {
+                this.$root.setAttribute('aria-checked', this.$el.checked);
+            }
         },
     }))
 }

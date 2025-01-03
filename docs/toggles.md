@@ -9,12 +9,12 @@ Create a toggle with the `<ui:toggle>` tag. Bind it to your data with `wire:mode
 
 ```html +demo
 <label class="flex items-center space-x-2">
-    <ui:toggle />
+    <ui:toggle color="primary" />
     <span>Yes, or no?</span>
 </label>
 
 <label class="flex mt-4 items-center space-x-2">
-    <ui:toggle :checked="true" />
+    <ui:toggle :checked="true" color="primary" />
     <span>Yes, or no?</span>
 </label>
 
