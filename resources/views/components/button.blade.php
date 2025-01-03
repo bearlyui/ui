@@ -87,7 +87,7 @@
     <span @class([
         '[[disabled]>&]:opacity-0',
         '[[data-ui-loading]>&]:opacity-0',
-        'transition ease-in-out'
+        'transition ease-in-out inline-flex items-center justify-center'
     ])>
         @if ($icon)
             <x-dynamic-component
