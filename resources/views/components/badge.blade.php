@@ -28,10 +28,10 @@
     'bg-danger-200/60 text-danger-900 dark:bg-danger-400/20 dark:text-danger-100' => Variant::Solid->is($variant) && Color::Danger->is($color),
 
     {{-- Outline Variant --}}
-    'bg-transparent border border-primary-700/60 text-primary-700 dark:border-primary-400/60 dark:text-primary-300/85' => Variant::Outline->is($variant) && Color::Primary->is($color),
-    'bg-transparent border border-secondary-700/60 text-secondary-700 dark:border-secondary-400/60 dark:text-secondary-300/85' => Variant::Outline->is($variant) && Color::Secondary->is($color),
-    'bg-transparent border border-success-700/60 text-success-700 dark:border-success-400/60 dark:text-success-300/85' => Variant::Outline->is($variant) && Color::Success->is($color),
-    'bg-transparent border border-warning-700/60 text-warning-700 dark:border-warning-400/60 dark:text-warning-300/85' => Variant::Outline->is($variant) && Color::Warning->is($color),
+    'bg-transparent border border-primary-600/70 text-primary-800 dark:border-primary-400/60 dark:text-primary-300/85' => Variant::Outline->is($variant) && Color::Primary->is($color),
+    'bg-transparent border border-secondary-600/40 text-secondary-700 dark:border-secondary-400/60 dark:text-secondary-300' => Variant::Outline->is($variant) && Color::Secondary->is($color),
+    'bg-transparent border border-success-600/60 text-success-800 dark:border-success-400/60 dark:text-success-300/85' => Variant::Outline->is($variant) && Color::Success->is($color),
+    'bg-transparent border border-warning-700/60 text-warning-800 dark:border-warning-400/60 dark:text-warning-300/85' => Variant::Outline->is($variant) && Color::Warning->is($color),
     'bg-transparent border border-danger-700/60 text-danger-700 dark:border-danger-400/60 dark:text-danger-300/85' => Variant::Outline->is($variant) && Color::Danger->is($color),
 
     {{-- Sizes --}}
