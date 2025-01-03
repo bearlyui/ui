@@ -1,8 +1,8 @@
 @props([
     'size' => 'md',
-    'hideCloseButton' => false,
     'cardClass' => null,
     'containerClass' => null,
+    'hideCloseButton' => false,
 ])
 
 <span
@@ -20,7 +20,7 @@
         <div
             x-bind="uiDialogAttributes"
             @class([
-                'sm:px-5' => $size === 'full',
+                'sm:px-5' => $size == 'full',
                 'fixed flex items-end sm:items-center justify-center top-0 right-0 bottom-0 left-0',
                 $containerClass,
             ])
@@ -36,11 +36,11 @@
                 x-bind="uiDialogContent"
                 @class([
                     'flex-1 relative not-prose mx-auto max-w-full w-full max-h-[96vh] sm:rounded',
-                    'sm:max-w-xl' => $size === 'sm',
-                    'sm:max-w-2xl' => $size === 'md',
-                    'sm:max-w-4xl' => $size === 'lg',
-                    'sm:max-w-6xl' => $size === 'xl',
-                    'sm:max-w-full' => $size === 'full',
+                    'sm:max-w-xl' => $size == 'sm',
+                    'sm:max-w-2xl' => $size == 'md',
+                    'sm:max-w-4xl' => $size == 'lg',
+                    'sm:max-w-6xl' => $size == 'xl',
+                    'sm:max-w-full' => $size == 'full',
                 ])
             >
 
@@ -50,46 +50,13 @@
                 >
 
                     {{-- Header --}}
-                    @empty($header)
-                        {{-- No header, add an absolutely positioned close button so it doesn't mess with layout of other stuff --}}
-                        <div @class([
-                            'absolute top-0 right-0 mr-1 mt-1',
-                            'hidden' => $hideCloseButton,
-                        ])>
-                            <ui:button
-                                color="secondary"
-                                size="sm"
-                                variant="ghost"
-                                class="group"
-                                x-bind="uiDialogClose"
-                            >
-                                <span class="sr-only">Close</span>
-                                <ui:icon.x-mark class="opacity-75 group-hover:opacity-100" variant="mini" />
-                            </ui:button>
-                        </div>
-                    @else
+                    @if (!empty($header))
                         <x-slot:header>
                             <div {{ $header->attributes->class(['text-gray-800 dark:text-gray-200']) }} >
                                 {{ $header }}
-
-                                {{-- Close button --}}
-                                <ui:button
-                                    color="secondary"
-                                    size="sm"
-                                    variant="ghost"
-                                    class="group"
-                                    x-bind="uiDialogClose"
-                                    @class([
-                                        'absolute top-0 right-0 mr-1 mt-1',
-                                        'hidden' => $hideCloseButton,
-                                    ])
-                                >
-                                    <span class="sr-only">Close</span>
-                                    <ui:icon.x-mark class="opacity-75 group-hover:opacity-100" variant="mini" />
-                                </ui:button>
                             </div>
                         </x-slot:header>
-                    @endempty
+                    @endif
 
                     {{-- Main Slot --}}
                     <div>{{ $slot }}</div>
@@ -114,9 +81,26 @@
                     >
                         <span class="block relative h-10 -mt-5 w-full"></span>
                     </button>
+
                 </x-card>
 
-            </div>
-        </div>
+                {{-- Close button, needs to be last element so that it isn't focused before other focusable elements --}}
+                <div @class([
+                    'absolute top-0 right-0 mr-1 mt-1',
+                    'hidden' => $hideCloseButton,
+                ])>
+                    <ui:button
+                        size="sm"
+                        class="group"
+                        variant="ghost"
+                        color="secondary"
+                        x-bind="uiDialogClose"
+                    >
+                        <span class="sr-only">Close</span>
+                        <ui:icon.x-mark class="opacity-75 group-hover:opacity-100" variant="mini" />
+                    </ui:button>
+                </div>
+            </div> {{-- uiDialogContent --}}
+        </div> {{-- uiDialogAttributes --}}
     </template>
 </span>

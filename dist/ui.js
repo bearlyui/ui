@@ -1,6 +1,6 @@
 (() => {
   // js/utils.js
-  var useHeadingsAsLabelAndDescription2 = (el, prefix) => {
+  var useHeadingsAsLabelAndDescription = (el, prefix) => {
     const heading = el.querySelector("[data-ui-heading]");
     if (heading) {
       heading.setAttribute("x-bind:id", "$id('".concat(prefix, "-title')"));
@@ -18,7 +18,7 @@
     Alpine.data("uiAlert", () => ({
       open: true,
       init() {
-        this.$nextTick(() => useHeadingsAsLabelAndDescription2(this.$el, "ui-alert"));
+        this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$el, "ui-alert"));
       },
       uiAlertAttributes: {
         "x-id"() {
@@ -55,7 +55,7 @@
       open: false,
       removedAriaHidden: false,
       init() {
-        this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$el, "ui-dialog"));
+        this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$refs.content, "ui-dialog"));
       },
       openDialog() {
         this.open = true;
@@ -65,12 +65,10 @@
         }
       },
       closeDialog() {
-        var _a;
         this.open = false;
         this.removedAriaHidden && $refs.dialog.setAttribute("aria-hidden", "true");
-        (_a = this.$refs.close) == null ? void 0 : _a.setAttribute("inert", "true");
       },
-      uiDialogContainer: {
+      uiDialogAttributes: {
         "x-show"() {
           return this.open;
         },
@@ -83,6 +81,17 @@
         "x-ref": "dialog",
         "x-id"() {
           return ["ui-dialog-title", "ui-dialog-description"];
+        }
+      },
+      uiDialogTrigger: {
+        ":aria-expanded"() {
+          return this.open;
+        },
+        ":aria-controls"() {
+          return this.open && this.$id("ui-dialog-content");
+        },
+        "x-on:click.stop"() {
+          return this.openDialog();
         }
       },
       uiDialogOverlay: {
@@ -102,17 +111,44 @@
         "x-show"() {
           return this.open;
         },
-        "x-transition:enter": "transition ease-out duration-150 delay-75 origin-bottom",
-        "x-transition:enter-start": "opacity-0 transform scale-90 translate-y-4",
-        "x-transition:enter-end": "opacity-100 transform scale-100 translate-y-0",
-        "x-transition:leave.duration.0ms.delay.0ms": ""
+        "x-transition:enter": "transition-all ease-out origin-bottom",
+        "x-transition:enter-start": "translate-y-full sm:opacity-0 sm:scale-90 sm:translate-y-4",
+        "x-transition:enter-end": "translate-y-0 sm:opacity-100 sm:scale-100 sm:translate-y-0",
+        "x-transition:leave": "duration-0 delay-0",
+        ":id"() {
+          return this.$id("ui-dialog-content");
+        }
       },
       uiDialogClose: {
-        "inert": true,
         "x-ref": "close",
-        "x-on:click": "closeDialog",
+        "x-on:click": "closeDialog"
+      },
+      uiDialogMobileDragToClose: {
+        "x-data"() {
+          return {
+            start: null,
+            current: null,
+            dragging: false,
+            get distance() {
+              return this.dragging ? Math.max(0, this.current - this.start) : 0;
+            }
+          };
+        },
+        "x-on:touchstart"(event) {
+          this.dragging = true;
+          this.start = this.current = event.touches[0].clientY;
+        },
+        "x-on:touchmove"(event) {
+          this.current = event.touches[0].clientY;
+        },
+        "x-on:touchend"() {
+          if (this.distance > 100) {
+            this.closeDialog();
+            this.dragging = false;
+          }
+        },
         "x-effect"() {
-          return this.open && setTimeout(() => this.$el.removeAttribute("inert"), 100);
+          this.$el.parentElement.style.transform = "translateY(".concat(this.distance, "px)");
         }
       }
     }));
@@ -170,7 +206,7 @@
           this.searchQuery = "";
         }, 500);
       },
-      uiTrigger: {
+      uiDropdownTrigger: {
         "x-ref": "trigger",
         "x-init"() {
           this.focusableTrigger = this.$focus.getFirst();
@@ -260,7 +296,10 @@
   function toggle_default(Alpine) {
     Alpine.data("uiToggle", (checked) => ({
       checked,
+      checkedState: false,
       uiToggleAttributes: {
+        "role": "switch",
+        "type": "button",
         "x-modelable": "checked",
         "x-on:click"() {
           this.$refs.checkbox.click();
