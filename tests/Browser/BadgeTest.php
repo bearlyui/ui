@@ -22,16 +22,11 @@ class BadgeTest extends BrowserTestCase
             <ui:badge color="warning" dusk="warning-badge">Warning</ui:badge>
             <ui:badge color="danger" dusk="danger-badge">Danger</ui:badge>
         HTML)
-            ->assertHasClass('@primary-badge', 'bg-primary-200/80')
-            ->assertHasClass('@primary-badge', 'text-primary-900')
-            ->assertHasClass('@secondary-badge', 'bg-secondary-300/80')
-            ->assertHasClass('@secondary-badge', 'text-secondary-800')
-            ->assertHasClass('@success-badge', 'bg-success-200/80')
-            ->assertHasClass('@success-badge', 'text-success-900')
-            ->assertHasClass('@warning-badge', 'bg-warning-200/80')
-            ->assertHasClass('@warning-badge', 'text-warning-900')
-            ->assertHasClass('@danger-badge', 'bg-danger-200/80')
-            ->assertHasClass('@danger-badge', 'text-danger-900');
+            ->assertHasClasses('@primary-badge', ['bg-primary-200/80', 'text-primary-900'])
+            ->assertHasClasses('@secondary-badge', ['bg-secondary-300/80', 'text-secondary-800'])
+            ->assertHasClasses('@success-badge', ['bg-success-200/80', 'text-success-900'])
+            ->assertHasClasses('@warning-badge', ['bg-warning-200/80', 'text-warning-900'])
+            ->assertHasClasses('@danger-badge', ['bg-danger-200/80', 'text-danger-900']);
     }
 
     public function test_sizes()
