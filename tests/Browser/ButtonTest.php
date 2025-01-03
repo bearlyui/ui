@@ -144,10 +144,10 @@ class ButtonTest extends BrowserTestCase
             ->assertVisible('@btn-content')
             ->assertMissing('@btn [data-ui-icon-spinner]')
             ->click('@btn')
-            ->pause(400)
+            ->waitFor('@btn [data-ui-icon-spinner]')
             ->assertMissing('@btn-content')
             ->assertVisible('@btn [data-ui-icon-spinner]')
-            ->pause(800)
+            ->waitUntilMissing('@btn [data-ui-icon-spinner]')
             ->assertVisible('@btn-content')
             ->assertMissing('@btn [data-ui-icon-spinner]');
     }
@@ -156,17 +156,19 @@ class ButtonTest extends BrowserTestCase
     {
         Livewire::visit(ExampleLoadingButtonSizes::class)
             ->click('@btn-xs')
-            ->pause(1100)
+            ->waitFor('@btn-xs [data-ui-icon-spinner]')
             ->assertVisible('@btn-xs [data-ui-icon-spinner]')
             ->assertVisible('@btn-xs span.size-3')
-            ->click('@btn-sm')
-            ->pause(1100)
             ->assertVisible('@btn-sm [data-ui-icon-spinner]')
             ->assertVisible('@btn-sm span.size-4')
-            ->click('@btn')
-            ->pause(1100)
             ->assertVisible('@btn [data-ui-icon-spinner]')
-            ->assertVisible('@btn span.size-5');
+            ->assertVisible('@btn span.size-5')
+            ->assertVisible('@btn-md [data-ui-icon-spinner]')
+            ->assertVisible('@btn-md span.size-6')
+            ->assertVisible('@btn-lg [data-ui-icon-spinner]')
+            ->assertVisible('@btn-lg span.size-7')
+            ->assertVisible('@btn-xl [data-ui-icon-spinner]')
+            ->assertVisible('@btn-xl span.size-8');
     }
 
     public function test_only_submit_button_gets_loading_state_with_wire_submit()
