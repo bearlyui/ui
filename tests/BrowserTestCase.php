@@ -16,9 +16,9 @@ class BrowserTestCase extends TestCase
     protected $browserHandle;
 
     /**
-     * Huge thanks to Caleb Porzio and the Livewire repository for this boilerplate!
-     * We need to trigger the events for Livewire::visit to work for DuskTestable
-     * so we need tweakApplicationHook to be defined and to trigger the events
+     * Huge thanks to Caleb Porzio and the Livewire source code for this boilerplate!
+     * We must trigger both events to make Livewire::visit work correctly. We also
+     * need `tweakApplicationHook` method to be defined for those events to work.
      */
     public static function tweakApplicationHook()
     {
@@ -39,11 +39,17 @@ class BrowserTestCase extends TestCase
         parent::tearDown();
     }
 
+    /**
+     * Use withoutUI to prevent the browser from opening up.
+     */
     public static function defineWebDriverOptions()
     {
         Options::withUI();
     }
 
+    /**
+     * Set up the environment for the tests.
+     */
     protected function defineEnvironment($app)
     {
         $app['config']->set('view.paths', [__DIR__.'/views', resource_path('views')]);
@@ -61,6 +67,9 @@ class BrowserTestCase extends TestCase
         ];
     }
 
+    /**
+     * Render a Blade template, then open a browser and navigate to its route.
+     */
     protected function blade(string $template)
     {
         $this->beforeServingApplication(function () use ($template) {
