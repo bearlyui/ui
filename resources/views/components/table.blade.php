@@ -2,10 +2,11 @@
 @use('Bearly\Ui\Color')
 
 @props([
-    'hover' => true,
+    'hover' => false,
     'hoverColor' => Color::Secondary,
     'radius' => Size::BASE,
     'shadow' => Size::BASE,
+    'striped' => false,
 ])
 
 {{-- We have a wrapping div mainly to apply overflow-x-auto for "responsive" tables --}}
@@ -22,17 +23,19 @@
     'shadow-sm' => Size::BASE->is($shadow),
     'shadow' => Size::LG->is($shadow),
     'shadow-md' => Size::XL->is($shadow),
-
-    {{-- Hover effect on table rows --}}
-    '[&_tbody>tr:hover_td]:bg-primary-200/10 dark:[&_tbody>tr:hover_td]:bg-primary-500/5' => $hover && Color::Primary->is($hoverColor),
-    '[&_tbody>tr:hover_td]:bg-secondary-200/25 dark:[&_tbody>tr:hover_td]:bg-secondary-500/15' => $hover && Color::Secondary->is($hoverColor),
-    '[&_tbody>tr:hover_td]:bg-success-200/10 dark:[&_tbody>tr:hover_td]:bg-success-500/5' => $hover && Color::Success->is($hoverColor),
-    '[&_tbody>tr:hover_td]:bg-danger-200/10 dark:[&_tbody>tr:hover_td]:bg-danger-500/5' => $hover && Color::Danger->is($hoverColor),
-    '[&_tbody>tr:hover_td]:bg-warning-200/10 dark:[&_tbody>tr:hover_td]:bg-warning-500/5' => $hover && Color::Warning->is($hoverColor),
 ])>
     <table {{ $attributes->class([
-        'w-full',
-        'text-sm',
+        'w-full text-sm',
+
+        {{-- Striping --}}
+        '[&_tbody>tr:nth-child(odd)]:bg-gray-100/50 dark:[&_tbody>tr:nth-child(odd)]:bg-gray-900/30' => $striped,
+
+        {{-- Hover --}}
+        '[&_tbody>tr:hover_td]:bg-primary-200/10 dark:[&_tbody>tr:hover_td]:bg-primary-500/5' => $hover && Color::Primary->is($hoverColor),
+        '[&_tbody>tr:hover_td]:bg-secondary-200/25 dark:[&_tbody>tr:hover_td]:bg-secondary-500/15' => $hover && Color::Secondary->is($hoverColor),
+        '[&_tbody>tr:hover_td]:bg-success-200/10 dark:[&_tbody>tr:hover_td]:bg-success-500/5' => $hover && Color::Success->is($hoverColor),
+        '[&_tbody>tr:hover_td]:bg-danger-200/10 dark:[&_tbody>tr:hover_td]:bg-danger-500/5' => $hover && Color::Danger->is($hoverColor),
+        '[&_tbody>tr:hover_td]:bg-warning-200/10 dark:[&_tbody>tr:hover_td]:bg-warning-500/5' => $hover && Color::Warning->is($hoverColor),
     ]) }}>
         @if ($header)
             <thead {{ $header->attributes->class([
