@@ -28,7 +28,8 @@
         'w-full text-sm',
 
         {{-- Striping --}}
-        '[&_tbody>tr:nth-child(odd)]:bg-gray-100/50 dark:[&_tbody>tr:nth-child(odd)]:bg-gray-900/30' => $striped,
+        '[&_tbody>tr:nth-child(even)]:bg-gray-100/50 dark:[&_tbody>tr:nth-child(odd)]:bg-gray-900/30 dark:[&_tbody>tr:nth-child(even)]:bg-transparent' => $striped,
+
 
         {{-- Hover --}}
         '[&_tbody>tr:hover_td]:bg-primary-200/10 dark:[&_tbody>tr:hover_td]:bg-primary-500/5' => $hover && Color::Primary->is($hoverColor),
@@ -37,13 +38,13 @@
         '[&_tbody>tr:hover_td]:bg-danger-200/10 dark:[&_tbody>tr:hover_td]:bg-danger-500/5' => $hover && Color::Danger->is($hoverColor),
         '[&_tbody>tr:hover_td]:bg-warning-200/10 dark:[&_tbody>tr:hover_td]:bg-warning-500/5' => $hover && Color::Warning->is($hoverColor),
     ]) }}>
-        @if ($header)
+        @isset ($header)
             <thead {{ $header->attributes->class([
             ]) }}>
                 <tr @class([
                 ]) >{{ $header }}</tr>
             </thead>
-        @endif
+        @endisset
 
         <tbody>{{ $slot }}</tbody>
     </table>
