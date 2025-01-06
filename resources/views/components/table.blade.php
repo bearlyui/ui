@@ -28,7 +28,7 @@
         'w-full text-sm',
 
         {{-- Striping --}}
-        '[&_tbody>tr:nth-child(even)]:bg-gray-100/50 dark:[&_tbody>tr:nth-child(odd)]:bg-gray-900/30 dark:[&_tbody>tr:nth-child(even)]:bg-transparent' => $striped,
+        '[&_tbody>tr:nth-child(even)_td]:bg-gray-100/50 dark:[&_tbody>tr:nth-child(odd)_td]:bg-gray-900/30 dark:[&_tbody>tr:nth-child(even)_td]:bg-transparent' => $striped,
 
 
         {{-- Hover --}}
