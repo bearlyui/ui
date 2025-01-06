@@ -225,4 +225,40 @@ class TableTest extends BrowserTestCase
                 '[&_[data-ui-table-inset]]:ring-transparent',
             ]);
     }
+
+    public function test_sticky_header()
+    {
+        $this->blade(<<<'HTML'
+            <ui:table dusk="table">
+                <x-slot:header :sticky="false">
+                    <ui:col>Col 1</ui:col>
+                    <ui:col>Col 2</ui:col>
+                </x-slot:header>
+            </ui:table>
+        HTML)
+            ->assertSourceMissing('[&>th]:sticky');
+
+        $this->blade(<<<'HTML'
+            <ui:table dusk="table">
+                <x-slot:header :sticky="true">
+                    <ui:col>Col 1</ui:col>
+                    <ui:col>Col 2</ui:col>
+                </x-slot:header>
+
+                <ui:row>
+                    <ui:cell>Cell 1</ui:cell>
+                    <ui:cell>Cell 2</ui:cell>
+                </ui:row>
+            </ui:table>
+        HTML)
+            ->assertHasClasses('@table thead>tr', [
+                '[&>th]:sticky',
+                '[&>th]:top-0',
+                '[&>th]:backdrop-blur-lg',
+                '[&>th]:shadow-sm',
+                '[&>th]:border-b-2',
+                '[&>th]:border-gray-200',
+                'dark:[&>th]:border-gray-700',
+            ]);
+    }
 }

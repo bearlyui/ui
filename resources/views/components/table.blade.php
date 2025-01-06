@@ -16,7 +16,8 @@
 <div
 {{ $inset ? 'data-ui-table-inset' : '' }}
 @class([
-    'overflow-x-auto ring-1 ring-gray-300/60 dark:ring-gray-700 bg-white dark:bg-gray-800',
+    'ring-1 ring-gray-300/60 dark:ring-gray-700 bg-white dark:bg-gray-800',
+    'overflow-x-auto md:overflow-x-visible',
 
     {{-- Rounded corners --}}
     'rounded-none' => Size::NONE->is($radius),
@@ -40,7 +41,6 @@
                 {{-- Striping --}}
                 '[&_tbody>tr:nth-child(even)_td]:bg-gray-100/50 dark:[&_tbody>tr:nth-child(odd)_td]:bg-gray-900/30 dark:[&_tbody>tr:nth-child(even)_td]:bg-transparent' => $striped,
 
-
                 {{-- Hover --}}
                 '[&_tbody>tr:hover_td]:bg-primary-200/10 dark:[&_tbody>tr:hover_td]:bg-primary-500/5' => $hover && Color::Primary->is($hoverColor),
                 '[&_tbody>tr:hover_td]:bg-secondary-200/25 dark:[&_tbody>tr:hover_td]:bg-secondary-500/15' => $hover && Color::Secondary->is($hoverColor),
@@ -50,9 +50,10 @@
             ]) }}
         >
             @isset ($header)
-                <thead {{ $header->attributes->class([
-                ]) }}>
+                <thead {{ $header->attributes }}>
                     <tr @class([
+                        {{-- Sticky header --}}
+                        '[&>th]:sticky [&>th]:top-0 [&>th]:backdrop-blur-lg [&>th]:shadow-sm [&>th]:border-b-2 [&>th]:border-gray-200 dark:[&>th]:border-gray-700' => $header->attributes->has('sticky'),
                     ]) >{{ $header }}</tr>
                 </thead>
             @endisset
