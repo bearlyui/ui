@@ -261,4 +261,27 @@ class TableTest extends BrowserTestCase
                 'dark:[&>th]:border-gray-700',
             ]);
     }
+
+    public function test_hover_cell_hidden_until_hover()
+    {
+        $this->blade(<<<'HTML'
+            <ui:table :hover="true" dusk="table">
+                <ui:row>
+                    <ui:cell dusk="cell-1">Cell 1</ui:cell>
+                    <ui:cell :hover="true"><span dusk="cell-2-content">Cell 2</span></ui:cell>
+                </ui:row>
+            </ui:table>
+            <ui:button dusk="button">Outside Button</ui:button>
+        HTML)
+            ->assertVisible('@cell-1')
+            ->assertMissing('@cell-2-content')
+            ->clickAndHold('@cell-1')
+            ->waitFor('@cell-2-content')
+            ->assertVisible('@cell-1')
+            ->assertVisible('@cell-2-content')
+            ->releaseMouse()
+            ->click('@button')
+            ->waitUntilMissing('@cell-2-content')
+            ->assertVisible('@cell-1');
+    }
 }
