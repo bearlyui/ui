@@ -137,4 +137,29 @@ class TableTest extends BrowserTestCase
         HTML)
             ->assertHasClass('@table', '[&_tbody>tr:nth-child(even)_td]:bg-gray-100/50');
     }
+
+    public function test_empty_state()
+    {
+        $this->blade(<<<'HTML'
+            <ui:table :empty="false" empty-message="Example empty state" dusk="table">
+                <ui:row>
+                    <ui:cell>Cell 1</ui:cell>
+                    <ui:cell>Cell 2</ui:cell>
+                </ui:row>
+            </ui:table>
+        HTML)
+            ->assertVisible('@table')
+            ->assertDontSee('Example empty state');
+
+        $this->blade(<<<'HTML'
+            <ui:table :empty="true" empty-message="Example empty state" dusk="table">
+                <ui:row>
+                    <ui:cell>Cell 1</ui:cell>
+                    <ui:cell>Cell 2</ui:cell>
+                </ui:row>
+            </ui:table>
+        HTML)
+            ->assertMissing('@table')
+            ->assertSee('Example empty state');
+    }
 }
