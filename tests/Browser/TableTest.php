@@ -162,4 +162,67 @@ class TableTest extends BrowserTestCase
             ->assertMissing('@table')
             ->assertSee('Example empty state');
     }
+
+    public function test_inset_within_card()
+    {
+        $this->blade(<<<'HTML'
+            <ui:card padding="sm" dusk="card">
+                <ui:table :inset="true">
+                    <ui:row>
+                        <ui:cell>Cell 1</ui:cell>
+                        <ui:cell>Cell 2</ui:cell>
+                    </ui:row>
+                </ui:table>
+            </ui:card>
+        HTML)
+            ->assertHasClasses('@card', [
+                '[&_[data-ui-table-inset]]:-m-3',
+                '[&_[data-ui-table-inset]]:ring-transparent',
+            ]);
+
+        $this->blade(<<<'HTML'
+            <ui:card padding="base" dusk="card">
+                <ui:table :inset="true">
+                    <ui:row>
+                        <ui:cell>Cell 1</ui:cell>
+                        <ui:cell>Cell 2</ui:cell>
+                    </ui:row>
+                </ui:table>
+            </ui:card>
+        HTML)
+            ->assertHasClasses('@card', [
+                '[&_[data-ui-table-inset]]:-m-4',
+                '[&_[data-ui-table-inset]]:ring-transparent',
+            ]);
+
+        $this->blade(<<<'HTML'
+            <ui:card padding="md" dusk="card">
+                <ui:table :inset="true">
+                    <ui:row>
+                        <ui:cell>Cell 1</ui:cell>
+                        <ui:cell>Cell 2</ui:cell>
+                    </ui:row>
+                </ui:table>
+            </ui:card>
+        HTML)
+            ->assertHasClasses('@card', [
+                '[&_[data-ui-table-inset]]:-m-5',
+                '[&_[data-ui-table-inset]]:ring-transparent',
+            ]);
+
+        $this->blade(<<<'HTML'
+            <ui:card padding="lg" dusk="card">
+                <ui:table :inset="true">
+                    <ui:row>
+                        <ui:cell>Cell 1</ui:cell>
+                        <ui:cell>Cell 2</ui:cell>
+                    </ui:row>
+                </ui:table>
+            </ui:card>
+        HTML)
+            ->assertHasClasses('@card', [
+                '[&_[data-ui-table-inset]]:-m-6',
+                '[&_[data-ui-table-inset]]:ring-transparent',
+            ]);
+    }
 }

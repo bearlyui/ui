@@ -13,6 +13,13 @@
     'p-4' => Size::BASE->is($padding),
     'p-5' => Size::MD->is($padding),
     'p-6' => Size::LG->is($padding),
+
+    {{-- Inset Tables --}}
+    '[&_[data-ui-table-inset]]:-m-3 [&_[data-ui-table-inset]]:ring-transparent' => Size::SM->is($padding),
+    '[&_[data-ui-table-inset]]:-m-4 [&_[data-ui-table-inset]]:ring-transparent' => Size::BASE->is($padding),
+    '[&_[data-ui-table-inset]]:-m-5 [&_[data-ui-table-inset]]:ring-transparent' => Size::MD->is($padding),
+    '[&_[data-ui-table-inset]]:-m-6 [&_[data-ui-table-inset]]:ring-transparent' => Size::LG->is($padding),
+
 ])->merge(['data-ui-card' => '']) }}>
 
     {{-- Header --}}
