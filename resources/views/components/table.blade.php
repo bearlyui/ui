@@ -54,11 +54,22 @@
                     <tr @class([
                         {{-- Sticky header --}}
                         '[&>th]:sticky [&>th]:top-0 [&>th]:backdrop-blur-lg [&>th]:shadow-sm [&>th]:border-b-2 [&>th]:border-gray-200 dark:[&>th]:border-gray-700' => $header->attributes->has('sticky'),
+
+                        {{-- Rounded corners --}}
+                        '[&>th:first-child]:rounded-none [&>th:last-child]:rounded-none' => Size::NONE->is($radius),
+                        '[&>th:first-child]:rounded-tl [&>th:last-child]:rounded-tr' => Size::BASE->is($radius),
+                        '[&>th:first-child]:rounded-tl-lg [&>th:last-child]:rounded-tr-lg' => Size::LG->is($radius),
+                        '[&>th:first-child]:rounded-tl-xl [&>th:last-child]:rounded-tr-xl' => Size::XL->is($radius),
                     ]) >{{ $header }}</tr>
                 </thead>
             @endisset
 
-            <tbody>{{ $slot }}</tbody>
+            <tbody @class([
+                '[&>tr:last-child>td:first-child]:rounded-none [&>tr:last-child>td:last-child]:rounded-none' => Size::NONE->is($radius),
+                '[&>tr:last-child>td:first-child]:rounded-bl [&>tr:last-child>td:last-child]:rounded-br' => Size::BASE->is($radius),
+                '[&>tr:last-child>td:first-child]:rounded-bl-lg [&>tr:last-child>td:last-child]:rounded-br-lg' => Size::LG->is($radius),
+                '[&>tr:last-child>td:first-child]:rounded-bl-xl [&>tr:last-child>td:last-child]:rounded-br-xl' => Size::XL->is($radius),
+            ])>{{ $slot }}</tbody>
         </table>
     @else
         <div class="p-4 text-center text-sm text-gray-500 dark:text-gray-400">{{ $emptyMessage }}</div>
