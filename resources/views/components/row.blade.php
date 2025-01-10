@@ -1,7 +1,6 @@
 @use('Bearly\Ui\Size')
 
 @aware([
-    'radius' => Size::BASE,
     'hover' => false
 ])
 

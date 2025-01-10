@@ -53,7 +53,9 @@
                 <thead {{ $header->attributes }}>
                     <tr @class([
                         {{-- Sticky header --}}
-                        '[&>th]:sticky [&>th]:top-0 [&>th]:backdrop-blur-lg [&>th]:shadow-sm [&>th]:border-b-2 [&>th]:border-gray-200 dark:[&>th]:border-gray-700' => $header->attributes->has('sticky'),
+                        '[&>th]:sticky [&>th]:top-0 [&>th]:backdrop-blur-lg' => $header->attributes->has('sticky'),
+                        '[&>th:after]:w-full [&>th:after]:absolute [&>th:after]:left-0 [&>th:after]:bottom-0 [&>th:after]:h-px' => $header->attributes->has('sticky'),
+                        '[&>th]:border-none [&>th:after]:bg-gray-200 dark:[&>th:after]:bg-gray-700' => $header->attributes->has('sticky'),
 
                         {{-- Rounded corners --}}
                         '[&>th:first-child]:rounded-none [&>th:last-child]:rounded-none' => Size::NONE->is($radius),
@@ -65,6 +67,7 @@
             @endisset
 
             <tbody @class([
+                {{-- Rounded corners --}}
                 '[&>tr:last-child>td:first-child]:rounded-none [&>tr:last-child>td:last-child]:rounded-none' => Size::NONE->is($radius),
                 '[&>tr:last-child>td:first-child]:rounded-bl [&>tr:last-child>td:last-child]:rounded-br' => Size::BASE->is($radius),
                 '[&>tr:last-child>td:first-child]:rounded-bl-lg [&>tr:last-child>td:last-child]:rounded-br-lg' => Size::LG->is($radius),
