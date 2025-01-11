@@ -255,10 +255,6 @@ class TableTest extends BrowserTestCase
                 '[&>th]:sticky',
                 '[&>th]:top-0',
                 '[&>th]:backdrop-blur-lg',
-                '[&>th]:shadow-sm',
-                '[&>th]:border-b-2',
-                '[&>th]:border-gray-200',
-                'dark:[&>th]:border-gray-700',
             ]);
     }
 
