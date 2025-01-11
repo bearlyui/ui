@@ -280,4 +280,19 @@ class TableTest extends BrowserTestCase
             ->waitUntilMissing('@cell-2-content')
             ->assertVisible('@cell-1');
     }
+
+    public function test_hover_cell_visible_on_mobile()
+    {
+        $this->blade(<<<'HTML'
+            <ui:table dusk="table">
+                <ui:row>
+                    <ui:cell :hover="true">
+                        <span dusk="cell-1">Cell 1</span>
+                    </ui:cell>
+                </ui:row>
+            </ui:table>
+        HTML)
+            ->resize(420, 800)
+            ->assertVisible('@cell-1');
+    }
 }
