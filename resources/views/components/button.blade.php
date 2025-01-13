@@ -44,6 +44,20 @@
             'px-6 py-3 text-lg font-medium' => Size::LG->is($size),
             'px-8 py-4 text-xl font-medium' => Size::XL->is($size),
 
+            {{-- Icons add slightly more padding to the opposite side if used on a single side --}}
+            'pr-2.5' => $icon && empty($iconAfter) && Size::XS->is($size),
+            'pr-3.5' => $icon && empty($iconAfter) && Size::SM->is($size),
+            'pr-5' => $icon && empty($iconAfter) && Size::BASE->is($size),
+            'pr-6' => $icon && empty($iconAfter) && Size::MD->is($size),
+            'pr-8' => $icon && empty($iconAfter) && Size::LG->is($size),
+            'pr-10' => $icon && empty($iconAfter) && Size::XL->is($size),
+            'pl-2.5' => $iconAfter && empty($icon) && Size::XS->is($size),
+            'pl-3.5' => $iconAfter && empty($icon) && Size::SM->is($size),
+            'pl-5' => $iconAfter && empty($icon) && Size::BASE->is($size),
+            'pl-6' => $iconAfter && empty($icon) && Size::MD->is($size),
+            'pl-8' => $iconAfter && empty($icon) && Size::LG->is($size),
+            'pl-10' => $iconAfter && empty($icon) && Size::XL->is($size),
+
             {{-- Base Variant Styles --}}
             'border shadow-sm hover:shadow' => Variant::Outline->is($variant) || Variant::Solid->is($variant),
             '[text-shadow:0.5px_0.5px_0px_rgba(255,255,255,0.24)] dark:[text-shadow:0.5px_0.5px_0px_rgba(0,0,0,0.24)]' => Variant::Solid->is($variant) || Variant::Gradient->is($variant),
@@ -81,7 +95,6 @@
             '[&[disabled]]:hover:text-success-700 [&[disabled]]:dark:hover:text-success-400' => Color::Success->is($color) && Variant::Ghost->is($variant),
             '[&[disabled]]:hover:text-warning-700 [&[disabled]]:dark:hover:text-warning-400' => Color::Warning->is($color) && Variant::Ghost->is($variant),
             '[&[disabled]]:hover:text-danger-600 [&[disabled]]:dark:hover:text-danger-400' => Color::Danger->is($color) && Variant::Ghost->is($variant),
-
         ])
 }}>
     <span @class([
@@ -93,7 +106,7 @@
             <x-dynamic-component
                 :component="'ui::icon.' . $icon"
                 :variant="$iconVariant"
-                class="opacity-80 mr-2"
+                class="opacity-70 mr-1.5"
             />
         @endif
         {{-- Main Slot --}}
@@ -102,7 +115,7 @@
             <x-dynamic-component
                 :component="'ui::icon.' . $iconAfter"
                 :variant="$iconVariant"
-                class="opacity-80 ml-2"
+                class="opacity-70 ml-1.5"
             />
         @endif
     </span>
