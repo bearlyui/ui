@@ -16,6 +16,7 @@
     'inline-flex items-center tabular-nums transition',
 
     {{-- Solid Variant --}}
+    'border border-black/5 dark:border-white/5' => Variant::Solid->is($variant),
     'bg-primary-200/60 text-primary-900 dark:bg-primary-400/20 dark:text-primary-100' => Variant::Solid->is($variant) && Color::Primary->is($color),
     'hover:bg-primary-300/60 hover:text-primary-900 dark:hover:bg-primary-300/25 dark:hover:text-primary-100' => $attributes->has('href') && Variant::Solid->is($variant) && Color::Primary->is($color),
     'bg-secondary-300/40 text-secondary-800 dark:bg-secondary-400/20 dark:text-secondary-100' => Variant::Solid->is($variant) && Color::Secondary->is($color),
