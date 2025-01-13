@@ -293,6 +293,9 @@ class TableTest extends BrowserTestCase
             </ui:table>
         HTML)
             ->resize(420, 800)
-            ->assertVisible('@cell-1');
+            ->assertVisible('@cell-1')
+            ->resize(1920, 1080)
+            ->pause(500)
+            ->assertMissing('@cell-1');
     }
 }

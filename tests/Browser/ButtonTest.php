@@ -114,7 +114,7 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button icon="arrow-left" dusk="btn"><span>Button</span></ui:button>')
             ->assertMissing('@btn svg:last-child')
             ->assertPresent('@btn svg:first-child')
-            ->assertHasClass('@btn svg:first-child', 'mr-2');
+            ->assertHasClass('@btn svg:first-child', 'mr-1.5');
     }
 
     public function test_with_icon_after()
@@ -122,7 +122,7 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button icon-after="arrow-right" dusk="btn"><span>Button</span></ui:button>')
             ->assertMissing('@btn svg:first-child')
             ->assertPresent('@btn svg:last-child')
-            ->assertHasClass('@btn svg:last-child', 'ml-2');
+            ->assertHasClass('@btn svg:last-child', 'ml-1.5');
     }
 
     public function test_custom_icon_variant()
@@ -145,6 +145,7 @@ class ButtonTest extends BrowserTestCase
             ->assertMissing('@btn [data-ui-icon-spinner]')
             ->click('@btn')
             ->waitFor('@btn [data-ui-icon-spinner]')
+            ->pause(200)
             ->assertMissing('@btn-content')
             ->assertVisible('@btn [data-ui-icon-spinner]')
             ->waitUntilMissing('@btn [data-ui-icon-spinner]')
