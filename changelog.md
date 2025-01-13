@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.5.0
+
 - Fixed dropdown items when using `focus-on-hover` property
 - Rewrote most of `<ui:toggle>` component
 - Added `<ui:badge>` component
