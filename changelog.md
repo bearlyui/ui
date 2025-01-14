@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.5.1
+
+- Table responsiveness breakpoint changed to `lg` instead of `md`
+
 ## 0.5.0
 
 - Fixed dropdown items when using `focus-on-hover` property

@@ -17,7 +17,7 @@
 {{ $inset ? 'data-ui-table-inset' : '' }}
 @class([
     'ring-1 ring-gray-300/60 dark:ring-gray-700 bg-white dark:bg-gray-800',
-    'overflow-x-auto md:overflow-x-visible',
+    'overflow-x-auto lg:overflow-x-visible',
 
     {{-- Rounded corners --}}
     'rounded-none' => Size::NONE->is($radius),
