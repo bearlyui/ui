@@ -10,14 +10,15 @@
     'empty' => false,
     'emptyMessage' => 'No data found',
     'inset' => false,
+    'containerClass' => '',
 ])
 
 {{-- We have a wrapping div mainly to apply overflow-x-auto for "responsive" tables --}}
 <div
 {{ $inset ? 'data-ui-table-inset' : '' }}
 @class([
+    'overflow-x-auto',
     'ring-1 ring-gray-300/60 dark:ring-gray-700 bg-white dark:bg-gray-800',
-    'overflow-x-auto lg:overflow-x-visible',
 
     {{-- Rounded corners --}}
     'rounded-none' => Size::NONE->is($radius),
@@ -29,6 +30,9 @@
     'shadow-sm' => Size::BASE->is($shadow),
     'shadow' => Size::LG->is($shadow),
     'shadow-md' => Size::XL->is($shadow),
+
+    {{-- Optional container class --}}
+    $containerClass,
 ])>
     @unless ($empty)
         <table {{ $attributes

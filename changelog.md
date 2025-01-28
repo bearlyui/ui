@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.5.2
+
+- Added `containerClass` property to `<ui:table>` component
+- Removed table responsiveness breakpoint (default to responsive)
+
 ## 0.5.1
 
 - Table responsiveness breakpoint changed to `lg` instead of `md`
