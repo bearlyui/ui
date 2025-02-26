@@ -68,8 +68,8 @@ class BadgeTest extends BrowserTestCase
             <ui:badge radius="full" dusk="full-radius-badge">Full</ui:badge>
         HTML)
             ->assertHasClass('@none-radius-badge', 'rounded-none')
-            ->assertHasClass('@sm-radius-badge', 'rounded-sm')
-            ->assertHasClass('@base-radius-badge', 'rounded')
+            ->assertHasClass('@sm-radius-badge', 'rounded-xs')
+            ->assertHasClass('@base-radius-badge', 'rounded-sm')
             ->assertHasClass('@md-radius-badge', 'rounded-md')
             ->assertHasClass('@lg-radius-badge', 'rounded-lg')
             ->assertHasClass('@xl-radius-badge', 'rounded-xl')

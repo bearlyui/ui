@@ -93,7 +93,7 @@ class CardTest extends BrowserTestCase
                 <ui:card dusk="inner">Inner Card</ui:card>
             </ui:card>
         HTML)
-            ->assertHasClass('@outer', '[&>[data-ui-card]]:bg-gray-50/60')
-            ->assertHasClass('@outer', '[&>[data-ui-card]]:dark:bg-gray-700/30');
+            ->assertHasClass('@outer', '*:data-ui-card:bg-gray-50/60')
+            ->assertHasClass('@outer', 'dark:*:data-ui-card:bg-gray-700/30');
     }
 }
