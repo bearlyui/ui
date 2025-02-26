@@ -28,8 +28,8 @@
                 role="tooltip"
                 {{ $attributes->class([
                     'block sm:w-max transition-all ease-in-out pointer-events-none',
-                    'ring-1 rounded backdrop-blur-lg',
-                    'bg-gradient-to-b from-white/80 to-white/50 ring-black/5 text-gray-700 shadow',
+                    'ring-1 rounded-sm backdrop-blur-lg',
+                    'bg-linear-to-b from-white/80 to-white/50 ring-black/5 text-gray-700 shadow-sm',
                     'dark:from-gray-700/70 dark:to-gray-700/50 dark:ring-white/15 dark:text-white/80 dark:shadow-lg dark:shadow-black/30',
                     'px-1.5 py-1 text-xs' => Size::SM->is($size),
                     'px-3 py-1.5 text-sm' => Size::BASE->is($size),

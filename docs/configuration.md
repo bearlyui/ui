@@ -14,11 +14,11 @@ You can modify them by publishing the config file to `PROJECT_ROOT/config/ui.php
 ```php
 return [
     'focusClasses' => [
-        'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500/70 focus:ring-offset-white/80',
+        'focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary-500/70 focus:ring-offset-white/80',
         'dark:focus:ring-primary-400/70 dark:focus:ring-offset-black/80',
     ],
     'linkClasses' => [
-        'font-medium transition text-gray-800 dark:text-gray-200 rounded-sm',
+        'font-medium transition text-gray-800 dark:text-gray-200 rounded-xs',
         'hover:text-primary-800 dark:hover:text-primary-200',
         'underline decoration-2 decoration-primary-500/20 hover:decoration-primary-500/50',
     ],

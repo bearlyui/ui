@@ -12,9 +12,9 @@
     ])->class([
         'group px-2.5 py-1.5',
         'w-full min-w-[200px] flex items-center justify-between',
-        'text-sm font-normal rounded text-left',
+        'text-sm font-normal rounded-sm text-left',
         'transition-all ease-in-out',
-        'outline-none focus:outline-none focus:bg-black/5 focus:dark:bg-white/5',
+        'outline-hidden focus:outline-hidden focus:bg-black/5 dark:focus:bg-white/5',
         'text-gray-600/90 dark:text-gray-300',
     ])->when(!$attributes->get('href'), fn ($a) => $a->merge([
         'type' => $attributes->get('type', 'button'),
@@ -44,7 +44,7 @@
         @endif
 
         {{-- Content --}}
-        <span class="flex-grow">{{ $slot }}</span>
+        <span class="grow">{{ $slot }}</span>
 
         {{-- After --}}
         @if ($iconAfter)

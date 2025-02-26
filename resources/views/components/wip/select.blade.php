@@ -10,7 +10,7 @@
 <select
     {{ $attributes->class([
         {{-- Base Styles --}}
-        'block rounded-md shadow-sm transition ease-out',
+        'block rounded-md shadow-xs transition ease-out',
         {{-- Color styles --}}
         'bg-white text-gray-700',
         'dark:bg-gray-200/5 dark:hover:bg-white/5 dark:text-white/70',

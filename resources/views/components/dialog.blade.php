@@ -28,14 +28,14 @@
             {{-- Overlay --}}
             <div
                 x-bind="uiDialogOverlay"
-                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/30 dark:bg-black/30 backdrop-blur"
+                class="fixed sm:p-4 md:px-0 top-0 bottom-0 left-0 right-0 w-full h-full bg-white/30 dark:bg-black/30 backdrop-blur-sm"
             ></div>
 
             {{-- Content --}}
             <div
                 x-bind="uiDialogContent"
                 @class([
-                    'flex-1 relative not-prose mx-auto max-w-full w-full max-h-[96vh] sm:rounded',
+                    'flex-1 relative not-prose mx-auto max-w-full w-full max-h-[96vh] sm:rounded-sm',
                     'sm:max-w-xl' => $size == 'sm',
                     'sm:max-w-2xl' => $size == 'md',
                     'sm:max-w-4xl' => $size == 'lg',
@@ -46,7 +46,7 @@
 
                 {{-- Card --}}
                 <ui:card
-                    class="relative w-full max-w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-white/5 rounded-none sm:rounded shadow-lg dark:shadow-2xl {{ $cardClass }}"
+                    class="relative w-full max-w-full max-h-[96vh] overflow-y-auto ring-1 ring-black/5 dark:ring-white/5 rounded-none sm:rounded-sm shadow-lg dark:shadow-2xl {{ $cardClass }}"
                 >
 
                     {{-- Header --}}

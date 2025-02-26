@@ -7,7 +7,7 @@
 @endphp
 <textarea {{ $attributes->class([
     {{-- Base Styles --}}
-    'rounded-md shadow-sm transition ease-out',
+    'rounded-md shadow-xs transition ease-out',
     {{-- Color styles --}}
     'bg-white text-gray-700',
     'dark:bg-gray-200/5 dark:hover:bg-white/5 dark:text-white/70',

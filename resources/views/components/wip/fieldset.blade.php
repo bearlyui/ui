@@ -1,7 +1,7 @@
 @props(['legend' => null])
 <fieldset
     {{ $attributes->class([
-        'px-6 py-4 border border-black/5 bg-gray-50/30 dark:bg-black/10 dark:border-white/10 rounded',
+        'px-6 py-4 border border-black/5 bg-gray-50/30 dark:bg-black/10 dark:border-white/10 rounded-sm',
     ]) }}
 >
     <legend
