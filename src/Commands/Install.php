@@ -61,30 +61,6 @@ class Install extends Command
         info('✅  Script assets installed.');
     }
 
-    protected function ensureJsFileHasValues(string $path, string $key, array $values)
-    {
-        $jsFile = File::get(base_path($path));
-        $arrayFromFile = str($jsFile)->match("/{$key}:[\s]*?\[.*?\],?/sm")
-            ->after('[')
-            ->beforeLast(']')
-            ->replaceMatches('/\s/', '')
-            ->trim()
-            ->explode(',')
-            ->filter()
-            ->push($values)
-            ->flatten()
-            ->unique();
-
-        File::put(
-            path: base_path($path),
-            contents: str($jsFile)->replaceMatches(
-                "/{$key}:[\s]*?\[.*?\],?/sm",
-                str("{$key}: [\n    ")->append($arrayFromFile->implode(",\n    "))->append("\n  ],")
-
-            )
-        );
-    }
-
     protected function installLivewire()
     {
         note('🛠️  Checking for Livewire installation...');
@@ -124,80 +100,26 @@ class Install extends Command
 
         $this->tailwindPackagesInstalled();
         $this->tailwindInAppCss();
-        $this->ensureTailwindConfigHasColorsImported();
-        $this->ensureTailwindConfigHasUiVendorContent();
-        $this->ensureTailwindConfigHasColorsExtended();
+        $this->ensureSourceForVendorContentInCss();
+        $this->ensureColorsImportedInAppCss();
     }
 
-    protected function ensureTailwindConfigHasColorsImported()
+    protected function ensureSourceForVendorContentInCss()
     {
-        $tailwindConfig = File::get(base_path('tailwind.config.js'));
-
-        if (! str($tailwindConfig)->contains("import colors from 'tailwindcss/colors'")) {
-            File::put(base_path('tailwind.config.js'), "import colors from 'tailwindcss/colors'\n\n".$tailwindConfig);
+        $expectedLine = "@source '../../vendor/bearly/ui/**/*.{php,blade.php,js}'";
+        $appCssFile = File::get(base_path('resources/css/app.css'));
+        if (! str($appCssFile)->contains($expectedLine)) {
+            File::put(base_path('resources/css/app.css'), str($appCssFile)->append($expectedLine."\n"));
         }
     }
 
-    protected function ensureTailwindConfigHasUiVendorContent()
+    protected function ensureColorsImportedInAppCss()
     {
-        $this->ensureJsFileHasValues('tailwind.config.js', 'content', ["'./resources/**/*.blade.php'", "'./app/**/*.php'", "'./vendor/bearly/ui/**/*.{php,blade.php}'", "'./vendor/bearly/ui/js/**/*.js'"]);
-    }
-
-    protected function ensureTailwindConfigHasColorsExtended()
-    {
-        $tailwindConfig = File::get(base_path('tailwind.config.js'));
-
-        $defaultColors = [
-            'primary' => 'colors.cyan',
-            'secondary' => 'colors.slate',
-            'success' => 'colors.green',
-            'warning' => 'colors.amber',
-            'danger' => 'colors.red',
-        ];
-
-        // Check if the theme.extend.colors section exists
-        if (! str($tailwindConfig)->contains('theme: {')) {
-            $tailwindConfig = str_replace(
-                'export default {',
-                "export default {\n  theme: {\n    extend: {\n      colors: {\n      },\n    },\n  },",
-                $tailwindConfig
-            );
-        } elseif (! str($tailwindConfig)->contains('extend: {')) {
-            $tailwindConfig = str_replace(
-                'theme: {',
-                "theme: {\n    extend: {\n      colors: {\n      },\n    },",
-                $tailwindConfig
-            );
-        } elseif (! str($tailwindConfig)->contains('colors: {')) {
-            $tailwindConfig = str_replace(
-                'extend: {',
-                "extend: {\n      colors: {\n      },\n    ",
-                $tailwindConfig
-            );
+        $expectedLine = "@import '../../vendor/bearly/ui/css/colors.css'";
+        $appCssFile = File::get(base_path('resources/css/app.css'));
+        if (! str($appCssFile)->contains($expectedLine)) {
+            File::put(base_path('resources/css/app.css'), str($appCssFile)->append($expectedLine."\n"));
         }
-
-        // Prepare the colors string
-        $colorsString = '';
-        foreach ($defaultColors as $name => $value) {
-            $newline = $name === 'danger' ? '' : "\n";
-            $colorsString .= "        '{$name}': {$value},{$newline}";
-        }
-
-        // Replace or add the colors
-        $pattern = '/colors:\s*{[^}]*}/s';
-        if (preg_match($pattern, $tailwindConfig)) {
-            $tailwindConfig = preg_replace($pattern, "colors: {\n{$colorsString}\n      }", $tailwindConfig);
-        } else {
-            $tailwindConfig = str_replace(
-                'colors: {',
-                "colors: {\n{$colorsString}\n      ",
-                $tailwindConfig
-            );
-        }
-
-        File::put(base_path('tailwind.config.js'), $tailwindConfig);
-
-        info('✅  Updated Tailwind config with extended colors.');
     }
 
     protected function tailwindPackagesInstalled()
@@ -206,14 +128,12 @@ class Install extends Command
             ->containsAll([
                 '"tailwindcss":',
                 '"@tailwindcss/forms":',
-                '"postcss":',
-                '"autoprefixer":',
             ]);
 
         if (! $tailwindAndRequirementsInstalled) {
             if (confirm('⛔️  Tailwind CSS and/or its required packages aren\'t installed. Do you want to install them now?')) {
                 spin(function () {
-                    Process::run('npm install -D tailwindcss postcss autoprefixer @tailwindcss/forms')->throw();
+                    Process::run('npm install -D tailwindcss @tailwindcss/vite @tailwindcss/forms')->throw();
                     Process::run('npx tailwindcss init -p');
                     info('✅  Installed Tailiwind CSS');
                 }, 'Installing Tailiwind CSS');
@@ -224,29 +144,11 @@ class Install extends Command
     protected function tailwindInAppCss()
     {
         $appCssFile = File::get(base_path('resources/css/app.css'));
-        if (! str($appCssFile)->contains([
-            '@tailwind base',
-            '@tailwind components',
-            '@tailwind utilities',
-        ])) {
+        if (! str($appCssFile)->contains("@import 'tailwindcss'")) {
             File::put(
                 path: base_path('resources/css/app.css'),
-                contents: str($appCssFile)->prepend(
-                    "\n@tailwind base;\n",
-                    "@tailwind components;\n",
-                    "@tailwind utilities;\n",
-                )
+                contents: str($appCssFile)->prepend("@import 'tailwindcss'\n")
             );
         }
-    }
-
-    protected function tailwindConfigContainsNeededValues()
-    {
-        $tailwindConfig = File::get(base_path('tailwind.config.js'));
-
-        return str($tailwindConfig)->contains([
-            './resources/**/*.blade.php',
-            './app/**/*.php',
-        ]);
     }
 }
