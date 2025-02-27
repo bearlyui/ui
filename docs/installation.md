@@ -5,7 +5,7 @@ The components are built for Laravel, Livewire, and Tailwind CSS.
 **The minimum required dependencies are:**
 - Laravel 10.x
 - Livewire 3.x (this also includes Alpine JS)
-- Tailwind CSS 3.4.x
+- Tailwind CSS 4.x
 - Tailwind CSS Forms Plugin
 
 ---
@@ -51,40 +51,22 @@ composer require bearly/ui:dev-main
 This step assumes that you already have a working Tailwind CSS installation **with the [tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms) plugin**.
 If you don't then please follow the [Tailwind CSS installation guide](https://tailwindcss.com/docs/guides/laravel) and [forms plugin installation](https://github.com/tailwindlabs/tailwindcss-forms?tab=readme-ov-file#installation) guides first.
 
-**Add the following configuration options to your `tailwind.config.js` file:**
+**Add the following Tailwind CSS configuration options to your `resources/css/app.css` file:**
 ```js
-import colors from 'tailwindcss/colors' // [tl! add] [tl! focus]
+@import 'tailwindcss'
 
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [ // [tl! focus]
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    './vendor/bearly/ui/**/*.{php,blade.php}', // [tl! add] [tl! focus]
-    './vendor/bearly/ui/js/**/*.js', // [tl! add] [tl! focus]
-  ], // [tl! focus]
-  theme: { // [tl! focus]
-    extend: { // [tl! focus]
-      colors: { // [tl! add] [tl! focus]
-        primary: colors.cyan, // [tl! add] [tl! focus]
-        secondary: colors.slate, // [tl! add] [tl! focus]
-        success: colors.green, // [tl! add] [tl! focus]
-        warning: colors.amber, // [tl! add] [tl! focus]
-        danger: colors.red, // [tl! add] [tl! focus]
-      } // [tl! add] [tl! focus]
-    }, // [tl! focus]
-  }, // [tl! focus]
-  plugins: [
-    forms,
-  ],
-}
+// ...
+
+@source('../../vendor/bearly/ui/**/*.{php,blade.php,js}') // [tl! add] [tl! focus]
+@import '../../vendor/bearly/ui/dist/colors.css' // [tl! add] [tl! focus]
+@plugin '@tailwindcss/forms' // [tl! add] [tl! focus]
 ```
 
 ### Add Script Assets
 
 The last step is to add the Javascript assets to your project. Usually this is done in thes `resources/js/app.js` file.
 ```js
-import { ui } from '../../vendor/bearly/ui/js/index.js'( ) // [tl! add]
+import { ui } from '../../vendor/bearly/ui/js/index.js' // [tl! add]
 
 document.addEventListener('alpine:init', () => { // [tl! add]
   ui(window.Alpine) // [tl! add]
