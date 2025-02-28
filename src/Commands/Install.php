@@ -29,8 +29,6 @@ class Install extends Command
         $this->newLine();
         $this->installJsAssets();
         Artisan::call('view:clear');
-        // TODO: build assets?
-
         info('✅  Bear UI installation complete. Enjoy! 🐻');
     }
 
@@ -106,7 +104,7 @@ class Install extends Command
 
     protected function ensureSourceForVendorContentInCss()
     {
-        $expectedLine = "@source '../../vendor/bearly/ui/**/*.{php,blade.php,js}'";
+        $expectedLine = "@source '../../vendor/bearly/ui/**/*.{php,blade.php,js}';";
         $appCssFile = File::get(base_path('resources/css/app.css'));
         if (! str($appCssFile)->contains($expectedLine)) {
             File::put(base_path('resources/css/app.css'), str($appCssFile)->append($expectedLine."\n"));
@@ -115,7 +113,7 @@ class Install extends Command
 
     protected function ensureColorsImportedInAppCss()
     {
-        $expectedLine = "@import '../../vendor/bearly/ui/css/colors.css'";
+        $expectedLine = "@import '../../vendor/bearly/ui/css/colors.css';";
         $appCssFile = File::get(base_path('resources/css/app.css'));
         if (! str($appCssFile)->contains($expectedLine)) {
             File::put(base_path('resources/css/app.css'), str($appCssFile)->append($expectedLine."\n"));
@@ -127,16 +125,16 @@ class Install extends Command
         $tailwindAndRequirementsInstalled = str(File::get(base_path('package.json')))
             ->containsAll([
                 '"tailwindcss":',
+                '"@tailwindcss/vite":',
                 '"@tailwindcss/forms":',
             ]);
 
         if (! $tailwindAndRequirementsInstalled) {
             if (confirm('⛔️  Tailwind CSS and/or its required packages aren\'t installed. Do you want to install them now?')) {
                 spin(function () {
-                    Process::run('npm install -D tailwindcss @tailwindcss/vite @tailwindcss/forms')->throw();
-                    Process::run('npx tailwindcss init -p');
-                    info('✅  Installed Tailiwind CSS');
-                }, 'Installing Tailiwind CSS');
+                    Process::run('npm i tailwindcss @tailwindcss/vite @tailwindcss/forms')->throw();
+                    info('✅  Installed Tailwind CSS');
+                }, 'Installing Tailwind CSS');
             }
         }
     }
@@ -144,7 +142,7 @@ class Install extends Command
     protected function tailwindInAppCss()
     {
         $appCssFile = File::get(base_path('resources/css/app.css'));
-        if (! str($appCssFile)->contains("@import 'tailwindcss'")) {
+        if (! str($appCssFile)->contains("@import 'tailwindcss';")) {
             File::put(
                 path: base_path('resources/css/app.css'),
                 contents: str($appCssFile)->prepend("@import 'tailwindcss'\n")
