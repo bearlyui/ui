@@ -3,9 +3,9 @@
 @use('Bearly\Ui\Variant')
 @props([
     'color' => Color::Secondary,
-    'size' => Size::BASE,
+    'size' => Size::MD,
     'variant' => Variant::Solid,
-    'radius' => Size::BASE,
+    'radius' => Size::SM,
     'href' => null,
     'icon' => null,
     'iconAfter' => null,
@@ -26,7 +26,6 @@
             {{-- Border Radius --}}
             'rounded-none' => Size::NONE->is($radius),
             'rounded-sm' => Size::SM->is($radius),
-            'rounded' => Size::BASE->is($radius),
             'rounded-md' => Size::MD->is($radius),
             'rounded-lg' => Size::LG->is($radius),
             'rounded-xl' => Size::XL->is($radius),
@@ -39,10 +38,9 @@
             {{-- Sizing --}}
             'px-1.5 py-1 text-xs' => Size::XS->is($size),
             'px-2 py-1.5 text-sm font-medium' => Size::SM->is($size),
-            'px-4 py-2 text-sm font-medium' => Size::BASE->is($size),
-            'px-5 py-2.5 text-base font-medium' => Size::MD->is($size),
-            'px-6 py-3 text-lg font-medium' => Size::LG->is($size),
-            'px-8 py-4 text-xl font-medium' => Size::XL->is($size),
+            'px-4 py-2 text-sm font-medium' => Size::MD->is($size),
+            'px-5 py-2 text-base font-medium' => Size::LG->is($size),
+            'px-6 py-3 text-base font-medium' => Size::XL->is($size),
 
             {{-- Icons add slightly more padding to the opposite side if used on a single side --}}
             'pr-2.5' => $icon && empty($iconAfter) && Size::XS->is($size),
