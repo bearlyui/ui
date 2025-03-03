@@ -45,16 +45,14 @@
             {{-- Icons add slightly more padding to the opposite side if used on a single side --}}
             'pr-2.5' => $icon && empty($iconAfter) && Size::XS->is($size),
             'pr-3.5' => $icon && empty($iconAfter) && Size::SM->is($size),
-            'pr-5' => $icon && empty($iconAfter) && Size::BASE->is($size),
-            'pr-6' => $icon && empty($iconAfter) && Size::MD->is($size),
-            'pr-8' => $icon && empty($iconAfter) && Size::LG->is($size),
-            'pr-10' => $icon && empty($iconAfter) && Size::XL->is($size),
+            'pr-4 pl-3' => $icon && empty($iconAfter) && Size::MD->is($size),
+            'pr-5 pl-4' => $icon && empty($iconAfter) && Size::LG->is($size),
+            'pr-7 pl-5' => $icon && empty($iconAfter) && Size::XL->is($size),
             'pl-2.5' => $iconAfter && empty($icon) && Size::XS->is($size),
             'pl-3.5' => $iconAfter && empty($icon) && Size::SM->is($size),
-            'pl-5' => $iconAfter && empty($icon) && Size::BASE->is($size),
-            'pl-6' => $iconAfter && empty($icon) && Size::MD->is($size),
-            'pl-8' => $iconAfter && empty($icon) && Size::LG->is($size),
-            'pl-10' => $iconAfter && empty($icon) && Size::XL->is($size),
+            'pl-4 pr-3' => $iconAfter && empty($icon) && Size::MD->is($size),
+            'pl-5 pr-4' => $iconAfter && empty($icon) && Size::LG->is($size),
+            'pl-7 pr-5' => $iconAfter && empty($icon) && Size::XL->is($size),
 
             {{-- Base Variant Styles --}}
             'border shadow-xs hover:shadow-sm' => Variant::Outline->is($variant) || Variant::Solid->is($variant),
@@ -127,10 +125,9 @@
             'block',
             'size-3' => Size::XS->is($size),
             'size-4' => Size::SM->is($size),
-            'size-5' => Size::BASE->is($size),
-            'size-6' => Size::MD->is($size),
-            'size-7' => Size::LG->is($size),
-            'size-8' => Size::XL->is($size),
+            'size-5' => Size::MD->is($size),
+            'size-6' => Size::LG->is($size),
+            'size-7' => Size::XL->is($size),
         ])>
             <ui:icon-spinner class="w-full h-full" />
         </span>
