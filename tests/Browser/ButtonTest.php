@@ -46,19 +46,19 @@ class ButtonTest extends BrowserTestCase
             ->assertHasClass('@btn', 'text-sm');
 
         $this->blade('<ui:button size="md" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'px-5')
-            ->assertHasClass('@btn', 'py-2.5')
-            ->assertHasClass('@btn', 'text-base');
+            ->assertHasClass('@btn', 'px-4')
+            ->assertHasClass('@btn', 'py-2')
+            ->assertHasClass('@btn', 'text-sm');
 
         $this->blade('<ui:button size="lg" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'px-6')
-            ->assertHasClass('@btn', 'py-3')
-            ->assertHasClass('@btn', 'text-lg');
+            ->assertHasClass('@btn', 'px-5')
+            ->assertHasClass('@btn', 'py-2')
+            ->assertHasClass('@btn', 'text-base');
 
         $this->blade('<ui:button size="xl" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'px-8')
-            ->assertHasClass('@btn', 'py-4')
-            ->assertHasClass('@btn', 'text-xl');
+            ->assertHasClass('@btn', 'px-6')
+            ->assertHasClass('@btn', 'py-3')
+            ->assertHasClass('@btn', 'text-base');
     }
 
     public function test_variants()
@@ -85,7 +85,7 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button radius="none" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-none');
         $this->blade('<ui:button radius="sm" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'rounded-xs');
+            ->assertHasClass('@btn', 'rounded-sm');
         $this->blade('<ui:button radius="md" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-md');
         $this->blade('<ui:button radius="lg" dusk="btn">Button</ui:button>')
@@ -155,14 +155,12 @@ class ButtonTest extends BrowserTestCase
             ->assertVisible('@btn-xs span.size-3')
             ->assertVisible('@btn-sm [data-ui-icon-spinner]')
             ->assertVisible('@btn-sm span.size-4')
-            ->assertVisible('@btn [data-ui-icon-spinner]')
-            ->assertVisible('@btn span.size-5')
             ->assertVisible('@btn-md [data-ui-icon-spinner]')
-            ->assertVisible('@btn-md span.size-6')
+            ->assertVisible('@btn-md span.size-5')
             ->assertVisible('@btn-lg [data-ui-icon-spinner]')
-            ->assertVisible('@btn-lg span.size-7')
+            ->assertVisible('@btn-lg span.size-6')
             ->assertVisible('@btn-xl [data-ui-icon-spinner]')
-            ->assertVisible('@btn-xl span.size-8');
+            ->assertVisible('@btn-xl span.size-7');
     }
 
     public function test_only_submit_button_gets_loading_state_with_wire_submit()

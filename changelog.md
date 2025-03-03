@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Upgrade to Tailwind CSS 4.x
+- Changed sizing scale for many components to improve clarity
 
 ## 0.5.2
 
