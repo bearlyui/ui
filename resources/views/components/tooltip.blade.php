@@ -5,7 +5,7 @@
     'shortcut' => null,
     'offset' => 4,
     'position' => 'top',
-    'size' => Size::SM
+    'size' => Size::MD,
 ])
 <span x-data="{ trigger: {{ ($trigger ?? false) ? '$refs.trigger.firstElementChild' : '$el.parentNode' }} }">
     {{-- Optional Trigger --}}
@@ -32,9 +32,9 @@
                     'bg-linear-to-b from-white/80 to-white/50 ring-black/5 text-gray-700 shadow-sm',
                     'dark:from-gray-700/70 dark:to-gray-700/50 dark:ring-white/15 dark:text-white/80 dark:shadow-lg dark:shadow-black/30',
                     'px-1.5 py-1 text-xs' => Size::SM->is($size),
-                    'px-3 py-1.5 text-sm' => Size::BASE->is($size),
-                    'px-4 py-2 text-base' => Size::MD->is($size),
-                    'px-5 py-2.5 text-lg' => Size::LG->is($size),
+                    'px-3 py-1.5 text-sm' => Size::MD->is($size),
+                    'px-4 py-2 text-base' => Size::LG->is($size),
+                    'px-5 py-2.5 text-lg' => Size::XL->is($size),
                 ]) }}
             >
                 @if ($title)

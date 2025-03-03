@@ -4,8 +4,8 @@
 @props([
     'hover' => false,
     'hoverColor' => Color::Secondary,
-    'radius' => Size::BASE,
-    'shadow' => Size::BASE,
+    'radius' => Size::SM,
+    'shadow' => Size::SM,
     'striped' => false,
     'empty' => false,
     'emptyMessage' => 'No data found',
@@ -22,14 +22,14 @@
 
     {{-- Rounded corners --}}
     'rounded-none' => Size::NONE->is($radius),
-    'rounded-sm' => Size::BASE->is($radius),
-    'rounded-lg' => Size::LG->is($radius),
-    'rounded-xl' => Size::XL->is($radius),
+    'rounded-sm' => Size::SM->is($radius),
+    'rounded-lg' => Size::MD->is($radius),
+    'rounded-xl' => Size::LG->is($radius),
 
     {{-- Shadows --}}
-    'shadow-xs' => Size::BASE->is($shadow),
-    'shadow-sm' => Size::LG->is($shadow),
-    'shadow-md' => Size::XL->is($shadow),
+    'shadow-xs' => Size::SM->is($shadow),
+    'shadow-sm' => Size::MD->is($shadow),
+    'shadow-md' => Size::LG->is($shadow),
 
     {{-- Optional container class --}}
     $containerClass,
@@ -63,9 +63,9 @@
 
                         {{-- Rounded corners --}}
                         '[&>th:first-child]:rounded-none [&>th:last-child]:rounded-none' => Size::NONE->is($radius),
-                        '[&>th:first-child]:rounded-tl [&>th:last-child]:rounded-tr' => Size::BASE->is($radius),
-                        '[&>th:first-child]:rounded-tl-lg [&>th:last-child]:rounded-tr-lg' => Size::LG->is($radius),
-                        '[&>th:first-child]:rounded-tl-xl [&>th:last-child]:rounded-tr-xl' => Size::XL->is($radius),
+                        '[&>th:first-child]:rounded-tl [&>th:last-child]:rounded-tr' => Size::SM->is($radius),
+                        '[&>th:first-child]:rounded-tl-lg [&>th:last-child]:rounded-tr-lg' => Size::MD->is($radius),
+                        '[&>th:first-child]:rounded-tl-xl [&>th:last-child]:rounded-tr-xl' => Size::LG->is($radius),
                     ]) >{{ $header }}</tr>
                 </thead>
             @endisset
@@ -73,9 +73,9 @@
             <tbody @class([
                 {{-- Rounded corners --}}
                 '[&>tr:last-child>td:first-child]:rounded-none [&>tr:last-child>td:last-child]:rounded-none' => Size::NONE->is($radius),
-                '[&>tr:last-child>td:first-child]:rounded-bl [&>tr:last-child>td:last-child]:rounded-br' => Size::BASE->is($radius),
-                '[&>tr:last-child>td:first-child]:rounded-bl-lg [&>tr:last-child>td:last-child]:rounded-br-lg' => Size::LG->is($radius),
-                '[&>tr:last-child>td:first-child]:rounded-bl-xl [&>tr:last-child>td:last-child]:rounded-br-xl' => Size::XL->is($radius),
+                '[&>tr:last-child>td:first-child]:rounded-bl [&>tr:last-child>td:last-child]:rounded-br' => Size::SM->is($radius),
+                '[&>tr:last-child>td:first-child]:rounded-bl-lg [&>tr:last-child>td:last-child]:rounded-br-lg' => Size::MD->is($radius),
+                '[&>tr:last-child>td:first-child]:rounded-bl-xl [&>tr:last-child>td:last-child]:rounded-br-xl' => Size::LG->is($radius),
             ])>{{ $slot }}</tbody>
         </table>
     @else
