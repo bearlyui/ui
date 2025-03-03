@@ -43,7 +43,8 @@ The required color names are:
 | `warning`    | Highlights cautionary actions or items needing attention       |
 | `danger`     | Signifies dangerous actions, failures, or critical issues      |
 
-Here is the default configuration in `colors.css`:
+
+These are the default colors in `colors.css`:
 
 ```css
 @theme inline {
