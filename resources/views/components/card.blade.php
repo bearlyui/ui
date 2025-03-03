@@ -6,19 +6,19 @@
 ])
 
 <div {{ $attributes->class([
-    'text-sm bg-white shadow rounded ring-1 ring-gray-900/5 text-gray-600',
+    'text-sm bg-white shadow-sm rounded-sm ring-1 ring-gray-900/5 text-gray-600',
     'dark:bg-gray-800 dark:shadow-md dark:ring-gray-50/15 dark:text-gray-400',
-    '[&>[data-ui-card]]:bg-gray-50/60 [&>[data-ui-card]]:dark:bg-gray-700/30',
+    '*:data-ui-card:bg-gray-50/60 dark:*:data-ui-card:bg-gray-700/30',
     'p-3' => Size::SM->is($padding),
     'p-4' => Size::BASE->is($padding),
     'p-5' => Size::MD->is($padding),
     'p-6' => Size::LG->is($padding),
 
     {{-- Inset Tables --}}
-    '[&_[data-ui-table-inset]]:-m-3 [&_[data-ui-table-inset]]:ring-transparent' => Size::SM->is($padding),
-    '[&_[data-ui-table-inset]]:-m-4 [&_[data-ui-table-inset]]:ring-transparent' => Size::BASE->is($padding),
-    '[&_[data-ui-table-inset]]:-m-5 [&_[data-ui-table-inset]]:ring-transparent' => Size::MD->is($padding),
-    '[&_[data-ui-table-inset]]:-m-6 [&_[data-ui-table-inset]]:ring-transparent' => Size::LG->is($padding),
+    '**:data-ui-table-inset:-m-3 **:data-ui-table-inset:ring-transparent' => Size::SM->is($padding),
+    '**:data-ui-table-inset:-m-4 **:data-ui-table-inset:ring-transparent' => Size::BASE->is($padding),
+    '**:data-ui-table-inset:-m-5 **:data-ui-table-inset:ring-transparent' => Size::MD->is($padding),
+    '**:data-ui-table-inset:-m-6 **:data-ui-table-inset:ring-transparent' => Size::LG->is($padding),
 
 ])->merge(['data-ui-card' => '']) }}>
 

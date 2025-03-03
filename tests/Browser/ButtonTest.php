@@ -70,19 +70,19 @@ class ButtonTest extends BrowserTestCase
     {
         $this->blade('<ui:button variant="solid" color="primary" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'border')
-            ->assertHasClass('@btn', 'shadow-sm')
-            ->assertHasClass('@btn', 'hover:shadow')
+            ->assertHasClass('@btn', 'shadow-xs')
+            ->assertHasClass('@btn', 'hover:shadow-sm')
             ->assertHasClass('@btn', '[text-shadow:0.5px_0.5px_0px_rgba(255,255,255,0.24)]');
 
         $this->blade('<ui:button variant="ghost" color="primary" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'hover:bg-gray-500/5')
             ->assertClassMissing('@btn', 'border')
-            ->assertClassMissing('@btn', 'shadow-sm');
+            ->assertClassMissing('@btn', 'shadow-xs');
 
         $this->blade('<ui:button variant="outline" color="primary" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'border')
-            ->assertHasClass('@btn', 'shadow-sm')
-            ->assertHasClass('@btn', 'hover:shadow');
+            ->assertHasClass('@btn', 'shadow-xs')
+            ->assertHasClass('@btn', 'hover:shadow-sm');
     }
 
     public function test_corner_radius()
@@ -90,9 +90,9 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button radius="none" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-none');
         $this->blade('<ui:button radius="sm" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'rounded-sm');
+            ->assertHasClass('@btn', 'rounded-xs');
         $this->blade('<ui:button radius="base" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'rounded');
+            ->assertHasClass('@btn', 'rounded-sm');
         $this->blade('<ui:button radius="md" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-md');
         $this->blade('<ui:button radius="lg" dusk="btn">Button</ui:button>')

@@ -34,7 +34,7 @@
 
             {{-- Focus states --}}
             ...config('ui.focusClasses'),
-            'focus-visible:ring-primary-400/80 focus-visible:dark:ring-primary-300/80',
+            'focus-visible:ring-primary-400/80 dark:focus-visible:ring-primary-300/80',
 
             {{-- Sizing --}}
             'px-1.5 py-1 text-xs' => Size::XS->is($size),
@@ -59,7 +59,7 @@
             'pl-10' => $iconAfter && empty($icon) && Size::XL->is($size),
 
             {{-- Base Variant Styles --}}
-            'border shadow-sm hover:shadow' => Variant::Outline->is($variant) || Variant::Solid->is($variant),
+            'border shadow-xs hover:shadow-sm' => Variant::Outline->is($variant) || Variant::Solid->is($variant),
             '[text-shadow:0.5px_0.5px_0px_rgba(255,255,255,0.24)] dark:[text-shadow:0.5px_0.5px_0px_rgba(0,0,0,0.24)]' => Variant::Solid->is($variant) || Variant::Gradient->is($variant),
 
             {{-- Solid Variant --}}
@@ -81,20 +81,20 @@
             '[&[disabled]]:opacity-60 [&[disabled]]:saturate-[0.6] [&[disabled]]:cursor-not-allowed',
 
             {{-- Disabled Solid --}}
-            '[&[disabled]]:hover:shadow-sm' => Variant::Solid->is($variant),
-            '[&[disabled]]:hover:bg-primary-700 [&[disabled]]:hover:text-white [&[disabled]]:dark:hover:bg-primary-400/30 [&[disabled]]:dark:hover:text-primary-300' => Color::Primary->is($color) && Variant::Solid->is($variant),
-            '[&[disabled]]:hover:bg-secondary-50 [&[disabled]]:hover:text-secondary-600/90 [&[disabled]]:dark:hover:bg-secondary-300/10 [&[disabled]]:dark:hover:text-secondary-300 [&[disabled]]:hover:border-secondary-300/60 [&[disabled]]:dark:hover:border-secondary-600' => Color::Secondary->is($color) && Variant::Solid->is($variant),
-            '[&[disabled]]:hover:bg-success-500 [&[disabled]]:hover:text-success-950/90 [&[disabled]]:dark:hover:bg-success-400/15 [&[disabled]]:dark:hover:text-success-500' => Color::Success->is($color) && Variant::Solid->is($variant),
-            '[&[disabled]]:hover:bg-warning-400 [&[disabled]]:hover:text-warning-900 [&[disabled]]:dark:hover:bg-warning-400/15 [&[disabled]]:dark:hover:text-warning-500' => Color::Warning->is($color) && Variant::Solid->is($variant),
-            '[&[disabled]]:hover:bg-danger-500/80 [&[disabled]]:hover:text-danger-950/90 [&[disabled]]:dark:hover:bg-danger-500/15 [&[disabled]]:dark:hover:text-danger-400' => Color::Danger->is($color) && Variant::Solid->is($variant),
+            '[&[disabled]]:hover:shadow-xs' => Variant::Solid->is($variant),
+            '[&[disabled]]:hover:bg-primary-700 [&[disabled]]:hover:text-white dark:[&[disabled]]:hover:bg-primary-400/30 dark:[&[disabled]]:hover:text-primary-300' => Color::Primary->is($color) && Variant::Solid->is($variant),
+            '[&[disabled]]:hover:bg-secondary-50 [&[disabled]]:hover:text-secondary-600/90 dark:[&[disabled]]:hover:bg-secondary-300/10 dark:[&[disabled]]:hover:text-secondary-300 [&[disabled]]:hover:border-secondary-300/60 dark:[&[disabled]]:hover:border-secondary-600' => Color::Secondary->is($color) && Variant::Solid->is($variant),
+            '[&[disabled]]:hover:bg-success-500 [&[disabled]]:hover:text-success-950/90 dark:[&[disabled]]:hover:bg-success-400/15 dark:[&[disabled]]:hover:text-success-500' => Color::Success->is($color) && Variant::Solid->is($variant),
+            '[&[disabled]]:hover:bg-warning-400 [&[disabled]]:hover:text-warning-900 dark:[&[disabled]]:hover:bg-warning-400/15 dark:[&[disabled]]:hover:text-warning-500' => Color::Warning->is($color) && Variant::Solid->is($variant),
+            '[&[disabled]]:hover:bg-danger-500/80 [&[disabled]]:hover:text-danger-950/90 dark:[&[disabled]]:hover:bg-danger-500/15 dark:[&[disabled]]:hover:text-danger-400' => Color::Danger->is($color) && Variant::Solid->is($variant),
 
             {{-- Disabled Ghost --}}
             '[&[disabled]]:hover:bg-transparent' => Variant::Ghost->is($variant),
-            '[&[disabled]]:hover:text-primary-700 [&[disabled]]:dark:hover:text-primary-400' => Color::Primary->is($color) && Variant::Ghost->is($variant),
-            '[&[disabled]]:hover:text-secondary-600/80 [&[disabled]]:dark:hover:text-secondary-300' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
-            '[&[disabled]]:hover:text-success-700 [&[disabled]]:dark:hover:text-success-400' => Color::Success->is($color) && Variant::Ghost->is($variant),
-            '[&[disabled]]:hover:text-warning-700 [&[disabled]]:dark:hover:text-warning-400' => Color::Warning->is($color) && Variant::Ghost->is($variant),
-            '[&[disabled]]:hover:text-danger-600 [&[disabled]]:dark:hover:text-danger-400' => Color::Danger->is($color) && Variant::Ghost->is($variant),
+            '[&[disabled]]:hover:text-primary-700 dark:[&[disabled]]:hover:text-primary-400' => Color::Primary->is($color) && Variant::Ghost->is($variant),
+            '[&[disabled]]:hover:text-secondary-600/80 dark:[&[disabled]]:hover:text-secondary-300' => Color::Secondary->is($color) && Variant::Ghost->is($variant),
+            '[&[disabled]]:hover:text-success-700 dark:[&[disabled]]:hover:text-success-400' => Color::Success->is($color) && Variant::Ghost->is($variant),
+            '[&[disabled]]:hover:text-warning-700 dark:[&[disabled]]:hover:text-warning-400' => Color::Warning->is($color) && Variant::Ghost->is($variant),
+            '[&[disabled]]:hover:text-danger-600 dark:[&[disabled]]:hover:text-danger-400' => Color::Danger->is($color) && Variant::Ghost->is($variant),
         ])
 }}>
     <span @class([

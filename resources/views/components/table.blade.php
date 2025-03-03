@@ -22,13 +22,13 @@
 
     {{-- Rounded corners --}}
     'rounded-none' => Size::NONE->is($radius),
-    'rounded' => Size::BASE->is($radius),
+    'rounded-sm' => Size::BASE->is($radius),
     'rounded-lg' => Size::LG->is($radius),
     'rounded-xl' => Size::XL->is($radius),
 
     {{-- Shadows --}}
-    'shadow-sm' => Size::BASE->is($shadow),
-    'shadow' => Size::LG->is($shadow),
+    'shadow-xs' => Size::BASE->is($shadow),
+    'shadow-sm' => Size::LG->is($shadow),
     'shadow-md' => Size::XL->is($shadow),
 
     {{-- Optional container class --}}

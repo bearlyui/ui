@@ -38,7 +38,7 @@ $trackClasses = match($color) {
         ->class([
             'group/toggle rounded-full border-2',
             'bg-gray-200 dark:bg-gray-950/70 dark:hover:bg-gray-900/70',
-            'relative inline-flex h-6 w-11 flex-shrink-0',
+            'relative inline-flex h-6 w-11 shrink-0',
             'outline focus:outline outline-1 focus:outline-1 outline-black/10  dark:outline-gray-500/10',
             'cursor-pointer transition-all duration-200 ease-in-out',
             'focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-white/80',
@@ -59,11 +59,11 @@ $trackClasses = match($color) {
         x-cloak
         @class([
             'rounded-full relative inline-block h-5 w-5 pointer-events-none transition duration-200 ease-in-out',
-            'shadow dark:shadow-black/25 ring-0',
+            'shadow-sm dark:shadow-black/25 ring-0',
             'translate-x-0 bg-gray-50 group-hover/toggle:bg-white dark:bg-gray-700 dark:group-hover/toggle:bg-gray-600',
 
             {{-- Checked state --}}
-            'has-[input:checked]:translate-x-5 has-[input:checked]:bg-white dark:has-[input:checked]:bg-gray-900 dark:has-[input:checked]:group-hover/toggle:bg-gray-900',
+            'has-[input:checked]:translate-x-5 has-[input:checked]:bg-white dark:has-[input:checked]:bg-gray-900 dark:group-hover/toggle:has-[input:checked]:bg-gray-900',
         ])
     >
         {{-- "On" icon --}}

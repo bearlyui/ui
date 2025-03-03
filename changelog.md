@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Upgrade to Tailwind CSS 4.x
+
 ## 0.5.2
 
 - Added `containerClass` property to `<ui:table>` component

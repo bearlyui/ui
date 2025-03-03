@@ -48,8 +48,8 @@
 
     {{-- Border Radius --}}
     'rounded-none' => Size::NONE->is($radius),
-    'rounded-sm' => Size::SM->is($radius),
-    'rounded' => Size::BASE->is($radius),
+    'rounded-xs' => Size::SM->is($radius),
+    'rounded-sm' => Size::BASE->is($radius),
     'rounded-md' => Size::MD->is($radius),
     'rounded-lg' => Size::LG->is($radius),
     'rounded-xl' => Size::XL->is($radius),
@@ -57,7 +57,7 @@
 
 
     ...config('ui.focusClasses'),
-    'focus-visible:ring-primary-400/80 focus-visible:dark:ring-primary-300/80',
+    'focus-visible:ring-primary-400/80 dark:focus-visible:ring-primary-300/80',
 ]) }}
 >
     @if ($icon)

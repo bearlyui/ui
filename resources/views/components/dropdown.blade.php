@@ -22,7 +22,7 @@
             <span
                 x-bind="uiDropdownContent"
                 {{ $attributes->class([
-                    'block p-1.5 rounded transition-all ease-in-out',
+                    'block p-1.5 rounded-sm transition-all ease-in-out',
                     'shadow-xl backdrop-blur-xl ring-1',
                     'bg-white/60 ring-black/5',
                     'dark:bg-gray-700/60 dark:ring-white/20',
