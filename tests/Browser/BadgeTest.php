@@ -33,7 +33,6 @@ class BadgeTest extends BrowserTestCase
     {
         $this->blade(<<<'HTML'
             <ui:badge size="sm" dusk="sm-badge">sm</ui:badge>
-            <ui:badge size="base" dusk="base-badge">base</ui:badge>
             <ui:badge size="md" dusk="md-badge">md</ui:badge>
             <ui:badge size="lg" dusk="lg-badge">lg</ui:badge>
         HTML)
@@ -61,7 +60,6 @@ class BadgeTest extends BrowserTestCase
         $this->blade(<<<'HTML'
             <ui:badge icon-after="arrow-right" radius="none" dusk="none-radius-badge">None</ui:badge>
             <ui:badge radius="sm" dusk="sm-radius-badge">Small</ui:badge>
-            <ui:badge radius="base" dusk="base-radius-badge">Base</ui:badge>
             <ui:badge radius="md" dusk="md-radius-badge">Medium</ui:badge>
             <ui:badge radius="lg" dusk="lg-radius-badge">Large</ui:badge>
             <ui:badge radius="xl" dusk="xl-radius-badge">Extra Large</ui:badge>
@@ -69,7 +67,6 @@ class BadgeTest extends BrowserTestCase
         HTML)
             ->assertHasClass('@none-radius-badge', 'rounded-none')
             ->assertHasClass('@sm-radius-badge', 'rounded-xs')
-            ->assertHasClass('@base-radius-badge', 'rounded-sm')
             ->assertHasClass('@md-radius-badge', 'rounded-md')
             ->assertHasClass('@lg-radius-badge', 'rounded-lg')
             ->assertHasClass('@xl-radius-badge', 'rounded-xl')

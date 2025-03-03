@@ -92,18 +92,18 @@ Why would you want a tooltip to be large? I don't know, but you can if you want 
 
 ```html +demo title={Tooltip Sizes} previewClasses={flex justify-between}
 <ui:button>
-    Small (sm - the default)
-    <ui:tooltip title="I'm a small tooltip" />
+    Extra Small
+    <ui:tooltip size="xs" title="I'm an extra small tooltip" />
 </ui:button>
 
 <ui:button>
-    Base (base)
-    <ui:tooltip size="base" title="I'm a base-sized tooltip" />
+    Small (sm - the default)
+    <ui:tooltip size="sm" title="I'm a small tooltip" />
 </ui:button>
 
 <ui:button>
     Medium (md)
-    <ui:tooltip size="md" title="I'm a medium-sized tooltip" />
+    <ui:tooltip size="md" title="I'm a medium tooltip" />
 </ui:button>
 
 <ui:button>

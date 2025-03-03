@@ -92,20 +92,6 @@ class TooltipTest extends BrowserTestCase
             ->releaseMouse();
     }
 
-    public function test_base_size()
-    {
-        $this->blade(<<<'HTML'
-            <ui:button dusk="btn-base">
-                <ui:tooltip dusk="tooltip-base" size="base">Base tooltip</ui:tooltip>
-                Base
-            </ui:button>
-        HTML)
-            ->clickAndHold('@btn-base')
-            ->pause(500)
-            ->assertSourceHas('px-3 py-1.5 text-sm')
-            ->releaseMouse();
-    }
-
     public function test_md_size()
     {
         $this->blade(<<<'HTML'

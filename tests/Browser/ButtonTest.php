@@ -45,11 +45,6 @@ class ButtonTest extends BrowserTestCase
             ->assertHasClass('@btn', 'py-1.5')
             ->assertHasClass('@btn', 'text-sm');
 
-        $this->blade('<ui:button size="base" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'px-4')
-            ->assertHasClass('@btn', 'py-2')
-            ->assertHasClass('@btn', 'text-sm');
-
         $this->blade('<ui:button size="md" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'px-5')
             ->assertHasClass('@btn', 'py-2.5')
@@ -91,8 +86,6 @@ class ButtonTest extends BrowserTestCase
             ->assertHasClass('@btn', 'rounded-none');
         $this->blade('<ui:button radius="sm" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-xs');
-        $this->blade('<ui:button radius="base" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'rounded-sm');
         $this->blade('<ui:button radius="md" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-md');
         $this->blade('<ui:button radius="lg" dusk="btn">Button</ui:button>')
@@ -206,7 +199,7 @@ class ExampleLoadingButton extends Component
         return <<<'HTML'
             <form wire:submit="simulateLoading">
                 <div>
-                    <ui:button size="base" dusk="btn" type="submit">
+                    <ui:button size="md" dusk="btn" type="submit">
                         <span dusk="btn-content">Simulate Loading</span>
                     </ui:button>
                 </div>
@@ -229,7 +222,6 @@ class ExampleLoadingButtonSizes extends Component
                 <div>
                     <ui:button size="xs" dusk="btn-xs" type="submit">Simulate Loading</ui:button>
                     <ui:button size="sm" dusk="btn-sm" type="submit">Simulate Loading</ui:button>
-                    <ui:button size="base" dusk="btn" type="submit">Simulate Loading</ui:button>
                     <ui:button size="md" dusk="btn-md" type="submit">Simulate Loading</ui:button>
                     <ui:button size="lg" dusk="btn-lg" type="submit">Simulate Loading</ui:button>
                     <ui:button size="xl" dusk="btn-xl" type="submit">Simulate Loading</ui:button>

@@ -18,9 +18,6 @@ class CardTest extends BrowserTestCase
         $this->blade('<ui:card padding="sm" dusk="card">Content</ui:card>')
             ->assertHasClass('@card', 'p-3');
 
-        $this->blade('<ui:card padding="base" dusk="card">Content</ui:card>')
-            ->assertHasClass('@card', 'p-4');
-
         $this->blade('<ui:card padding="md" dusk="card">Content</ui:card>')
             ->assertHasClass('@card', 'p-5');
 

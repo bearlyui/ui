@@ -121,10 +121,10 @@ Tiles come in three variants: `outline` (default), `solid`, and `ghost`.
 
 The gap property controls the gap between tiles. It can be either `base` (default), `md`, or `lg`.
 
-#### Base
+#### Small
 
 ```html +demo title={Tile Gap Property}
-<ui:tiles gap="base">
+<ui:tiles gap="small">
     <ui:tile>
         <x-slot:label>Test Status</x-slot:label>
         <span class="text-success-600 dark:text-success-400">Passed</span>

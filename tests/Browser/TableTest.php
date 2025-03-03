@@ -181,21 +181,6 @@ class TableTest extends BrowserTestCase
             ]);
 
         $this->blade(<<<'HTML'
-            <ui:card padding="base" dusk="card">
-                <ui:table :inset="true">
-                    <ui:row>
-                        <ui:cell>Cell 1</ui:cell>
-                        <ui:cell>Cell 2</ui:cell>
-                    </ui:row>
-                </ui:table>
-            </ui:card>
-        HTML)
-            ->assertHasClasses('@card', [
-                '**:data-ui-table-inset:-m-4',
-                '**:data-ui-table-inset:ring-transparent',
-            ]);
-
-        $this->blade(<<<'HTML'
             <ui:card padding="md" dusk="card">
                 <ui:table :inset="true">
                     <ui:row>

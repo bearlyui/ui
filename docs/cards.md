@@ -77,7 +77,6 @@ Cards come with rounded corners by default, but support `none`, `sm`, `base`, `m
 ```html +demo title={Card Radius} previewClasses={space-y-5}
 <ui:card radius="none">I'm a card with no radius</ui:card>
 <ui:card radius="sm">I'm a card with a small radius</ui:card>
-<ui:card radius="base">I'm a card with the default radius</ui:card>
 <ui:card radius="md">I'm a card with a medium radius</ui:card>
 <ui:card radius="lg">I'm a card with a large radius</ui:card>
 <ui:card radius="xl">I'm a card with a extra large radius</ui:card>

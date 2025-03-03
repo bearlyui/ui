@@ -44,7 +44,7 @@ class TileTest extends BrowserTestCase
 
     public function test_supports_different_gap_sizes()
     {
-        $this->blade('<ui:tiles gap="base" dusk="tiles">Content</ui:tiles>')
+        $this->blade('<ui:tiles gap="sm" dusk="tiles">Content</ui:tiles>')
             ->assertVisible('@tiles')
             ->assertHasClass('@tiles', 'gap-px');
 
