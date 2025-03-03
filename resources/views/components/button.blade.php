@@ -91,35 +91,41 @@
             '[&[disabled]]:hover:text-success-700 dark:[&[disabled]]:hover:text-success-400' => Color::Success->is($color) && Variant::Ghost->is($variant),
             '[&[disabled]]:hover:text-warning-700 dark:[&[disabled]]:hover:text-warning-400' => Color::Warning->is($color) && Variant::Ghost->is($variant),
             '[&[disabled]]:hover:text-danger-600 dark:[&[disabled]]:hover:text-danger-400' => Color::Danger->is($color) && Variant::Ghost->is($variant),
+
+            {{-- Loading state --}}
+            'data-ui-loading:text-transparent',
+            '*:data-ui-loader:text-primary-700' => Color::Primary->is($color),
+            '*:data-ui-loader:text-secondary-600/80' => Color::Secondary->is($color),
+            '*:data-ui-loader:text-success-700' => Color::Success->is($color),
+            '*:data-ui-loader:text-warning-700' => Color::Warning->is($color),
+            '*:data-ui-loader:text-danger-600' => Color::Danger->is($color),
+            '*:transition *:ease-in-out',
+
+            {{-- Icon alignment --}}
+            'inline-flex items-center justify-center' => $icon || $iconAfter,
         ])
 }}>
-    <span @class([
-        '[[disabled]>&]:opacity-0',
-        '[[data-ui-loading]>&]:opacity-0',
-        'transition ease-in-out inline-flex items-center justify-center'
-    ])>
-        @if ($icon)
-            <x-dynamic-component
-                :component="'ui::icon.' . $icon"
-                :variant="$iconVariant"
-                class="opacity-70 mr-1.5"
-            />
-        @endif
-        {{-- Main Slot --}}
-        {{ $slot }}
-        @if ($iconAfter)
-            <x-dynamic-component
-                :component="'ui::icon.' . $iconAfter"
-                :variant="$iconVariant"
-                class="opacity-70 ml-1.5"
-            />
-        @endif
-    </span>
+    @if ($icon)
+        <x-dynamic-component
+            :component="'ui::icon.' . $icon"
+            :variant="$iconVariant"
+            class="opacity-70 mr-1.5"
+        />
+    @endif
+    {{-- Main Slot --}}
+    {{ $slot }}
+    @if ($iconAfter)
+        <x-dynamic-component
+            :component="'ui::icon.' . $iconAfter"
+            :variant="$iconVariant"
+            class="opacity-70 ml-1.5"
+        />
+    @endif
 
-    <span @class([
+
+    <span data-ui-loader @class([
         'opacity-0 transition ease-in-out absolute inset-0 flex items-center justify-center',
-        '[[disabled]>&]:opacity-100 [[disabled]>&]:pointer-events-none',
-        '[[data-ui-loading]>&]:opacity-100 [[data-ui-loading]>&]:pointer-events-none'
+        '[[data-ui-loading]>&]:opacity-100 [[data-ui-loading]>&]:pointer-events-none',
     ])>
         <span @class([
             'block',
