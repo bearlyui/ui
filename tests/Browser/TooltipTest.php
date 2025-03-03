@@ -69,7 +69,6 @@ class TooltipTest extends BrowserTestCase
                 Save
             </ui:button>
         HTML)
-            ->tinker()
             ->assertMissing('Save changes')
             ->assertMissing('⌘+S')
             ->clickAndHold('@btn')
