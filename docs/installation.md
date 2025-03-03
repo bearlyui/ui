@@ -57,9 +57,8 @@ If you don't then please follow the [Tailwind CSS installation guide](https://ta
 
 // ...
 
-@source('../../vendor/bearly/ui/**/*.{php,blade.php,js}') // [tl! add] [tl! focus]
+@source('../../vendor/bearly/ui') // [tl! add] [tl! focus]
 @import '../../vendor/bearly/ui/css/colors.css' // [tl! add] [tl! focus]
-@plugin '@tailwindcss/forms' // [tl! add] [tl! focus]
 ```
 
 ### Add Script Assets
