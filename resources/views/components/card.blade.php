@@ -24,13 +24,14 @@
 
     {{-- Header --}}
     @if ($header ?? false)
-        <div {{ $header->attributes->class([
+        <div data-ui-card-header {{ $header->attributes->class([
             'rounded-t border-b bg-gray-100/60 dark:bg-black/5 border-gray-900/5 dark:border-gray-50/10',
             'px-5 py-2' => Size::NONE->is($padding),
             '-mx-3 -mt-3 mb-3 px-3 py-2' => Size::SM->is($padding),
             '-mx-4 -mt-4 mb-4 px-4 py-2' => Size::MD->is($padding),
             '-mx-5 -mt-5 mb-5 px-5 py-3' => Size::LG->is($padding),
             '-mx-6 -mt-6 mb-6 px-6 py-3.5' => Size::XL->is($padding),
+            'hidden' => $header->attributes?->get('when') === false,
         ]) }}>
             {{ $header }}
         </div>
@@ -41,13 +42,14 @@
 
     {{-- Footer --}}
     @if ($footer ?? false)
-        <div {{ $footer->attributes->class([
+        <div data-ui-card-footer {{ $footer->attributes->class([
             'border-t bg-gray-100/60 dark:bg-black/5 rounded-b border-gray-900/5 dark:border-gray-50/10',
             'px-5 py-2' => Size::NONE->is($padding),
             '-mx-3 -mb-3 mt-3 px-3 py-2' => Size::SM->is($padding),
             '-mx-4 -mb-4 mt-4 px-4 py-2' => Size::MD->is($padding),
             '-mx-5 -mb-5 mt-5 px-5 py-3' => Size::LG->is($padding),
             '-mx-6 -mb-6 mt-6 px-6 py-3.5' => Size::XL->is($padding),
+            'hidden' => $footer->attributes?->get('when') === false,
         ]) }}>
             {{ $footer }}
         </div>

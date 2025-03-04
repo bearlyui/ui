@@ -96,4 +96,27 @@ class CardTest extends BrowserTestCase
             ->assertHasClass('@outer', '*:data-ui-card:bg-gray-50/60')
             ->assertHasClass('@outer', 'dark:*:data-ui-card:bg-gray-700/30');
     }
+
+    public function test_header_and_footer_when_conditions()
+    {
+        $this->blade(<<<'HTML'
+            <ui:card dusk="card">
+                <x-slot:header dusk="header" :when="true">Header</x-slot:header>
+                Card Content
+                <x-slot:footer dusk="footer" :when="true">Footer</x-slot:footer>
+            </ui:card>
+        HTML)
+            ->assertVisible('@header')
+            ->assertVisible('@footer');
+
+        $this->blade(<<<'HTML'
+            <ui:card dusk="card">
+                <x-slot:header dusk="header" :when="false">Header</x-slot:header>
+                Card Content
+                <x-slot:footer dusk="footer" :when="false">Footer</x-slot:footer>
+            </ui:card>
+        HTML)
+            ->assertNotVisible('@header')
+            ->assertNotVisible('@footer');
+    }
 }

@@ -228,6 +228,28 @@ class DialogTest extends BrowserTestCase
             ->assertHasClass('[data-ui-card]', 'test-card-class');
     }
 
+    public function test_header_and_footer_classes()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                <x-slot:header class="text-center">
+                    <ui:heading>Dialog Header</ui:heading>
+                </x-slot:header>
+                Dialog Content
+                <x-slot:footer class="flex justify-end">
+                    <ui:button>Right aligned footer</ui:button>
+                </x-slot:footer>
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Header')
+            ->assertHasClass('[data-ui-card-header]', 'text-center')
+            ->assertHasClass('[data-ui-card-footer]', 'justify-end');
+    }
+
     public function test_headings_and_subheadings_are_bound_to_aria_labelledby_and_describedby()
     {
         $this->blade(<<<'HTML'

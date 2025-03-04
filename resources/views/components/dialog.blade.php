@@ -51,10 +51,8 @@
 
                     {{-- Header --}}
                     @if (!empty($header))
-                        <x-slot:header>
-                            <div {{ $header->attributes->class(['text-gray-800 dark:text-gray-200']) }} >
-                                {{ $header }}
-                            </div>
+                        <x-slot:header :attributes="$header->attributes->class(['text-gray-800 dark:text-gray-200'])">
+                            {{ $header }}
                         </x-slot:header>
                     @endif
 
@@ -63,7 +61,7 @@
 
                     {{-- Footer --}}
                     @if ($footer ?? false)
-                        <x-slot:footer>{{ $footer }}</x-slot:footer>
+                        <x-slot:footer :attributes="$footer->attributes">{{ $footer }}</x-slot:footer>
                     @endif
 
                     {{-- Mobile drag-to-close --}}
