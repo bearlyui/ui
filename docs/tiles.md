@@ -38,7 +38,7 @@ The `<ui:tiles>` tag accepts the following properties:
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `gap` | `string` | `base` | The gap between tiles. Either `base` (default), `md`, or `lg`. |
+| `gap` | `string` | `sm` | The gap between tiles. Either `sm` (default), `md`, or `lg`. |
 | `variant` | `string` | `outline` | The variant of the tiles, either `outline` (default), `solid`, or `ghost`. |
 
 ## Variants
@@ -119,12 +119,12 @@ Tiles come in three variants: `outline` (default), `solid`, and `ghost`.
 
 ## Gap
 
-The gap property controls the gap between tiles. It can be either `base` (default), `md`, or `lg`.
+The gap property controls the gap between tiles. It can be either `sm` (default), `md`, or `lg`.
 
 #### Small
 
 ```html +demo title={Tile Gap Property}
-<ui:tiles gap="small">
+<ui:tiles gap="sm">
     <ui:tile>
         <x-slot:label>Test Status</x-slot:label>
         <span class="text-success-600 dark:text-success-400">Passed</span>
