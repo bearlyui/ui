@@ -31,6 +31,7 @@
             '-mx-4 -mt-4 mb-4 px-4 py-2' => Size::MD->is($padding),
             '-mx-5 -mt-5 mb-5 px-5 py-3' => Size::LG->is($padding),
             '-mx-6 -mt-6 mb-6 px-6 py-3.5' => Size::XL->is($padding),
+            'hidden' => $header->attributes?->get('when') === false,
         ]) }}>
             {{ $header }}
         </div>
@@ -48,6 +49,7 @@
             '-mx-4 -mb-4 mt-4 px-4 py-2' => Size::MD->is($padding),
             '-mx-5 -mb-5 mt-5 px-5 py-3' => Size::LG->is($padding),
             '-mx-6 -mb-6 mt-6 px-6 py-3.5' => Size::XL->is($padding),
+            'hidden' => $footer->attributes?->get('when') === false,
         ]) }}>
             {{ $footer }}
         </div>
