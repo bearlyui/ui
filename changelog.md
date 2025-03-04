@@ -9,6 +9,7 @@
 - Dialog header and footer slots now forward attributes to card slots
 - Add `when` attribute to card (and dialog) header and footer slots to conditionally show them
 - Fix button padding to allow icon-only buttons without strange custom padding
+- Added `tooltip` property to button component
 
 ## 0.5.2
 

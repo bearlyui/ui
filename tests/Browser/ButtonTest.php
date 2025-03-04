@@ -105,6 +105,7 @@ class ButtonTest extends BrowserTestCase
     public function test_with_icon()
     {
         $this->blade('<ui:button icon="arrow-left" dusk="btn"><span>Button</span></ui:button>')
+            ->tinker()
             ->assertMissing('@btn svg:last-child')
             ->assertPresent('@btn svg:first-child')
             ->assertHasClass('@btn svg:first-child', 'mr-1.5');
