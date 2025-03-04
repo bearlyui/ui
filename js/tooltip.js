@@ -6,6 +6,10 @@ export default function(Alpine) {
         closeHandler: null,
 
         init() {
+            if (this.trigger.hasAttribute('data-ui-button-content')) {
+                this.trigger = this.trigger.parentNode
+            }
+
             this.openHandler = () => { this.show = true }
             this.closeHandler = () => { this.show = false }
             this.trigger.addEventListener('mouseenter', this.openHandler)

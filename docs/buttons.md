@@ -164,3 +164,33 @@ Each variant also has a disabled state. The `disabled` prop accepts a boolean va
 <ui:button :disabled="true" color="warning" variant="ghost">Warning</ui:button>
 <ui:button :disabled="true" color="danger" variant="ghost">Danger</ui:button>
 ```
+
+### Loading States
+
+Buttons automatically try to show a loading state based on Livewire requests. All submit buttons show loading states. Buttons with `wire:click` attributes are targeted automatically for loading states too!
+
+```html +demo title={Loading States}
+<div class="text-center">
+    <?php
+    use function Livewire\Volt\state;
+
+    state('loading', false);
+    $simulateLoading = function () {
+        $this->loading = true;
+        sleep(2);
+        $this->loading = false;
+    };
+    ?>
+    @volt
+    <ui:button wire:click="simulateLoading">Simulate Loading State</ui:button>
+    @endvolt
+</div>
+
+<div class="mt-8 flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4">
+    <ui:button color="primary" data-ui-loading>Primary</ui:button>
+    <ui:button color="secondary" data-ui-loading>Secondary</ui:button>
+    <ui:button color="success" data-ui-loading>Success</ui:button>
+    <ui:button color="warning" data-ui-loading>Warning</ui:button>
+    <ui:button color="danger" data-ui-loading>Danger</ui:button>
+</div>
+```

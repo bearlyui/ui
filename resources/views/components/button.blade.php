@@ -95,25 +95,27 @@
 
             {{-- Loading state --}}
             '[&[data-ui-loading]>*:not([data-ui-loader])]:opacity-0',
+            '[&[data-ui-loading]]:cursor-wait [&[data-ui-loading]]:pointer-events-none',
         ])
 }}>
-    <span class="inline-flex items-center justify-center transition ease-in-out">
-    @if ($icon)
-        <x-dynamic-component
-            :component="'ui::icon.' . $icon"
-            :variant="$iconVariant"
-            class="opacity-70 mr-1.5"
-        />
-    @endif
-    {{-- Main Slot --}}
-    {{ $slot }}
-    @if ($iconAfter)
-        <x-dynamic-component
-            :component="'ui::icon.' . $iconAfter"
-            :variant="$iconVariant"
-            class="opacity-70 ml-1.5"
-        />
-    @endif
+    {{-- We need this data attribute for tooltips... --}}
+    <span data-ui-button-content class="inline-flex items-center justify-center transition ease-in-out">
+        @if ($icon)
+            <x-dynamic-component
+                :component="'ui::icon.' . $icon"
+                :variant="$iconVariant"
+                class="opacity-70 mr-1.5"
+            />
+        @endif
+        {{-- Main Slot --}}
+        {{ $slot }}
+        @if ($iconAfter)
+            <x-dynamic-component
+                :component="'ui::icon.' . $iconAfter"
+                :variant="$iconVariant"
+                class="opacity-70 ml-1.5"
+            />
+        @endif
     </span>
 
 
