@@ -10,6 +10,7 @@
     'icon' => null,
     'iconAfter' => null,
     'iconVariant' => 'micro',
+    'tooltip' => null,
 ])
 
 <button
@@ -97,7 +98,7 @@
             '[&[data-ui-loading]]:cursor-wait [&[data-ui-loading]]:pointer-events-none',
         ])
 }}>
-    {{-- We need this data attribute for tooltips... --}}
+    {{-- We need this data attribute for ui:tooltip children --}}
     <span data-ui-button-content class="inline-flex items-center justify-center transition ease-in-out">
         @if ($icon)
             <x-dynamic-component
@@ -133,4 +134,8 @@
             <ui:icon-spinner class="w-full h-full" />
         </span>
     </span>
+
+    @if ($tooltip)
+        <ui:tooltip :title="$tooltip" />
+    @endif
 </button>
