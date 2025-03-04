@@ -149,7 +149,6 @@ class ButtonTest extends BrowserTestCase
     public function test_loading_state_sizes()
     {
         Livewire::visit(ExampleLoadingButtonSizes::class)
-            ->tinker()
             ->click('@btn-xs')
             ->waitFor('@btn-xs [data-ui-icon-spinner]')
             ->assertVisible('@btn-xs [data-ui-icon-spinner]')
@@ -179,7 +178,7 @@ class ButtonTest extends BrowserTestCase
             ->click('@no-loading')
             ->waitFor('@no-loading [data-ui-icon-spinner]')
             ->assertVisible('@no-loading [data-ui-icon-spinner]')
-            ->assertMissing('@submit [data-ui-icon-spinner]')
+            ->assertVisible('@submit [data-ui-icon-spinner]')
             ->waitUntilMissing('@no-loading [data-ui-icon-spinner]')
             ->assertMissing('@no-loading [data-ui-icon-spinner]')
             ->assertMissing('@submit [data-ui-icon-spinner]');

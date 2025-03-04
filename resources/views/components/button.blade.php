@@ -13,17 +13,14 @@
 ])
 
 
-
 <button
     {{ $attributes
         ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
         ->merge([
             'type' => 'button',
+            'wire:loading.attr' => 'data-ui-loading',
         ])
-        ->when(
-            $attributes->has('type') == 'submit',
-            fn ($a) => $a->merge(['wire:loading.attr' => 'data-ui-loading']),
-        )
+        ->when($attributes->wire('click'), fn ($a) => $a->merge(['wire:target' => $attributes->wire('click')->value]))
         ->class([
             'transition-all ease-in-out inline-flex items-center relative',
 
