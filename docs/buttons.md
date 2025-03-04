@@ -15,9 +15,9 @@ Buttons support several other properties that can be used to customize their app
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
 | `color` | `string \| Color` | `secondary` | The color of the button. |
-| `size` | `string \| Size` | `base` | The size of the button. |
+| `size` | `string \| Size` | `md` | The size of the button. |
 | `variant` | `string \| Variant` | `solid` | The variant of the button. |
-| `radius` | `string \| Size` | `base` | The border radius of the button. |
+| `radius` | `string \| Size` | `sm` | The border radius of the button. |
 | `href` | `string` | `null` | The URL the button should link to. |
 | `disabled` | `boolean` | `false` | Whether the button is disabled. |
 
@@ -53,7 +53,7 @@ You can also add an icon after the button's text with the `icon-after` prop.
 ```
 
 ### Sizing
-Buttons support sizes `xs`, `sm`, `base` (default), `md`, `lg`, and `xl`. You can
+Buttons support sizes `xs`, `sm`, `md` (default), `lg`, and `xl`. You can
 disable default sizing and specify your own by using the size attribute with an unsupported value like `size="none"`... or even `size="bogus"` if that's your jam.
 
 ```html +demo title={Button Sizing} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
@@ -64,10 +64,6 @@ disable default sizing and specify your own by using the size attribute with an 
 <div class="text-center">
     <ui:button size="sm">Button</ui:button>
     <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">sm</div>
-</div>
-<div class="text-center">
-    <ui:button>Button</ui:button>
-    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">base</div>
 </div>
 <div class="text-center">
     <ui:button size="md">Button</ui:button>
@@ -85,7 +81,7 @@ disable default sizing and specify your own by using the size attribute with an 
 
 ### Radius
 
-Control the border radius with these options: `none`, `sm`, `md` (default), `lg`, `xl`, and `full`.
+Control the border radius with these options: `none`, `sm` (default), `md`, `lg`, `xl`, and `full`.
 
 ```html +demo title={Button Corner Radius} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
 <div class="text-center">
@@ -95,10 +91,6 @@ Control the border radius with these options: `none`, `sm`, `md` (default), `lg`
 <div class="text-center">
     <ui:button radius="sm">Button</ui:button>
     <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">sm</div>
-</div>
-<div class="text-center">
-    <ui:button>Button</ui:button>
-    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">base</div>
 </div>
 <div class="text-center">
     <ui:button radius="md">Button</ui:button>
