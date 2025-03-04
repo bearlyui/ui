@@ -15,9 +15,9 @@ Badges support several properties that can be used to customize their appearance
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
 | `color` | `string \| Color` | `secondary` | The color of the badge. |
-| `size` | `string \| Size` | `base` | The size of the badge. |
+| `size` | `string \| Size` | `sm` | The size of the badge. |
 | `variant` | `string \| Variant` | `solid` | The variant of the badge. |
-| `radius` | `string \| Size` | `base` | The border radius of the badge. |
+| `radius` | `string \| Size` | `sm` | The border radius of the badge. |
 | `icon` | `string` | `null` | The icon to display before the badge text. |
 | `iconAfter` | `string` | `null` | The icon to display after the badge text. |
 | `iconVariant` | `string` | `micro` | The variant of the icon. |
@@ -64,16 +64,16 @@ You can also add an icon after the badge's text with the `icon-after` prop.
 ```
 
 ### Sizing
-Badges support sizes `sm`, `base` (default), `md`, and `lg`.
+Badges support sizes `xs`, `sm` (default), `md`, and `lg`.
 
 ```html +demo title={Badge Sizing} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
 <div class="text-center">
-    <ui:badge size="sm">Badge</ui:badge>
-    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">sm</div>
+    <ui:badge size="xs">Badge</ui:badge>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">xs</div>
 </div>
 <div class="text-center">
-    <ui:badge>Badge</ui:badge>
-    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">base</div>
+    <ui:badge size="sm">Badge</ui:badge>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">sm</div>
 </div>
 <div class="text-center">
     <ui:badge size="md">Badge</ui:badge>
@@ -87,7 +87,7 @@ Badges support sizes `sm`, `base` (default), `md`, and `lg`.
 
 ### Radius
 
-Control the border radius with these options: `none`, `sm`, `base` (default), `md`, `lg`, `xl`, and `full`.
+Control the border radius with these options: `none`, `xs`, `sm` (default), `md`, `lg`, `xl`, and `full`.
 
 ```html +demo title={Badge Corner Radius} previewClasses={flex flex-col sm:flex-row gap-3 sm:items-end justify-center py-4}
 <div class="text-center">
@@ -95,12 +95,12 @@ Control the border radius with these options: `none`, `sm`, `base` (default), `m
     <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">none</div>
 </div>
 <div class="text-center">
-    <ui:badge radius="sm">Badge</ui:badge>
-    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">sm</div>
+    <ui:badge radius="xs">Badge</ui:badge>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">xs</div>
 </div>
 <div class="text-center">
-    <ui:badge>Badge</ui:badge>
-    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">base</div>
+    <ui:badge radius="sm">Badge</ui:badge>
+    <div class="text-sm uppercase tracking-wide opacity-60 mt-1.5">sm</div>
 </div>
 <div class="text-center">
     <ui:badge radius="md">Badge</ui:badge>
