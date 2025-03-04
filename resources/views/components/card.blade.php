@@ -24,7 +24,7 @@
 
     {{-- Header --}}
     @if ($header ?? false)
-        <div {{ $header->attributes->class([
+        <div data-ui-card-header {{ $header->attributes->class([
             'rounded-t border-b bg-gray-100/60 dark:bg-black/5 border-gray-900/5 dark:border-gray-50/10',
             'px-5 py-2' => Size::NONE->is($padding),
             '-mx-3 -mt-3 mb-3 px-3 py-2' => Size::SM->is($padding),
@@ -41,7 +41,7 @@
 
     {{-- Footer --}}
     @if ($footer ?? false)
-        <div {{ $footer->attributes->class([
+        <div data-ui-card-footer {{ $footer->attributes->class([
             'border-t bg-gray-100/60 dark:bg-black/5 rounded-b border-gray-900/5 dark:border-gray-50/10',
             'px-5 py-2' => Size::NONE->is($padding),
             '-mx-3 -mb-3 mt-3 px-3 py-2' => Size::SM->is($padding),
