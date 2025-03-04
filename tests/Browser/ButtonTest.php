@@ -105,6 +105,7 @@ class ButtonTest extends BrowserTestCase
     public function test_with_icon()
     {
         $this->blade('<ui:button icon="arrow-left" dusk="btn"><span>Button</span></ui:button>')
+            ->tinker()
             ->assertMissing('@btn svg:last-child')
             ->assertPresent('@btn svg:first-child')
             ->assertHasClass('@btn svg:first-child', 'mr-1.5');
@@ -182,6 +183,17 @@ class ButtonTest extends BrowserTestCase
             ->waitUntilMissing('@no-loading [data-ui-icon-spinner]')
             ->assertMissing('@no-loading [data-ui-icon-spinner]')
             ->assertMissing('@submit [data-ui-icon-spinner]');
+    }
+
+    public function test_tooltip_property()
+    {
+        $this->blade('<ui:button tooltip="Example tooltip" dusk="btn">Button</ui:button>')
+            ->assertDontSee('Example tooltip')
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertSee('Example tooltip')
+            ->releaseMouse()
+            ->waitUntilMissing('Example tooltip');
     }
 }
 
