@@ -12,14 +12,18 @@
     'iconVariant' => 'micro',
 ])
 
+
+
 <button
     {{ $attributes
         ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
         ->merge([
             'type' => 'button',
-            'wire:loading.attr' => 'data-ui-loading',
         ])
-        ->when($attributes->has('type') == 'submit', fn ($a) => $a->merge(['wire:submit.attr' => 'data-ui-loading']))
+        ->when(
+            $attributes->has('type') == 'submit',
+            fn ($a) => $a->merge(['wire:loading.attr' => 'data-ui-loading']),
+        )
         ->class([
             'transition-all ease-in-out inline-flex items-center relative',
 
@@ -93,18 +97,10 @@
             '[&[disabled]]:hover:text-danger-600 dark:[&[disabled]]:hover:text-danger-400' => Color::Danger->is($color) && Variant::Ghost->is($variant),
 
             {{-- Loading state --}}
-            'data-ui-loading:text-transparent',
-            '*:data-ui-loader:text-primary-700' => Color::Primary->is($color),
-            '*:data-ui-loader:text-secondary-600/80' => Color::Secondary->is($color),
-            '*:data-ui-loader:text-success-700' => Color::Success->is($color),
-            '*:data-ui-loader:text-warning-700' => Color::Warning->is($color),
-            '*:data-ui-loader:text-danger-600' => Color::Danger->is($color),
-            '*:transition *:ease-in-out',
-
-            {{-- Icon alignment --}}
-            'inline-flex items-center justify-center' => $icon || $iconAfter,
+            '[&[data-ui-loading]>*:not([data-ui-loader])]:opacity-0',
         ])
 }}>
+    <span class="inline-flex items-center justify-center transition ease-in-out">
     @if ($icon)
         <x-dynamic-component
             :component="'ui::icon.' . $icon"
@@ -121,6 +117,7 @@
             class="opacity-70 ml-1.5"
         />
     @endif
+    </span>
 
 
     <span data-ui-loader @class([
