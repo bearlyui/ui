@@ -186,3 +186,11 @@ Buttons automatically try to show a loading state based on Livewire requests. Al
     <ui:button color="danger" data-ui-loading>Danger</ui:button>
 </div>
 ```
+
+### Tooltips
+
+Buttons have a tooltip property for convenience. It's a shortcut for adding a tooltip to the button.
+
+```html +demo title={Button Tooltips}
+<ui:button tooltip="Thank you for hovering!">Hover Me, Please!</ui:button>
+```

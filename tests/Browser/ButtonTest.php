@@ -183,6 +183,17 @@ class ButtonTest extends BrowserTestCase
             ->assertMissing('@no-loading [data-ui-icon-spinner]')
             ->assertMissing('@submit [data-ui-icon-spinner]');
     }
+
+    public function test_tooltip_property()
+    {
+        $this->blade('<ui:button tooltip="Example tooltip" dusk="btn">Button</ui:button>')
+            ->assertDontSee('Example tooltip')
+            ->clickAndHold('@btn')
+            ->pause(500)
+            ->assertSee('Example tooltip')
+            ->releaseMouse()
+            ->waitUntilMissing('Example tooltip');
+    }
 }
 
 class ExampleLoadingButton extends Component
