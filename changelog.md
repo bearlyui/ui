@@ -3,6 +3,9 @@
 ## Unreleased
 
 - Upgrade to Tailwind CSS 4.x
+- Changed sizing scale for many components to improve clarity
+- Removed nested `<span>` elements from buttons
+- Changed loading indicator logic to target wire clicks automatically
 
 ## 0.5.2
 

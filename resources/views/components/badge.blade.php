@@ -3,8 +3,8 @@
 @use('Bearly\Ui\Variant')
 
 @props([
-    'size' => Size::BASE,
-    'radius' => Size::BASE,
+    'size' => Size::SM,
+    'radius' => Size::SM,
     'color' => Color::Secondary,
     'variant' => Variant::Solid,
     'icon' => null,
@@ -41,15 +41,15 @@
     'hover:bg-danger-300/50 hover:border-danger-400/50 hover:text-danger-900 dark:hover:bg-danger-400/20 dark:hover:text-danger-100' => $attributes->has('href') && Variant::Outline->is($variant) && Color::Danger->is($color),
 
     {{-- Sizes --}}
-    'p-0.5 text-[0.675rem]' => Size::SM->is($size),
-    'px-1.5 py-1 text-xs' => Size::BASE->is($size),
+    'p-0.5 text-[0.675rem]' => Size::XS->is($size),
+    'px-1.5 py-1 text-xs' => Size::SM->is($size),
     'px-2 py-1 text-sm' => Size::MD->is($size),
     'px-2 py-1 text-base' => Size::LG->is($size),
 
     {{-- Border Radius --}}
     'rounded-none' => Size::NONE->is($radius),
-    'rounded-xs' => Size::SM->is($radius),
-    'rounded-sm' => Size::BASE->is($radius),
+    'rounded-xs' => Size::XS->is($radius),
+    'rounded-sm' => Size::SM->is($radius),
     'rounded-md' => Size::MD->is($radius),
     'rounded-lg' => Size::LG->is($radius),
     'rounded-xl' => Size::XL->is($radius),

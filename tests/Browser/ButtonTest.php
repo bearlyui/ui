@@ -45,25 +45,20 @@ class ButtonTest extends BrowserTestCase
             ->assertHasClass('@btn', 'py-1.5')
             ->assertHasClass('@btn', 'text-sm');
 
-        $this->blade('<ui:button size="base" dusk="btn">Button</ui:button>')
+        $this->blade('<ui:button size="md" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'px-4')
             ->assertHasClass('@btn', 'py-2')
             ->assertHasClass('@btn', 'text-sm');
 
-        $this->blade('<ui:button size="md" dusk="btn">Button</ui:button>')
+        $this->blade('<ui:button size="lg" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'px-5')
-            ->assertHasClass('@btn', 'py-2.5')
+            ->assertHasClass('@btn', 'py-2')
             ->assertHasClass('@btn', 'text-base');
 
-        $this->blade('<ui:button size="lg" dusk="btn">Button</ui:button>')
+        $this->blade('<ui:button size="xl" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'px-6')
             ->assertHasClass('@btn', 'py-3')
-            ->assertHasClass('@btn', 'text-lg');
-
-        $this->blade('<ui:button size="xl" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'px-8')
-            ->assertHasClass('@btn', 'py-4')
-            ->assertHasClass('@btn', 'text-xl');
+            ->assertHasClass('@btn', 'text-base');
     }
 
     public function test_variants()
@@ -90,8 +85,6 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button radius="none" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-none');
         $this->blade('<ui:button radius="sm" dusk="btn">Button</ui:button>')
-            ->assertHasClass('@btn', 'rounded-xs');
-        $this->blade('<ui:button radius="base" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-sm');
         $this->blade('<ui:button radius="md" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-md');
@@ -122,7 +115,7 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button icon-after="arrow-right" dusk="btn"><span>Button</span></ui:button>')
             ->assertMissing('@btn svg:first-child')
             ->assertPresent('@btn svg:last-child')
-            ->assertHasClass('@btn svg:last-child', 'ml-1.5');
+            ->assertHasClass('@btn svg:nth-child(2)', 'ml-1.5');
     }
 
     public function test_custom_icon_variant()
@@ -162,14 +155,12 @@ class ButtonTest extends BrowserTestCase
             ->assertVisible('@btn-xs span.size-3')
             ->assertVisible('@btn-sm [data-ui-icon-spinner]')
             ->assertVisible('@btn-sm span.size-4')
-            ->assertVisible('@btn [data-ui-icon-spinner]')
-            ->assertVisible('@btn span.size-5')
             ->assertVisible('@btn-md [data-ui-icon-spinner]')
-            ->assertVisible('@btn-md span.size-6')
+            ->assertVisible('@btn-md span.size-5')
             ->assertVisible('@btn-lg [data-ui-icon-spinner]')
-            ->assertVisible('@btn-lg span.size-7')
+            ->assertVisible('@btn-lg span.size-6')
             ->assertVisible('@btn-xl [data-ui-icon-spinner]')
-            ->assertVisible('@btn-xl span.size-8');
+            ->assertVisible('@btn-xl span.size-7');
     }
 
     public function test_only_submit_button_gets_loading_state_with_wire_submit()
@@ -187,7 +178,7 @@ class ButtonTest extends BrowserTestCase
             ->click('@no-loading')
             ->waitFor('@no-loading [data-ui-icon-spinner]')
             ->assertVisible('@no-loading [data-ui-icon-spinner]')
-            ->assertMissing('@submit [data-ui-icon-spinner]')
+            ->assertVisible('@submit [data-ui-icon-spinner]')
             ->waitUntilMissing('@no-loading [data-ui-icon-spinner]')
             ->assertMissing('@no-loading [data-ui-icon-spinner]')
             ->assertMissing('@submit [data-ui-icon-spinner]');
@@ -206,7 +197,7 @@ class ExampleLoadingButton extends Component
         return <<<'HTML'
             <form wire:submit="simulateLoading">
                 <div>
-                    <ui:button size="base" dusk="btn" type="submit">
+                    <ui:button size="md" dusk="btn" type="submit">
                         <span dusk="btn-content">Simulate Loading</span>
                     </ui:button>
                 </div>
@@ -229,7 +220,6 @@ class ExampleLoadingButtonSizes extends Component
                 <div>
                     <ui:button size="xs" dusk="btn-xs" type="submit">Simulate Loading</ui:button>
                     <ui:button size="sm" dusk="btn-sm" type="submit">Simulate Loading</ui:button>
-                    <ui:button size="base" dusk="btn" type="submit">Simulate Loading</ui:button>
                     <ui:button size="md" dusk="btn-md" type="submit">Simulate Loading</ui:button>
                     <ui:button size="lg" dusk="btn-lg" type="submit">Simulate Loading</ui:button>
                     <ui:button size="xl" dusk="btn-xl" type="submit">Simulate Loading</ui:button>

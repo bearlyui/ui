@@ -3,14 +3,15 @@
 @use('Bearly\Ui\Variant')
 @props([
     'color' => Color::Secondary,
-    'size' => Size::BASE,
+    'size' => Size::MD,
     'variant' => Variant::Solid,
-    'radius' => Size::BASE,
+    'radius' => Size::SM,
     'href' => null,
     'icon' => null,
     'iconAfter' => null,
     'iconVariant' => 'micro',
 ])
+
 
 <button
     {{ $attributes
@@ -19,14 +20,13 @@
             'type' => 'button',
             'wire:loading.attr' => 'data-ui-loading',
         ])
-        ->when($attributes->has('type') == 'submit', fn ($a) => $a->merge(['wire:submit.attr' => 'data-ui-loading']))
+        ->when($attributes->wire('click'), fn ($a) => $a->merge(['wire:target' => $attributes->wire('click')->value]))
         ->class([
             'transition-all ease-in-out inline-flex items-center relative',
 
             {{-- Border Radius --}}
             'rounded-none' => Size::NONE->is($radius),
             'rounded-sm' => Size::SM->is($radius),
-            'rounded' => Size::BASE->is($radius),
             'rounded-md' => Size::MD->is($radius),
             'rounded-lg' => Size::LG->is($radius),
             'rounded-xl' => Size::XL->is($radius),
@@ -39,24 +39,21 @@
             {{-- Sizing --}}
             'px-1.5 py-1 text-xs' => Size::XS->is($size),
             'px-2 py-1.5 text-sm font-medium' => Size::SM->is($size),
-            'px-4 py-2 text-sm font-medium' => Size::BASE->is($size),
-            'px-5 py-2.5 text-base font-medium' => Size::MD->is($size),
-            'px-6 py-3 text-lg font-medium' => Size::LG->is($size),
-            'px-8 py-4 text-xl font-medium' => Size::XL->is($size),
+            'px-4 py-2 text-sm font-medium' => Size::MD->is($size),
+            'px-5 py-2 text-base font-medium' => Size::LG->is($size),
+            'px-6 py-3 text-base font-medium' => Size::XL->is($size),
 
             {{-- Icons add slightly more padding to the opposite side if used on a single side --}}
             'pr-2.5' => $icon && empty($iconAfter) && Size::XS->is($size),
             'pr-3.5' => $icon && empty($iconAfter) && Size::SM->is($size),
-            'pr-5' => $icon && empty($iconAfter) && Size::BASE->is($size),
-            'pr-6' => $icon && empty($iconAfter) && Size::MD->is($size),
-            'pr-8' => $icon && empty($iconAfter) && Size::LG->is($size),
-            'pr-10' => $icon && empty($iconAfter) && Size::XL->is($size),
+            'pr-4 pl-3' => $icon && empty($iconAfter) && Size::MD->is($size),
+            'pr-5 pl-4' => $icon && empty($iconAfter) && Size::LG->is($size),
+            'pr-7 pl-5' => $icon && empty($iconAfter) && Size::XL->is($size),
             'pl-2.5' => $iconAfter && empty($icon) && Size::XS->is($size),
             'pl-3.5' => $iconAfter && empty($icon) && Size::SM->is($size),
-            'pl-5' => $iconAfter && empty($icon) && Size::BASE->is($size),
-            'pl-6' => $iconAfter && empty($icon) && Size::MD->is($size),
-            'pl-8' => $iconAfter && empty($icon) && Size::LG->is($size),
-            'pl-10' => $iconAfter && empty($icon) && Size::XL->is($size),
+            'pl-4 pr-3' => $iconAfter && empty($icon) && Size::MD->is($size),
+            'pl-5 pr-4' => $iconAfter && empty($icon) && Size::LG->is($size),
+            'pl-7 pr-5' => $iconAfter && empty($icon) && Size::XL->is($size),
 
             {{-- Base Variant Styles --}}
             'border shadow-xs hover:shadow-sm' => Variant::Outline->is($variant) || Variant::Solid->is($variant),
@@ -95,13 +92,14 @@
             '[&[disabled]]:hover:text-success-700 dark:[&[disabled]]:hover:text-success-400' => Color::Success->is($color) && Variant::Ghost->is($variant),
             '[&[disabled]]:hover:text-warning-700 dark:[&[disabled]]:hover:text-warning-400' => Color::Warning->is($color) && Variant::Ghost->is($variant),
             '[&[disabled]]:hover:text-danger-600 dark:[&[disabled]]:hover:text-danger-400' => Color::Danger->is($color) && Variant::Ghost->is($variant),
+
+            {{-- Loading state --}}
+            '[&[data-ui-loading]>*:not([data-ui-loader])]:opacity-0',
+            '[&[data-ui-loading]]:cursor-wait [&[data-ui-loading]]:pointer-events-none',
         ])
 }}>
-    <span @class([
-        '[[disabled]>&]:opacity-0',
-        '[[data-ui-loading]>&]:opacity-0',
-        'transition ease-in-out inline-flex items-center justify-center'
-    ])>
+    {{-- We need this data attribute for tooltips... --}}
+    <span data-ui-button-content class="inline-flex items-center justify-center transition ease-in-out">
         @if ($icon)
             <x-dynamic-component
                 :component="'ui::icon.' . $icon"
@@ -120,19 +118,18 @@
         @endif
     </span>
 
-    <span @class([
+
+    <span data-ui-loader @class([
         'opacity-0 transition ease-in-out absolute inset-0 flex items-center justify-center',
-        '[[disabled]>&]:opacity-100 [[disabled]>&]:pointer-events-none',
-        '[[data-ui-loading]>&]:opacity-100 [[data-ui-loading]>&]:pointer-events-none'
+        '[[data-ui-loading]>&]:opacity-100 [[data-ui-loading]>&]:pointer-events-none',
     ])>
         <span @class([
             'block',
             'size-3' => Size::XS->is($size),
             'size-4' => Size::SM->is($size),
-            'size-5' => Size::BASE->is($size),
-            'size-6' => Size::MD->is($size),
-            'size-7' => Size::LG->is($size),
-            'size-8' => Size::XL->is($size),
+            'size-5' => Size::MD->is($size),
+            'size-6' => Size::LG->is($size),
+            'size-7' => Size::XL->is($size),
         ])>
             <ui:icon-spinner class="w-full h-full" />
         </span>

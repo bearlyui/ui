@@ -32,13 +32,13 @@ class BadgeTest extends BrowserTestCase
     public function test_sizes()
     {
         $this->blade(<<<'HTML'
+            <ui:badge size="xs" dusk="xs-badge">xs</ui:badge>
             <ui:badge size="sm" dusk="sm-badge">sm</ui:badge>
-            <ui:badge size="base" dusk="base-badge">base</ui:badge>
             <ui:badge size="md" dusk="md-badge">md</ui:badge>
             <ui:badge size="lg" dusk="lg-badge">lg</ui:badge>
         HTML)
-            ->assertHasClasses('@sm-badge', ['p-0.5', 'text-[0.675rem]'])
-            ->assertHasClasses('@base-badge', ['px-1.5', 'py-1', 'text-xs'])
+            ->assertHasClasses('@xs-badge', ['p-0.5', 'text-[0.675rem]'])
+            ->assertHasClasses('@sm-badge', ['px-1.5', 'py-1', 'text-xs'])
             ->assertHasClasses('@md-badge', ['px-2', 'py-1', 'text-sm'])
             ->assertHasClasses('@lg-badge', ['px-2', 'py-1', 'text-base']);
     }
@@ -60,16 +60,16 @@ class BadgeTest extends BrowserTestCase
     {
         $this->blade(<<<'HTML'
             <ui:badge icon-after="arrow-right" radius="none" dusk="none-radius-badge">None</ui:badge>
+            <ui:badge radius="xs" dusk="xs-radius-badge">Small</ui:badge>
             <ui:badge radius="sm" dusk="sm-radius-badge">Small</ui:badge>
-            <ui:badge radius="base" dusk="base-radius-badge">Base</ui:badge>
             <ui:badge radius="md" dusk="md-radius-badge">Medium</ui:badge>
             <ui:badge radius="lg" dusk="lg-radius-badge">Large</ui:badge>
             <ui:badge radius="xl" dusk="xl-radius-badge">Extra Large</ui:badge>
             <ui:badge radius="full" dusk="full-radius-badge">Full</ui:badge>
         HTML)
             ->assertHasClass('@none-radius-badge', 'rounded-none')
-            ->assertHasClass('@sm-radius-badge', 'rounded-xs')
-            ->assertHasClass('@base-radius-badge', 'rounded-sm')
+            ->assertHasClass('@xs-radius-badge', 'rounded-xs')
+            ->assertHasClass('@sm-radius-badge', 'rounded-sm')
             ->assertHasClass('@md-radius-badge', 'rounded-md')
             ->assertHasClass('@lg-radius-badge', 'rounded-lg')
             ->assertHasClass('@xl-radius-badge', 'rounded-xl')

@@ -36,8 +36,8 @@ The following properties can be used to customize the table:
 | `hover` | `boolean` | `false` | Enables hover effects on table rows. |
 | `hoverColor` | `string` | `secondary` | Sets the hover color. Options: `primary`, `secondary`, `success`, `warning`, `danger`. |
 | `inset` | `boolean` | `false` | Adjusts table styling when used within a card. |
-| `radius` | `string` | `base` | Sets the border radius. Options: `none`, `base`, `lg`, `xl`. |
-| `shadow` | `string` | `base` | Sets the shadow size. Options: `base`, `lg`, `xl`. |
+| `radius` | `string` | `sm` | Sets the border radius. Options: `none`, `sm`, `md`, `lg`. |
+| `shadow` | `string` | `sm` | Sets the shadow size. Options: `sm`, `md`, `lg`. |
 | `striped` | `boolean` | `false` | Enables striped rows for better readability. |
 
 ---

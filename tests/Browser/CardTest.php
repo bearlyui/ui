@@ -18,13 +18,13 @@ class CardTest extends BrowserTestCase
         $this->blade('<ui:card padding="sm" dusk="card">Content</ui:card>')
             ->assertHasClass('@card', 'p-3');
 
-        $this->blade('<ui:card padding="base" dusk="card">Content</ui:card>')
+        $this->blade('<ui:card padding="md" dusk="card">Content</ui:card>')
             ->assertHasClass('@card', 'p-4');
 
-        $this->blade('<ui:card padding="md" dusk="card">Content</ui:card>')
+        $this->blade('<ui:card padding="lg" dusk="card">Content</ui:card>')
             ->assertHasClass('@card', 'p-5');
 
-        $this->blade('<ui:card padding="lg" dusk="card">Content</ui:card>')
+        $this->blade('<ui:card padding="xl" dusk="card">Content</ui:card>')
             ->assertHasClass('@card', 'p-6');
     }
 
@@ -64,11 +64,11 @@ class CardTest extends BrowserTestCase
                 Content
             </ui:card>
         HTML)
-            ->assertHasClass('@header', '-mx-6')
-            ->assertHasClass('@header', '-mt-6')
-            ->assertHasClass('@header', 'mb-6')
-            ->assertHasClass('@header', 'px-6')
-            ->assertHasClass('@header', 'py-3.5');
+            ->assertHasClass('@header', '-mx-5')
+            ->assertHasClass('@header', '-mt-5')
+            ->assertHasClass('@header', 'mb-5')
+            ->assertHasClass('@header', 'px-5')
+            ->assertHasClass('@header', 'py-3');
     }
 
     public function test_footer_padding_adjusts_with_card_padding()
@@ -79,11 +79,11 @@ class CardTest extends BrowserTestCase
                 <x-slot:footer dusk="footer">Footer</x-slot:footer>
             </ui:card>
         HTML)
-            ->assertHasClass('@footer', '-mx-6')
-            ->assertHasClass('@footer', '-mb-6')
-            ->assertHasClass('@footer', 'mt-6')
-            ->assertHasClass('@footer', 'px-6')
-            ->assertHasClass('@footer', 'py-3.5');
+            ->assertHasClass('@footer', '-mx-5')
+            ->assertHasClass('@footer', '-mb-5')
+            ->assertHasClass('@footer', 'mt-5')
+            ->assertHasClass('@footer', 'px-5')
+            ->assertHasClass('@footer', 'py-3');
     }
 
     public function test_nested_cards_have_different_background()

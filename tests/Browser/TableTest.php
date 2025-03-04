@@ -181,7 +181,7 @@ class TableTest extends BrowserTestCase
             ]);
 
         $this->blade(<<<'HTML'
-            <ui:card padding="base" dusk="card">
+            <ui:card padding="md" dusk="card">
                 <ui:table :inset="true">
                     <ui:row>
                         <ui:cell>Cell 1</ui:cell>
@@ -196,7 +196,7 @@ class TableTest extends BrowserTestCase
             ]);
 
         $this->blade(<<<'HTML'
-            <ui:card padding="md" dusk="card">
+            <ui:card padding="lg" dusk="card">
                 <ui:table :inset="true">
                     <ui:row>
                         <ui:cell>Cell 1</ui:cell>
@@ -211,7 +211,7 @@ class TableTest extends BrowserTestCase
             ]);
 
         $this->blade(<<<'HTML'
-            <ui:card padding="lg" dusk="card">
+            <ui:card padding="xl" dusk="card">
                 <ui:table :inset="true">
                     <ui:row>
                         <ui:cell>Cell 1</ui:cell>

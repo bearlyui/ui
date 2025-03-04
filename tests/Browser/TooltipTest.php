@@ -92,20 +92,6 @@ class TooltipTest extends BrowserTestCase
             ->releaseMouse();
     }
 
-    public function test_base_size()
-    {
-        $this->blade(<<<'HTML'
-            <ui:button dusk="btn-base">
-                <ui:tooltip dusk="tooltip-base" size="base">Base tooltip</ui:tooltip>
-                Base
-            </ui:button>
-        HTML)
-            ->clickAndHold('@btn-base')
-            ->pause(500)
-            ->assertSourceHas('px-3 py-1.5 text-sm')
-            ->releaseMouse();
-    }
-
     public function test_md_size()
     {
         $this->blade(<<<'HTML'
@@ -116,7 +102,7 @@ class TooltipTest extends BrowserTestCase
         HTML)
             ->clickAndHold('@btn-md')
             ->pause(500)
-            ->assertSourceHas('px-4 py-2 text-base')
+            ->assertSourceHas('px-3 py-1.5 text-sm')
             ->releaseMouse();
     }
 
@@ -129,6 +115,20 @@ class TooltipTest extends BrowserTestCase
             </ui:button>
         HTML)
             ->clickAndHold('@btn-lg')
+            ->pause(500)
+            ->assertSourceHas('px-4 py-2 text-base')
+            ->releaseMouse();
+    }
+
+    public function test_xl_size()
+    {
+        $this->blade(<<<'HTML'
+            <ui:button dusk="btn-xl">
+                <ui:tooltip dusk="tooltip-xl" size="xl">Extra large tooltip</ui:tooltip>
+                Extra Large
+            </ui:button>
+        HTML)
+            ->clickAndHold('@btn-xl')
             ->pause(500)
             ->assertSourceHas('px-5 py-2.5 text-lg')
             ->releaseMouse();

@@ -21,20 +21,18 @@ Cards suppport the following properties:
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `size` | `string \| Size` | `true` | The padding and text size of the card. |
-| `radius` | `string \| Size` | `base` | The border radius of the card. |
-| `variant` | `string \| Variant` | `solid` | The variant of the card. |
+| `padding` | `string \| Size` | `true` | The padding of the card. |
 
 ---
 
-### Size
+### Padding
 
-Cards of all sizes. The default is `base`, but `sm`, `md`, and `lg` are all available too.
+Cards of all padding sizes -- `sm`, `md` (default), `lg`, and `xl`.
 
 ```html +demo title={Card Sizing} previewClasses={space-y-5}
 <div>
     <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">SM Sizing</h5>
-    <ui:card size="sm">
+    <ui:card padding="sm">
         <x-slot:header>Header</x-slot:header>
         I'm a small card
         <x-slot:footer>Footer</x-slot:footer>
@@ -42,17 +40,8 @@ Cards of all sizes. The default is `base`, but `sm`, `md`, and `lg` are all avai
 </div>
 
 <div>
-    <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">Base Sizing</h5>
-    <ui:card>
-        <x-slot:header>Header</x-slot:header>
-        I'm a base card
-        <x-slot:footer>Footer</x-slot:footer>
-    </ui:card>
-</div>
-
-<div>
     <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">MD Sizing</h5>
-    <ui:card size="md">
+    <ui:card padding="md">
         <x-slot:header>Header</x-slot:header>
         I'm a medium card
         <x-slot:footer>Footer</x-slot:footer>
@@ -61,68 +50,22 @@ Cards of all sizes. The default is `base`, but `sm`, `md`, and `lg` are all avai
 
 <div>
     <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">LG Sizing</h5>
-    <ui:card size="lg">
+    <ui:card padding="lg">
         <x-slot:header>Header</x-slot:header>
         I'm a large card
         <x-slot:footer>Footer</x-slot:footer>
     </ui:card>
 </div>
+
+<div>
+    <h5 class="text-center opacity-75 text-xs uppercase tracking-wide">XL Sizing</h5>
+    <ui:card padding="xl">
+        <x-slot:header>Header</x-slot:header>
+        I'm an extralarge card
+        <x-slot:footer>Footer</x-slot:footer>
+    </ui:card>
+</div>
 ```
-
-
-### ️️Radius
-
-Cards come with rounded corners by default, but support `none`, `sm`, `base`, `md`, and `lg`, `xl` corner radii.
-
-```html +demo title={Card Radius} previewClasses={space-y-5}
-<ui:card radius="none">I'm a card with no radius</ui:card>
-<ui:card radius="sm">I'm a card with a small radius</ui:card>
-<ui:card radius="base">I'm a card with the default radius</ui:card>
-<ui:card radius="md">I'm a card with a medium radius</ui:card>
-<ui:card radius="lg">I'm a card with a large radius</ui:card>
-<ui:card radius="xl">I'm a card with a extra large radius</ui:card>
-```
-
-### Variant
-
-Cards come in several variants: `solid`, `outline`, `glow`, and `gradient`. The default is `outline`.
-
-```html +demo title={Outline Variant} previewClasses={space-y-3}
-<ui:card>I'm a happy little card.</ui:card>
-<ui:card color="primary">I'm a happy little primary card.</ui:card>
-<ui:card color="secondary">I'm a happy little secondary card.</ui:card>
-<ui:card color="success">I'm a happy little success card.</ui:card>
-<ui:card color="warning">I'm a happy little warning card.</ui:card>
-<ui:card color="danger">I'm a happy little danger card.</ui:card>
-```
-
-```html +demo title={Solid Variant} previewClasses={space-y-3}
-<ui:card variant="solid">I'm a happy little card.</ui:card>
-<ui:card variant="solid" color="primary">I'm a happy little primary card.</ui:card>
-<ui:card variant="solid" color="secondary">I'm a happy little secondary card.</ui:card>
-<ui:card variant="solid" color="success">I'm a happy little success card.</ui:card>
-<ui:card variant="solid" color="warning">I'm a happy little warning card.</ui:card>
-<ui:card variant="solid" color="danger">I'm a happy little danger card.</ui:card>
-```
-
-```html +demo title={Gradient Variant} previewClasses={space-y-3}
-<ui:card variant="gradient">I'm a happy little card.</ui:card>
-<ui:card variant="gradient" color="primary">I'm a happy little primary card.</ui:card>
-<ui:card variant="gradient" color="secondary">I'm a happy little secondary card.</ui:card>
-<ui:card variant="gradient" color="success">I'm a happy little success card.</ui:card>
-<ui:card variant="gradient" color="warning">I'm a happy little warning card.</ui:card>
-<ui:card variant="gradient" color="danger">I'm a happy little danger card.</ui:card>
-```
-
-```html +demo title={Glow Variant} previewClasses={space-y-3}
-<ui:card variant="glow">I'm a happy little card.</ui:card>
-<ui:card variant="glow" color="primary">I'm a happy little primary card.</ui:card>
-<ui:card variant="glow" color="secondary">I'm a happy little secondary card.</ui:card>
-<ui:card variant="glow" color="success">I'm a happy little success card.</ui:card>
-<ui:card variant="glow" color="warning">I'm a happy little warning card.</ui:card>
-<ui:card variant="glow" color="danger">I'm a happy little danger card.</ui:card>
-```
-
 
 ## Slots
 
