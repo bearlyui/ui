@@ -87,17 +87,12 @@ This property defaults to `top`, but you can also use `top-start`, `top-end`, `b
 Both the `offset` and `position` props are sent to [Floating UI](https://floating-ui.com) Alpine's [Anchor plugin](https://alpinejs.dev/plugins/anchor#positioning).
 
 ### Size
-The size prop defines the size of the tooltip. The possible sizes are `sm`, `md` (default), and `lg`.
-Why would you want a tooltip to be large? I don't know, but you can if you want to.
+The size prop defines the size of the tooltip. The possible sizes are `sm`, `md` (default), `lg`, and `xl`.
+Why would you want a tooltip to be extra large? I don't know, but you can if you want to.
 
 ```html +demo title={Tooltip Sizes} previewClasses={flex justify-between}
 <ui:button>
-    Extra Small
-    <ui:tooltip size="xs" title="I'm an extra small tooltip" />
-</ui:button>
-
-<ui:button>
-    Small (sm - the default)
+    Small (sm)
     <ui:tooltip size="sm" title="I'm a small tooltip" />
 </ui:button>
 
@@ -109,6 +104,11 @@ Why would you want a tooltip to be large? I don't know, but you can if you want 
 <ui:button>
     Large (lg)
     <ui:tooltip size="lg" title="I'm a large tooltip" />
+</ui:button>
+
+<ui:button>
+    Extra Large (xl)
+    <ui:tooltip size="xl" title="I'm an extra large tooltip" />
 </ui:button>
 ```
 
