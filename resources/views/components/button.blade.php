@@ -12,7 +12,6 @@
     'iconVariant' => 'micro',
 ])
 
-
 <button
     {{ $attributes
         ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
@@ -44,16 +43,16 @@
             'px-6 py-3 text-base font-medium' => Size::XL->is($size),
 
             {{-- Icons add slightly more padding to the opposite side if used on a single side --}}
-            'pr-2.5' => $icon && empty($iconAfter) && Size::XS->is($size),
-            'pr-3.5' => $icon && empty($iconAfter) && Size::SM->is($size),
-            'pr-4 pl-3' => $icon && empty($iconAfter) && Size::MD->is($size),
-            'pr-5 pl-4' => $icon && empty($iconAfter) && Size::LG->is($size),
-            'pr-7 pl-5' => $icon && empty($iconAfter) && Size::XL->is($size),
-            'pl-2.5' => $iconAfter && empty($icon) && Size::XS->is($size),
-            'pl-3.5' => $iconAfter && empty($icon) && Size::SM->is($size),
-            'pl-4 pr-3' => $iconAfter && empty($icon) && Size::MD->is($size),
-            'pl-5 pr-4' => $iconAfter && empty($icon) && Size::LG->is($size),
-            'pl-7 pr-5' => $iconAfter && empty($icon) && Size::XL->is($size),
+            'pr-2.5' => $icon && !empty($slot?->content) && empty($iconAfter) && Size::XS->is($size),
+            'pr-3.5' => $icon && !empty($slot?->content) && empty($iconAfter) && Size::SM->is($size),
+            'pr-4 pl-3' => $icon && !empty($slot?->content) && empty($iconAfter) && Size::MD->is($size),
+            'pr-5 pl-4' => $icon && !empty($slot?->content) && empty($iconAfter) && Size::LG->is($size),
+            'pr-7 pl-5' => $icon && !empty($slot?->content) && empty($iconAfter) && Size::XL->is($size),
+            'pl-2.5' => $iconAfter && !empty($slot?->content) && empty($icon) && Size::XS->is($size),
+            'pl-3.5' => $iconAfter && !empty($slot?->content) && empty($icon) && Size::SM->is($size),
+            'pl-4 pr-3' => $iconAfter && !empty($slot?->content) && empty($icon) && Size::MD->is($size),
+            'pl-5 pr-4' => $iconAfter && !empty($slot?->content) && empty($icon) && Size::LG->is($size),
+            'pl-7 pr-5' => $iconAfter && !empty($slot?->content) && empty($icon) && Size::XL->is($size),
 
             {{-- Base Variant Styles --}}
             'border shadow-xs hover:shadow-sm' => Variant::Outline->is($variant) || Variant::Solid->is($variant),
@@ -104,7 +103,7 @@
             <x-dynamic-component
                 :component="'ui::icon.' . $icon"
                 :variant="$iconVariant"
-                class="opacity-70 mr-1.5"
+                class="opacity-70 {{ empty($slot?->content) ? '' : 'mr-1.5' }}"
             />
         @endif
         {{-- Main Slot --}}
@@ -113,7 +112,7 @@
             <x-dynamic-component
                 :component="'ui::icon.' . $iconAfter"
                 :variant="$iconVariant"
-                class="opacity-70 ml-1.5"
+                class="opacity-70 {{ empty($slot?->content) ? '' : 'ml-1.5' }}"
             />
         @endif
     </span>
