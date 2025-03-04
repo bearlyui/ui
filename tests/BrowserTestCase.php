@@ -70,7 +70,7 @@ class BrowserTestCase extends TestCase
     /**
      * Render a Blade template, then open a browser and navigate to its route.
      */
-    protected function blade(string $template)
+    protected function blade(string $template, $data = [])
     {
         $this->beforeServingApplication(function () use ($template) {
             Artisan::call('view:clear');

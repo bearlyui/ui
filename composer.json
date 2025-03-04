@@ -10,7 +10,7 @@
     },
     "require-dev": {
         "laravel/pint": "^1.18",
-        "livewire/livewire": "^3.4",
+        "livewire/livewire": "^3.6",
         "orchestra/testbench": "^9.5",
         "orchestra/testbench-dusk": "^9.9"
     },

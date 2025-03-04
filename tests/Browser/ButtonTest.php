@@ -115,7 +115,7 @@ class ButtonTest extends BrowserTestCase
         $this->blade('<ui:button icon-after="arrow-right" dusk="btn"><span>Button</span></ui:button>')
             ->assertMissing('@btn svg:first-child')
             ->assertPresent('@btn svg:last-child')
-            ->assertHasClass('@btn svg:last-child', 'ml-1.5');
+            ->assertHasClass('@btn svg:nth-child(2)', 'ml-1.5');
     }
 
     public function test_custom_icon_variant()
@@ -149,6 +149,7 @@ class ButtonTest extends BrowserTestCase
     public function test_loading_state_sizes()
     {
         Livewire::visit(ExampleLoadingButtonSizes::class)
+            ->tinker()
             ->click('@btn-xs')
             ->waitFor('@btn-xs [data-ui-icon-spinner]')
             ->assertVisible('@btn-xs [data-ui-icon-spinner]')
