@@ -135,7 +135,7 @@ class MenuTest extends BrowserTestCase
             ->assertAttribute('nav', 'aria-label', 'Mobile Label');
     }
 
-    public function test_selecting_menu_item_navigates_to_corresponding_page()
+    public function test_selecting_mobile_menu_item_navigates_to_corresponding_page()
     {
         $this->menu()
             ->resize(375, 667)
