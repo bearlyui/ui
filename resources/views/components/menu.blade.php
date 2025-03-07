@@ -10,6 +10,7 @@
     <div class="block md:hidden">
         <label for="mobile-menu-select" class="sr-only">{{ $mobileLabel }}</label>
         <select
+            data-ui-mobile-menu
             x-ref="mobileSelect"
             x-on:change="navigateToSelection"
             @class([

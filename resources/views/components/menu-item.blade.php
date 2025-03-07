@@ -1,7 +1,7 @@
 @props([
     'href' => null,
     'icon' => null,
-    'iconVariant' => 'micro',
+    'iconVariant' => 'outline',
     'active' => request()->url() === $href,
 ])
 

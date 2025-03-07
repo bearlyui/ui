@@ -70,15 +70,19 @@ class BrowserTestCase extends TestCase
     /**
      * Render a Blade template, then open a browser and navigate to its route.
      */
-    protected function blade(string $template, $data = [])
+    protected function blade(string $template, $data = [], $withBrowser = null)
     {
         $this->beforeServingApplication(function () use ($template) {
             Artisan::call('view:clear');
             Route::view('/_test_ui', 'render-blade-template', ['slot' => $template])->middleware('web');
         });
 
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) use ($withBrowser) {
             $this->browserHandle = $browser->visit('/_test_ui');
+
+            if ($withBrowser) {
+                $withBrowser($browser);
+            }
         });
 
         return $this->browserHandle;
