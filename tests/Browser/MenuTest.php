@@ -140,7 +140,9 @@ class MenuTest extends BrowserTestCase
             ->resize(375, 667)
             ->waitFor('@menu [data-ui-mobile-menu]')
             ->select('@menu [data-ui-mobile-menu]', '#team')
-            ->assertPathIs('/test_ui#team');
+            ->assertFragmentIs('team')
+            ->select('@menu [data-ui-mobile-menu]', '#dashboard')
+            ->assertFragmentIs('dashboard');
     }
 
     // TODO: add icon variant data attributes so we can test this easier
