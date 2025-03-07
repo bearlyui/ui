@@ -20,7 +20,7 @@
             ])
         >
             @if ($mobileLabel)
-                <option disabled selected="selected">{{ $mobileLabel }}</option>
+                <option disabled>{{ $mobileLabel }}</option>
             @endif
         </select>
     </div>

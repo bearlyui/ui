@@ -7,17 +7,17 @@ use Laravel\Dusk\Browser;
 
 class MenuTest extends BrowserTestCase
 {
-    protected function menu($withBrowser = null)
+    protected function menu($active = null, $withBrowser = null)
     {
         return $this->blade(<<<'HTML'
-            <ui:menu dusk="menu" mobileLabel="Navigation">
-                <ui:menu-item href="/dashboard" icon="home" dusk="menu-item-1">
+            <ui:menu dusk="menu" mobile-label="Mobile Label">
+                <ui:menu-item href="#dashboard" icon="home" dusk="menu-item-1">
                     Dashboard
                 </ui:menu-item>
-                <ui:menu-item href="/team" icon="users" dusk="menu-item-2">
+                <ui:menu-item href="#team" icon="users" dusk="menu-item-2">
                     Team
                 </ui:menu-item>
-                <ui:menu-item href="/projects" icon="folder" dusk="menu-item-3">
+                <ui:menu-item href="#projects" icon="folder" dusk="menu-item-3">
                     Projects
                 </ui:menu-item>
             </ui:menu>
@@ -61,59 +61,98 @@ class MenuTest extends BrowserTestCase
             ->assertMissing('@menu-item-1 svg');
     }
 
-    // public function test_mobile_select_has_options_for_menu_items()
-    // {
-    //     $this->menu(3)
-    //         ->waitFor('select option:not([disabled])')
-    //         ->assertVisible('select option[value="/dashboard"]')
-    //         ->assertVisible('select option[value="/team"]')
-    //         ->assertVisible('select option[value="/projects"]')
-    //         ->assertSeeIn('select option[value="/dashboard"]', 'Dashboard')
-    //         ->assertSeeIn('select option[value="/team"]', 'Team')
-    //         ->assertSeeIn('select option[value="/projects"]', 'Projects');
-    // }
+    public function test_mobile_label_defaults_to_navigation()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="/dashboard" dusk="menu-item-1">
+                    Dashboard
+                </ui:menu-item>
+            </ui:menu>
+        HTML, withBrowser: function (Browser $browser) {
+            $browser
+                ->resize(375, 667)
+                ->assertVisible('@menu [data-ui-mobile-menu] option[disabled]')
+                ->assertSeeIn('@menu [data-ui-mobile-menu] option[disabled]', 'Navigation');
+        });
+    }
 
-    // public function test_active_menu_item_has_aria_current()
-    // {
-    //     $this->menu(3)
-    //         ->assertAttributeMissing('@menu-item-1', 'aria-current')
-    //         ->assertAttribute('@menu-item-2', 'aria-current', 'page')
-    //         ->assertAttribute('@menu-item-3', 'aria-current', 'page');
-    // }
+    public function test_mobile_select_uses_mobile_label_prop_as_disabled_option()
+    {
+        $this->menu(withBrowser: function (Browser $browser) {
+            $browser
+                ->resize(375, 667)
+                ->assertVisible('@menu [data-ui-mobile-menu] option[disabled]')
+                ->assertSeeIn('@menu [data-ui-mobile-menu] option[disabled]', 'Mobile Label');
+        });
+    }
 
-    // public function test_active_menu_item_is_selected_in_mobile_dropdown()
-    // {
-    //     $this->menu(3)
-    //         ->waitFor('select option:not([disabled])')
-    //         ->assertNotSelected('select', '/dashboard')
-    //         ->assertSelected('select', '/team')
-    //         ->assertSelected('select', '/projects');
-    // }
+    public function test_mobile_select_has_options_for_menu_items()
+    {
+        $this->menu()
+            ->resize(375, 667)
+            ->waitFor('select option:not([disabled])')
+            ->assertVisible('select option[value="#dashboard"]')
+            ->assertVisible('select option[value="#team"]')
+            ->assertVisible('select option[value="#projects"]')
+            ->assertSeeIn('select option[value="#dashboard"]', 'Dashboard')
+            ->assertSeeIn('select option[value="#team"]', 'Team')
+            ->assertSeeIn('select option[value="#projects"]', 'Projects');
+    }
 
-    // public function test_menu_has_correct_aria_label()
-    // {
-    //     $this->menu()
-    //         ->assertAttribute('nav', 'aria-label', 'Navigation');
-    // }
+    public function test_active_menu_item_has_aria_current()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" dusk="menu-item-1" :active="false">Dashboard</ui:menu-item>
+                <ui:menu-item href="#" dusk="menu-item-2" :active="true">Team</ui:menu-item>
+                <ui:menu-item href="#" dusk="menu-item-3">Projects</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->assertAttribute('@menu-item-2', 'aria-current', 'page')
+            ->assertAttributeMissing('@menu-item-1', 'aria-current')
+            ->assertAttributeMissing('@menu-item-3', 'aria-current');
+    }
+
+    public function test_active_menu_item_is_selected_in_mobile_dropdown()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" dusk="menu-item-1" :active="false">Dashboard</ui:menu-item>
+                <ui:menu-item href="#" dusk="menu-item-2" :active="true">Team</ui:menu-item>
+                <ui:menu-item href="#" dusk="menu-item-3">Projects</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->resize(375, 667)
+            ->assertVisible('@menu [data-ui-mobile-menu] option[selected]')
+            ->assertSeeIn('@menu [data-ui-mobile-menu] option[selected]', 'Team');
+    }
+
+    public function test_menu_has_correct_aria_label()
+    {
+        $this->menu()
+            ->assertAttribute('nav', 'aria-label', 'Mobile Label');
+    }
+
+    public function test_selecting_menu_item_navigates_to_corresponding_page()
+    {
+        $this->menu()
+            ->resize(375, 667)
+            ->waitFor('@menu [data-ui-mobile-menu]')
+            ->select('@menu [data-ui-mobile-menu]', '#team')
+            ->assertPathIs('/test_ui#team');
+    }
 
     // TODO: add icon variant data attributes so we can test this easier
     // public function test_menu_item_with_custom_icon_variant()
     // {
     //     $this->blade(<<<'HTML'
     //         <ui:menu dusk="menu">
-    //             <ui:menu-item href="/dashboard" icon="home" iconVariant="solid" dusk="menu-item-1">
+    //             <ui:menu-item href="#dashboard" icon="home" iconVariant="solid" dusk="menu-item-1">
     //                 Dashboard
     //             </ui:menu-item>
     //         </ui:menu>
     //     HTML)
     //         ->assertVisible('@menu-item-1 svg');
-    // }
-
-    // public function test_navigates_to_selected_page()
-    // {
-    //     $this->menu(3)
-    //         ->waitFor('select option:not([disabled])')
-    //         ->select('select', '/team')
-    //         ->assertPathIs('/team');
     // }
 }

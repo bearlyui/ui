@@ -14,6 +14,7 @@ export default function(Alpine) {
                     // Set selected if the menu item is active (has aria-current attribute)
                     if (item.hasAttribute('aria-current')) {
                         option.selected = true
+                        option.setAttribute('selected', 'selected')
                     }
 
                     select.appendChild(option)
