@@ -3,11 +3,16 @@
 namespace Bearly\Ui\Tests\Browser;
 
 use Bearly\Ui\Tests\BrowserTestCase;
-use Laravel\Dusk\Browser;
 
 class MenuTest extends BrowserTestCase
 {
-    protected function menu($active = null, $withBrowser = null)
+    protected function tearDown(): void
+    {
+        $this->menu()->resize(1920, 1080);
+        parent::tearDown();
+    }
+
+    protected function menu()
     {
         return $this->blade(<<<'HTML'
             <ui:menu dusk="menu" mobile-label="Mobile Label">
@@ -21,20 +26,18 @@ class MenuTest extends BrowserTestCase
                     Projects
                 </ui:menu-item>
             </ui:menu>
-        HTML, withBrowser: $withBrowser);
+        HTML);
     }
 
     public function test_renders_desktop_and_mobile_versions()
     {
-        $this->menu(withBrowser: function (Browser $browser) {
-            $browser
-                ->resize(375, 667)
-                ->assertMissing('@menu-item-1')
-                ->assertVisible('@menu [data-ui-mobile-menu]')
-                ->resize(1920, 1080)
-                ->assertVisible('@menu-item-1')
-                ->assertMissing('@menu [data-ui-mobile-menu]');
-        });
+        $this->menu()
+            ->resize(375, 667)
+            ->assertMissing('@menu-item-1')
+            ->assertVisible('@menu [data-ui-mobile-menu]')
+            ->resize(1920, 1080)
+            ->assertVisible('@menu-item-1')
+            ->assertMissing('@menu [data-ui-mobile-menu]');
     }
 
     public function test_menu_item_with_icon()
@@ -46,6 +49,7 @@ class MenuTest extends BrowserTestCase
                 </ui:menu-item>
             </ui:menu>
         HTML)
+            ->waitFor('@menu-item-1')
             ->assertVisible('@menu-item-1 svg');
     }
 
@@ -58,6 +62,7 @@ class MenuTest extends BrowserTestCase
                 </ui:menu-item>
             </ui:menu>
         HTML)
+            ->waitFor('@menu-item-1')
             ->assertMissing('@menu-item-1 svg');
     }
 
@@ -69,22 +74,18 @@ class MenuTest extends BrowserTestCase
                     Dashboard
                 </ui:menu-item>
             </ui:menu>
-        HTML, withBrowser: function (Browser $browser) {
-            $browser
-                ->resize(375, 667)
-                ->assertVisible('@menu [data-ui-mobile-menu] option[disabled]')
-                ->assertSeeIn('@menu [data-ui-mobile-menu] option[disabled]', 'Navigation');
-        });
+        HTML)
+            ->resize(375, 667)
+            ->assertVisible('@menu [data-ui-mobile-menu] option[disabled]')
+            ->assertSeeIn('@menu [data-ui-mobile-menu] option[disabled]', 'Navigation');
     }
 
     public function test_mobile_select_uses_mobile_label_prop_as_disabled_option()
     {
-        $this->menu(withBrowser: function (Browser $browser) {
-            $browser
-                ->resize(375, 667)
-                ->assertVisible('@menu [data-ui-mobile-menu] option[disabled]')
-                ->assertSeeIn('@menu [data-ui-mobile-menu] option[disabled]', 'Mobile Label');
-        });
+        $this->menu()
+            ->resize(375, 667)
+            ->waitFor('@menu [data-ui-mobile-menu] option[disabled]')
+            ->assertSeeIn('@menu [data-ui-mobile-menu] option[disabled]', 'Mobile Label');
     }
 
     public function test_mobile_select_has_options_for_menu_items()
