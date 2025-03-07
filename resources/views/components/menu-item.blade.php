@@ -3,6 +3,8 @@
     'icon' => null,
     'iconVariant' => 'outline',
     'active' => request()->url() === $href,
+    'badge' => null,
+    'showZero' => false,
 ])
 
 <a
@@ -27,4 +29,9 @@
         />
     @endif
     <span class="truncate">{{ $slot }}</span>
+    @if ($badge || ($badge === 0 && $showZero))
+        <span class="ml-auto">
+            <ui:badge>{{ $badge }}</ui:badge>
+        </span>
+    @endif
 </a>

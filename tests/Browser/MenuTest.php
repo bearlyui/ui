@@ -146,6 +146,41 @@ class MenuTest extends BrowserTestCase
             ->assertFragmentIs('dashboard');
     }
 
+    public function test_menu_item_with_badge_prop_renders_badge()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" badge="10" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertVisible('@menu-item-1 [data-ui-badge]')
+            ->assertSeeIn('@menu-item-1 [data-ui-badge]', 10);
+    }
+
+    public function test_menu_item_with_badge_doesnt_show_zero_by_default()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" :badge="0" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertMissing('@menu-item-1 [data-ui-badge]');
+    }
+
+    public function test_menu_item_with_badge_shows_zero_if_show_zero_prop_is_true()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" :badge="0" :show-zero="true" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertVisible('@menu-item-1 [data-ui-badge]')
+            ->assertSeeIn('@menu-item-1 [data-ui-badge]', 0);
+    }
+
     // TODO: add icon variant data attributes so we can test this easier
     // public function test_menu_item_with_custom_icon_variant()
     // {

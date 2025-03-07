@@ -12,6 +12,7 @@
     'iconVariant' => 'micro',
 ])
 <{{ $attributes->has('href') ? 'a' : 'span' }}
+data-ui-badge
 {{ $attributes->class([
     'inline-flex items-center tabular-nums transition',
 
