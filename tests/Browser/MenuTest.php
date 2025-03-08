@@ -250,4 +250,34 @@ class MenuTest extends BrowserTestCase
     //     HTML)
     //         ->assertVisible('@menu-item-1 svg');
     // }
+
+    public function test_menu_with_size_prop_adds_max_width_class()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu" size="xs">
+                <ui:menu-item href="#" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->assertHasClass('@menu', 'max-w-40');
+    }
+
+    public function test_menu_defaults_to_sm_size()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->assertHasClass('@menu', 'max-w-54');
+    }
+
+    public function test_menu_with_size_full_adds_no_max_width_class()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu" size="full">
+                <ui:menu-item href="#" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->assertClassMissing('@menu', 'max-w-54');
+    }
 }

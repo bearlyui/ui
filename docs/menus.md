@@ -23,6 +23,7 @@ To use a menu, use the `<ui:menu>` tag with `<ui:menu-item>` components inside i
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
 | `mobileLabel` | `string` | `Navigation` | The label shown in the mobile select dropdown. |
+| `size` | `Size` | `Size::SM` | Controls the maximum width of the menu. |
 
 ---
 
@@ -33,6 +34,32 @@ The label shown in the mobile select dropdown. This is used for accessibility an
 ```html
 <ui:menu mobile-label="Main Navigation">
     <!-- Menu items -->
+</ui:menu>
+```
+
+### Size
+
+The `size` property controls the maximum width of the menu. By default, the menu uses the `sm` size. You can use the `size` property to adjust the width of the menu.
+
+```html
+<ui:menu size="md">
+    <!-- Menu items -->
+</ui:menu>
+```
+
+Available sizes:
+- `xs` - max-width: 10rem (160px)
+- `sm` - max-width: 13.5rem (216px)
+- `md` - max-width: 16rem (256px)
+- `lg` - max-width: 18rem (288px)
+
+```html +demo title={Menu with Size}
+<ui:menu size="md">
+    <ui:menu-item href="/dashboard" active>Dashboard</ui:menu-item>
+    <ui:menu-item href="/team">Team</ui:menu-item>
+    <ui:menu-item href="/projects">Projects</ui:menu-item>
+    <ui:menu-item href="/calendar">Calendar</ui:menu-item>
+    <ui:menu-item href="/settings">Settings</ui:menu-item>
 </ui:menu>
 ```
 

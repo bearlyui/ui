@@ -1,10 +1,18 @@
+@use('Bearly\Ui\Size')
 @props([
     'mobileLabel' => 'Navigation',
+    'size' => Size::SM,
 ])
 
 <div {{ $attributes
     ->merge(['x-data' => 'uiMenu'])
-    ->class(['transition-all ease-in-out'])
+    ->class([
+        'transition-all ease-in-out',
+        'max-w-40' => Size::XS->is($size),
+        'max-w-54' => Size::SM->is($size),
+        'max-w-64' => Size::MD->is($size),
+        'max-w-72' => Size::LG->is($size),
+    ])
 }}>
     {{-- On mobile we show a select tag menu instead --}}
     <div class="block md:hidden">
