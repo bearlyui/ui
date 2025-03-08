@@ -181,6 +181,63 @@ class MenuTest extends BrowserTestCase
             ->assertSeeIn('@menu-item-1 [data-ui-badge]', 0);
     }
 
+    public function test_badge_defaults_to_secondary_color()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" :badge="10" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertVisible('@menu-item-1 [data-ui-badge]')
+            ->assertHasClass('@menu-item-1 [data-ui-badge]', 'text-secondary-800');
+    }
+
+    public function test_badge_color_prop_changes_badge_color()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" :badge="10" badge-color="primary" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertVisible('@menu-item-1 [data-ui-badge]')
+            ->assertHasClass('@menu-item-1 [data-ui-badge]', 'text-primary-900');
+    }
+
+    public function test_badge_variant_prop_changes_badge_variant()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" :badge="10" badge-color="primary" badge-variant="solid" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertVisible('@menu-item-1 [data-ui-badge]')
+            ->assertHasClass('@menu-item-1 [data-ui-badge]', 'bg-primary-200/60');
+
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" :badge="10" badge-color="primary" badge-variant="outline" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertVisible('@menu-item-1 [data-ui-badge]')
+            ->assertHasClass('@menu-item-1 [data-ui-badge]', 'border-primary-600/70');
+    }
+
+    public function test_badge_size_prop_changes_badge_size()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#" :badge="10" badge-size="xs" dusk="menu-item-1">Dashboard</ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->waitFor('@menu-item-1')
+            ->assertVisible('@menu-item-1 [data-ui-badge]')
+            ->assertHasClass('@menu-item-1 [data-ui-badge]', 'text-[0.675rem]');
+    }
+
     // TODO: add icon variant data attributes so we can test this easier
     // public function test_menu_item_with_custom_icon_variant()
     // {

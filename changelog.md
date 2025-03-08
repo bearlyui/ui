@@ -4,7 +4,6 @@
 
 - Upgrade to Tailwind CSS 4.x
 - Changed sizing scale for many components to improve clarity
-- Removed nested `<span>` elements from buttons
 - Changed loading indicator logic to target wire clicks automatically
 - Dialog header and footer slots now forward attributes to card slots
 - Add `when` attribute to card (and dialog) header and footer slots to conditionally show them

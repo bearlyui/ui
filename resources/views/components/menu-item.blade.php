@@ -1,3 +1,6 @@
+@use('Bearly\Ui\Color')
+@use('Bearly\Ui\Size')
+@use('Bearly\Ui\Variant')
 @props([
     'href' => null,
     'icon' => null,
@@ -5,6 +8,9 @@
     'active' => request()->url() === $href,
     'badge' => null,
     'showZero' => false,
+    'badgeColor' => Color::Secondary,
+    'badgeVariant' => Variant::Solid,
+    'badgeSize' => Size::XS,
 ])
 
 <a
@@ -31,7 +37,7 @@
     <span class="truncate">{{ $slot }}</span>
     @if ($badge || ($badge === 0 && $showZero))
         <span class="ml-auto">
-            <ui:badge>{{ $badge }}</ui:badge>
+            <ui:badge :color="$badgeColor" :variant="$badgeVariant" :size="$badgeSize">{{ $badge }}</ui:badge>
         </span>
     @endif
 </a>
