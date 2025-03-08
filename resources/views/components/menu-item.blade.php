@@ -36,7 +36,7 @@
     @endif
     <span class="truncate">{{ $slot }}</span>
     @if ($badge || ($badge === 0 && $showZero))
-        <span class="ml-auto">
+        <span class="ml-auto tabular-nums">
             <ui:badge :color="$badgeColor" :variant="$badgeVariant" :size="$badgeSize">{{ $badge }}</ui:badge>
         </span>
     @endif
