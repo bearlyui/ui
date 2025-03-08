@@ -92,10 +92,13 @@ class DropdownTest extends BrowserTestCase
             ->waitFor('[x-bind="uiDropdownContent"]')
             ->assertFocused('@item1')
             ->keys('@item1', ['{arrow_down}'])
+            ->pause(200)
             ->assertFocused('@item2')
             ->keys('@item2', ['{arrow_down}'])
+            ->pause(200)
             ->assertFocused('@item3')
             ->keys('@item3', ['{arrow_up}'])
+            ->pause(200)
             ->assertFocused('@item2')
             ->keys('@item2', ['{arrow_up}'])
             ->assertFocused('@item1');
@@ -166,12 +169,16 @@ class DropdownTest extends BrowserTestCase
             ->waitFor('[x-bind="uiDropdownContent"]')
             ->assertFocused('@item1')
             ->keys('@item1', ['{end}'])
+            ->pause(200)
             ->assertFocused('@item3')
             ->keys('@item3', ['{home}'])
+            ->pause(200)
             ->assertFocused('@item1')
             ->keys('@item1', ['{page_down}'])
+            ->pause(200)
             ->assertFocused('@item3')
             ->keys('@item3', ['{page_up}'])
+            ->pause(200)
             ->assertFocused('@item1');
     }
 
@@ -191,8 +198,10 @@ class DropdownTest extends BrowserTestCase
             ->waitFor('[x-bind="uiDropdownContent"]')
             ->assertFocused('@item1')
             ->keys('@item1', ['{arrow_right}'])
+            ->pause(200)
             ->assertFocused('@item2')
             ->keys('@item2', ['{arrow_left}'])
+            ->pause(200)
             ->assertFocused('@item1');
     }
 
