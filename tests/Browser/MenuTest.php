@@ -258,7 +258,7 @@ class MenuTest extends BrowserTestCase
                 <ui:menu-item href="#" dusk="menu-item-1">Dashboard</ui:menu-item>
             </ui:menu>
         HTML)
-            ->assertHasClass('@menu', 'max-w-40');
+            ->assertHasClass('@menu', 'md:max-w-40');
     }
 
     public function test_menu_defaults_to_sm_size()
@@ -268,7 +268,7 @@ class MenuTest extends BrowserTestCase
                 <ui:menu-item href="#" dusk="menu-item-1">Dashboard</ui:menu-item>
             </ui:menu>
         HTML)
-            ->assertHasClass('@menu', 'max-w-54');
+            ->assertHasClass('@menu', 'md:max-w-54');
     }
 
     public function test_menu_with_size_full_adds_no_max_width_class()
@@ -278,6 +278,6 @@ class MenuTest extends BrowserTestCase
                 <ui:menu-item href="#" dusk="menu-item-1">Dashboard</ui:menu-item>
             </ui:menu>
         HTML)
-            ->assertClassMissing('@menu', 'max-w-54');
+            ->assertClassMissing('@menu', 'md:max-w-54');
     }
 }
