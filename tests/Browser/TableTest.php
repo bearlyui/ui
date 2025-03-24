@@ -298,4 +298,22 @@ class TableTest extends BrowserTestCase
             ->pause(500)
             ->assertMissing('@cell-1');
     }
+
+    public function test_rows_can_be_muted()
+    {
+        $this->blade(<<<'HTML'
+            <ui:table>
+                <ui:row dusk="normal">
+                    <ui:cell>Cell 1</ui:cell>
+                    <ui:cell>Cell 2</ui:cell>
+                </ui:row>
+                <ui:row dusk="muted" :muted="true">
+                    <ui:cell>Cell 1</ui:cell>
+                    <ui:cell>Cell 2</ui:cell>
+                </ui:row>
+            </ui:table>
+        HTML)
+            ->assertClassMissing('@normal', '*:opacity-65')
+            ->assertHasClass('@muted', '*:opacity-65');
+    }
 }
