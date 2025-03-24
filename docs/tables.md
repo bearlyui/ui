@@ -178,6 +178,42 @@ This is useful for hiding interactive elements like buttons until they're needed
 </ui:table>
 ```
 
+## Muted Rows
+
+Passing a boolean value to the `muted` property on any `<ui:row>` will reduce the opacity of the row's contents.
+
+```html
+<ui:row :muted="true">
+    <ui:cell>Muted Row</ui:cell>
+</ui:row>
+```
+
+```html +demo title={Muted Rows}
+<ui:table>
+    <x-slot:header>
+        <ui:col>Name</ui:col>
+        <ui:col>Email</ui:col>
+        <ui:col>Status</ui:col>
+    </x-slot:header>
+    <ui:row>
+        <ui:cell>John Doe</ui:cell>
+        <ui:cell>john@example.com</ui:cell>
+        <ui:cell>Active</ui:cell>
+    </ui:row>
+    <ui:row :muted="true">
+        <ui:cell>Jane Doe</ui:cell>
+        <ui:cell>jane@example.com</ui:cell>
+        <ui:cell>Inactive</ui:cell>
+    </ui:row>
+    <ui:row>
+        <ui:cell>Jim Doe</ui:cell>
+        <ui:cell>jim@example.com</ui:cell>
+        <ui:cell>Active</ui:cell>
+    </ui:row>
+</ui:table>
+```
+
+
 ## Related Components
 
 ### Col
