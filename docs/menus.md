@@ -1,6 +1,7 @@
 # Menus
 
-Sidebar navigation menus that adapt to mobile and desktop views. The menu component automatically transforms into a select dropdown on mobile devices and a vertical navigation menu on desktop.
+The menu component displays a vertical sidebar-esque menu that transforms into a select tag on mobile devices.
+Currently menus only have support a vertical layout. It's possible that other layouts will be added in the future.
 
 ---
 
@@ -29,7 +30,7 @@ To use a menu, use the `<ui:menu>` tag with `<ui:menu-item>` components inside i
 
 ### Mobile Label
 
-The label shown in the mobile select dropdown. This is used for accessibility and as a disabled option in the select dropdown.
+The label shown in the mobile select dropdown. This is used for accessibility, labeling, and as a disabled option in the select dropdown.
 
 ```html
 <ui:menu mobile-label="Main Navigation">
@@ -39,7 +40,7 @@ The label shown in the mobile select dropdown. This is used for accessibility an
 
 ### Size
 
-The `size` property controls the maximum width of the menu. By default, the menu uses the `sm` size. You can use the `size` property to adjust the width of the menu.
+The `size` property controls the maximum width of the menu (defaulting to `sm` size). Supported sizes are `xs`, `sm`, `md`, and `lg`.
 
 ```html
 <ui:menu size="md">
@@ -47,14 +48,8 @@ The `size` property controls the maximum width of the menu. By default, the menu
 </ui:menu>
 ```
 
-Available sizes:
-- `xs` - max-width: 10rem (160px)
-- `sm` - max-width: 13.5rem (216px)
-- `md` - max-width: 16rem (256px)
-- `lg` - max-width: 18rem (288px)
-
-```html +demo title={Menu with Size}
-<ui:menu size="md">
+```html +demo title={Menu with XS Size}
+<ui:menu size="xs">
     <ui:menu-item href="/dashboard" active>Dashboard</ui:menu-item>
     <ui:menu-item href="/team">Team</ui:menu-item>
     <ui:menu-item href="/projects">Projects</ui:menu-item>
@@ -63,11 +58,15 @@ Available sizes:
 </ui:menu>
 ```
 
-## Menu Item Properties
+## Menu Items
+
+Menu items are used to display a single menu item in the menu. They can be customized in various ways by using the following properties:
+
+### Properties
 
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
-| `href` | `string` | `null` | The URL the menu item links to. |
+| `href` | `string` | `null` | The URL the menu item links to. **Required** |
 | `icon` | `string` | `null` | Include [an Icon](/docs/icons) before the menu item's content. |
 | `iconVariant` | `string` | `outline` | The icon variant to use. `micro`, `mini`, `solid`, or `outline` |
 | `active` | `boolean` | `request()->url() === $href` | Whether the menu item is active. By default, it's active if the current URL matches the href. |
@@ -78,6 +77,14 @@ Available sizes:
 | `badgeSize` | `Size` | `Size::XS` | The size of the badge. |
 
 ---
+
+#### Href
+
+The `href` property is used to specify the URL that the menu item links to. It is **required**!
+
+```html
+<ui:menu-item href="/dashboard">Dashboard</ui:menu-item>
+```
 
 ### Icons
 
@@ -97,21 +104,25 @@ The `icon` property is used to include an icon before the menu item's content.
 </ui:menu>
 ```
 
+#### Icon Variants
+You can also specify the icon variant using the icon variant property.
+
+```html +demo title={Customizing the Icon Variant}
+<ui:menu-item href="/dashboard" icon="home" icon-variant="micro">Dashboard</ui:menu-item>
+```
+
 ### Active State
 
-The `active` property is used to indicate the currently active menu item. By default, a menu item is active if the current URL matches its href.
+The `active` property indicates the currently active menu item. By default, a menu item is active if the current URL matches its href.
 
-```html
-<ui:menu-item href="/dashboard" active>Dashboard</ui:menu-item>
+```html +demo
+<ui:menu-item href="/dashboard" active="true">Dashboard</ui:menu-item>
 ```
 
 You can also use custom logic to determine if a menu item is active:
 
 ```php
-<ui:menu-item
-    href="/projects"
-    :active="request()->routeIs('projects.*')"
->
+<ui:menu-item href="/projects" :active="$yourCustomLogic">
     Projects
 </ui:menu-item>
 ```
@@ -136,7 +147,7 @@ The `badge` property is used to display a badge on the menu item. This is useful
 
 #### Badge Customization
 
-You can customize the badge appearance using the `badgeColor`, `badgeVariant`, and `badgeSize` properties.
+You can customize the badge appearance using the `badgeColor`, `badgeVariant`, and `badgeSize` properties. For more information on the values these properties support, read the [Badges documentation](/docs/badges) page.
 
 ```html
 <ui:menu-item
@@ -149,16 +160,3 @@ You can customize the badge appearance using the `badgeColor`, `badgeVariant`, a
     Messages
 </ui:menu-item>
 ```
-
-## Mobile Behavior
-
-The menu component automatically transforms into a select dropdown on mobile devices. This provides a better user experience on smaller screens.
-
-When a user selects an option from the mobile dropdown, they are automatically navigated to the corresponding URL.
-
-## Accessibility
-
-The menu component is built with accessibility in mind:
-- The mobile select dropdown has a proper label for screen readers
-- Active menu items have the `aria-current="page"` attribute
-- The navigation element has an `aria-label` attribute matching the `mobileLabel` property
