@@ -238,18 +238,17 @@ class MenuTest extends BrowserTestCase
             ->assertHasClass('@menu-item-1 [data-ui-badge]', 'text-[0.675rem]');
     }
 
-    // TODO: add icon variant data attributes so we can test this easier
-    // public function test_menu_item_with_custom_icon_variant()
-    // {
-    //     $this->blade(<<<'HTML'
-    //         <ui:menu dusk="menu">
-    //             <ui:menu-item href="#dashboard" icon="home" iconVariant="solid" dusk="menu-item-1">
-    //                 Dashboard
-    //             </ui:menu-item>
-    //         </ui:menu>
-    //     HTML)
-    //         ->assertVisible('@menu-item-1 svg');
-    // }
+    public function test_menu_item_with_custom_icon_variant()
+    {
+        $this->blade(<<<'HTML'
+            <ui:menu dusk="menu">
+                <ui:menu-item href="#dashboard" icon="home" icon-variant="solid" dusk="menu-item-1">
+                    Dashboard
+                </ui:menu-item>
+            </ui:menu>
+        HTML)
+            ->assertVisible('@menu-item-1 svg');
+    }
 
     public function test_menu_with_size_prop_adds_max_width_class()
     {
