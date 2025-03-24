@@ -11,22 +11,26 @@
             'fill' => 'none',
             'viewBox' => '0 0 24 24',
             'stroke-width' => '1.5',
-            'stroke' => 'currentColor'
+            'stroke' => 'currentColor',
+            'data-ui-icon-variant' => 'outline',
         ])->class('size-6')
     )->when(
         $variant === 'solid', fn ($a) => $a->merge([
             'viewBox' => '0 0 24 24',
             'fill' => 'currentColor',
+            'data-ui-icon-variant' => 'solid',
         ])->class('size-6')
     )->when(
         $variant === 'mini', fn ($a) => $a->merge([
             'viewBox' => '0 0 20 20',
             'fill' => 'currentColor',
+            'data-ui-icon-variant' => 'mini',
         ])->class('size-5')
     )->when(
         $variant === 'micro', fn ($a) => $a->merge([
             'viewBox' => '0 0 16 16',
             'fill' => 'currentColor',
+            'data-ui-icon-variant' => 'micro',
         ])->class('size-4')
     ) }}
 >
