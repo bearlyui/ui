@@ -15,6 +15,7 @@ return [
         'Dropdown' => '/docs/dropdowns',
         'Icon' => '/docs/icons',
         // '🚧 Form Inputs' => '/docs/form-inputs',
+        'Menu' => '/docs/menus',
         'Table' => '/docs/tables',
         'Tile' => '/docs/tiles',
         'Toggle' => '/docs/toggles',

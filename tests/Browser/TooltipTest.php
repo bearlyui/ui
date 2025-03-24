@@ -24,7 +24,7 @@ class TooltipTest extends BrowserTestCase
         HTML)
             ->assertMissing('Happy little tooltip')
             ->clickAndHold('@btn')
-            ->pause(500)
+            ->pause(550)
             ->assertSee('Happy little tooltip')
             ->releaseMouse();
     }
