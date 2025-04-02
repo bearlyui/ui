@@ -3,8 +3,8 @@
     const toggleDarkmode = () => {
         // Assure the change happens instantly, otherwise elements with
         // differing transition durations might transition at different rates
-        htmlElementClasses.add('**:transition-none!')
-        window.setTimeout(() => { htmlElementClasses.remove('**:transition-none!') }, 0)
+        htmlElementClasses.add('[&_*]:!transition-none')
+        window.setTimeout(() => { htmlElementClasses.remove('[&_*]:!transition-none') }, 0)
 
         htmlElementClasses.toggle('dark', this.on)
     }

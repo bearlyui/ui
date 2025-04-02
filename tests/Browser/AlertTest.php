@@ -99,8 +99,8 @@ class AlertTest extends BrowserTestCase
     public function test_heading_and_subheading_inherit_text_color()
     {
         $this->blade('<ui:alert color="primary" dusk="alert"><ui:heading>Heading</ui:heading><ui:subheading>Subheading</ui:subheading></ui:alert>')
-            ->assertHasClass('@alert', '**:data-ui-heading:text-primary-800')
-            ->assertHasClass('@alert', '**:data-ui-subheading:text-inherit');
+            ->assertHasClass('@alert', '[&_[data-ui-heading]]:text-primary-800')
+            ->assertHasClass('@alert', '[&_[data-ui-subheading]]:text-inherit');
     }
 
     public function test_color_variants()
