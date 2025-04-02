@@ -15,7 +15,6 @@
 
 ## 0.5.3
 - Downgrade of `0.6.0` to provide version compatible with Tailwind CSS v3
--
 
 ## 0.5.2
 
