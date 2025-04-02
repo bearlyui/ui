@@ -2,6 +2,7 @@
 @props([
     'mobileLabel' => 'Navigation',
     'size' => Size::SM,
+    'gap' => Size::SM,
 ])
 
 <div {{ $attributes
@@ -35,7 +36,13 @@
 
     {{-- Desktop Sidebar Menu --}}
     <div class="hidden md:block">
-        <nav class="space-y-1" aria-label="{{ $mobileLabel }}">
+        <nav @class([
+            'space-y-0' => Size::NONE->is($gap),
+            'space-y-0.5' => Size::XS->is($gap),
+            'space-y-1' => Size::SM->is($gap),
+            'space-y-1.5' => Size::MD->is($gap),
+            'space-y-3' => Size::LG->is($gap),
+        ]) aria-label="{{ $mobileLabel }}">
             {{ $slot }}
         </nav>
     </div>

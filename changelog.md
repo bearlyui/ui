@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.5.4
+
+- Added `gap` property to `<ui:menu>` component to control spacing between menu items
+- Fixed badge in menu items to not take up vertical space. This makes all menu items a consistent height
+- Updated menu documentation
+
+
 ## 0.6.0
 
 - Upgrade to Tailwind CSS 4.x

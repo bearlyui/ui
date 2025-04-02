@@ -160,3 +160,21 @@ You can customize the badge appearance using the `badgeColor`, `badgeVariant`, a
     Messages
 </ui:menu-item>
 ```
+
+#### Showing Zeroes
+
+By default, badges are hidden when their value is 0. You can show zeroes by setting the `showZero` property to `true`.
+
+```html
+<ui:menu-item href="/tasks" badge="0" :show-zero="true">Tasks</ui:menu-item>
+```
+
+#### Gap
+
+The `gap` property controls the spacing between menu items. Possible values are `none`, `xs`, `sm`, `md`, and `lg`.
+
+```html
+<ui:menu gap="md">
+    <!-- Menu items -->
+</ui:menu>
+```
