@@ -65,15 +65,15 @@
             'dark:border-danger-300/25' => Color::Danger->is($color) && Variant::Glow->is($variant),
 
             {{-- Headings should match text color  --}}
-            '**:data-ui-heading:text-inherit' => empty($color),
-            '**:data-ui-heading:text-primary-800 dark:**:data-ui-heading:text-primary-200' => Color::Primary->is($color),
-            '**:data-ui-heading:text-secondary-800 dark:**:data-ui-heading:text-secondary-200' => Color::Secondary->is($color),
-            '**:data-ui-heading:text-success-800 dark:**:data-ui-heading:text-success-200' => Color::Success->is($color),
-            '**:data-ui-heading:text-warning-800 dark:**:data-ui-heading:text-warning-200' => Color::Warning->is($color),
-            '**:data-ui-heading:text-danger-800 dark:**:data-ui-heading:text-danger-200' => Color::Danger->is($color),
+            '[&_[data-ui-heading]]:text-inherit' => empty($color),
+            '[&_[data-ui-heading]]:text-primary-800 dark:[&_[data-ui-heading]]:text-primary-200' => Color::Primary->is($color),
+            '[&_[data-ui-heading]]:text-secondary-800 dark:[&_[data-ui-heading]]:text-secondary-200' => Color::Secondary->is($color),
+            '[&_[data-ui-heading]]:text-success-800 dark:[&_[data-ui-heading]]:text-success-200' => Color::Success->is($color),
+            '[&_[data-ui-heading]]:text-warning-800 dark:[&_[data-ui-heading]]:text-warning-200' => Color::Warning->is($color),
+            '[&_[data-ui-heading]]:text-danger-800 dark:[&_[data-ui-heading]]:text-danger-200' => Color::Danger->is($color),
 
             {{-- Subheadings should match text color --}}
-            '**:data-ui-subheading:text-inherit **:data-ui-subheading:opacity-95',
+            '[&_[data-ui-subheading]]:text-inherit [&_[data-ui-subheading]]:opacity-95',
         ])
     }}
 >
