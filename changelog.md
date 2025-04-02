@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.6.0
+
 - Upgrade to Tailwind CSS 4.x
 - Changed sizing scale for many components to improve clarity
 - Changed loading indicator logic to target wire clicks automatically
@@ -10,6 +12,9 @@
 - Fix button padding to allow icon-only buttons without strange custom padding
 - Add `tooltip` property to button component
 - Add `menu` and `menu-item` components
+
+## 0.5.3
+- Downgrade of `0.6.0` to ensure compatibility with Tailwind CSS v3 temporarily
 
 ## 0.5.2
 
