@@ -176,8 +176,8 @@ class TableTest extends BrowserTestCase
             </ui:card>
         HTML)
             ->assertHasClasses('@card', [
-                '**:data-ui-table-inset:-m-3',
-                '**:data-ui-table-inset:ring-transparent',
+                '[&_[data-ui-table-inset]]:-m-3',
+                '[&_[data-ui-table-inset]]:ring-transparent',
             ]);
 
         $this->blade(<<<'HTML'
@@ -191,8 +191,8 @@ class TableTest extends BrowserTestCase
             </ui:card>
         HTML)
             ->assertHasClasses('@card', [
-                '**:data-ui-table-inset:-m-4',
-                '**:data-ui-table-inset:ring-transparent',
+                '[&_[data-ui-table-inset]]:-m-4',
+                '[&_[data-ui-table-inset]]:ring-transparent',
             ]);
 
         $this->blade(<<<'HTML'
@@ -206,8 +206,8 @@ class TableTest extends BrowserTestCase
             </ui:card>
         HTML)
             ->assertHasClasses('@card', [
-                '**:data-ui-table-inset:-m-5',
-                '**:data-ui-table-inset:ring-transparent',
+                '[&_[data-ui-table-inset]]:-m-5',
+                '[&_[data-ui-table-inset]]:ring-transparent',
             ]);
 
         $this->blade(<<<'HTML'
@@ -221,8 +221,8 @@ class TableTest extends BrowserTestCase
             </ui:card>
         HTML)
             ->assertHasClasses('@card', [
-                '**:data-ui-table-inset:-m-6',
-                '**:data-ui-table-inset:ring-transparent',
+                '[&_[data-ui-table-inset]]:-m-6',
+                '[&_[data-ui-table-inset]]:ring-transparent',
             ]);
     }
 

@@ -5,6 +5,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ $title ?? 'Bear UI' }}</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: tailwind.colors.cyan,
+                            secondary: tailwind.colors.slate,
+                            success: tailwind.colors.green,
+                            warning: tailwind.colors.amber,
+                            danger: tailwind.colors.red,
+                        }
+                    }
+                }
+            }
+        </script>
+
+        {{--
+        Tailwind 4
+
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <style type="text/tailwindcss">
             @theme inline {
@@ -74,6 +94,7 @@
               --color-danger-950: var(--color-red-950);
             }
         </style>
+        --}}
 
         <script src="/_test_ui/scripts.js"></script>
         @livewireStyles
