@@ -8,11 +8,6 @@ Use `<ui:card>` to create a card with the default `variant`, `padding`, and `rad
 
 ```html +demo title={Basic Cards} previewClasses={space-y-5}
 <ui:card>I'm a Happy Little Card</ui:card>
-<ui:card color="primary">I'm a Happy Little Card</ui:card>
-<ui:card color="secondary">I'm a Happy Little Card</ui:card>
-<ui:card color="success">I'm a Happy Little Card</ui:card>
-<ui:card color="warning">I'm a Happy Little Card</ui:card>
-<ui:card color="danger">I'm a Happy Little Card</ui:card>
 ```
 
 ## Properties
