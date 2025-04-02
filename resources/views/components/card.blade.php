@@ -15,10 +15,10 @@
     'p-6' => Size::XL->is($padding),
 
     {{-- Inset Tables --}}
-    '**:data-ui-table-inset:-m-3 **:data-ui-table-inset:ring-transparent' => Size::SM->is($padding),
-    '**:data-ui-table-inset:-m-4 **:data-ui-table-inset:ring-transparent' => Size::MD->is($padding),
-    '**:data-ui-table-inset:-m-5 **:data-ui-table-inset:ring-transparent' => Size::LG->is($padding),
-    '**:data-ui-table-inset:-m-6 **:data-ui-table-inset:ring-transparent' => Size::XL->is($padding),
+    '[&_[data-ui-table-inset]]:-m-3 [&_[data-ui-table-inset]]:ring-transparent' => Size::SM->is($padding),
+    '[&_[data-ui-table-inset]]:-m-4 [&_[data-ui-table-inset]]:ring-transparent' => Size::MD->is($padding),
+    '[&_[data-ui-table-inset]]:-m-5 [&_[data-ui-table-inset]]:ring-transparent' => Size::LG->is($padding),
+    '[&_[data-ui-table-inset]]:-m-6 [&_[data-ui-table-inset]]:ring-transparent' => Size::XL->is($padding),
 
 ])->merge(['data-ui-card' => '']) }}>
 
