@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.5.5
+
+- Add `badgeRadius` property to menu items
+- Improve contrast of menu item active state in light mode
+- Improve vertical height of badges by removing line height
+
 ## 0.5.4
 
 - Added `gap` property to `<ui:menu>` component to control spacing between menu items

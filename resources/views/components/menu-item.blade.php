@@ -11,6 +11,7 @@
     'badgeColor' => Color::Secondary,
     'badgeVariant' => Variant::Solid,
     'badgeSize' => Size::XS,
+    'badgeRadius' => Size::SM,
 ])
 
 <a
@@ -20,8 +21,8 @@
             ...config('ui.focusClasses'),
             'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all ease-in-out',
             'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
-            'bg-primary-100/70 text-primary-700 dark:bg-primary-400/20 dark:text-primary-50' => $active,
-            'text-gray-600/80 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300/80 dark:hover:bg-gray-700/50 dark:hover:text-gray-100' => !$active,
+            'bg-gray-50 text-primary-700 dark:bg-primary-400/20 dark:text-primary-50 shadow-xs' => $active,
+            'text-gray-600/80 hover:bg-gray-50/60 hover:text-gray-900 dark:text-gray-300/80 dark:hover:bg-gray-700/50 dark:hover:text-gray-100' => !$active,
         ])
         ->merge(['href' => $href])
         ->when($active, fn ($a) => $a->merge(['aria-current' => 'page']))
@@ -37,7 +38,7 @@
     <span class="truncate">{{ $slot }}</span>
     @if ($badge || ($badge === 0 && $showZero))
         <span class="ml-auto -my-1 tabular-nums">
-            <ui:badge :color="$badgeColor" :variant="$badgeVariant" :size="$badgeSize">{{ $badge }}</ui:badge>
+            <ui:badge :color="$badgeColor" :variant="$badgeVariant" :size="$badgeSize" :radius="$badgeRadius">{{ $badge }}</ui:badge>
         </span>
     @endif
 </a>

@@ -42,10 +42,10 @@ data-ui-badge
     'hover:bg-danger-300/50 hover:border-danger-400/50 hover:text-danger-900 dark:hover:bg-danger-400/20 dark:hover:text-danger-100' => $attributes->has('href') && Variant::Outline->is($variant) && Color::Danger->is($color),
 
     {{-- Sizes --}}
-    'p-0.5 text-[0.675rem]' => Size::XS->is($size),
-    'px-1.5 py-1 text-xs' => Size::SM->is($size),
-    'px-2 py-1 text-sm' => Size::MD->is($size),
-    'px-2 py-1 text-base' => Size::LG->is($size),
+    'p-0.5 text-[0.675rem] leading-none' => Size::XS->is($size),
+    'px-1.5 py-1 text-xs leading-none' => Size::SM->is($size),
+    'px-2 py-1 text-sm leading-none' => Size::MD->is($size),
+    'px-2 py-1 text-base leading-none' => Size::LG->is($size),
 
     {{-- Border Radius --}}
     'rounded-none' => Size::NONE->is($radius),
