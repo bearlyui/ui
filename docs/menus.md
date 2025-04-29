@@ -147,7 +147,7 @@ The `badge` property is used to display a badge on the menu item. This is useful
 
 #### Badge Customization
 
-You can customize the badge appearance using the `badgeColor`, `badgeVariant`, and `badgeSize` properties. For more information on the values these properties support, read the [Badges documentation](/docs/badges) page.
+You can customize the badge appearance using the `badgeColor`, `badgeVariant`, `badgeRadius`, and `badgeSize` properties. For more information on the values these properties support, read the [Badges documentation](/docs/badges) page.
 
 ```html
 <ui:menu-item
@@ -156,6 +156,7 @@ You can customize the badge appearance using the `badgeColor`, `badgeVariant`, a
     badge-color="primary"
     badge-variant="outline"
     badge-size="sm"
+    badge-radius="full"
 >
     Messages
 </ui:menu-item>
