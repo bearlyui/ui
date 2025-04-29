@@ -11,6 +11,7 @@
     'badgeColor' => Color::Secondary,
     'badgeVariant' => Variant::Solid,
     'badgeSize' => Size::XS,
+    'badgeRadius' => Size::SM,
 ])
 
 <a
@@ -37,7 +38,7 @@
     <span class="truncate">{{ $slot }}</span>
     @if ($badge || ($badge === 0 && $showZero))
         <span class="ml-auto -my-1 tabular-nums">
-            <ui:badge :color="$badgeColor" :variant="$badgeVariant" :size="$badgeSize">{{ $badge }}</ui:badge>
+            <ui:badge :color="$badgeColor" :variant="$badgeVariant" :size="$badgeSize" :radius="$badgeRadius">{{ $badge }}</ui:badge>
         </span>
     @endif
 </a>
