@@ -13,13 +13,14 @@
     'tooltip' => null,
 ])
 
-<button
+<{{ $href ? 'a' : 'button' }}
     {{ $attributes
-        ->when($href, fn ($attributes) => $attributes->merge(['onclick' => "window.location.href='$href'"]))
-        ->merge([
-            'type' => 'button',
-            'wire:loading.attr' => 'data-ui-loading',
-        ])
+        ->when(
+            $href,
+            fn ($attributes) => $attributes->merge(['href' => $href]),
+            fn ($attributes) => $attributes->merge(['type' => 'button'])
+        )
+        ->merge(['wire:loading.attr' => 'data-ui-loading'])
         ->when($attributes->wire('click'), fn ($a) => $a->merge(['wire:target' => $attributes->wire('click')->value]))
         ->class([
             'transition-all ease-in-out inline-flex items-center relative',
@@ -138,4 +139,4 @@
     @if ($tooltip)
         <ui:tooltip :title="$tooltip" />
     @endif
-</button>
+</{{ $href ? 'a' : 'button' }}>

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- `ui:button` is now a real anchor tag instead of a button when the `href` property is set
+
 ## 0.5.5
 
 - Add `badgeRadius` property to menu items

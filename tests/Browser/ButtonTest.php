@@ -99,7 +99,8 @@ class ButtonTest extends BrowserTestCase
     public function test_with_href()
     {
         $this->blade('<ui:button href="https://example.com" dusk="btn">Link</ui:button>')
-            ->assertAttribute('@btn', 'onclick', "window.location.href='https://example.com'");
+            ->assertAttribute('@btn', 'href', 'https://example.com')
+            ->assertAttributeMissing('@btn', 'type');
     }
 
     public function test_with_icon()
