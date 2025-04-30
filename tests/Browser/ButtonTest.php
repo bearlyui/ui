@@ -8,10 +8,18 @@ use Livewire\Livewire;
 
 class ButtonTest extends BrowserTestCase
 {
-    public function test_can_be_rendered()
+    public function test_can_be_rendered_as_button()
     {
         $this->blade('<ui:button dusk="btn">Click Me</ui:button>')
             ->assertVisible('@btn')
+            ->assertSee('Click Me');
+    }
+
+    public function test_can_be_rendered_as_a_link()
+    {
+        $this->blade('<ui:button href="https://example.com" dusk="btn">Click Me</ui:button>')
+            ->assertVisible('@btn')
+            ->assertAttribute('@btn', 'href', 'https://example.com/')
             ->assertSee('Click Me');
     }
 
@@ -94,12 +102,6 @@ class ButtonTest extends BrowserTestCase
             ->assertHasClass('@btn', 'rounded-xl');
         $this->blade('<ui:button radius="full" dusk="btn">Button</ui:button>')
             ->assertHasClass('@btn', 'rounded-full');
-    }
-
-    public function test_with_href()
-    {
-        $this->blade('<ui:button href="https://example.com" dusk="btn">Link</ui:button>')
-            ->assertAttribute('@btn', 'onclick', "window.location.href='https://example.com'");
     }
 
     public function test_with_icon()
