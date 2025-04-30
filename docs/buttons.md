@@ -131,8 +131,7 @@ Buttons come in two variants: `solid` _(default)_ and  `ghost`.
 ```
 
 ### Links (href)
-Use the `href` prop to turn a button into a pseudo-link. It uses an `onclick` handler to redirect to the specified URL since buttons don't have an `href` attribute in HTML.
-If you really want it to be an anchor tag (`<a>`), use [the link component](/docs/typography#links) (`<ui:link>`) instead.
+Use the `href` prop to turn a button into an `<a>` tag instead of a `<button>`. If you need to conditionally apply a link,  use [the link component](/docs/typography#links) (`<ui:link>`) instead.
 
 ```html +demo title={Buttons as Links} previewClasses={flex items-center justify-center py-6}
 <ui:button href="https://laravel.com" variant="ghost" color="danger">This Button Links to the Laravel Docs</ui:button>
