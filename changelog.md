@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.5.6
+
 - Buttons can now become a real `<a>` tag instead of a `<button>` when the `href` property is set
 - Alert contrast for warning and primary improved on light mode on darker backgrounds
 
