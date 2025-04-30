@@ -21,7 +21,7 @@
             'px-3 py-2',
 
             {{-- Primary --}}
-            'text-primary-700 shadow-primary-400/20 border-primary-500/25 bg-primary-50/30' => Color::Primary->is($color),
+            'text-primary-700 shadow-primary-400/20 border-primary-500/25 bg-primary-50/50' => Color::Primary->is($color),
             'dark:text-primary-400 dark:shadow-primary-300/20 dark:bg-primary-900/35' => Color::Primary->is($color),
 
             {{-- Secondary --}}
@@ -33,7 +33,7 @@
             'dark:text-success-400 dark:shadow-success-400/15 dark:bg-success-900/30' => Color::Success->is($color),
 
             {{-- Warning --}}
-            'text-warning-700 shadow-warning-400/20 border-warning-500/30 bg-warning-50/30' => Color::Warning->is($color),
+            'text-warning-700 shadow-warning-400/20 border-warning-500/30 bg-warning-50/50' => Color::Warning->is($color),
             'dark:text-warning-400 dark:shadow-warning-400/15 dark:bg-warning-900/30' => Color::Warning->is($color),
 
             {{-- Danger --}}

@@ -2,7 +2,8 @@
 
 ## Unreleased
 
-- `ui:button` is now a real anchor tag instead of a button when the `href` property is set
+- Buttons can now become a real `<a>` tag instead of a `<button>` when the `href` property is set
+- Alert contrast for warning and primary improved on light mode on darker backgrounds
 
 ## 0.5.5
 
