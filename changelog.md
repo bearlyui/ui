@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.5.8
+
+- Actually add cursor:pointer to button component
+
 ## 0.5.7
 
 - Added `data-ui-button` attribute to all buttons

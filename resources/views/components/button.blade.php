@@ -26,7 +26,7 @@
         ])
         ->when($attributes->wire('click'), fn ($a) => $a->merge(['wire:target' => $attributes->wire('click')->value]))
         ->class([
-            'transition-all ease-in-out inline-flex items-center relative',
+            'transition-all ease-in-out inline-flex items-center relative cursor-pointer',
 
             {{-- Border Radius --}}
             'rounded-none' => Size::NONE->is($radius),
