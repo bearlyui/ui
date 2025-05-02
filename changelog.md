@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.5.7
+
+- Added `data-ui-button` attribute to all buttons
+
 ## 0.5.6
 
 - Buttons can now become a real `<a>` tag instead of a `<button>` when the `href` property is set

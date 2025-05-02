@@ -20,7 +20,10 @@
             fn ($attributes) => $attributes->merge(['href' => $href]),
             fn ($attributes) => $attributes->merge(['type' => 'button'])
         )
-        ->merge(['wire:loading.attr' => 'data-ui-loading'])
+        ->merge([
+            'wire:loading.attr' => 'data-ui-loading',
+            'data-ui-button' => true,
+        ])
         ->when($attributes->wire('click'), fn ($a) => $a->merge(['wire:target' => $attributes->wire('click')->value]))
         ->class([
             'transition-all ease-in-out inline-flex items-center relative',
