@@ -1,6 +1,7 @@
 @props([
     'offset' => 4,
     'position' => 'bottom',
+    'containerClass' => null,
 ])
 <span
     x-id="['dropdown-trigger', 'dropdown-items']"
@@ -17,7 +18,7 @@
         <span
             x-anchor.{{ $position }}.offset.{{ $offset }}="$refs.trigger"
             x-on:click.outside="closeDropdown"
-            class="w-min"
+            class="w-min {{ $containerClass }}"
         >
             <span
                 x-bind="uiDropdownContent"

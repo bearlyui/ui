@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.5.9
+
+- Added `containerClass` property to `<ui:dropdown>` component
+
 ## 0.5.8
 
 - Actually add cursor:pointer to button component
