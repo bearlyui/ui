@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.5.10
+
+- Fixed dropdown item dismiss to still allow default link / mailto behavior
+
 ## 0.5.9
 
 - Added `containerClass` property to `<ui:dropdown>` component

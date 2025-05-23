@@ -28,7 +28,7 @@
             'x-bind:class' => '{ "hover:bg-black/5 hover:text-gray-800 hover:bg-black/5 dark:hover:text-gray-200 dark:hover:bg-white/5": true }',
         ])
     )->when($dismiss, fn ($a) => $a->merge([
-        'x-on:click.stop.prevent' => 'closeDropdown',
+        'x-on:click' => '$nextTick(() => { closeDropdown() })',
     ])) }}
 >
     <span @class([

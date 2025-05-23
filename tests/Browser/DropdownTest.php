@@ -396,4 +396,22 @@ class DropdownTest extends BrowserTestCase
             ->assertVisible('@tooltip')
             ->releaseMouse();
     }
+
+    public function test_item_dismiss_property_closes_dropdown_when_href_link()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open</ui:button>
+                </x-slot:trigger>
+                <ui:dropdown-item dusk="item" href="/test">Item</ui:dropdown-item>
+            </ui:dropdown>
+        HTML)
+            ->click('@trigger')
+            ->waitFor('[x-bind="uiDropdownContent"]')
+            ->click('@item')
+            ->waitUntilMissing('[x-bind="uiDropdownContent"]')
+            ->assertMissing('[x-bind="uiDropdownContent"]')
+            ->assertUrlIs('http://127.0.0.1:8001/test');
+    }
 }
