@@ -52,17 +52,17 @@ You can control the vertical alignment of the icon using the `icon-align` proper
 
 ```html +demo title={Icon Alignment} previewClasses={space-y-4}
 <ui:alert icon="information-circle" icon-align="start">
-    <ui:heading>Start Aligned Icon</ui:heading>
+    <ui:heading tag="div">Start Aligned Icon</ui:heading>
     <ui:subheading>This is the default alignment. The icon aligns with the start of the content.</ui:subheading>
 </ui:alert>
 
 <ui:alert icon="information-circle" icon-align="center">
-    <ui:heading>Center Aligned Icon</ui:heading>
+    <ui:heading tag="div">Center Aligned Icon</ui:heading>
     <ui:subheading>The icon is vertically centered relative to the entire content block.</ui:subheading>
 </ui:alert>
 
 <ui:alert icon="information-circle" icon-align="end">
-    <ui:heading>End Aligned Icon</ui:heading>
+    <ui:heading tag="div">End Aligned Icon</ui:heading>
     <ui:subheading>The icon aligns with the end of the content block.</ui:subheading>
 </ui:alert>
 ```
