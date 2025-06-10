@@ -46,6 +46,27 @@ You can easily include an [Icon](/docs/icons) in your alert by using the `icon` 
 <ui:alert color="danger" icon="exclamation-triangle">I'm a scary alert, danger is my middle name!</ui:alert>
 ```
 
+### Icon Alignment
+
+You can control the vertical alignment of the icon using the `icon-align` property. Available values are: `start` _(default)_, `center`, and `end`.
+
+```html +demo title={Icon Alignment} previewClasses={space-y-4}
+<ui:alert icon="information-circle" icon-align="start">
+    <ui:heading>Start Aligned Icon</ui:heading>
+    <ui:subheading>This is the default alignment. The icon aligns with the start of the content.</ui:subheading>
+</ui:alert>
+
+<ui:alert icon="information-circle" icon-align="center">
+    <ui:heading>Center Aligned Icon</ui:heading>
+    <ui:subheading>The icon is vertically centered relative to the entire content block.</ui:subheading>
+</ui:alert>
+
+<ui:alert icon="information-circle" icon-align="end">
+    <ui:heading>End Aligned Icon</ui:heading>
+    <ui:subheading>The icon aligns with the end of the content block.</ui:subheading>
+</ui:alert>
+```
+
 ### Icon Variants
 
 The icon variant can be set using the `iconVariant` property.

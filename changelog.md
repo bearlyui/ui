@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.5.11
+
+- Fixed alert content growth when using an icon
+- Added `icon-align` property to alert component
+
 ## 0.5.10
 
 - Fixed dropdown item dismiss to still allow default link / mailto behavior

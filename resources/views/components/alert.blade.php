@@ -8,6 +8,7 @@
     'role' => 'status',
     'icon' => null,
     'iconVariant' => 'outline',
+    'iconAlign' => 'start',
 ])
 <div
     {{ $attributes
@@ -18,7 +19,7 @@
         ])
         ->class([
             'relative rounded-sm transition ease-in-out text-sm',
-            'px-3 py-2',
+            'px-3 py-2.5',
 
             {{-- Primary --}}
             'text-primary-700 shadow-primary-400/20 border-primary-500/25 bg-primary-50/50' => Color::Primary->is($color),
@@ -79,16 +80,23 @@
 >
     <div @class([
         'flex-1 flex justify-between items-start sm:items-center gap-1' => $dismiss,
-        'flex items-center' => $icon,
+        'flex items-stretch' => $icon,
     ])>
         {{-- Icon --}}
         @if ($icon)
-            <x-dynamic-component :component="'ui::icon.' . $icon" :variant="$iconVariant" class="opacity-50 mr-3" />
+            <div @class([
+                'inline-flex',
+                'items-start' => $iconAlign === 'start',
+                'items-center' => $iconAlign === 'center',
+                'items-end' => $iconAlign === 'end',
+            ])>
+                <x-dynamic-component :component="'ui::icon.' . $icon" :variant="$iconVariant" class="opacity-50 mr-3" />
+            </div>
         @endif
 
 
         {{-- Main content --}}
-        <div>{{ $slot }}</div>
+        <div class="grow">{{ $slot }}</div>
 
         {{-- Close Button --}}
         @if ($dismiss)
