@@ -8,6 +8,7 @@
     'role' => 'status',
     'icon' => null,
     'iconVariant' => 'outline',
+    'iconAlign' => 'start',
 ])
 <div
     {{ $attributes
@@ -83,7 +84,14 @@
     ])>
         {{-- Icon --}}
         @if ($icon)
-            <x-dynamic-component :component="'ui::icon.' . $icon" :variant="$iconVariant" class="opacity-50 mr-3" />
+            <div @class([
+                'inline-flex',
+                'items-start' => $iconAlign === 'start',
+                'items-center' => $iconAlign === 'center',
+                'items-end' => $iconAlign === 'end',
+            ])>
+                <x-dynamic-component :component="'ui::icon.' . $icon" :variant="$iconVariant" class="opacity-50 mr-3" />
+            </div>
         @endif
 
 
