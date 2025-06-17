@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.5.12
+
+- Improve text contrast for primary color of solid button variant on dark mode
+
 ## 0.5.11
 
 - Fixed alert content growth when using an icon
