@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+
+## 0.5.13
+
+- Rename `open` to `dialogOpen` in dialog component
+- Rename `open` to `dropdownOpen` in dropdown component
+- Rename `open` to `alertOpen` in alert component
+
 ## 0.5.12
 
 - Improve text contrast for primary color of solid button variant on dark mode

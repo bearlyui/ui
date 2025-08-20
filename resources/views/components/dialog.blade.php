@@ -8,7 +8,7 @@
 <span
     {{ $attributes->merge([
         'x-data' => 'uiDialog',
-        'x-modelable' => 'open',
+        'x-modelable' => 'dialogOpen',
         'x-id' => "['ui-dialog-content']",
     ]) }}
 >
