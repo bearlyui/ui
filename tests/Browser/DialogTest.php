@@ -401,6 +401,37 @@ class DialogTest extends BrowserTestCase
             ->assertMissing('@content2')
             ->assertMissing('@content');
     }
+
+    public function test_triggering_dropdown_item_with_dismiss_doesnt_close_dialog_also()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dropdown>
+                <x-slot:trigger>
+                    <ui:button dusk="dropdown-trigger">Open Dropdown</ui:button>
+                </x-slot:trigger>
+                <ui:dialog dusk="dialog">
+                    <x-slot:trigger>
+                        <ui:dropdown-item dusk="dialog-trigger" :dismiss="true">Open Dialog</ui:dropdown-item>
+                    </x-slot:trigger>
+                    <span dusk="content">Dialog Content</span>
+                </ui:dialog>
+            </ui:dropdown>
+        HTML)
+            // ->tinker()
+            ->waitForText('Open Dropdown')
+            ->click('@dropdown-trigger')
+            ->waitForText('Open Dialog')
+            ->click('@dialog-trigger')
+            ->assertMissing('@dialog-trigger')
+            ->assertVisible('@content');
+        // ->click('@trigger')
+        // ->waitForText('Dialog Content')
+        // ->assertVisible('@content')
+        // ->click('@trigger2')
+        // ->waitForText('Dialog Content 2')
+        // ->assertVisible('@content2')
+        // ->assertVisible('@content');
+    }
 }
 
 class ExampleLivewireDialog extends Component
