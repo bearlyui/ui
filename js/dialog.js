@@ -2,13 +2,13 @@ import { useHeadingsAsLabelAndDescription } from './utils'
 
 export default function(Alpine) {
     Alpine.data('uiDialog', () => ({
-        open: false,
+        dialogOpen: false,
         removedAriaHidden: false,
         init() {
             this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$refs.content, 'ui-dialog'))
         },
         openDialog() {
-            this.open = true
+            this.dialogOpen = true
 
             if (this.$refs.dialog.hasAttribute('aria-hidden')) {
                 this.$refs.dialog.removeAttribute('aria-hidden')
@@ -16,26 +16,26 @@ export default function(Alpine) {
             }
         },
         closeDialog() {
-            this.open = false
+            this.dialogOpen = false
             this.removedAriaHidden && $refs.dialog.setAttribute('aria-hidden', 'true')
         },
 
         uiDialogAttributes: {
-            'x-show'() { return this.open },
-            'x-trap.inert.noscroll'() { return this.open },
+            'x-show'() { return this.dialogOpen },
+            'x-trap.inert.noscroll'() { return this.dialogOpen },
             'x-on:keyup.escape.window'() { this.$refs.dialog.getAttribute('aria-hidden') === null && this.closeDialog() },
             'x-ref': 'dialog' ,
             'x-id'() { return ['ui-dialog-title', 'ui-dialog-description'] },
         },
 
         uiDialogTrigger: {
-            ':aria-expanded'() { return this.open },
-            ':aria-controls'() { return this.open && this.$id('ui-dialog-content') },
+            ':aria-expanded'() { return this.dialogOpen },
+            ':aria-controls'() { return this.dialogOpen && this.$id('ui-dialog-content') },
             'x-on:click.stop'() { return this.openDialog() }
         },
 
         uiDialogOverlay: {
-            'x-show'() { return this.open },
+            'x-show'() { return this.dialogOpen },
             'x-transition:enter.opacity.delay.0ms': '',
             'x-transition:leave.delay.0ms.duration.0ms': '',
             'x-on:click.stop'() { return this.closeDialog() },
@@ -45,7 +45,7 @@ export default function(Alpine) {
             'role': 'dialog',
             'aria-modal': true,
             'x-ref': 'content',
-            'x-show'() { return this.open },
+            'x-show'() { return this.dialogOpen },
             'x-transition:enter': 'transition-all ease-out origin-bottom',
             'x-transition:enter-start': 'translate-y-full sm:opacity-0 sm:scale-90 sm:translate-y-4',
             'x-transition:enter-end': 'translate-y-0 sm:opacity-100 sm:scale-100 sm:translate-y-0',

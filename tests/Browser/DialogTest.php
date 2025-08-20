@@ -422,15 +422,9 @@ class DialogTest extends BrowserTestCase
             ->click('@dropdown-trigger')
             ->waitForText('Open Dialog')
             ->click('@dialog-trigger')
-            ->assertMissing('@dialog-trigger')
-            ->assertVisible('@content');
-        // ->click('@trigger')
-        // ->waitForText('Dialog Content')
-        // ->assertVisible('@content')
-        // ->click('@trigger2')
-        // ->waitForText('Dialog Content 2')
-        // ->assertVisible('@content2')
-        // ->assertVisible('@content');
+            ->waitForText('Dialog Content')
+            ->assertVisible('@content')
+            ->assertMissing('@dialog-trigger');
     }
 }
 
