@@ -1,6 +1,6 @@
 export default function(Alpine) {
     Alpine.data('uiDropdown', () => ({
-        open: false,
+        dropdownOpen: false,
         focusableTrigger: null,
         activeItem: null,
         searchQuery: '',
@@ -14,7 +14,7 @@ export default function(Alpine) {
         },
 
         openDropdown() {
-            this.open = true
+            this.dropdownOpen = true
             if (this.activeItem == null) {
                 this.activeItem = this.$refs.content.firstElementChild
             }
@@ -22,7 +22,7 @@ export default function(Alpine) {
         },
 
         closeDropdown() {
-            this.open = false
+            this.dropdownOpen = false
             this.$nextTick(() => {
                 if (this.focusableTrigger) {
                     this.focusableTrigger.focus({ preventScroll: true })
@@ -31,7 +31,7 @@ export default function(Alpine) {
         },
 
         toggle() {
-            this.open ? this.closeDropdown() : this.openDropdown()
+            this.dropdownOpen ? this.closeDropdown() : this.openDropdown()
         },
 
         search(e) {
@@ -66,15 +66,15 @@ export default function(Alpine) {
             'x-init'() { this.focusableTrigger = this.$focus.getFirst() },
             'x-on:click.prevent'() { this.toggle() },
             'aria-haspopup': true,
-            ':aria-expanded'() { return this.open },
-            ':aria-controls'() { return this.open && this.$id('dropdown-items') },
+            ':aria-expanded'() { return this.dropdownOpen },
+            ':aria-controls'() { return this.dropdownOpen && this.$id('dropdown-items') },
             ':id'() { return this.$id('dropdown-trigger') },
         },
         uiDropdownContent: {
             'x-transition': true,
             'x-ref': 'content',
-            'x-show'() { return this.open },
-            'x-trap'() { return this.open },
+            'x-show'() { return this.dropdownOpen },
+            'x-trap'() { return this.dropdownOpen },
             'x-on:keydown': 'search',
             ':id'() { return this.$id('dropdown-items') },
             'role': 'menu',

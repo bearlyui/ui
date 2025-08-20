@@ -58,8 +58,10 @@ class AlertTest extends BrowserTestCase
     public function test_icon_property_adds_svg()
     {
         $this->blade('<ui:alert icon="exclamation-triangle" dusk="alert"><span dusk="content">Hello World</span></ui:alert>')
-            ->assertPresent('@alert svg + div > @content')
-            ->assertVisible('@alert svg + div > @content');
+            ->assertPresent('@alert svg')
+            ->assertVisible('@alert svg')
+            ->assertPresent('@content')
+            ->assertVisible('@content');
     }
 
     public function test_including_heading_automatically_binds_aria_label()

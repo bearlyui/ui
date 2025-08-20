@@ -2,7 +2,7 @@ import { useHeadingsAsLabelAndDescription } from './utils'
 
 export default function(Alpine) {
     Alpine.data('uiAlert', () => ({
-        open: true,
+        alertOpen: true,
 
         init() {
             this.$nextTick(() => useHeadingsAsLabelAndDescription(this.$el, 'ui-alert'))
@@ -10,7 +10,7 @@ export default function(Alpine) {
 
         uiAlertAttributes: {
             'x-id'() { return ['ui-alert-title', 'ui-alert-description'] },
-            'x-show'() { return this.open },
+            'x-show'() { return this.alertOpen },
             'x-transition:enter': 'transition ease-out duration-300',
             'x-transition:enter-start': 'opacity-0 scale-75 translate-y-full',
             'x-transition:enter-end': 'opacity-100 scale-[1.02] -translate-y-1',
@@ -21,9 +21,9 @@ export default function(Alpine) {
 
         uiAlertClose: {
             'x-ref': 'closeButton',
-            '@keyup.enter'() { return this.open = false },
-            '@keyup.space'() { return this.open = false },
-            '@click.prevent'() { return this.open = false },
+            '@keyup.enter'() { return this.alertOpen = false },
+            '@keyup.space'() { return this.alertOpen = false },
+            '@click.prevent'() { return this.alertOpen = false },
         },
 
     }))
