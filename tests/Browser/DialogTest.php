@@ -417,7 +417,6 @@ class DialogTest extends BrowserTestCase
                 </ui:dialog>
             </ui:dropdown>
         HTML)
-            // ->tinker()
             ->waitForText('Open Dropdown')
             ->click('@dropdown-trigger')
             ->waitForText('Open Dialog')
