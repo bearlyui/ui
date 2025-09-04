@@ -425,6 +425,102 @@ class DialogTest extends BrowserTestCase
             ->assertVisible('@content')
             ->assertMissing('@dialog-trigger');
     }
+
+    public function test_position_top()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog" position="top">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-start'])
+            ->assertHasClasses('[x-bind="uiDialogContent"]', ['mx-auto', 'sm:mt-[25vh]']);
+    }
+
+    public function test_position_right()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog" position="right">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-center'])
+            ->assertHasClasses('[x-bind="uiDialogContent"]', ['ml-auto', 'sm:mr-[25vh]']);
+    }
+
+    public function test_position_bottom()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog" position="bottom">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-end'])
+            ->assertHasClasses('[x-bind="uiDialogContent"]', ['mx-auto', 'sm:mb-[25vh]']);
+    }
+
+    public function test_position_left()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog" position="left">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-center'])
+            ->assertHasClasses('[x-bind="uiDialogContent"]', ['mr-auto', 'sm:ml-[25vh]']);
+    }
+
+    public function test_position_center()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog" position="center">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-center'])
+            ->assertHasClass('[x-bind="uiDialogContent"]', 'mx-auto');
+    }
+
+    public function test_position_top_is_default()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog">
+                <x-slot:trigger>
+                    <ui:button dusk="trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content
+            </ui:dialog>
+        HTML)
+            ->click('@trigger')
+            ->waitForText('Dialog Content')
+            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-start'])
+            ->assertHasClasses('[x-bind="uiDialogContent"]', ['mx-auto', 'sm:mt-[25vh]']);
+    }
 }
 
 class ExampleLivewireDialog extends Component

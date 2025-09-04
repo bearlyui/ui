@@ -1,5 +1,10 @@
+
+@use('Bearly\Ui\Size')
+@use('Bearly\Ui\Position')
+
 @props([
-    'size' => 'md',
+    'size' => Size::MD,
+    'position' => Position::TOP,
     'cardClass' => null,
     'containerClass' => null,
     'hideCloseButton' => false,
@@ -20,8 +25,11 @@
         <div
             x-bind="uiDialogAttributes"
             @class([
-                'sm:px-5' => $size == 'full',
-                'fixed flex items-end sm:items-center justify-center top-0 right-0 bottom-0 left-0',
+                'sm:px-5' => Size::FULL->is($size),
+                'items-end sm:items-start' => Position::TOP->is($position),
+                'items-end sm:items-center' => Position::LEFT->is($position) || Position::RIGHT->is($position) || Position::CENTER->is($position),
+                'items-end sm:items-end' => Position::BOTTOM->is($position),
+                'fixed flex justify-center top-0 right-0 bottom-0 left-0',
                 $containerClass,
             ])
         >
@@ -35,12 +43,19 @@
             <div
                 x-bind="uiDialogContent"
                 @class([
-                    'flex-1 relative not-prose mx-auto max-w-full w-full max-h-[96vh] sm:rounded-sm',
-                    'sm:max-w-xl' => $size == 'sm',
-                    'sm:max-w-2xl' => $size == 'md',
-                    'sm:max-w-4xl' => $size == 'lg',
-                    'sm:max-w-6xl' => $size == 'xl',
-                    'sm:max-w-full' => $size == 'full',
+                    'flex-1 relative not-prose max-w-full w-full max-h-[96vh] sm:rounded-sm',
+                    'sm:max-w-xl' => Size::SM->is($size),
+                    'sm:max-w-2xl' => Size::MD->is($size),
+                    'sm:max-w-4xl' => Size::LG->is($size),
+                    'sm:max-w-6xl' => Size::XL->is($size),
+                    'sm:max-w-full' => Size::FULL->is($size),
+                    'mx-auto' => Position::CENTER->is($position) || Position::TOP->is($position) || Position::BOTTOM->is($position),
+                    'ml-auto' => Position::RIGHT->is($position),
+                    'mr-auto' => Position::LEFT->is($position),
+                    'sm:mt-[25vh]' => Position::TOP->is($position),
+                    'sm:mb-[25vh]' => Position::BOTTOM->is($position),
+                    'sm:ml-[25vh]' => Position::LEFT->is($position),
+                    'sm:mr-[25vh]' => Position::RIGHT->is($position),
                 ])
             >
 
