@@ -1,6 +1,7 @@
 @use('Bearly\Ui\Color')
 @use('Bearly\Ui\Size')
 @use('Bearly\Ui\Variant')
+
 @props([
     'padding' => Size::MD,
 ])
