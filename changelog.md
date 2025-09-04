@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## 0.5.14
+
+- Add `position` property to dialog component
 
 ## 0.5.13
 
