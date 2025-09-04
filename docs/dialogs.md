@@ -21,7 +21,7 @@ Use the `<ui:dialog>` tag to create a dialog. In their simplest form, they requi
 | Property | Type | Default | Description |
 |:---|:---|:---|:---|
 | `size` | `string` | `'md'` | Controls the maximum width of the dialog. |
-| `position` | `string` | `'center'` | Controls the position of the dialog on the screen. |
+| `position` | `string` | `'top'` | Controls the position of the dialog on the screen. |
 | `hideCloseButton` | `boolean` | `false` | Hides the default close button in the top-right corner. |
 | `cardClass` | `string\|null` | `null` | Additional CSS classes to apply to the dialog card. |
 | `containerClass` | `string\|null` | `null` | Additional CSS classes to apply to the dialog container. |
@@ -40,7 +40,7 @@ Controls the maximum width of the dialog. Available options are `'xs'`, `'sm'`, 
 
 ### position
 
-Controls the position of the dialog on the screen. Available options are `'center'`, `'top'`, `'right'`, `'bottom'`, and `'left'`. The default is `'center'`.
+Controls the position of the dialog on the screen. Available options are `'top'`, `'center'`, `'right'`, `'bottom'`, and `'left'`. The default is `'top'`.
 
 ```html
 <ui:dialog position="top">
@@ -50,11 +50,11 @@ Controls the position of the dialog on the screen. Available options are `'cente
 
 ```html +demo title={Positioned Dialogs}
 <div class="space-y-4">
-    <ui:dialog position="top">
+    <ui:dialog>
         <x-slot:trigger>
-            <ui:button>Top Position</ui:button>
+            <ui:button>Top Position (Default)</ui:button>
         </x-slot:trigger>
-        <p class="min-h-[200px] text-center mt-20">Dialog positioned at the top</p>
+        <p class="min-h-[200px] text-center mt-20">Dialog positioned at the top (default)</p>
     </ui:dialog>
 
     <ui:dialog position="right">
@@ -80,7 +80,7 @@ Controls the position of the dialog on the screen. Available options are `'cente
 
     <ui:dialog position="center">
         <x-slot:trigger>
-            <ui:button>Center Position (Default)</ui:button>
+            <ui:button>Center Position</ui:button>
         </x-slot:trigger>
         <p class="min-h-[200px] text-center mt-20">Dialog positioned in the center</p>
     </ui:dialog>

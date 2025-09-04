@@ -4,7 +4,7 @@
 
 @props([
     'size' => Size::MD,
-    'position' => Position::CENTER,
+    'position' => Position::TOP,
     'cardClass' => null,
     'containerClass' => null,
     'hideCloseButton' => false,

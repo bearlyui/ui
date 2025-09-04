@@ -506,7 +506,7 @@ class DialogTest extends BrowserTestCase
             ->assertHasClass('[x-bind="uiDialogContent"]', 'mx-auto');
     }
 
-    public function test_position_center_is_default()
+    public function test_position_top_is_default()
     {
         $this->blade(<<<'HTML'
             <ui:dialog dusk="dialog">
@@ -518,8 +518,8 @@ class DialogTest extends BrowserTestCase
         HTML)
             ->click('@trigger')
             ->waitForText('Dialog Content')
-            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-center'])
-            ->assertHasClass('[x-bind="uiDialogContent"]', 'mx-auto');
+            ->assertHasClasses('[x-bind="uiDialogAttributes"]', ['items-end', 'sm:items-start'])
+            ->assertHasClasses('[x-bind="uiDialogContent"]', ['mx-auto', 'sm:mt-[25vh]']);
     }
 }
 
