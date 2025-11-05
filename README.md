@@ -11,7 +11,7 @@ This package is built for Laravel and Livewire and Tailwind CSS, it requires:
 - Tailwind CSS Forms Plugin
 
 ### How to Install
-To install the package follow the [Installation instructions in the docs](https://ui.austencam.com/docs/installation).
+To install the package follow the [Installation instructions in the docs](https://ui.austencam.dev/docs/installation).
 
 
 ## Usage
