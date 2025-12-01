@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## 0.5.14
+
+- Fix dropdowns nested in dialogs not being closed when the dialog is closed
 
 ## 0.5.13
 
