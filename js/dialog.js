@@ -16,6 +16,9 @@ export default function(Alpine) {
             }
         },
         closeDialog() {
+            this.$refs.content.querySelectorAll('[x-data="uiDropdown"]').forEach(dropdown => {
+                Alpine.$data(dropdown).closeDropdown()
+            })
             this.dialogOpen = false
             this.removedAriaHidden && $refs.dialog.setAttribute('aria-hidden', 'true')
         },
