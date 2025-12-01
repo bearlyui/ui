@@ -449,10 +449,10 @@ class DialogTest extends BrowserTestCase
             ->assertVisible('@dropdown-trigger')
             ->click('@dropdown-trigger')
             ->waitFor('@dropdown-item')
-            ->click('[x-bind="uiDialogOverlay"]')
+            ->click('[x-bind="uiDialogClose"]')
             ->waitUntilMissing('[x-bind="uiDialogContent"]')
-            ->assertMissing('@dropdown-item')
-            ->tinker();
+            ->waitUntilMissing('@dropdown-item')
+            ->assertMissing('@dropdown-item');
     }
 }
 
