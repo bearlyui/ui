@@ -425,6 +425,35 @@ class DialogTest extends BrowserTestCase
             ->assertVisible('@content')
             ->assertMissing('@dialog-trigger');
     }
+
+    public function test_closing_dialog_closes_nested_dropdowns()
+    {
+        $this->blade(<<<'HTML'
+            <ui:dialog dusk="dialog">
+                <x-slot:trigger>
+                    <ui:button dusk="dialog-trigger">Open Dialog</ui:button>
+                </x-slot:trigger>
+                Dialog Content
+                <ui:dropdown>
+                    <x-slot:trigger>
+                        <ui:button dusk="dropdown-trigger">Open Dropdown</ui:button>
+                    </x-slot:trigger>
+                    <ui:dropdown-item dusk="dropdown-item">Dropdown Item</ui:dropdown-item>
+                    <ui:dropdown-item>Dropdown Item</ui:dropdown-item>
+                    <ui:dropdown-item>Dropdown Item</ui:dropdown-item>
+                </ui:dropdown>
+            </ui:dialog>
+        HTML)
+            ->click('@dialog-trigger')
+            ->waitForText('Dialog Content')
+            ->assertVisible('@dropdown-trigger')
+            ->click('@dropdown-trigger')
+            ->waitFor('@dropdown-item')
+            ->click('[x-bind="uiDialogOverlay"]')
+            ->waitUntilMissing('[x-bind="uiDialogContent"]')
+            ->assertMissing('@dropdown-item')
+            ->tinker();
+    }
 }
 
 class ExampleLivewireDialog extends Component
