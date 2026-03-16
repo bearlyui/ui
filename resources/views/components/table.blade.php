@@ -45,12 +45,19 @@
                 {{-- Striping --}}
                 '[&_tbody>tr:nth-child(even)_td]:bg-gray-100/50 dark:[&_tbody>tr:nth-child(odd)_td]:bg-gray-900/30 dark:[&_tbody>tr:nth-child(even)_td]:bg-transparent' => $striped,
 
-                {{-- Hover --}}
-                '[&_tbody>tr:hover_td]:bg-primary-200/10 dark:[&_tbody>tr:hover_td]:bg-primary-500/5' => $hover && Color::Primary->is($hoverColor),
-                '[&_tbody>tr:hover_td]:bg-secondary-200/25 dark:[&_tbody>tr:hover_td]:bg-secondary-500/15' => $hover && Color::Secondary->is($hoverColor),
-                '[&_tbody>tr:hover_td]:bg-success-200/10 dark:[&_tbody>tr:hover_td]:bg-success-500/5' => $hover && Color::Success->is($hoverColor),
-                '[&_tbody>tr:hover_td]:bg-danger-200/10 dark:[&_tbody>tr:hover_td]:bg-danger-500/5' => $hover && Color::Danger->is($hoverColor),
-                '[&_tbody>tr:hover_td]:bg-warning-200/10 dark:[&_tbody>tr:hover_td]:bg-warning-500/5' => $hover && Color::Warning->is($hoverColor),
+                {{-- Hover when striped (higher specificity via nth-child(n) overrides stripe) --}}
+                '[&_tbody>tr:nth-child(n):hover_td]:bg-primary-200/10 dark:[&_tbody>tr:nth-child(n):hover_td]:bg-primary-500/5' => $hover && $striped && Color::Primary->is($hoverColor),
+                '[&_tbody>tr:nth-child(n):hover_td]:bg-secondary-200/25 dark:[&_tbody>tr:nth-child(n):hover_td]:bg-secondary-500/15' => $hover && $striped && Color::Secondary->is($hoverColor),
+                '[&_tbody>tr:nth-child(n):hover_td]:bg-success-200/10 dark:[&_tbody>tr:nth-child(n):hover_td]:bg-success-500/5' => $hover && $striped && Color::Success->is($hoverColor),
+                '[&_tbody>tr:nth-child(n):hover_td]:bg-danger-200/10 dark:[&_tbody>tr:nth-child(n):hover_td]:bg-danger-500/5' => $hover && $striped && Color::Danger->is($hoverColor),
+                '[&_tbody>tr:nth-child(n):hover_td]:bg-warning-200/10 dark:[&_tbody>tr:nth-child(n):hover_td]:bg-warning-500/5' => $hover && $striped && Color::Warning->is($hoverColor),
+
+                {{-- Hover (no stripe) --}}
+                '[&_tbody>tr:hover_td]:bg-primary-200/10 dark:[&_tbody>tr:hover_td]:bg-primary-500/5' => $hover && !$striped && Color::Primary->is($hoverColor),
+                '[&_tbody>tr:hover_td]:bg-secondary-200/25 dark:[&_tbody>tr:hover_td]:bg-secondary-500/15' => $hover && !$striped && Color::Secondary->is($hoverColor),
+                '[&_tbody>tr:hover_td]:bg-success-200/10 dark:[&_tbody>tr:hover_td]:bg-success-500/5' => $hover && !$striped && Color::Success->is($hoverColor),
+                '[&_tbody>tr:hover_td]:bg-danger-200/10 dark:[&_tbody>tr:hover_td]:bg-danger-500/5' => $hover && !$striped && Color::Danger->is($hoverColor),
+                '[&_tbody>tr:hover_td]:bg-warning-200/10 dark:[&_tbody>tr:hover_td]:bg-warning-500/5' => $hover && !$striped && Color::Warning->is($hoverColor),
             ]) }}
         >
             @isset ($header)
