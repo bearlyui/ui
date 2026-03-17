@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.5.16
+
+- Fixed stripe + hover together not working correctly
+
 ## 0.5.15
 
 - Fix dropdowns nested in dialogs not being closed when the dialog is closed
